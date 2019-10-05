@@ -27,7 +27,7 @@ dependencies:
   # scoped model packages
   scoped_model:
   flutter_platform_widgets:
-    path: ../../packages/third-party/flutter_platform_widgets
+    path: ../third-party/flutter_platform_widgets
 
 
 dev_dependencies:
