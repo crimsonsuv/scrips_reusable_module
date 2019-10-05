@@ -1,0 +1,14 @@
+.DS_Store
+.dart_tool/
+.idea
+.packages
+.pub/
+.vscode/
+
+build/
+ios/.generated/
+ios/Flutter/Generated.xcconfig
+ios/Runner/GeneratedPluginRegistrant.*
+
+pubspec.lock
+example/ios/Flutter/flutter_export_environment.sh
