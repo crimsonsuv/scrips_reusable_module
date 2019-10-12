@@ -95,38 +95,49 @@ class MainFrameModel extends BaseModel {
   }
 
   List<Widget> loadContainedItems(MainFrame data) {
+    setBusy(true);
     String mainMenuId = data?.mainMenu?.currentItem?.id;
     String mainSubMenuId = data?.mainSubMenu?.currentItem?.id;
     switch (mainMenuId) {
       case '1':
         switch (mainSubMenuId) {
           case '1':
-            return [ContainedItem11()];
+            this.data.containedItems = [ContainedItem11()];
+            break;
           case '2':
-            return [ContainedItem12()];
+            this.data.containedItems = [ContainedItem12()];
+            break;
           case '3':
-            return [ContainedItem13()];
+            this.data.containedItems = [ContainedItem13()];
+            break;
           default:
-            return [ContainedItemEmpty()];
+            this.data.containedItems = [ContainedItemEmpty()];
+            break;
         }
         break;
 
       case '2':
         switch (mainSubMenuId) {
           case '1':
-            return [ContainedItem21()];
+            this.data.containedItems = [ContainedItem21()];
+            break;
           case '2':
-            return [ContainedItem22()];
+            this.data.containedItems = [ContainedItem22()];
+            break;
           case '3':
-            return [ContainedItem23()];
+            this.data.containedItems = [ContainedItem23()];
+            break;
           default:
-            return [ContainedItemEmpty()];
+            this.data.containedItems = [ContainedItemEmpty()];
+            break;
         }
         break;
 
       default:
-        return [ContainedItemEmpty()];
+        this.data.containedItems = [ContainedItemEmpty()];
+        break;
     }
+    setBusy(false);
   }
 
   void setCurrentMainMenuItem(MenuItem item) {
