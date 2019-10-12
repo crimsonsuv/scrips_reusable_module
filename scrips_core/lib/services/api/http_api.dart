@@ -24,15 +24,6 @@ class HttpApi implements Api {
   }
 
   @override
-  Future<User> getUser2(int userId) async {
-    // Get user profile for id
-    var response = await client.get('$endpoint/users/$userId');
-
-    // Convert and return
-    return User.fromJson(json.decode(response.body));
-  }
-
-  @override
   Future<List<Post>> getPostsForUser(int userId) async {
     var posts = List<Post>();
     // Get user posts for id

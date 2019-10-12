@@ -60,4 +60,3 @@ class FakeApi implements Api {
     return null;
   }
 }
-
