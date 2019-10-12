@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:scrips_core/datamodels/location/user_location.dart';
 import 'package:scrips_core/services/api/stoppable_service.dart';
@@ -26,22 +25,18 @@ class LocationService extends StoppableService {
   StreamController<UserLocation> _locationController = StreamController<UserLocation>.broadcast();
 
   LocationService() {
-    try {
-      location.requestPermission().then((granted) {
-        if (granted) {
-          location.onLocationChanged().listen((locationData) {
-            if (locationData != null) {
-              _locationController.add(UserLocation(
-                latitude: locationData.latitude,
-                longitude: locationData.longitude,
-              ));
-            }
-          });
-        }
-      });
-    } catch (e) {
-      print('LocationService.constructor error $e');
-    }
+    location.requestPermission().then((granted) {
+      if (granted) {
+        location.onLocationChanged().listen((locationData) {
+          if (locationData != null) {
+            _locationController.add(UserLocation(
+              latitude: locationData.latitude,
+              longitude: locationData.longitude,
+            ));
+          }
+        });
+      }
+    });
   }
 
   Stream<UserLocation> get locationStream => _locationController.stream;

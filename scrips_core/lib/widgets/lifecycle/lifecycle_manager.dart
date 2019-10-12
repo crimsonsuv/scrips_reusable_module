@@ -14,8 +14,10 @@ class LifeCycleManager extends StatefulWidget {
 
 class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBindingObserver {
   // STEPS: Add stoppable services here from Locator
-
-  List<StoppableService> servicesToManage = [];
+  List<StoppableService> servicesToManage = [
+    locator<LocationService>(),
+    locator<BackgroundFetchService>(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,30 +28,6 @@ class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBinding
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    StoppableService locationService;
-    StoppableService backgroundFetchService;
-    //
-    try {
-      locationService = locator<LocationService>();
-    } catch (e) {
-      print(e);
-    }
-    //
-    try {
-      backgroundFetchService = locator<BackgroundFetchService>();
-    } catch (e) {
-      print(e);
-    }
-
-    // check if services were instantiated)
-    locationService != null
-        ? servicesToManage.add(locationService)
-        : {print('No StoppableSevice Registered: Location service')};
-
-    //
-    backgroundFetchService != null
-        ? servicesToManage.add(backgroundFetchService)
-        : {print('No StoppableSevice Registered: BackgroundFetch Service')};
   }
 
   @override
