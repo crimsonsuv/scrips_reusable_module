@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:scrips_core/datamodels/post/comment.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/base_model.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:provider/provider.dart';
 
 class CommentsModel extends BaseModel {
   Api _api;

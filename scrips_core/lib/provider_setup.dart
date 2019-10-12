@@ -1,13 +1,9 @@
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/datamodels/location/user_location.dart';
 import 'package:scrips_core/services/api/api.dart';
-import 'package:scrips_core/services/api/location_service.dart';
 
 import 'datamodels/user/user.dart';
 import 'locator.dart';
 import 'services/api/authentication_service.dart';
-import 'dart:io' show Platform;
 
 // STEPS: Create providers
 

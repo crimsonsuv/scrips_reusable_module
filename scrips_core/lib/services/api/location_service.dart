@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:scrips_core/datamodels/location/user_location.dart';
 import 'package:scrips_core/services/api/stoppable_service.dart';
