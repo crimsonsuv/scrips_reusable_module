@@ -153,6 +153,12 @@ class MainFrameModel extends BaseModel {
     this.loadContainedItems(data);
     setBusy(false);
   }
+
+  void toggleSubMenuVisible() {
+    setBusy(true);
+    this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
+    setBusy(false);
+  }
 }
 
 class ContainedItem11 extends StatelessWidget {

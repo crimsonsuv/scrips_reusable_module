@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 
 class MainMenu {
-  List<MenuItem> items;
-  MenuItem currentItem;
+  List<MenuItem> items = [];
+  MenuItem currentItem = null;
 
   MainMenu({this.items, this.currentItem});
 

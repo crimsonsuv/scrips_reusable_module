@@ -1,8 +1,8 @@
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 
 class MainSubMenu {
-  List<MenuItem> items;
-  MenuItem currentItem;
+  List<MenuItem> items = [];
+  MenuItem currentItem = null;
 
   MainSubMenu({this.items, this.currentItem});
 
