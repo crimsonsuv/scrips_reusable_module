@@ -151,6 +151,24 @@ class MainFrameModel extends BaseModel {
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
     this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
+    this.data.statusText = this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
+    setBusy(false);
+  }
+
+  void toggleShowOverlappedSubMenu(bool value) {
+    setBusy(true);
+    // whether to show or not
+    this.data.showOverlappedSubMenu = !this.data.showOverlappedSubMenu;
+    this.data.statusText =
+        this.data.showOverlappedSubMenu ? 'Showing Overlapped Menu' : 'Showing Fixed Menu';
+
+    setBusy(false);
+  }
+
+  void setStatusText(String value) {
+    setBusy(true);
+    // whether to show or not
+    this.data.statusText = value;
     setBusy(false);
   }
 }

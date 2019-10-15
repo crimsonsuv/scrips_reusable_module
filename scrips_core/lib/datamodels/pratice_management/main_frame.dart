@@ -5,10 +5,12 @@ import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 
 class MainFrame {
   MainMenu mainMenu = MainMenu();
-  bool mainSubMenuVisible = true;
   MainSubMenu mainSubMenu = MainSubMenu();
   List<Widget> containedItems = [];
+  bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
+  bool showOverlappedSubMenu = true;
+  String statusText = 'Works';
 
   MainFrame();
 
