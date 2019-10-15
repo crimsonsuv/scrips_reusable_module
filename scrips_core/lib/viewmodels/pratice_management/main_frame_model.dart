@@ -86,6 +86,30 @@ class MainFrameModel extends BaseModel {
         ]);
         data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
         break;
+      case '3':
+        //posts = await _api.getPostsForUser(userId);
+        data.mainSubMenu = MainSubMenu(items: [
+          MenuItem(
+              id: '7',
+              label: 'subitem 8',
+              name: 'subitem_8',
+              icon: Icons.accessibility,
+              enabled: true),
+          MenuItem(
+              id: '9',
+              label: 'subitem 9',
+              name: 'subitem_9',
+              icon: Icons.battery_alert,
+              enabled: false),
+          MenuItem(
+              id: '10',
+              label: 'subitem 10',
+              name: 'subitem_10',
+              icon: Icons.calendar_today,
+              enabled: true),
+        ]);
+        data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
+        break;
 
       default:
         data.mainSubMenu = MainSubMenu(items: []);
@@ -94,49 +118,12 @@ class MainFrameModel extends BaseModel {
     this.loadContainedItems(data);
   }
 
-  List<Widget> loadContainedItems(MainFrame data) {
+  void loadContainedItems(MainFrame data) {
     setBusy(true);
     String mainMenuId = data?.mainMenu?.currentItem?.id;
     String mainSubMenuId = data?.mainSubMenu?.currentItem?.id;
-    switch (mainMenuId) {
-      case '1':
-        switch (mainSubMenuId) {
-          case '1':
-            this.data.containedItems = [ContainedItem11()];
-            break;
-          case '2':
-            this.data.containedItems = [ContainedItem12()];
-            break;
-          case '3':
-            this.data.containedItems = [ContainedItem13()];
-            break;
-          default:
-            this.data.containedItems = [ContainedItemEmpty()];
-            break;
-        }
-        break;
-
-      case '2':
-        switch (mainSubMenuId) {
-          case '1':
-            this.data.containedItems = [ContainedItem21()];
-            break;
-          case '2':
-            this.data.containedItems = [ContainedItem22()];
-            break;
-          case '3':
-            this.data.containedItems = [ContainedItem23()];
-            break;
-          default:
-            this.data.containedItems = [ContainedItemEmpty()];
-            break;
-        }
-        break;
-
-      default:
-        this.data.containedItems = [ContainedItemEmpty()];
-        break;
-    }
+    this.data.containedItems = [ContainedItem(suffix: '${mainMenuId}-${mainSubMenuId}')];
+    //
     setBusy(false);
   }
 
@@ -144,6 +131,7 @@ class MainFrameModel extends BaseModel {
     setBusy(true);
     this.data.mainMenu.currentItem = item;
     this.loadSubMenuItems(data);
+    this.data.mainSubMenuVisible = true;
     setBusy(false);
   }
 
@@ -161,194 +149,30 @@ class MainFrameModel extends BaseModel {
   }
 }
 
-class ContainedItem11 extends StatelessWidget {
+class ContainedItem extends StatelessWidget {
+  final String suffix;
+  //
+  ContainedItem({Key key, this.suffix}) : super(key: key);
+  //
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         TextViewAndLabel(
-          labelValue: 'Label 11',
-          textValue: 'Contained Text 11',
+          labelValue: 'Label $suffix-1',
+          textValue: 'Contained Text $suffix-1',
           axis: Axis.horizontal,
           enabled: true,
         ),
         TextViewAndLabel(
-          labelValue: 'Label 2',
-          textValue: 'Contained Text 2',
+          labelValue: 'Label $suffix-2',
+          textValue: 'Contained Text $suffix-2',
           axis: Axis.horizontal,
           enabled: true,
         ),
         TextViewAndLabel(
-          labelValue: 'Label 3',
-          textValue: 'Contained Text 3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItemEmpty extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label Empty',
-          textValue: 'Contained Text Empty',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label Empty',
-          textValue: 'Contained Text Empty',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label Empty',
-          textValue: 'Contained Text Empty',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItem12 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label 12',
-          textValue: 'Contained Text 12',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 12',
-          textValue: 'Contained Text 12',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 3',
-          textValue: 'Contained Text 3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItem13 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label 13',
-          textValue: 'Contained Text 13',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 13',
-          textValue: 'Contained Text 13',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 13',
-          textValue: 'Contained Text 13',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItem21 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label 21',
-          textValue: 'Contained Text 21',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 2',
-          textValue: 'Contained Text 2',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 3',
-          textValue: 'Contained Text 3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItem22 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label 22',
-          textValue: 'Contained Text 22',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 22',
-          textValue: 'Contained Text 22',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 3',
-          textValue: 'Contained Text 3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
-  }
-}
-
-class ContainedItem23 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label 23',
-          textValue: 'Contained Text 23',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 23',
-          textValue: 'Contained Text 23',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label 23',
-          textValue: 'Contained Text 23',
+          labelValue: 'Label $suffix-3',
+          textValue: 'Contained Text $suffix-3',
           axis: Axis.horizontal,
           enabled: true,
         ),
