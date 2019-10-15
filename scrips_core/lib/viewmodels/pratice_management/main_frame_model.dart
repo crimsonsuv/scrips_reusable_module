@@ -135,16 +135,22 @@ class MainFrameModel extends BaseModel {
     setBusy(false);
   }
 
-  void setCurrentMainSubMenuItem(MenuItem item) {
+  void setCurrentMainSubMenuItem(MenuItem item, bool hideOnSelect) {
     setBusy(true);
     this.data.mainSubMenu.currentItem = item;
+    if (hideOnSelect) {
+      this.data.mainSubMenuVisible = false;
+    }
     this.loadContainedItems(data);
     setBusy(false);
   }
 
   void toggleSubMenuVisible() {
     setBusy(true);
+    // whether to show or not
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
+    // whether to animate on next show
+    this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
     setBusy(false);
   }
 }

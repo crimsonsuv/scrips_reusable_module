@@ -8,6 +8,7 @@ class MainFrame {
   bool mainSubMenuVisible = true;
   MainSubMenu mainSubMenu = MainSubMenu();
   List<Widget> containedItems = [];
+  bool mainSubMenuStartShowing = true;
 
   MainFrame();
 

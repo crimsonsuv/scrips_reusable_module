@@ -41,7 +41,7 @@ class MainMenuListItem extends StatelessWidget {
             padding: this.isSelected ? _selectedPadding : _padding,
             decoration: this.isSelected ? _selectedBoxDecoration : _boxDecoration,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 this.showIcon && this.item?.icon != null ? Icon(this.item?.icon) : Container(),
