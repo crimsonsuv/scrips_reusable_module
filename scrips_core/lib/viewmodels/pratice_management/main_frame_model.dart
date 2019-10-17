@@ -144,3 +144,35 @@ class MainFrameModel extends BaseModel {
     setBusy(false);
   }
 }
+
+class ContainedItem extends StatelessWidget {
+  final String suffix;
+  //
+  ContainedItem({Key key, this.suffix}) : super(key: key);
+  //
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        TextViewAndLabel(
+          labelValue: 'Label $suffix-1',
+          textValue: 'Contained Text $suffix-1',
+          axis: Axis.horizontal,
+          enabled: true,
+        ),
+        TextViewAndLabel(
+          labelValue: 'Label $suffix-2',
+          textValue: 'Contained Text $suffix-2',
+          axis: Axis.horizontal,
+          enabled: true,
+        ),
+        TextViewAndLabel(
+          labelValue: 'Label $suffix-3',
+          textValue: 'Contained Text $suffix-3',
+          axis: Axis.horizontal,
+          enabled: true,
+        ),
+      ],
+    );
+  }
+}

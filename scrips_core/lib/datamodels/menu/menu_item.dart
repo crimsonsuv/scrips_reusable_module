@@ -5,8 +5,9 @@ class MenuItem {
   IconData icon;
   String label;
   bool enabled;
+  String navigationRoute;
 
-  MenuItem({this.id, this.icon, this.label, this.enabled});
+  MenuItem({this.id, this.icon, this.label, this.enabled, this.navigationRoute});
 
   MenuItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
