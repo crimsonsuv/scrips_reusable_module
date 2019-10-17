@@ -30,17 +30,28 @@ class MainFrameModel extends BaseModel {
   void loadMainMenuItems(MainFrame data) {
     //sumeet: note: this will call API.loadMenuItems for current userId
     data.mainMenu = MainMenu(items: [
-      MenuItem(id: RoutePaths.Home, label: 'Home', icon: Icons.home, enabled: true),
+      MenuItem(
+          id: RoutePaths.Home,
+          label: 'Home',
+          icon: Icons.home,
+          navigationRoute: RoutePaths.Home,
+          enabled: true),
       MenuItem(
           id: RoutePaths.PracticeOnBoardingWizard,
           label: 'Onboard Pratice',
           icon: Icons.stars,
+          navigationRoute: RoutePaths.PracticeOnBoardingWizard,
           enabled: true),
-      MenuItem(id: RoutePaths.Settings, label: 'Settings', icon: Icons.settings, enabled: true),
+      MenuItem(
+          id: RoutePaths.Settings,
+          label: 'Settings',
+          icon: Icons.settings,
+          navigationRoute: RoutePaths.Settings,
+          enabled: true),
     ]);
     //
     data.mainMenu.currentItem =
-        this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);
+        this.getMenuItemForId(items: this.data?.mainMenu?.items, id: this.data?.mainMenuPath);
     this.loadSubMenuItems(data);
   }
 
@@ -62,40 +73,63 @@ class MainFrameModel extends BaseModel {
   void loadSubMenuItems(MainFrame data) {
     String mainMenuId = data?.mainMenu?.currentItem?.id;
     switch (mainMenuId) {
-      case '1':
-        //posts = await _api.getPostsForUser(userId);
+      case RoutePaths.Home:
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(id: '1', label: 'subitem 1', icon: Icons.directions_boat, enabled: true),
-          MenuItem(id: '2', label: 'subitem 2', icon: Icons.directions_bus, enabled: false),
-          MenuItem(id: '3', label: 'subitem 3', icon: Icons.directions_subway, enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.Home}',
+              label: 'Home - Home',
+              icon: Icons.directions_boat,
+              navigationRoute: '${mainMenuId}-${RoutePaths.Home}',
+              enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.Home}',
+              label: 'Home 2',
+              icon: Icons.directions_bus,
+              navigationRoute: RoutePaths.PracticeOnBoardingWizard,
+              enabled: false),
         ]);
-        data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
         break;
 
-      case '2':
-        //posts = await _api.getPostsForUser(userId);
+      case RoutePaths.PracticeOnBoardingWizard:
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(id: '4', label: 'subitem 4', icon: Icons.directions_railway, enabled: true),
-          MenuItem(id: '5', label: 'subitem 5', icon: Icons.directions_transit, enabled: false),
-          MenuItem(id: '6', label: 'subitem 6', icon: Icons.directions_run, enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-1',
+              label: 'Home - Home',
+              icon: Icons.directions_boat,
+              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-1',
+              enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
+              label: 'Home - Home',
+              icon: Icons.directions_boat,
+              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
+              enabled: true),
         ]);
-        data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
         break;
-      case '3':
-        //posts = await _api.getPostsForUser(userId);
+
+        break;
+      case RoutePaths.Settings:
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(id: '7', label: 'subitem 8', icon: Icons.accessibility, enabled: true),
-          MenuItem(id: '9', label: 'subitem 9', icon: Icons.battery_alert, enabled: false),
-          MenuItem(id: '10', label: 'subitem 10', icon: Icons.calendar_today, enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.Settings}-1',
+              label: 'Home - 1',
+              icon: Icons.directions_boat,
+              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}-1',
+              enabled: true),
+          MenuItem(
+              id: '${mainMenuId}-${RoutePaths.Settings}-2',
+              label: 'Home - 2',
+              icon: Icons.directions_boat,
+              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}-2',
+              enabled: true),
         ]);
-        data.mainSubMenu.currentItem = this
-            .getMenuItemForId(items: this.data.mainSubMenu.items, id: this.data.mainSubMenuPath);
         break;
 
       default:
         data.mainSubMenu = MainSubMenu(items: []);
-        data.mainSubMenu.currentItem = null;
     }
+    data.mainSubMenu.currentItem =
+        this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
 //    this.loadContainedItems(data);
   }
 
