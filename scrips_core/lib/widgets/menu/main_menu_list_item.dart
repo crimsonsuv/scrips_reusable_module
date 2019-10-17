@@ -21,11 +21,13 @@ final _selectedPadding = EdgeInsets.all(4.0);
 class MainMenuListItem extends StatelessWidget {
   final MenuItem item;
   final bool showLabel;
+  final bool center;
   final bool showIcon;
   final bool isSelected;
   final Function onTap;
   //
-  const MainMenuListItem({this.item, this.onTap, this.showLabel, this.showIcon, this.isSelected})
+  const MainMenuListItem(
+      {this.item, this.onTap, this.showLabel, this.showIcon, this.isSelected, this.center})
       : super();
 
   @override
@@ -41,7 +43,7 @@ class MainMenuListItem extends StatelessWidget {
             padding: this.isSelected ? _selectedPadding : _padding,
             decoration: this.isSelected ? _selectedBoxDecoration : _boxDecoration,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: this.center ? MainAxisAlignment.center : MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 this.showIcon && this.item?.icon != null ? Icon(this.item?.icon) : Container(),

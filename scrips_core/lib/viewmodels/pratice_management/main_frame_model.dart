@@ -52,6 +52,7 @@ class MainFrameModel extends BaseModel {
     //
     data.mainMenu.currentItem =
         this.getMenuItemForId(items: this.data?.mainMenu?.items, id: this.data?.mainMenuPath);
+    debugPrint('Current Main Menu Item: ${data?.mainMenu?.currentItem?.id}');
     this.loadSubMenuItems(data);
   }
 
@@ -85,7 +86,7 @@ class MainFrameModel extends BaseModel {
               id: '${mainMenuId}-${RoutePaths.Home}',
               label: 'Home 2',
               icon: Icons.directions_bus,
-              navigationRoute: RoutePaths.PracticeOnBoardingWizard,
+              navigationRoute: '${mainMenuId}-${RoutePaths.Home}-2',
               enabled: false),
         ]);
         break;
@@ -93,33 +94,31 @@ class MainFrameModel extends BaseModel {
       case RoutePaths.PracticeOnBoardingWizard:
         data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-1',
-              label: 'Home - Home',
-              icon: Icons.directions_boat,
-              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-1',
+              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}',
+              label: 'OnBoarding - 1',
+              icon: Icons.directions_bike,
+              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}',
               enabled: true),
           MenuItem(
               id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
-              label: 'Home - Home',
-              icon: Icons.directions_boat,
+              label: 'OnBoarding - 2',
+              icon: Icons.directions_run,
               navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
               enabled: true),
         ]);
-        break;
-
         break;
       case RoutePaths.Settings:
         data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${mainMenuId}-${RoutePaths.Settings}-1',
-              label: 'Home - 1',
-              icon: Icons.directions_boat,
-              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}-1',
+              label: 'Settings - 1',
+              icon: Icons.directions_railway,
+              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}',
               enabled: true),
           MenuItem(
               id: '${mainMenuId}-${RoutePaths.Settings}-2',
-              label: 'Home - 2',
-              icon: Icons.directions_boat,
+              label: 'Settings - 2',
+              icon: Icons.directions_subway,
               navigationRoute: '${mainMenuId}-${RoutePaths.Settings}-2',
               enabled: true),
         ]);
@@ -130,6 +129,7 @@ class MainFrameModel extends BaseModel {
     }
     data.mainSubMenu.currentItem =
         this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
+    debugPrint('Current Main Sub Menu Item: ${data?.mainSubMenu?.currentItem?.id}');
 //    this.loadContainedItems(data);
   }
 
