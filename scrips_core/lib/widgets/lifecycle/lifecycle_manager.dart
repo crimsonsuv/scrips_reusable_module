@@ -44,12 +44,12 @@ class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBinding
     // check if services were instantiated)
     locationService != null
         ? servicesToManage.add(locationService)
-        : {print('No StoppableSevice Registered: Location service')};
+        : print('No StoppableSevice Registered: Location service');
 
     //
     backgroundFetchService != null
         ? servicesToManage.add(backgroundFetchService)
-        : {print('No StoppableSevice Registered: BackgroundFetch Service')};
+        : print('No StoppableSevice Registered: BackgroundFetch Service');
   }
 
   @override

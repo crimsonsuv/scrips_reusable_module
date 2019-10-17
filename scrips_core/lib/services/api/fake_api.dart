@@ -16,7 +16,7 @@ class FakeApi implements Api {
           postId: postId,
           id: index,
           name: 'Comment $postId - $index',
-          email: '${postId}@a.com',
+          email: '$postId@a.com',
           body: 'Comment body $postId - $index'),
     );
   }
@@ -41,7 +41,7 @@ class FakeApi implements Api {
     return User(
         id: userId,
         name: 'user $userId',
-        phoneNumber: '${userId}${userId}${userId}${userId}${userId}${userId}${userId}');
+        phoneNumber: '$userId$userId$userId$userId$userId$userId$userId');
   }
 
   @override

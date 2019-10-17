@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-final BoxDecoration _TextViewAndLabelBorder =
+final BoxDecoration _textViewAndLabelBorder =
     null; // BoxDecoration(border: Border.all(color: Colors.grey));
-final double _TextViewAndLabelMargin = 8.0;
-final double _TextViewAndLabelPadding = 8.0;
+final double _textViewAndLabelMargin = 8.0;
+final double _textViewAndLabelPadding = 8.0;
 
 class TextViewAndLabel extends StatefulWidget {
   final String labelValue;
@@ -47,6 +47,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
   TextEditingController _controller;
 
   void initState() {
+    super.initState();
     _controller = TextEditingController(text: this.widget.textValue);
     _controller.addListener(() {
       final text = _controller.text;
@@ -59,9 +60,9 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(this.widget.padding ?? _TextViewAndLabelPadding),
-      margin: EdgeInsets.all(this.widget.margin ?? _TextViewAndLabelMargin),
-      decoration: this.widget.boxDecoration ?? _TextViewAndLabelBorder,
+      padding: EdgeInsets.all(this.widget.padding ?? _textViewAndLabelPadding),
+      margin: EdgeInsets.all(this.widget.margin ?? _textViewAndLabelMargin),
+      decoration: this.widget.boxDecoration ?? _textViewAndLabelBorder,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,

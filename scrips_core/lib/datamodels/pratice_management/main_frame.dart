@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 
@@ -33,5 +31,6 @@ class MainFrame {
 //    }
 //    return data;
 //
+    return new Map<String, dynamic>();
   }
 }

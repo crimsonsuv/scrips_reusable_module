@@ -3,7 +3,6 @@ import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_core/widgets/menu/main_menu_list_item.dart';
 import 'package:scrips_pm/constants/app_routes.dart';
 import '../../datamodels/pratice_management/main_frame.dart';
 import '../../widgets/general/text_view_and_label.dart';
@@ -77,16 +76,16 @@ class MainFrameModel extends BaseModel {
       case RoutePaths.Home:
         data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.Home}',
+              id: '$mainMenuId-${RoutePaths.Home}',
               label: 'Home - Home',
               icon: Icons.directions_boat,
-              navigationRoute: '${mainMenuId}-${RoutePaths.Home}',
+              navigationRoute: '$mainMenuId-${RoutePaths.Home}',
               enabled: true),
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.Home}',
+              id: '$mainMenuId-${RoutePaths.Home}',
               label: 'Home 2',
               icon: Icons.directions_bus,
-              navigationRoute: '${mainMenuId}-${RoutePaths.Home}-2',
+              navigationRoute: '$mainMenuId-${RoutePaths.Home}-2',
               enabled: false),
         ]);
         break;
@@ -94,32 +93,32 @@ class MainFrameModel extends BaseModel {
       case RoutePaths.PracticeOnBoardingWizard:
         data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}',
+              id: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}',
               label: 'OnBoarding - 1',
               icon: Icons.directions_bike,
-              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}',
+              navigationRoute: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}',
               enabled: true),
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
+              id: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
               label: 'OnBoarding - 2',
               icon: Icons.directions_run,
-              navigationRoute: '${mainMenuId}-${RoutePaths.PracticeOnBoardingWizard}-2',
+              navigationRoute: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
               enabled: true),
         ]);
         break;
       case RoutePaths.Settings:
         data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.Settings}-1',
+              id: '$mainMenuId-${RoutePaths.Settings}-1',
               label: 'Settings - 1',
               icon: Icons.directions_railway,
-              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}',
+              navigationRoute: '$mainMenuId-${RoutePaths.Settings}',
               enabled: true),
           MenuItem(
-              id: '${mainMenuId}-${RoutePaths.Settings}-2',
+              id: '$mainMenuId-${RoutePaths.Settings}-2',
               label: 'Settings - 2',
               icon: Icons.directions_subway,
-              navigationRoute: '${mainMenuId}-${RoutePaths.Settings}-2',
+              navigationRoute: '$mainMenuId-${RoutePaths.Settings}-2',
               enabled: true),
         ]);
         break;

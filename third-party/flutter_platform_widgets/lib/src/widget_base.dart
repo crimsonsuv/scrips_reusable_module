@@ -11,8 +11,7 @@ import 'platform.dart';
 
 typedef T PlatformBuilder<T>(BuildContext context);
 
-abstract class PlatformWidgetBase<I extends Widget, A extends Widget>
-    extends StatelessWidget {
+abstract class PlatformWidgetBase<I extends Widget, A extends Widget> extends StatelessWidget {
   PlatformWidgetBase({Key key}) : super(key: key);
 
   @override
@@ -25,8 +24,8 @@ abstract class PlatformWidgetBase<I extends Widget, A extends Widget>
       return createAndroidWidget(context);
     }
 
-    return throw new UnsupportedError(
-        'This platform is not supported: $defaultTargetPlatform');
+//    return throw new UnsupportedError(
+//        'This platform is not supported: $defaultTargetPlatform');
   }
 
   I createIosWidget(BuildContext context);

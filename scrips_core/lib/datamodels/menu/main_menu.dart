@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 
 class MainMenu {
   List<MenuItem> items = [];
-  MenuItem currentItem = null;
+  MenuItem currentItem ;
 
   MainMenu({this.items, this.currentItem});
 
@@ -24,5 +23,6 @@ class MainMenu {
 //    }
 //    return data;
 //
+    return new Map<String, dynamic>();
   }
 }

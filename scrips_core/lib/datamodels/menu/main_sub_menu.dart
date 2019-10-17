@@ -2,7 +2,7 @@ import 'package:scrips_core/datamodels/menu/menu_item.dart';
 
 class MainSubMenu {
   List<MenuItem> items = [];
-  MenuItem currentItem = null;
+  MenuItem currentItem;
 
   MainSubMenu({this.items, this.currentItem});
 
@@ -23,5 +23,6 @@ class MainSubMenu {
 //    }
 //    return data;
 //
+    return new Map<String, dynamic>();
   }
 }
