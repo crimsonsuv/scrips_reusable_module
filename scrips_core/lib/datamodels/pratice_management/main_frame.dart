@@ -6,13 +6,15 @@ import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 class MainFrame {
   MainMenu mainMenu = MainMenu();
   MainSubMenu mainSubMenu = MainSubMenu();
-  List<Widget> containedItems = [];
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
   bool showOverlappedSubMenu = true;
   String statusText = 'Works';
+  String userId = '';
+  String mainMenuPath;
+  String mainSubMenuPath;
 
-  MainFrame();
+  MainFrame({this.userId, this.mainMenuPath, this.mainSubMenuPath});
 
   MainFrame.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

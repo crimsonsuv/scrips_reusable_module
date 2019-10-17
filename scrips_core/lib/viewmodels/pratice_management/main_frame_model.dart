@@ -3,19 +3,24 @@ import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
-
+import 'package:scrips_core/widgets/menu/main_menu_list_item.dart';
+import 'package:scrips_pm/constants/app_routes.dart';
 import '../../datamodels/pratice_management/main_frame.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
 class MainFrameModel extends BaseModel {
-  MainFrame data = MainFrame();
+  MainFrame data;
 
-  MainFrameModel();
+//
+  MainFrameModel({String userId, String mainMenuPath, String mainSubMenuPath})
+      : data =
+            MainFrame(userId: userId, mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
+        super();
 
-  Future loadData({int userId}) async {
+  Future init() async {
     setBusy(true);
-    data = MainFrame();
+
     //posts = await _api.getPostsForUser(userId);
     this.loadMainMenuItems(data);
     //
@@ -23,15 +28,35 @@ class MainFrameModel extends BaseModel {
   }
 
   void loadMainMenuItems(MainFrame data) {
+    //sumeet: note: this will call API.loadMenuItems for current userId
     data.mainMenu = MainMenu(items: [
-      MenuItem(id: '1', label: 'item 1', name: 'item_1', icon: Icons.directions_car, enabled: true),
+      MenuItem(id: RoutePaths.Home, label: 'Home', icon: Icons.home, enabled: true),
       MenuItem(
-          id: '2', label: 'item 2', name: 'item_2', icon: Icons.directions_bike, enabled: false),
-      MenuItem(
-          id: '3', label: 'item 3', name: 'item_3', icon: Icons.directions_walk, enabled: true),
+          id: RoutePaths.PracticeOnBoardingWizard,
+          label: 'Onboard Pratice',
+          icon: Icons.stars,
+          enabled: true),
+      MenuItem(id: RoutePaths.Settings, label: 'Settings', icon: Icons.settings, enabled: true),
     ]);
-    data.mainMenu.currentItem = data.mainMenu.items[0];
+    //
+    data.mainMenu.currentItem =
+        this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);
     this.loadSubMenuItems(data);
+  }
+
+  MenuItem getMenuItemForId({List<MenuItem> items, String id}) {
+    if (items != null && items.length > 0) {
+      for (MenuItem item in items) {
+        // for null id, return first enabled item
+        if ((id == null || id == '') && item.enabled) {
+          return item;
+          // for nonnull id, return first matching enabled item
+        } else if (item.id == id && item.enabled) {
+          return item;
+        }
+      }
+    }
+    return null;
   }
 
   void loadSubMenuItems(MainFrame data) {
@@ -40,24 +65,9 @@ class MainFrameModel extends BaseModel {
       case '1':
         //posts = await _api.getPostsForUser(userId);
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '1',
-              label: 'subitem 1',
-              name: 'subitem_1',
-              icon: Icons.directions_boat,
-              enabled: true),
-          MenuItem(
-              id: '2',
-              label: 'subitem 2',
-              name: 'subitem_2',
-              icon: Icons.directions_bus,
-              enabled: false),
-          MenuItem(
-              id: '3',
-              label: 'subitem 3',
-              name: 'subitem_3',
-              icon: Icons.directions_subway,
-              enabled: true),
+          MenuItem(id: '1', label: 'subitem 1', icon: Icons.directions_boat, enabled: true),
+          MenuItem(id: '2', label: 'subitem 2', icon: Icons.directions_bus, enabled: false),
+          MenuItem(id: '3', label: 'subitem 3', icon: Icons.directions_subway, enabled: true),
         ]);
         data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
         break;
@@ -65,66 +75,28 @@ class MainFrameModel extends BaseModel {
       case '2':
         //posts = await _api.getPostsForUser(userId);
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '4',
-              label: 'subitem 4',
-              name: 'subitem_4',
-              icon: Icons.directions_railway,
-              enabled: true),
-          MenuItem(
-              id: '5',
-              label: 'subitem 5',
-              name: 'subitem_5',
-              icon: Icons.directions_transit,
-              enabled: false),
-          MenuItem(
-              id: '6',
-              label: 'subitem 6',
-              name: 'subitem_6',
-              icon: Icons.directions_run,
-              enabled: true),
+          MenuItem(id: '4', label: 'subitem 4', icon: Icons.directions_railway, enabled: true),
+          MenuItem(id: '5', label: 'subitem 5', icon: Icons.directions_transit, enabled: false),
+          MenuItem(id: '6', label: 'subitem 6', icon: Icons.directions_run, enabled: true),
         ]);
         data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
         break;
       case '3':
         //posts = await _api.getPostsForUser(userId);
         data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '7',
-              label: 'subitem 8',
-              name: 'subitem_8',
-              icon: Icons.accessibility,
-              enabled: true),
-          MenuItem(
-              id: '9',
-              label: 'subitem 9',
-              name: 'subitem_9',
-              icon: Icons.battery_alert,
-              enabled: false),
-          MenuItem(
-              id: '10',
-              label: 'subitem 10',
-              name: 'subitem_10',
-              icon: Icons.calendar_today,
-              enabled: true),
+          MenuItem(id: '7', label: 'subitem 8', icon: Icons.accessibility, enabled: true),
+          MenuItem(id: '9', label: 'subitem 9', icon: Icons.battery_alert, enabled: false),
+          MenuItem(id: '10', label: 'subitem 10', icon: Icons.calendar_today, enabled: true),
         ]);
-        data.mainSubMenu.currentItem = data.mainSubMenu.items[0];
+        data.mainSubMenu.currentItem = this
+            .getMenuItemForId(items: this.data.mainSubMenu.items, id: this.data.mainSubMenuPath);
         break;
 
       default:
         data.mainSubMenu = MainSubMenu(items: []);
         data.mainSubMenu.currentItem = null;
     }
-    this.loadContainedItems(data);
-  }
-
-  void loadContainedItems(MainFrame data) {
-    setBusy(true);
-    String mainMenuId = data?.mainMenu?.currentItem?.id;
-    String mainSubMenuId = data?.mainSubMenu?.currentItem?.id;
-    this.data.containedItems = [ContainedItem(suffix: '${mainMenuId}-${mainSubMenuId}')];
-    //
-    setBusy(false);
+//    this.loadContainedItems(data);
   }
 
   void setCurrentMainMenuItem(MenuItem item) {
@@ -141,7 +113,7 @@ class MainFrameModel extends BaseModel {
     if (hideOnSelect) {
       this.data.mainSubMenuVisible = false;
     }
-    this.loadContainedItems(data);
+//    this.loadContainedItems(data);
     setBusy(false);
   }
 
@@ -170,37 +142,5 @@ class MainFrameModel extends BaseModel {
     // whether to show or not
     this.data.statusText = value;
     setBusy(false);
-  }
-}
-
-class ContainedItem extends StatelessWidget {
-  final String suffix;
-  //
-  ContainedItem({Key key, this.suffix}) : super(key: key);
-  //
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-1',
-          textValue: 'Contained Text $suffix-1',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-2',
-          textValue: 'Contained Text $suffix-2',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-3',
-          textValue: 'Contained Text $suffix-3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
   }
 }
