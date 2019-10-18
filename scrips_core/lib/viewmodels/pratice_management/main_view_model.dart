@@ -4,17 +4,16 @@ import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_pm/constants/app_routes.dart';
-import '../../datamodels/pratice_management/main_frame.dart';
-import '../../datamodels/pratice_management/global.dart';
+import '../../datamodels/pratice_management/main_view.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
-class MainFrameModel extends BaseModel {
-  MainFrame mainFrameData;
+class MainViewModel extends BaseModel {
+  MainView mainFrameData;
   final BuildContext context;
   //
-  MainFrameModel(this.context, {String mainMenuPath, String mainSubMenuPath})
-      : mainFrameData = MainFrame(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
+  MainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath})
+      : mainFrameData = MainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
         super();
 
   Future init({String userId}) async {

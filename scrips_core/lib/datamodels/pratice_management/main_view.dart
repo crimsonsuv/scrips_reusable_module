@@ -1,7 +1,7 @@
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 
-class MainFrame {
+class MainView {
   MainMenu mainMenu = MainMenu();
   MainSubMenu mainSubMenu = MainSubMenu();
   bool mainSubMenuVisible = true;
@@ -10,9 +10,9 @@ class MainFrame {
   String mainMenuPath;
   String mainSubMenuPath;
 
-  MainFrame({this.mainMenuPath, this.mainSubMenuPath});
+  MainView({this.mainMenuPath, this.mainSubMenuPath});
 
-  MainFrame.fromJson(Map<String, dynamic> json) {
+  MainView.fromJson(Map<String, dynamic> json) {
     //todo: fromJson
 //    this.items = [];
 //    json.map((k2, v2) {

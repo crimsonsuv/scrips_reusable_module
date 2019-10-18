@@ -10,9 +10,9 @@ import '../base_model.dart';
 
 class GlobalModel extends BaseModel {
   Global data;
-
+  final BuildContext context;
   //
-  GlobalModel({String userId})
+  GlobalModel(this.context, {String userId})
       : data = Global(userId: userId),
         super();
 
