@@ -7,6 +7,7 @@ class MainFrame {
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
   bool showOverlappedSubMenu = false;
+  bool animateSubMenu = false;
   String statusText = 'Works';
   String userId = '';
   String mainMenuPath;

@@ -11,24 +11,22 @@ import '../base_model.dart';
 class MainFrameModel extends BaseModel {
   MainFrame data;
 
-//
+  //
   MainFrameModel({String userId, String mainMenuPath, String mainSubMenuPath})
       : data =
             MainFrame(userId: userId, mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
         super();
 
   Future init() async {
-    setBusy(true);
-
     //posts = await _api.getPostsForUser(userId);
-    this.loadMainMenuItems(data);
-    //
-    setBusy(false);
+    this.loadMainMenuItems();
   }
 
-  void loadMainMenuItems(MainFrame data) {
+  void loadMainMenuItems() {
+    //
+    setBusy(true);
     //sumeet: note: this will call API.loadMenuItems for current userId
-    data.mainMenu = MainMenu(items: [
+    this.data.mainMenu = MainMenu(items: [
       MenuItem(
           id: RoutePaths.Home,
           label: 'Home',
@@ -52,7 +50,66 @@ class MainFrameModel extends BaseModel {
     data.mainMenu.currentItem =
         this.getMenuItemForId(items: this.data?.mainMenu?.items, id: this.data?.mainMenuPath);
     debugPrint('Current Main Menu Item: ${data?.mainMenu?.currentItem?.id}');
-    this.loadSubMenuItems(data);
+    //
+    this.loadSubMenuItems();
+    //
+    setBusy(false);
+  }
+
+  void loadSubMenuItems() {
+    String mainMenuId = this.data?.mainMenu?.currentItem?.id;
+    switch (mainMenuId) {
+      case RoutePaths.Home:
+        this.data.mainSubMenu = MainSubMenu(items: [
+          MenuItem(
+              id: '${RoutePaths.Home1}',
+              label: 'Home - Home',
+              icon: Icons.home,
+              navigationRoute: '${RoutePaths.Home1}',
+              enabled: true),
+        ]);
+        break;
+
+      case RoutePaths.PracticeOnBoardingWizard:
+        this.data.mainSubMenu = MainSubMenu(items: [
+          MenuItem(
+              id: '${RoutePaths.PracticeOnBoardingWizard1}',
+              label: 'OnBoarding - 1',
+              icon: Icons.directions_bike,
+              navigationRoute: '${RoutePaths.PracticeOnBoardingWizard1}',
+              enabled: true),
+          MenuItem(
+              id: '${RoutePaths.PracticeOnBoardingWizard2}',
+              label: 'OnBoarding - 2',
+              icon: Icons.directions_bike,
+              navigationRoute: '${RoutePaths.PracticeOnBoardingWizard2}',
+              enabled: true),
+        ]);
+        break;
+      case RoutePaths.Settings:
+        this.data.mainSubMenu = MainSubMenu(items: [
+          MenuItem(
+              id: '${RoutePaths.Settings1}',
+              label: 'Settings - 1',
+              icon: Icons.directions_railway,
+              navigationRoute: '${RoutePaths.Settings1}',
+              enabled: true),
+          MenuItem(
+              id: '${RoutePaths.Settings2}',
+              label: 'Settings - 2',
+              icon: Icons.directions_railway,
+              navigationRoute: '${RoutePaths.Settings2}',
+              enabled: true),
+        ]);
+        break;
+
+      default:
+        this.data.mainSubMenu = MainSubMenu(items: []);
+    }
+    this.data.mainSubMenu.currentItem =
+        this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
+    debugPrint('Current Main Sub Menu Item: ${data?.mainSubMenu?.currentItem?.id}');
+//    this.loadContainedItems(data);
   }
 
   MenuItem getMenuItemForId({List<MenuItem> items, String id}) {
@@ -70,72 +127,10 @@ class MainFrameModel extends BaseModel {
     return null;
   }
 
-  void loadSubMenuItems(MainFrame data) {
-    String mainMenuId = data?.mainMenu?.currentItem?.id;
-    switch (mainMenuId) {
-      case RoutePaths.Home:
-        data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.Home}',
-              label: 'Home - Home',
-              icon: Icons.home,
-              navigationRoute: '$mainMenuId-${RoutePaths.Home}',
-              enabled: true),
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.Home}',
-              label: 'Home 2',
-              icon: Icons.home,
-              navigationRoute: '$mainMenuId-${RoutePaths.Home}-2',
-              enabled: false),
-        ]);
-        break;
-
-      case RoutePaths.PracticeOnBoardingWizard:
-        data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}',
-              label: 'OnBoarding - 1',
-              icon: Icons.directions_bike,
-              navigationRoute: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}',
-              enabled: true),
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
-              label: 'OnBoarding - 2',
-              icon: Icons.directions_bike,
-              navigationRoute: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
-              enabled: true),
-        ]);
-        break;
-      case RoutePaths.Settings:
-        data.mainSubMenu = MainSubMenu(items: [
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.Settings}-1',
-              label: 'Settings - 1',
-              icon: Icons.directions_railway,
-              navigationRoute: '$mainMenuId-${RoutePaths.Settings}',
-              enabled: true),
-          MenuItem(
-              id: '$mainMenuId-${RoutePaths.Settings}-2',
-              label: 'Settings - 2',
-              icon: Icons.directions_railway,
-              navigationRoute: '$mainMenuId-${RoutePaths.Settings}-2',
-              enabled: true),
-        ]);
-        break;
-
-      default:
-        data.mainSubMenu = MainSubMenu(items: []);
-    }
-    data.mainSubMenu.currentItem =
-        this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
-    debugPrint('Current Main Sub Menu Item: ${data?.mainSubMenu?.currentItem?.id}');
-//    this.loadContainedItems(data);
-  }
-
   void setCurrentMainMenuItem(MenuItem item) {
     setBusy(true);
     this.data.mainMenu.currentItem = item;
-    this.loadSubMenuItems(data);
+    this.loadSubMenuItems();
     this.data.mainSubMenuVisible = true;
     setBusy(false);
   }
@@ -166,6 +161,16 @@ class MainFrameModel extends BaseModel {
     this.data.showOverlappedSubMenu = !this.data.showOverlappedSubMenu;
     this.data.statusText =
         this.data.showOverlappedSubMenu ? 'Showing Overlapped Menu' : 'Showing Fixed Menu';
+
+    setBusy(false);
+  }
+
+  void toggleAnimateSubMenu(bool value) {
+    setBusy(true);
+    // whether to show or not
+    this.data.animateSubMenu = !this.data.animateSubMenu;
+    this.data.statusText =
+        this.data.animateSubMenu ? 'Showing Animated Menu' : 'Showing Non Animated Menu';
 
     setBusy(false);
   }
