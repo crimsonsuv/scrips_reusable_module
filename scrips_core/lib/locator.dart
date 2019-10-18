@@ -1,4 +1,5 @@
-import 'dart:io' show Platform;
+//sumeet: noteL dart:io not supported on Web!
+//import 'dart:io' show Platform;
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
@@ -23,15 +24,15 @@ void setupLocator() {
   locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
 
   WidgetsFlutterBinding.ensureInitialized();
-
-  // check which services are availablke in platform, and add them to providers and register in locator
-  if (Platform.isAndroid || Platform.isIOS) {
-    LocationService locationService = LocationService();
-    providers
-        .add(StreamProvider<UserLocation>(builder: (context) => locationService.locationStream));
-    locator.registerLazySingleton(() => locationService);
-  } else {
-    print('Not Instantiaing Locator Service for Platform ${Platform.operatingSystem}');
-    print('Not registering Locator Service for Platform ${Platform.operatingSystem}');
-  }
+  //sumeet: note dart:io not supported on Web!
+//  // check which services are availablke in platform, and add them to providers and register in locator
+//  if (Platform.isAndroid || Platform.isIOS) {
+//    LocationService locationService = LocationService();
+//    providers
+//        .add(StreamProvider<UserLocation>(builder: (context) => locationService.locationStream));
+//    locator.registerLazySingleton(() => locationService);
+//  } else {
+//    print('Not Instantiaing Locator Service for Platform ${Platform.operatingSystem}');
+//    print('Not registering Locator Service for Platform ${Platform.operatingSystem}');
+//  }
 }
