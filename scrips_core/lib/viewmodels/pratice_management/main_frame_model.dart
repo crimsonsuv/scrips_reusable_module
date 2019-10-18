@@ -78,13 +78,13 @@ class MainFrameModel extends BaseModel {
           MenuItem(
               id: '$mainMenuId-${RoutePaths.Home}',
               label: 'Home - Home',
-              icon: Icons.directions_boat,
+              icon: Icons.home,
               navigationRoute: '$mainMenuId-${RoutePaths.Home}',
               enabled: true),
           MenuItem(
               id: '$mainMenuId-${RoutePaths.Home}',
               label: 'Home 2',
-              icon: Icons.directions_bus,
+              icon: Icons.home,
               navigationRoute: '$mainMenuId-${RoutePaths.Home}-2',
               enabled: false),
         ]);
@@ -101,7 +101,7 @@ class MainFrameModel extends BaseModel {
           MenuItem(
               id: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
               label: 'OnBoarding - 2',
-              icon: Icons.directions_run,
+              icon: Icons.directions_bike,
               navigationRoute: '$mainMenuId-${RoutePaths.PracticeOnBoardingWizard}-2',
               enabled: true),
         ]);
@@ -117,7 +117,7 @@ class MainFrameModel extends BaseModel {
           MenuItem(
               id: '$mainMenuId-${RoutePaths.Settings}-2',
               label: 'Settings - 2',
-              icon: Icons.directions_subway,
+              icon: Icons.directions_railway,
               navigationRoute: '$mainMenuId-${RoutePaths.Settings}-2',
               enabled: true),
         ]);

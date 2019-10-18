@@ -16,7 +16,7 @@ final _selectedBoxDecoration = BoxDecoration(
     boxShadow: [
       BoxShadow(blurRadius: 3.0, offset: Offset(0.0, 2.0), color: Color.fromARGB(80, 0, 0, 0))
     ]);
-final _selectedPadding = EdgeInsets.all(4.0);
+final _selectedPadding = EdgeInsets.all(1.0);
 
 class MainMenuListItem extends StatelessWidget {
   final MenuItem item;
@@ -42,21 +42,24 @@ class MainMenuListItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
             padding: this.isSelected ? _selectedPadding : _padding,
             decoration: this.isSelected ? _selectedBoxDecoration : _boxDecoration,
-            child: Row(
-              mainAxisAlignment: this.center ? MainAxisAlignment.center : MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                this.showIcon && this.item?.icon != null ? Icon(this.item?.icon) : Container(),
-                Padding(
-                  padding: EdgeInsets.only(left: 6.0),
-                  child: this.showLabel
-                      ? PlatformText(
-                          this.item?.label ?? '',
-                          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.0),
-                        )
-                      : Container(),
-                ),
-              ],
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Row(
+                mainAxisAlignment: this.center ? MainAxisAlignment.center : MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  this.showIcon && this.item?.icon != null ? Icon(this.item?.icon) : Container(),
+                  Padding(
+                    padding: EdgeInsets.only(left: 6.0),
+                    child: this.showLabel
+                        ? PlatformText(
+                            this.item?.label ?? '',
+                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.0),
+                          )
+                        : Container(),
+                  ),
+                ],
+              ),
             ),
           ),
         )

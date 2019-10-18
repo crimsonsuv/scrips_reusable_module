@@ -3,16 +3,13 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
-import 'package:scrips_core/provider_setup.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/background_fetch_service.dart';
 import 'package:scrips_core/services/api/fake_api.dart';
 import 'package:scrips_core/services/api/http_api.dart';
-import 'package:scrips_core/services/api/location_service.dart';
+// import 'datamodels/location/user_location.dart';
+// import 'package:scrips_core/services/api/location_service.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
-
-import 'datamodels/location/user_location.dart';
 
 GetIt locator = GetIt.instance;
 
