@@ -1,18 +1,15 @@
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 
-class MainFrame {
-  MainMenu mainMenu = MainMenu();
-  MainSubMenu mainSubMenu = MainSubMenu();
-  bool mainSubMenuVisible = true;
-  bool mainSubMenuStartShowing = true;
+class Global {
+  bool showOverlappedSubMenu = false;
+  bool animateSubMenu = false;
   String statusText = 'Works';
-  String mainMenuPath;
-  String mainSubMenuPath;
+  String userId = '';
 
-  MainFrame({this.mainMenuPath, this.mainSubMenuPath});
+  Global({this.userId});
 
-  MainFrame.fromJson(Map<String, dynamic> json) {
+  Global.fromJson(Map<String, dynamic> json) {
     //todo: fromJson
 //    this.items = [];
 //    json.map((k2, v2) {

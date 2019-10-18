@@ -5,28 +5,27 @@ import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_pm/constants/app_routes.dart';
 import '../../datamodels/pratice_management/main_frame.dart';
+import '../../datamodels/pratice_management/global.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
 class MainFrameModel extends BaseModel {
-  MainFrame data;
-
+  MainFrame mainFrameData;
+  final BuildContext context;
   //
-  MainFrameModel({String userId, String mainMenuPath, String mainSubMenuPath})
-      : data =
-            MainFrame(userId: userId, mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
+  MainFrameModel(this.context, {String mainMenuPath, String mainSubMenuPath})
+      : mainFrameData = MainFrame(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
         super();
 
-  Future init() async {
-    //posts = await _api.getPostsForUser(userId);
+  Future init({String userId}) async {
     this.loadMainMenuItems();
   }
 
-  void loadMainMenuItems() {
+  void loadMainMenuItems({String userId}) {
     //
     setBusy(true);
     //sumeet: note: this will call API.loadMenuItems for current userId
-    this.data.mainMenu = MainMenu(items: [
+    this.mainFrameData.mainMenu = MainMenu(items: [
       MenuItem(
           id: RoutePaths.Home,
           label: 'Home',
@@ -47,9 +46,9 @@ class MainFrameModel extends BaseModel {
           enabled: true),
     ]);
     //
-    data.mainMenu.currentItem =
-        this.getMenuItemForId(items: this.data?.mainMenu?.items, id: this.data?.mainMenuPath);
-    debugPrint('Current Main Menu Item: ${data?.mainMenu?.currentItem?.id}');
+    mainFrameData.mainMenu.currentItem = this.getMenuItemForId(
+        items: this.mainFrameData?.mainMenu?.items, id: this.mainFrameData?.mainMenuPath);
+    debugPrint('Current Main Menu Item: ${mainFrameData?.mainMenu?.currentItem?.id}');
     //
     this.loadSubMenuItems();
     //
@@ -57,10 +56,10 @@ class MainFrameModel extends BaseModel {
   }
 
   void loadSubMenuItems() {
-    String mainMenuId = this.data?.mainMenu?.currentItem?.id;
+    String mainMenuId = this.mainFrameData?.mainMenu?.currentItem?.id;
     switch (mainMenuId) {
       case RoutePaths.Home:
-        this.data.mainSubMenu = MainSubMenu(items: [
+        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.Home1}',
               label: 'Home - Home',
@@ -71,7 +70,7 @@ class MainFrameModel extends BaseModel {
         break;
 
       case RoutePaths.PracticeOnBoardingWizard:
-        this.data.mainSubMenu = MainSubMenu(items: [
+        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.PracticeOnBoardingWizard1}',
               label: 'OnBoarding - 1',
@@ -87,7 +86,7 @@ class MainFrameModel extends BaseModel {
         ]);
         break;
       case RoutePaths.Settings:
-        this.data.mainSubMenu = MainSubMenu(items: [
+        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.Settings1}',
               label: 'Settings - 1',
@@ -104,11 +103,11 @@ class MainFrameModel extends BaseModel {
         break;
 
       default:
-        this.data.mainSubMenu = MainSubMenu(items: []);
+        this.mainFrameData.mainSubMenu = MainSubMenu(items: []);
     }
-    this.data.mainSubMenu.currentItem =
-        this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
-    debugPrint('Current Main Sub Menu Item: ${data?.mainSubMenu?.currentItem?.id}');
+    this.mainFrameData.mainSubMenu.currentItem = this.getMenuItemForId(
+        items: this.mainFrameData?.mainSubMenu?.items, id: this.mainFrameData?.mainSubMenuPath);
+    debugPrint('Current Main Sub Menu Item: ${mainFrameData?.mainSubMenu?.currentItem?.id}');
 //    this.loadContainedItems(data);
   }
 
@@ -129,17 +128,17 @@ class MainFrameModel extends BaseModel {
 
   void setCurrentMainMenuItem(MenuItem item) {
     setBusy(true);
-    this.data.mainMenu.currentItem = item;
+    this.mainFrameData.mainMenu.currentItem = item;
     this.loadSubMenuItems();
-    this.data.mainSubMenuVisible = true;
+    this.mainFrameData.mainSubMenuVisible = true;
     setBusy(false);
   }
 
   void setCurrentMainSubMenuItem(MenuItem item, bool hideOnSelect) {
     setBusy(true);
-    this.data.mainSubMenu.currentItem = item;
+    this.mainFrameData.mainSubMenu.currentItem = item;
     if (hideOnSelect) {
-      this.data.mainSubMenuVisible = false;
+      this.mainFrameData.mainSubMenuVisible = false;
     }
 //    this.loadContainedItems(data);
     setBusy(false);
@@ -148,37 +147,11 @@ class MainFrameModel extends BaseModel {
   void toggleSubMenuVisible() {
     setBusy(true);
     // whether to show or not
-    this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
+    this.mainFrameData.mainSubMenuVisible = !this.mainFrameData.mainSubMenuVisible;
     // whether to animate on next show
-    this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
-    this.data.statusText = this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
-    setBusy(false);
-  }
-
-  void toggleShowOverlappedSubMenu(bool value) {
-    setBusy(true);
-    // whether to show or not
-    this.data.showOverlappedSubMenu = !this.data.showOverlappedSubMenu;
-    this.data.statusText =
-        this.data.showOverlappedSubMenu ? 'Showing Overlapped Menu' : 'Showing Fixed Menu';
-
-    setBusy(false);
-  }
-
-  void toggleAnimateSubMenu(bool value) {
-    setBusy(true);
-    // whether to show or not
-    this.data.animateSubMenu = !this.data.animateSubMenu;
-    this.data.statusText =
-        this.data.animateSubMenu ? 'Showing Animated Menu' : 'Showing Non Animated Menu';
-
-    setBusy(false);
-  }
-
-  void setStatusText(String value) {
-    setBusy(true);
-    // whether to show or not
-    this.data.statusText = value;
+    this.mainFrameData.mainSubMenuStartShowing = this.mainFrameData.mainSubMenuVisible;
+    this.mainFrameData.statusText =
+        this.mainFrameData.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
     setBusy(false);
   }
 }
