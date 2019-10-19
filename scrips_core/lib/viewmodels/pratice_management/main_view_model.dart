@@ -9,11 +9,15 @@ import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
 class MainViewModel extends BaseModel {
-  MainView mainFrameData;
+  MainView data;
   final BuildContext context;
   //
-  MainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath})
-      : mainFrameData = MainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath),
+  MainViewModel(this.context,
+      {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
+      : data = MainView(
+            mainMenuPath: mainMenuPath,
+            mainSubMenuPath: mainSubMenuPath,
+            mainSubMenuVisible: mainSubMenuVisible),
         super();
 
   Future init({String userId}) async {
@@ -24,7 +28,7 @@ class MainViewModel extends BaseModel {
     //
     setBusy(true);
     //sumeet: note: this will call API.loadMenuItems for current userId
-    this.mainFrameData.mainMenu = MainMenu(items: [
+    this.data.mainMenu = MainMenu(items: [
       MenuItem(
           id: RoutePaths.Home,
           label: 'Home',
@@ -45,9 +49,9 @@ class MainViewModel extends BaseModel {
           enabled: true),
     ]);
     //
-    mainFrameData.mainMenu.currentItem = this.getMenuItemForId(
-        items: this.mainFrameData?.mainMenu?.items, id: this.mainFrameData?.mainMenuPath);
-    debugPrint('Current Main Menu Item: ${mainFrameData?.mainMenu?.currentItem?.id}');
+    data.mainMenu.currentItem =
+        this.getMenuItemForId(items: this.data?.mainMenu?.items, id: this.data?.mainMenuPath);
+    debugPrint('Current Main Menu Item: ${data?.mainMenu?.currentItem?.id}');
     //
     this.loadSubMenuItems();
     //
@@ -55,10 +59,10 @@ class MainViewModel extends BaseModel {
   }
 
   void loadSubMenuItems() {
-    String mainMenuId = this.mainFrameData?.mainMenu?.currentItem?.id;
+    String mainMenuId = this.data?.mainMenu?.currentItem?.id;
     switch (mainMenuId) {
       case RoutePaths.Home:
-        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
+        this.data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.Home1}',
               label: 'Home - Home',
@@ -69,7 +73,7 @@ class MainViewModel extends BaseModel {
         break;
 
       case RoutePaths.PracticeOnBoardingWizard:
-        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
+        this.data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.PracticeOnBoardingWizard1}',
               label: 'OnBoarding - 1',
@@ -85,7 +89,7 @@ class MainViewModel extends BaseModel {
         ]);
         break;
       case RoutePaths.Settings:
-        this.mainFrameData.mainSubMenu = MainSubMenu(items: [
+        this.data.mainSubMenu = MainSubMenu(items: [
           MenuItem(
               id: '${RoutePaths.Settings1}',
               label: 'Settings - 1',
@@ -102,11 +106,11 @@ class MainViewModel extends BaseModel {
         break;
 
       default:
-        this.mainFrameData.mainSubMenu = MainSubMenu(items: []);
+        this.data.mainSubMenu = MainSubMenu(items: []);
     }
-    this.mainFrameData.mainSubMenu.currentItem = this.getMenuItemForId(
-        items: this.mainFrameData?.mainSubMenu?.items, id: this.mainFrameData?.mainSubMenuPath);
-    debugPrint('Current Main Sub Menu Item: ${mainFrameData?.mainSubMenu?.currentItem?.id}');
+    this.data.mainSubMenu.currentItem =
+        this.getMenuItemForId(items: this.data?.mainSubMenu?.items, id: this.data?.mainSubMenuPath);
+    debugPrint('Current Main Sub Menu Item: ${data?.mainSubMenu?.currentItem?.id}');
 //    this.loadContainedItems(data);
   }
 
@@ -127,17 +131,17 @@ class MainViewModel extends BaseModel {
 
   void setCurrentMainMenuItem(MenuItem item) {
     setBusy(true);
-    this.mainFrameData.mainMenu.currentItem = item;
+    this.data.mainMenu.currentItem = item;
     this.loadSubMenuItems();
-    this.mainFrameData.mainSubMenuVisible = true;
+    this.data.mainSubMenuVisible = true;
     setBusy(false);
   }
 
   void setCurrentMainSubMenuItem(MenuItem item, bool hideOnSelect) {
     setBusy(true);
-    this.mainFrameData.mainSubMenu.currentItem = item;
+    this.data.mainSubMenu.currentItem = item;
     if (hideOnSelect) {
-      this.mainFrameData.mainSubMenuVisible = false;
+      this.data.mainSubMenuVisible = false;
     }
 //    this.loadContainedItems(data);
     setBusy(false);
@@ -146,11 +150,10 @@ class MainViewModel extends BaseModel {
   void toggleSubMenuVisible() {
     setBusy(true);
     // whether to show or not
-    this.mainFrameData.mainSubMenuVisible = !this.mainFrameData.mainSubMenuVisible;
+    this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
-    this.mainFrameData.mainSubMenuStartShowing = this.mainFrameData.mainSubMenuVisible;
-    this.mainFrameData.statusText =
-        this.mainFrameData.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
+    this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
+    this.data.statusText = this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
     setBusy(false);
   }
 }

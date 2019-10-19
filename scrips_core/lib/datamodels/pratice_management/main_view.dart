@@ -10,7 +10,7 @@ class MainView {
   String mainMenuPath;
   String mainSubMenuPath;
 
-  MainView({this.mainMenuPath, this.mainSubMenuPath});
+  MainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible});
 
   MainView.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

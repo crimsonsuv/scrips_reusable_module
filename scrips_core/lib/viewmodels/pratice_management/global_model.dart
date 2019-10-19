@@ -18,20 +18,30 @@ class GlobalModel extends BaseModel {
 
   Future init() async {}
 
-  void toggleShowOverlappedSubMenu(bool value) {
+  void setShowOverlappedSubMenu(bool value) {
     setBusy(true);
     // whether to show or not
-    this.data.showOverlappedSubMenu = !this.data.showOverlappedSubMenu;
+    this.data.showOverlappedSubMenu = value;
     this.data.statusText =
         this.data.showOverlappedSubMenu ? 'Showing Overlapped Menu' : 'Showing Fixed Menu';
 
     setBusy(false);
   }
 
-  void toggleAnimateSubMenu(bool value) {
+  void setShowDevicePreview(bool value) {
     setBusy(true);
     // whether to show or not
-    this.data.animateSubMenu = !this.data.animateSubMenu;
+    this.data.showDevicePreview = value;
+    this.data.statusText =
+        this.data.showDevicePreview ? 'Showing Device Preview' : 'Not Showing Device Preview';
+
+    setBusy(false);
+  }
+
+  void setAnimateSubMenu(bool value) {
+    setBusy(true);
+    // whether to show or not
+    this.data.animateSubMenu = value;
     this.data.statusText =
         this.data.animateSubMenu ? 'Showing Animated Menu' : 'Showing Non Animated Menu';
 

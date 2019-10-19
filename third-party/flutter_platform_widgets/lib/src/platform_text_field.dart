@@ -345,6 +345,7 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       textInputAction: data?.textInputAction ?? textInputAction,
       //sumeet
       decoration: this.decoration ?? data?.decoration ?? const InputDecoration(),
+      // sumeet END
       textDirection: data?.textDirection,
       buildCounter: data?.buildCounter,
       dragStartBehavior: data?.dragStartBehavior ?? dragStartBehavior ?? DragStartBehavior.start,
@@ -394,8 +395,9 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       textAlign: data?.textAlign ?? textAlign,
       textCapitalization: data?.textCapitalization ?? textCapitalization,
       textInputAction: data?.textInputAction ?? textInputAction,
-      //sumeet
-      decoration: this.decoration ?? data?.decoration ?? const InputDecoration(),
+      //sumeet - decoration NOT supported?
+      // decoration: this.decoration ?? data?.decoration ?? const InputDecoration(),
+      // sumeet END
       clearButtonMode: data?.clearButtonMode ?? OverlayVisibilityMode.never,
       padding: data?.padding ?? const EdgeInsets.all(6.0),
       placeholder: data?.placeholder,

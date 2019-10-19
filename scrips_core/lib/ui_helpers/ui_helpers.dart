@@ -56,7 +56,7 @@ class UIHelper {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey),
         child: TextField(
           controller: controller,
-          obscureText: isPassword,
+          obscureText: isPassword != null ? true : false,
           style: TextStyle(fontSize: 12.0),
           decoration: InputDecoration.collapsed(
               hintText: placeholder, hintStyle: TextStyle(color: Colors.grey[600], fontSize: 12.0)),

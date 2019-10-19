@@ -4,6 +4,7 @@ import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 class Global {
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
+  bool showDevicePreview = true;
   String statusText = 'Works';
   String userId = '';
 
