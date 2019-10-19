@@ -16,7 +16,13 @@ class GlobalModel extends BaseModel {
       : data = Global(userId: userId),
         super();
 
-  Future init() async {}
+  void init() {}
+  void setVars({bool showOverlappedSubMenu, bool animateSubMenu}) {
+    setBusy(true);
+    this.data.showOverlappedSubMenu = showOverlappedSubMenu;
+    this.data.animateSubMenu = animateSubMenu;
+    setBusy(false);
+  }
 
   void setShowOverlappedSubMenu(bool value) {
     setBusy(true);

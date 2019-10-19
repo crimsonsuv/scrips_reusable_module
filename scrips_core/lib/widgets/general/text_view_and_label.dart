@@ -83,7 +83,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
               children: <Widget>[
                 PlatformText(
                   this.widget.labelValue,
-                  style: labelStyle,
+                  style: defaultTextStyle,
                   textAlign: TextAlign.left,
                 ),
                 SizedBox(
@@ -97,7 +97,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                 this.widget.validationMessage != null
                     ? PlatformText(
                         this.widget.validationMessage,
-                        style: validationStyle,
+                        style: defaultValidationTextStyle,
                       )
                     : Container(),
                 SizedBox(
@@ -105,14 +105,14 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                 ),
                 PlatformTextField(
                   obscureText: this.widget.isPassword != null ? true : false,
-                  style: textEditStyle,
+                  style: defaultTextEditStyle,
                   textAlign: TextAlign.left,
                   enabled: this.widget.enabled ?? true,
                   controller: TextEditingController(text: this.widget.textValue),
                   decoration: InputDecoration.collapsed(
                     border: OutlineInputBorder(),
                     hintText: this.widget.placeholder,
-                    hintStyle: hintStyle,
+                    hintStyle: defaultTetEditHintStyle,
                   ),
                 )
               ]),

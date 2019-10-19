@@ -4,11 +4,11 @@ import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 class Global {
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
-  bool showDevicePreview = true;
+  bool showDevicePreview = false;
   String statusText = 'Works';
   String userId = '';
 
-  Global({this.userId});
+  Global({this.userId, this.showOverlappedSubMenu, this.showDevicePreview, this.animateSubMenu});
 
   Global.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

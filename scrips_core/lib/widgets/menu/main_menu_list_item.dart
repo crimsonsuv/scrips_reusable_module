@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
+import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 final _boxDecoration = BoxDecoration(
     color: Colors.white,
@@ -9,14 +10,17 @@ final _boxDecoration = BoxDecoration(
       BoxShadow(blurRadius: 3.0, offset: Offset(0.0, 2.0), color: Color.fromARGB(80, 0, 0, 0))
     ]);
 
-final _padding = EdgeInsets.all(1.0);
 final _selectedBoxDecoration = BoxDecoration(
     color: Colors.green,
     borderRadius: BorderRadius.circular(5.0),
     boxShadow: [
       BoxShadow(blurRadius: 3.0, offset: Offset(0.0, 2.0), color: Color.fromARGB(80, 0, 0, 0))
     ]);
-final _selectedPadding = EdgeInsets.all(1.0);
+//
+final _padding = EdgeInsets.all(4.0);
+final _margin = EdgeInsets.only(bottom: 8.0, left: 2.0, top: 2.0, right: 2.0);
+final _iconHeight = 20.0;
+final _selectedPadding = EdgeInsets.all(4.0);
 
 class MainMenuListItem extends StatelessWidget {
   final MenuItem item;
@@ -39,25 +43,32 @@ class MainMenuListItem extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+            margin: _margin,
             padding: this.isSelected ? _selectedPadding : _padding,
             decoration: this.isSelected ? _selectedBoxDecoration : _boxDecoration,
+            height: _iconHeight * 1.5,
             child: FittedBox(
               fit: BoxFit.fitWidth,
               child: Row(
                 mainAxisAlignment: this.center ? MainAxisAlignment.center : MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  this.showIcon && this.item?.icon != null ? Icon(this.item?.icon) : Container(),
-                  Padding(
-                    padding: EdgeInsets.only(left: 6.0),
-                    child: this.showLabel
-                        ? PlatformText(
+                  this.showIcon && this.item?.icon != null
+                      ? Icon(
+                          this.item?.icon,
+                          size: _iconHeight,
+                          semanticLabel: this.item?.semanticLabel,
+                        )
+                      : Container(),
+                  this.showLabel && this.item?.label != null && this.item?.label != ''
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 6.0, right: 6.0),
+                          child: PlatformText(
                             this.item?.label ?? '',
-                            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16.0),
-                          )
-                        : Container(),
-                  ),
+                            style: defaultMenuItemTextStyle,
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ),

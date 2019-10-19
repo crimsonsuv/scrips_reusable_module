@@ -339,7 +339,7 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       onEditingComplete: data?.onEditingComplete ?? onEditingComplete,
       onSubmitted: data?.onSubmitted ?? onSubmitted,
       scrollPadding: data?.scrollPadding ?? scrollPadding,
-      style: data?.style ?? style,
+      style: data?.style ?? style ?? _kDefaultTextStyle,
       textAlign: data?.textAlign ?? textAlign,
       textCapitalization: data?.textCapitalization ?? textCapitalization,
       textInputAction: data?.textInputAction ?? textInputAction,
