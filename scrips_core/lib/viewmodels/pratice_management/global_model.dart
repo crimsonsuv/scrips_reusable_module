@@ -1,9 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_pm/constants/app_routes.dart';
 import '../../datamodels/pratice_management/global.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';

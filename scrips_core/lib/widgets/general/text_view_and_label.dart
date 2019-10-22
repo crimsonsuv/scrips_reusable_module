@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 final BoxDecoration _textViewAndLabelBorder =
@@ -17,11 +16,16 @@ class TextViewAndLabel extends StatefulWidget {
   final BoxDecoration boxDecoration;
   final double padding;
   final double margin;
-  String placeholder;
-  String validationMessage;
   final bool isPassword;
   final double spaceBetweenTitle;
-  _TextViewAndLabelState state;
+  // non final vars
+  final String placeholder;
+  final String validationMessage;
+//  _TextViewAndLabelState state;
+
+  static _TextViewAndLabelState of(BuildContext context, {bool root = false}) => root
+      ? context.rootAncestorStateOfType(const TypeMatcher<_TextViewAndLabelState>())
+      : context.ancestorStateOfType(const TypeMatcher<_TextViewAndLabelState>());
 
   //
   TextViewAndLabel(
@@ -42,18 +46,23 @@ class TextViewAndLabel extends StatefulWidget {
   //
   @override
   _TextViewAndLabelState createState() {
-    this.state = _TextViewAndLabelState();
-    return this.state;
+    return _TextViewAndLabelState();
   }
 
-  String getValue() {
-    return this.state.currentTextValue;
+  String getValue(BuildContext context) {
+    return TextViewAndLabel.of(context).currentTextValue;
+  }
+
+  String getValidationMessage(BuildContext context) {
+    return TextViewAndLabel.of(context).currentValidationMessage;
   }
 }
 
 class _TextViewAndLabelState extends State<TextViewAndLabel> {
   //
   String currentTextValue;
+  String currentPlaceholder;
+  String currentValidationMessage;
   TextEditingController _controller;
 
   void initState() {
@@ -62,7 +71,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
     _controller.addListener(() {
       final text = _controller.text;
       this.setState(() {
-        currentTextValue = text;
+        this.currentTextValue = text;
       });
     });
   }
@@ -96,7 +105,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                     : Container(),
                 this.widget.validationMessage != null
                     ? PlatformText(
-                        this.widget.validationMessage,
+                        this.currentValidationMessage ?? this.widget.validationMessage ?? null,
                         style: defaultValidationTextStyle,
                       )
                     : Container(),
@@ -108,10 +117,11 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                   style: defaultTextEditStyle,
                   textAlign: TextAlign.left,
                   enabled: this.widget.enabled ?? true,
-                  controller: TextEditingController(text: this.widget.textValue),
+                  controller:
+                      TextEditingController(text: this.widget.textValue ?? this.currentTextValue),
                   decoration: InputDecoration.collapsed(
                     border: OutlineInputBorder(),
-                    hintText: this.widget.placeholder,
+                    hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,
                     hintStyle: defaultTetEditHintStyle,
                   ),
                 )
