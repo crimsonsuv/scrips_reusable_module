@@ -9,9 +9,9 @@ abstract class Api {
   Future<User> getUser(String userId);
   Future<MainMenu> getMenuItems(String userId);
 
-  // sumeet: note: example fns - delete later
+  // scrips: sumeet: note: example fns - delete later
   Future<List<Post>> getPostsForUser(String userId);
   Future<List<Comment>> getCommentsForPost(int postId);
   Future<bool> likePost(int postId);
-  // sumeet: END
+  // scrips: sumeet: END
 }

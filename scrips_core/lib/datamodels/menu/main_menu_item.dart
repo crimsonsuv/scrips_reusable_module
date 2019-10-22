@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 
@@ -9,13 +8,7 @@ part 'main_menu_item.g.dart';
 class MainMenuItem extends MenuItem {
   MainSubMenu subMenu = MainSubMenu();
   MainMenuItem(
-      {String id,
-      String iconName,
-      String label,
-      bool enabled,
-      String semanticLabel,
-      String navigationRoute,
-      this.subMenu})
+      {String id, String iconName, String label, bool enabled, String semanticLabel, String navigationRoute, this.subMenu})
       : super(
             id: id,
             iconName: iconName,

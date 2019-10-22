@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:scrips_core/constants/app_routes.dart';
 
 //

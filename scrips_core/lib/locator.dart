@@ -1,4 +1,4 @@
-//sumeet: noteL dart:io not supported on Web!
+//scrips: sumeet: note: dart:io not supported on Web!
 //import 'dart:io' show Platform;
 
 import 'package:flutter/widgets.dart';
@@ -21,7 +21,7 @@ void setupLocator() {
   locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
 
   WidgetsFlutterBinding.ensureInitialized();
-  //sumeet: note dart:io not supported on Web!
+  //scrips: sumeet: note dart:io not supported on Web!
 //  // check which services are availablke in platform, and add them to providers and register in locator
 //  if (Platform.isAndroid || Platform.isIOS) {
 //    LocationService locationService = LocationService();

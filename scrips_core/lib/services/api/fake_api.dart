@@ -40,10 +40,7 @@ class FakeApi implements Api {
   @override
   Future<User> getUser(String userId) async {
     await Future.delayed(Duration(seconds: 1));
-    return User(
-        id: userId,
-        name: 'user $userId',
-        phoneNumber: '$userId$userId$userId$userId$userId$userId$userId');
+    return User(id: userId, name: 'user $userId', phoneNumber: '$userId$userId$userId$userId$userId$userId$userId');
   }
 
   @override
@@ -58,7 +55,7 @@ class FakeApi implements Api {
   Future<bool> likePost(int postId) async {
     await Future.delayed(Duration(seconds: 1));
 
-    //sumeet: ToDo: FakeAPi for likePost
+    //scrips: sumeet: ToDo: FakeAPi for likePost
     return null;
   }
 

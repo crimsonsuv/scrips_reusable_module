@@ -5,8 +5,7 @@
  */
 
 import 'package:flutter/cupertino.dart' show CupertinoApp, CupertinoThemeData;
-import 'package:flutter/material.dart'
-    show MaterialApp, Theme, ThemeData, ThemeMode;
+import 'package:flutter/material.dart' show MaterialApp, Theme, ThemeData, ThemeMode;
 import 'package:flutter/widgets.dart';
 
 import 'widget_base.dart';
@@ -197,7 +196,7 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
   final PlatformBuilder<MaterialAppData> android;
   final PlatformBuilder<CupertinoAppData> ios;
 
-  // sumeet: added
+  // scrips: sumeet: added
   final ThemeData theme;
 
   PlatformApp(
@@ -226,7 +225,7 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
       this.debugShowCheckedModeBanner = true,
       this.android,
       this.ios,
-      // sumeet: added
+      // scrips: sumeet: added
       this.theme})
       : super(key: key);
 
@@ -251,25 +250,16 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
       onGenerateTitle: data?.onGenerateTitle ?? onGenerateTitle,
       color: data?.color ?? color,
       locale: data?.locale ?? locale,
-      localizationsDelegates:
-          data?.localizationsDelegates ?? localizationsDelegates,
-      localeListResolutionCallback:
-          data?.localeListResolutionCallback ?? localeListResolutionCallback,
-      localeResolutionCallback:
-          data?.localeResolutionCallback ?? localeResolutionCallback,
+      localizationsDelegates: data?.localizationsDelegates ?? localizationsDelegates,
+      localeListResolutionCallback: data?.localeListResolutionCallback ?? localeListResolutionCallback,
+      localeResolutionCallback: data?.localeResolutionCallback ?? localeResolutionCallback,
       supportedLocales: data?.supportedLocales ?? supportedLocales,
-      showPerformanceOverlay:
-          data?.showPerformanceOverlay ?? showPerformanceOverlay,
-      checkerboardRasterCacheImages:
-          data?.checkerboardRasterCacheImages ?? checkerboardRasterCacheImages,
-      checkerboardOffscreenLayers:
-          data?.checkerboardOffscreenLayers ?? checkerboardOffscreenLayers,
-      showSemanticsDebugger:
-          data?.showSemanticsDebugger ?? showSemanticsDebugger,
-      debugShowCheckedModeBanner:
-          data?.debugShowCheckedModeBanner ?? debugShowCheckedModeBanner,
-      theme: (data?.theme ?? Theme.of(context))
-          .copyWith(platform: TargetPlatform.android),
+      showPerformanceOverlay: data?.showPerformanceOverlay ?? showPerformanceOverlay,
+      checkerboardRasterCacheImages: data?.checkerboardRasterCacheImages ?? checkerboardRasterCacheImages,
+      checkerboardOffscreenLayers: data?.checkerboardOffscreenLayers ?? checkerboardOffscreenLayers,
+      showSemanticsDebugger: data?.showSemanticsDebugger ?? showSemanticsDebugger,
+      debugShowCheckedModeBanner: data?.debugShowCheckedModeBanner ?? debugShowCheckedModeBanner,
+      theme: (data?.theme ?? Theme.of(context)).copyWith(platform: TargetPlatform.android),
       debugShowMaterialGrid: data?.debugShowMaterialGrid ?? false,
       darkTheme: data?.darkTheme?.copyWith(platform: TargetPlatform.android),
       themeMode: data?.themeMode ?? ThemeMode.system,
@@ -297,23 +287,15 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
       onGenerateTitle: data?.onGenerateTitle ?? onGenerateTitle,
       color: data?.color ?? color,
       locale: data?.locale ?? locale,
-      localizationsDelegates:
-          data?.localizationsDelegates ?? localizationsDelegates,
-      localeListResolutionCallback:
-          data?.localeListResolutionCallback ?? localeListResolutionCallback,
-      localeResolutionCallback:
-          data?.localeResolutionCallback ?? localeResolutionCallback,
+      localizationsDelegates: data?.localizationsDelegates ?? localizationsDelegates,
+      localeListResolutionCallback: data?.localeListResolutionCallback ?? localeListResolutionCallback,
+      localeResolutionCallback: data?.localeResolutionCallback ?? localeResolutionCallback,
       supportedLocales: data?.supportedLocales ?? supportedLocales,
-      showPerformanceOverlay:
-          data?.showPerformanceOverlay ?? showPerformanceOverlay,
-      checkerboardRasterCacheImages:
-          data?.checkerboardRasterCacheImages ?? checkerboardRasterCacheImages,
-      checkerboardOffscreenLayers:
-          data?.checkerboardOffscreenLayers ?? checkerboardOffscreenLayers,
-      showSemanticsDebugger:
-          data?.showSemanticsDebugger ?? showSemanticsDebugger,
-      debugShowCheckedModeBanner:
-          data?.debugShowCheckedModeBanner ?? debugShowCheckedModeBanner,
+      showPerformanceOverlay: data?.showPerformanceOverlay ?? showPerformanceOverlay,
+      checkerboardRasterCacheImages: data?.checkerboardRasterCacheImages ?? checkerboardRasterCacheImages,
+      checkerboardOffscreenLayers: data?.checkerboardOffscreenLayers ?? checkerboardOffscreenLayers,
+      showSemanticsDebugger: data?.showSemanticsDebugger ?? showSemanticsDebugger,
+      debugShowCheckedModeBanner: data?.debugShowCheckedModeBanner ?? debugShowCheckedModeBanner,
       theme: data?.theme,
     );
   }

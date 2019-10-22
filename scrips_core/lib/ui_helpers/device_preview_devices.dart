@@ -1,6 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 
-// sumeet: not possible to add new Devices as DeviceFrame() is not exposed - use FreeForm devices instead
+// scrips: sumeet: not possible to add new Devices as DeviceFrame() is not exposed - use FreeForm devices instead
 /*const androidTab = Device.android(
     name: "Android Tab",
     type: DeviceType.phone,

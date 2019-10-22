@@ -45,6 +45,5 @@ class MenuItem {
         return null;
         break;
     }
-    return null;
   }
 }
