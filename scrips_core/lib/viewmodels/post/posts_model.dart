@@ -13,7 +13,7 @@ class PostsModel extends BaseModel {
 
   List<Post> posts;
 
-  Future getPosts(int userId) async {
+  Future getPosts(String userId) async {
     setBusy(true);
     posts = await _api.getPostsForUser(userId);
     setBusy(false);

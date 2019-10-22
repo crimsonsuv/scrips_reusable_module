@@ -1,28 +1,19 @@
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+import 'main_menu_item.dart';
+
+part 'main_menu.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class MainMenu {
-  List<MenuItem> items = [];
-  MenuItem currentItem ;
+  List<MainMenuItem> items = [];
+  MainMenuItem currentItem;
 
   MainMenu({this.items, this.currentItem});
 
-  MainMenu.fromJson(Map<String, dynamic> json) {
-    //todo: fromJson
-//    this.items = [];
-//    json.map((k2, v2) {
-//      this.items.add(MainMenuItem(
-//          id: k2, icon: v2['icon'], name: v2['name'], label: v2['label'], enabled: v2['enabled']));
-//    });
+  factory MainMenu.fromJson(Map<String, dynamic> json) {
+    return _$MainMenuFromJson(json);
   }
 
-  Map<String, dynamic> toJson() {
-    //todo: toJson
-//    final Map<String, dynamic> data = new Map<String, MainMenuItem>();
-//    this.items.map((k, v) {
-//      data['id'] = v;
-//    }
-//    return data;
-//
-    return new Map<String, dynamic>();
-  }
+  Map<String, dynamic> toJson() => _$MainMenuToJson(this);
 }

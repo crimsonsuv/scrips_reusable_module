@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:scrips_core/datamodels/login/login.dart';
+import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/post/comment.dart';
 import 'package:scrips_core/datamodels/post/post.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
@@ -15,7 +16,7 @@ class HttpApi implements Api {
   var client = new http.Client();
 
   @override
-  Future<User> getUser(int userId) async {
+  Future<User> getUser(String userId) async {
     // Get user profile for id
     var response = await client.get('$endpoint/users/$userId');
 
@@ -24,7 +25,7 @@ class HttpApi implements Api {
   }
 
   @override
-  Future<List<Post>> getPostsForUser(int userId) async {
+  Future<List<Post>> getPostsForUser(String userId) async {
     var posts = List<Post>();
     // Get user posts for id
     var response = await client.get('$endpoint/posts?userId=$userId');
@@ -73,5 +74,11 @@ class HttpApi implements Api {
     }
 
     return false;
+  }
+
+  @override
+  Future<MainMenu> getMenuItems(String userId) {
+    // TODO: implement getMenuItems
+    return null;
   }
 }

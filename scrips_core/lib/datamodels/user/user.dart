@@ -1,21 +1,15 @@
 class User {
-  int id;
+  String id;
   String name;
   String username;
   String phoneNumber;
   String email;
   String accessToken;
 
-  User(
-      {this.id,
-      this.name,
-      this.username,
-      this.phoneNumber,
-      this.email,
-      this.accessToken});
+  User({this.id, this.name, this.username, this.phoneNumber, this.email, this.accessToken});
 
   User.initial()
-      : id = 0,
+      : id = '',
         name = '',
         username = '',
         email = '',

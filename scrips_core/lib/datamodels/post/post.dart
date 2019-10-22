@@ -1,5 +1,5 @@
 class Post {
-  int userId;
+  String userId;
   int id;
   String title;
   String body;

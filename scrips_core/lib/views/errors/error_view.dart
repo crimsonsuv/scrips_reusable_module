@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
-import 'package:scrips_core/viewmodels/pratice_management/global_model.dart';
-import 'package:scrips_pm/constants/app_constants.dart';
+import 'package:scrips_core/viewmodels/general/global_model.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 
 final _mainPadding = EdgeInsets.only(left: 0.0, right: 0.0, top: 0.0, bottom: 0.0);
 final BoxDecoration _mainBorder =

@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../datamodels/pratice_management/global.dart';
+import 'package:provider/provider.dart';
+import 'package:scrips_core/services/api/api.dart';
+import '../../datamodels/general/global.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
 class GlobalModel extends BaseModel {
   Global data;
   final BuildContext context;
-  //
+  Api _api;
+
   GlobalModel(this.context, {String userId})
       : data = Global(userId: userId),
+        this._api = Provider.of<Api>(context),
         super();
 
   void init() {}

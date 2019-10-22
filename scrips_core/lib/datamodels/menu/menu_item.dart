@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'menu_item.g.dart';
 
+@JsonSerializable(explicitToJson: true)
 class MenuItem {
   String id;
+  @JsonKey(ignore: true)
   IconData icon;
   String label;
   String semanticLabel;
@@ -11,20 +15,7 @@ class MenuItem {
   MenuItem(
       {this.id, this.icon, this.label, this.enabled, this.semanticLabel, this.navigationRoute});
 
-  MenuItem.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    icon = json['icon'];
-    label = json['label'];
-    enabled = json['enabled'];
-    semanticLabel = json['semanticLabel'];
-  }
+  factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['icon'] = this.icon;
-    data['label'] = this.label;
-    data['semanticLabel'] = this.semanticLabel;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$MenuItemToJson(this);
 }

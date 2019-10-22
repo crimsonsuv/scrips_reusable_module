@@ -1,7 +1,9 @@
 import 'package:scrips_core/datamodels/login/login.dart';
+import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/post/comment.dart';
 import 'package:scrips_core/datamodels/post/post.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
 
 import 'api.dart';
 
@@ -22,7 +24,7 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<List<Post>> getPostsForUser(int userId) async {
+  Future<List<Post>> getPostsForUser(String userId) async {
     await Future.delayed(Duration(seconds: 1));
 
     return List<Post>.generate(
@@ -36,7 +38,7 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<User> getUser(int userId) async {
+  Future<User> getUser(String userId) async {
     await Future.delayed(Duration(seconds: 1));
     return User(
         id: userId,
@@ -48,7 +50,7 @@ class FakeApi implements Api {
   Future<LoginResponse> login({String username, String password}) async {
     await Future.delayed(Duration(seconds: 1));
 
-    int userId = int.parse(username.split(' ')[1]);
+    String userId = username;
     return LoginResponse(userId: userId);
   }
 
@@ -59,5 +61,12 @@ class FakeApi implements Api {
     //sumeet: ToDo: FakeAPi for likePost
     return null;
   }
-}
 
+  @override
+  Future<MainMenu> getMenuItems(String userId) async {
+    await Future.delayed(Duration(seconds: 1));
+    Map<String, dynamic> json = mockDataMenuItems;
+    MainMenu mainMenu = MainMenu.fromJson(json);
+    return mainMenu;
+  }
+}

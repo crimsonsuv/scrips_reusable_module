@@ -1,14 +1,13 @@
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/menu/main_sub_menu.dart';
 
 class MainView {
   MainMenu mainMenu = MainMenu();
-  MainSubMenu mainSubMenu = MainSubMenu();
+  String mainMenuPath;
+  String mainSubMenuPath;
+
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
   String statusText = '';
-  String mainMenuPath;
-  String mainSubMenuPath;
 
   MainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible});
 

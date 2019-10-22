@@ -23,6 +23,8 @@ dependencies:
   location:
   localstorage:
   connectivity:
+  json_serializable:
+  device_preview:
   # cloud_firestore:
   # scoped model packages
   scoped_model:
@@ -33,7 +35,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_runner:
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
