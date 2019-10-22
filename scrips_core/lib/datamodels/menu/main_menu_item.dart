@@ -10,7 +10,7 @@ class MainMenuItem extends MenuItem {
   MainSubMenu subMenu = MainSubMenu();
   MainMenuItem(
       {String id,
-      IconData icon,
+      String iconName,
       String label,
       bool enabled,
       String semanticLabel,
@@ -18,7 +18,7 @@ class MainMenuItem extends MenuItem {
       this.subMenu})
       : super(
             id: id,
-            icon: icon,
+            iconName: iconName,
             label: label,
             enabled: enabled,
             semanticLabel: semanticLabel,

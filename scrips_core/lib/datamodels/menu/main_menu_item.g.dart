@@ -9,6 +9,7 @@ part of 'main_menu_item.dart';
 MainMenuItem _$MainMenuItemFromJson(Map<String, dynamic> json) {
   return MainMenuItem(
     id: json['id'] as String,
+    iconName: json['iconName'] as String,
     label: json['label'] as String,
     enabled: json['enabled'] as bool,
     semanticLabel: json['semanticLabel'] as String,
@@ -22,6 +23,7 @@ MainMenuItem _$MainMenuItemFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$MainMenuItemToJson(MainMenuItem instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'iconName': instance.iconName,
       'label': instance.label,
       'semanticLabel': instance.semanticLabel,
       'enabled': instance.enabled,
