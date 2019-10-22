@@ -13,11 +13,15 @@ class GlobalModel extends BaseModel {
         super();
 
   void init() {}
-  void setVars({bool showOverlappedSubMenu, bool animateSubMenu}) {
-    setBusy(true);
+  void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
+    if (callSetBusy) {
+      setBusy(true);
+    }
     this.data.showOverlappedSubMenu = showOverlappedSubMenu;
     this.data.animateSubMenu = animateSubMenu;
-    setBusy(false);
+    if (callSetBusy) {
+      setBusy(false);
+    }
   }
 
   void setShowOverlappedSubMenu(bool value) {
@@ -36,15 +40,6 @@ class GlobalModel extends BaseModel {
     this.data.showDevicePreview = value;
     this.data.statusText =
         this.data.showDevicePreview ? 'Showing Device Preview' : 'Not Showing Device Preview';
-
-    setBusy(false);
-  }
-
-  void setShowTestPostsApp(bool value) {
-    setBusy(true);
-    // whether to show or not
-    this.data.showTestPostsApp = value;
-    this.data.statusText = this.data.showTestPostsApp ? 'Showing Test App' : 'Showing Main App';
 
     setBusy(false);
   }

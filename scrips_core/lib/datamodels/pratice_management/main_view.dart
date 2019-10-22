@@ -6,7 +6,7 @@ class MainView {
   MainSubMenu mainSubMenu = MainSubMenu();
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
-  String statusText = 'Works';
+  String statusText = '';
   String mainMenuPath;
   String mainSubMenuPath;
 
