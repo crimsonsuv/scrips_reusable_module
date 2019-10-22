@@ -2,6 +2,7 @@ class Global {
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
   bool showDevicePreview = false;
+  String statusText = '';
   String userId = '';
   Exception lastException;
 
