@@ -2,8 +2,10 @@ class Global {
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
   bool showDevicePreview = false;
+  bool showTestPostsApp = false;
   String statusText = 'Works';
   String userId = '';
+  Exception lastException;
 
   Global({this.userId, this.showOverlappedSubMenu, this.showDevicePreview, this.animateSubMenu});
 

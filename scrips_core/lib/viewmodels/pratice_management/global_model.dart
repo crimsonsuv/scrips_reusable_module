@@ -40,6 +40,25 @@ class GlobalModel extends BaseModel {
     setBusy(false);
   }
 
+  void setShowTestPostsApp(bool value) {
+    setBusy(true);
+    // whether to show or not
+    this.data.showTestPostsApp = value;
+    this.data.statusText = this.data.showTestPostsApp ? 'Showing Test App' : 'Showing Main App';
+
+    setBusy(false);
+  }
+
+  void setLastException(Exception exception) {
+    setBusy(true);
+    // whether to show or not
+    this.data.lastException = exception;
+    this.data.statusText =
+        this.data.lastException != null ? this.data.lastException.toString() : '';
+
+    setBusy(false);
+  }
+
   void setAnimateSubMenu(bool value) {
     setBusy(true);
     // whether to show or not
