@@ -6,8 +6,7 @@ import 'package:scrips_core/viewmodels/general/global_model.dart';
 import 'package:scrips_core/constants/app_constants.dart';
 
 final _mainPadding = EdgeInsets.only(left: 0.0, right: 0.0, top: 0.0, bottom: 0.0);
-final BoxDecoration _mainBorder =
-    BoxDecoration(border: Border.all(color: Colors.blue), color: Colors.white70);
+final BoxDecoration _mainBorder = BoxDecoration(border: Border.all(color: Colors.blue), color: Colors.white70);
 
 class ErrorView extends StatelessWidget {
   final Exception exception;
@@ -23,7 +22,7 @@ class ErrorView extends StatelessWidget {
       //        key: globalKeyMainScaffold,
       appBar: PlatformAppBar(
         //          key: globalKeyMainAppBar,
-        title: const Text(PM_APP_NAME),
+        title: Text(PM_APP_NAME),
         backgroundColor: backgroundColor,
       ),
       body: Padding(
