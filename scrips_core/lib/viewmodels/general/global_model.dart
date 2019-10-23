@@ -70,6 +70,14 @@ class GlobalModel extends BaseModel {
     this.data.statusText = value;
     setBusy(false);
   }
+
+  void setNewLocale(String localeCode, String localeCountry) {
+    setBusy(true);
+    // whether to show or not
+    this.data.localeCode = localeCode;
+    this.data.localeCountry = localeCountry;
+    setBusy(false);
+  }
 }
 
 class ContainedItem extends StatelessWidget {

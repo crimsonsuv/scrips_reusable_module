@@ -32,6 +32,11 @@ class UIHelper {
     return Container(width: width);
   }
 
+  static EdgeInsets defaultPadding = EdgeInsets.all(4.0);
+  static EdgeInsets defaultPaddingLarge = EdgeInsets.all(8.0);
+  static EdgeInsets defaultPaddingVeryLarge = EdgeInsets.all(16.0);
+  static EdgeInsets defaultMargin = EdgeInsets.all(4.0);
+
   /// Provides an input field with a title that stretches the full width of the screen
   static Widget inputField(
       {String title,
@@ -44,8 +49,7 @@ class UIHelper {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
       PlatformText(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0)),
       validationMessage != null
-          ? PlatformText(validationMessage,
-              style: TextStyle(color: Colors.red[400], fontSize: 12.0))
+          ? PlatformText(validationMessage, style: TextStyle(color: Colors.red[400], fontSize: 12.0))
           : Container(),
       Container(
         alignment: Alignment(0.0, 0.0),
@@ -71,8 +75,7 @@ class UIHelper {
       child: Container(
         width: double.infinity,
         height: 40.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0), color: Color.fromARGB(255, 9, 202, 172)),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: Color.fromARGB(255, 9, 202, 172)),
         child: Center(child: PlatformText(title, style: TextStyle(fontWeight: FontWeight.w800))),
       ),
     );

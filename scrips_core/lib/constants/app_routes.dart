@@ -17,5 +17,6 @@ class RoutePaths {
   static const String LocationView = 'location-view';
   static const String DialogTest = 'dialog-test';
   static const String Splash = 'dialog-test';
+  static const String SettingsLocale = 'settings-locale';
   static const String Empty = '';
 }
