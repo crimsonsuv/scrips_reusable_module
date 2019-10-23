@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 
-final BoxDecoration _textViewAndLabelBorder =
-    null; // BoxDecoration(border: Border.all(color: Colors.grey));
+final BoxDecoration _textViewAndLabelBorder = null; // BoxDecoration(border: Border.all(color: Colors.grey));
 final double _textViewAndLabelMargin = 8.0;
 final double _textViewAndLabelPadding = 8.0;
 
@@ -93,7 +92,7 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                 PlatformText(
                   this.widget.labelValue,
                   style: defaultTextStyle,
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.start,
                 ),
                 SizedBox(
                   height: _textViewAndLabelPadding / 2,
@@ -115,10 +114,9 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                 PlatformTextField(
                   obscureText: this.widget.isPassword != null ? true : false,
                   style: defaultTextEditStyle,
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.start,
                   enabled: this.widget.enabled ?? true,
-                  controller:
-                      TextEditingController(text: this.widget.textValue ?? this.currentTextValue),
+                  controller: TextEditingController(text: this.widget.textValue ?? this.currentTextValue),
                   decoration: InputDecoration.collapsed(
                     border: OutlineInputBorder(),
                     hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,

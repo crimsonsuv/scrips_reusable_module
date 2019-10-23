@@ -37,6 +37,8 @@ class UIHelper {
   static EdgeInsets defaultPaddingVeryLarge = EdgeInsets.all(16.0);
   static EdgeInsets defaultMargin = EdgeInsets.all(4.0);
 
+  static BoxDecoration defaultButtonBorder = BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
+
   /// Provides an input field with a title that stretches the full width of the screen
   static Widget inputField(
       {String title,
