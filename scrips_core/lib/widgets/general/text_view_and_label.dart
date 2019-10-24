@@ -11,6 +11,7 @@ class TextViewAndLabel extends StatefulWidget {
   final String labelValue;
   final String textValue;
   final bool enabled;
+  final double width;
   final Axis axis;
   final BoxDecoration boxDecoration;
   final double padding;
@@ -20,6 +21,7 @@ class TextViewAndLabel extends StatefulWidget {
   // non final vars
   final String placeholder;
   final String validationMessage;
+  final Function onChange;
 //  _TextViewAndLabelState state;
 
   static _TextViewAndLabelState of(BuildContext context, {bool root = false}) => root
@@ -39,7 +41,9 @@ class TextViewAndLabel extends StatefulWidget {
       this.placeholder,
       this.validationMessage,
       this.spaceBetweenTitle,
-      this.isPassword})
+      this.isPassword,
+      this.onChange,
+      this.width})
       : super(key: key);
 
   //
@@ -62,70 +66,76 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
   String currentTextValue;
   String currentPlaceholder;
   String currentValidationMessage;
-  TextEditingController _controller;
+  TextEditingController controller;
 
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: this.widget.textValue);
-    _controller.addListener(() {
-      final text = _controller.text;
+    controller = TextEditingController(text: this.widget.textValue);
+    controller.addListener(() {
+      final text = controller.text;
       this.setState(() {
         this.currentTextValue = text;
       });
+      if (this.widget.onChange != null) {
+        this.widget.onChange(text);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(this.widget.padding ?? _textViewAndLabelPadding),
-          margin: EdgeInsets.all(this.widget.margin ?? _textViewAndLabelMargin),
-          decoration: this.widget.boxDecoration ?? _textViewAndLabelBorder,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                PlatformText(
-                  this.widget.labelValue,
-                  style: defaultTextStyle,
-                  textAlign: TextAlign.start,
-                ),
-                SizedBox(
-                  height: _textViewAndLabelPadding / 2,
-                ),
-                this.widget.validationMessage != null
-                    ? SizedBox(
-                        height: _textViewAndLabelPadding / 2,
-                      )
-                    : Container(),
-                this.widget.validationMessage != null
-                    ? PlatformText(
-                        this.currentValidationMessage ?? this.widget.validationMessage ?? null,
-                        style: defaultValidationTextStyle,
-                      )
-                    : Container(),
-                SizedBox(
-                  height: _textViewAndLabelPadding / 2,
-                ),
-                PlatformTextField(
-                  obscureText: this.widget.isPassword != null ? true : false,
-                  style: defaultTextEditStyle,
-                  textAlign: TextAlign.start,
-                  enabled: this.widget.enabled ?? true,
-                  controller: TextEditingController(text: this.widget.textValue ?? this.currentTextValue),
-                  decoration: InputDecoration.collapsed(
-                    border: OutlineInputBorder(),
-                    hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,
-                    hintStyle: defaultTetEditHintStyle,
+    return Container(
+      width: this.widget.width != null && this.widget.width > 0 ? this.widget.width : double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(this.widget.padding ?? _textViewAndLabelPadding),
+            margin: EdgeInsets.all(this.widget.margin ?? _textViewAndLabelMargin),
+            decoration: this.widget.boxDecoration ?? _textViewAndLabelBorder,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  PlatformText(
+                    this.widget.labelValue,
+                    style: defaultTextStyle,
+                    textAlign: TextAlign.start,
                   ),
-                )
-              ]),
-        ),
-      ],
+                  SizedBox(
+                    height: _textViewAndLabelPadding / 2,
+                  ),
+                  this.widget.validationMessage != null
+                      ? SizedBox(
+                          height: _textViewAndLabelPadding / 2,
+                        )
+                      : Container(),
+                  this.widget.validationMessage != null
+                      ? PlatformText(
+                          this.currentValidationMessage ?? this.widget.validationMessage ?? null,
+                          style: defaultValidationTextStyle,
+                        )
+                      : Container(),
+                  SizedBox(
+                    height: _textViewAndLabelPadding / 2,
+                  ),
+                  PlatformTextField(
+                    obscureText: this.widget.isPassword != null ? true : false,
+                    style: defaultTextEditStyle,
+                    textAlign: TextAlign.start,
+                    enabled: this.widget.enabled ?? true,
+                    controller: this.controller,
+                    decoration: InputDecoration.collapsed(
+                      border: OutlineInputBorder(),
+                      hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,
+                      hintStyle: defaultTetEditHintStyle,
+                    ),
+                  )
+                ]),
+          ),
+        ],
+      ),
     );
   }
 }

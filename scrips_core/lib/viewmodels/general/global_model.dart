@@ -85,7 +85,7 @@ class GlobalModel extends BaseModel {
     setBusy(false);
   }
 
-  login(String userName, String password) async {
+  Future<bool> login(String userName, String password) async {
     setBusy(true);
     try {
       // whether to show or not
@@ -93,9 +93,12 @@ class GlobalModel extends BaseModel {
       if (loginResponse.success) {
         this.data.userId = loginResponse.userId;
         this.data.loginMessage = loginResponse.message;
+
+        return true;
       } else {
         this.data.userId = '';
         this.data.loginMessage = loginResponse.message;
+        return false;
       }
     } finally {
       setBusy(false);
