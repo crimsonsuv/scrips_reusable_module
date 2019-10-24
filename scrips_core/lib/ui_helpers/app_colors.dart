@@ -9,7 +9,7 @@ const Color defaultMainMenuBackgroundColor = Color(0xff233D93);
 const Color defaultMainSubMenuBackgroundColor = Color(0xff1F3888);
 const Color defaultMainAppBarBackgroundColor = Color(0xff233D93);
 const Color defaultMainStatusBarBackgroundColor = Color(0xff233D93);
-const Color defaultMainContainedAreaBackgroundColor = Color(0xffF7F7F7);
+final Color defaultMainContainedAreaBackgroundColor = Colors.deepOrange[100];
 
 //
 const Color defaultHeaderBackgroundColor = defaultMainAppBarBackgroundColor;

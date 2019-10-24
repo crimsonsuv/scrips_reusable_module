@@ -1,7 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:scrips_core/services/api/api.dart';
 
-import 'datamodels/user/user.dart';
 import 'locator.dart';
 import 'services/api/authentication_service.dart';
 

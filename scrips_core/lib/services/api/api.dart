@@ -9,6 +9,8 @@ abstract class Api {
   Future<User> getUser(BuildContext context, {String userName, String password});
   Future<MainMenu> getMenuItems(String userId);
 
+  Future<LoginResponse> login(BuildContext context, {String userName, String password});
+
   // scrips: sumeet: note: example fns - delete later
   Future<List<Post>> getPostsForUser(String userId);
   Future<List<Comment>> getCommentsForPost(int postId);

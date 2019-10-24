@@ -7,7 +7,6 @@ import 'package:scrips_core/services/api/authentication_service.dart';
 //import 'package:provider/provider.dart';
 //import 'package:scrips_core/services/api/api.dart';
 import '../../datamodels/general/global.dart';
-import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
 class GlobalModel extends BaseModel {

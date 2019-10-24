@@ -76,4 +76,10 @@ class HttpApi implements Api {
     // TODO: implement getMenuItems
     return null;
   }
+
+  @override
+  Future<LoginResponse> login(BuildContext context, {String userName, String password}) {
+    // TODO: implement login
+    return null;
+  }
 }
