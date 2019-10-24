@@ -39,37 +39,11 @@ class UIHelper {
 
   static BoxDecoration defaultButtonBorder = BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
 
-  /// Provides an input field with a title that stretches the full width of the screen
-  static Widget inputField(
-      {String title,
-      String placeholder,
-      @required TextEditingController controller,
-      String validationMessage,
-      bool isPassword = false,
-      double spaceBetweenTitle = 15.0,
-      double padding = 10.0}) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-      PlatformText(title, style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0)),
-      validationMessage != null
-          ? PlatformText(validationMessage, style: TextStyle(color: Colors.red[400], fontSize: 12.0))
-          : Container(),
-      Container(
-        alignment: Alignment(0.0, 0.0),
-        padding: EdgeInsets.only(left: padding),
-        margin: EdgeInsets.only(top: spaceBetweenTitle),
-        width: double.infinity,
-        height: 40.0,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey),
-        child: TextField(
-          controller: controller,
-          obscureText: isPassword != null ? true : false,
-          style: TextStyle(fontSize: 12.0),
-          decoration: InputDecoration.collapsed(
-              hintText: placeholder, hintStyle: TextStyle(color: Colors.grey[600], fontSize: 12.0)),
-        ),
-      )
-    ]);
-  }
+  static BoxDecoration defaultLabelBoxDecoration(color) => BoxDecoration(
+      border: Border.all(color: color ?? defaultLabelBackgroundColor), color: color ?? defaultLabelBackgroundColor);
+
+  static BoxDecoration defaultFieldBoxDecoration(color) => BoxDecoration(
+      border: Border.all(color: color ?? defaultFieldBackgroundColor), color: color ?? defaultFieldBackgroundColor);
 
   static Widget fullScreenButton({String title, Function onTap}) {
     return GestureDetector(

@@ -59,7 +59,7 @@ class LocaleListItem extends StatelessWidget {
                           padding: EdgeInsets.only(left: 6.0, right: 6.0),
                           child: PlatformText(
                             this.item?.label ?? '',
-                            style: defaultMenuItemTextStyle,
+                            style: defaultMenuItemTextStyle(null, null),
                           ),
                         )
                       : Container(),

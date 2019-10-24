@@ -2,12 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
+import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 
 final BoxDecoration _textViewAndLabelBorder = null; // BoxDecoration(border: Border.all(color: Colors.grey));
 final double _textViewAndLabelMargin = 8.0;
 final double _textViewAndLabelPadding = 8.0;
 
 class TextViewAndLabel extends StatefulWidget {
+  final Color labelTextColor;
+  final Color labelBackgroundColor;
+  final Color fieldBackgroundColor;
+  final Color fieldTextColor;
   final String labelValue;
   final String textValue;
   final bool enabled;
@@ -43,7 +48,11 @@ class TextViewAndLabel extends StatefulWidget {
       this.spaceBetweenTitle,
       this.isPassword,
       this.onChange,
-      this.width})
+      this.width,
+      this.labelTextColor,
+      this.labelBackgroundColor,
+      this.fieldBackgroundColor,
+      this.fieldTextColor})
       : super(key: key);
 
   //
@@ -98,10 +107,13 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  PlatformText(
-                    this.widget.labelValue,
-                    style: defaultTextStyle,
-                    textAlign: TextAlign.start,
+                  Container(
+                    decoration: UIHelper.defaultLabelBoxDecoration(this.widget.labelBackgroundColor),
+                    child: PlatformText(
+                      this.widget.labelValue,
+                      style: defaultLabelStyle(this.widget.labelTextColor, this.widget.labelBackgroundColor),
+                      textAlign: TextAlign.start,
+                    ),
                   ),
                   SizedBox(
                     height: _textViewAndLabelPadding / 2,
@@ -111,25 +123,28 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                           height: _textViewAndLabelPadding / 2,
                         )
                       : Container(),
-                  this.widget.validationMessage != null
-                      ? PlatformText(
-                          this.currentValidationMessage ?? this.widget.validationMessage ?? null,
-                          style: defaultValidationTextStyle,
-                        )
-                      : Container(),
+                  Container(
+                    decoration: UIHelper.defaultLabelBoxDecoration(this.widget.fieldBackgroundColor),
+                    child: this.widget.validationMessage != null
+                        ? PlatformText(
+                            this.currentValidationMessage ?? this.widget.validationMessage ?? null,
+                            style: defaultValidationStyle(null, null),
+                          )
+                        : Container(),
+                  ),
                   SizedBox(
                     height: _textViewAndLabelPadding / 2,
                   ),
                   PlatformTextField(
                     obscureText: this.widget.isPassword != null ? true : false,
-                    style: defaultTextEditStyle,
+                    style: defaultFieldStyle(this.widget.fieldTextColor, this.widget.fieldBackgroundColor),
                     textAlign: TextAlign.start,
                     enabled: this.widget.enabled ?? true,
                     controller: this.controller,
                     decoration: InputDecoration.collapsed(
                       border: OutlineInputBorder(),
                       hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,
-                      hintStyle: defaultTetEditHintStyle,
+                      hintStyle: defaultHintStyle(null, null),
                     ),
                   )
                 ]),

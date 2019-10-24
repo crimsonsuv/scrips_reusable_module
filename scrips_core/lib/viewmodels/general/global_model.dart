@@ -12,7 +12,7 @@ import '../base_model.dart';
 
 class GlobalModel extends BaseModel {
   Global data;
-  final BuildContext context;
+  BuildContext context;
   Api _api;
   AuthenticationService _authService;
 
@@ -23,6 +23,8 @@ class GlobalModel extends BaseModel {
         super();
 
   void init() {}
+
+  // ensure we don't call setBusy during build of child!!! setState() or markNeedsBuild() called during build.
   void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
     if (callSetBusy) {
       setBusy(true);
@@ -32,6 +34,11 @@ class GlobalModel extends BaseModel {
     if (callSetBusy) {
       setBusy(false);
     }
+  }
+
+  // utility function to get current platform from places without a buildContext
+  TargetPlatform getCurrentPlatform() {
+    return Theme.of(context)?.platform;
   }
 
   void setShowOverlappedSubMenu(bool value) {
@@ -103,37 +110,5 @@ class GlobalModel extends BaseModel {
     } finally {
       setBusy(false);
     }
-  }
-}
-
-class ContainedItem extends StatelessWidget {
-  final String suffix;
-  //
-  ContainedItem({Key key, this.suffix}) : super(key: key);
-  //
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-1',
-          textValue: 'Contained Text $suffix-1',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-2',
-          textValue: 'Contained Text $suffix-2',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-        TextViewAndLabel(
-          labelValue: 'Label $suffix-3',
-          textValue: 'Contained Text $suffix-3',
-          axis: Axis.horizontal,
-          enabled: true,
-        ),
-      ],
-    );
   }
 }
