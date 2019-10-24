@@ -26,10 +26,10 @@ List<SingleChildCloneableWidget> dependentServices = [
 
 // Stream Providers
 List<SingleChildCloneableWidget> uiConsumableProviders = [
-  // change of Auth Service user
-  StreamProvider<User>(
-    builder: (context) => Provider.of<AuthenticationService>(context, listen: false).user,
-  ),
+//  // change of Auth Service user
+//  StreamProvider<User>(
+//    builder: (context) => Provider.of<AuthenticationService>(context, listen: false).user,
+//  ),
 ];
 
 // concatenate all services into one List for providing to App at root

@@ -1,6 +1,6 @@
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 
-class MainView {
+class PmMainView {
   MainMenu mainMenu = MainMenu();
   String mainMenuPath;
   String mainSubMenuPath;
@@ -9,9 +9,9 @@ class MainView {
   bool mainSubMenuStartShowing = true;
   String statusText = '';
 
-  MainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible});
+  PmMainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible});
 
-  MainView.fromJson(Map<String, dynamic> json) {
+  PmMainView.fromJson(Map<String, dynamic> json) {
     //todo: fromJson
 //    this.items = [];
 //    json.map((k2, v2) {

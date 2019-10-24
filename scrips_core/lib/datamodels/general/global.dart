@@ -6,6 +6,7 @@ class Global {
   bool showDevicePreview = false;
   String statusText = '';
   String userId = '';
+  String loginMessage = '';
   String localeCode = PM_DEFAULT_LOCALE_CODE;
   String localeCountry = PM_DEFAULT_LOCALE_COUNTRY;
   Exception lastException;

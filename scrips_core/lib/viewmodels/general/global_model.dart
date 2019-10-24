@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scrips_core/datamodels/login/login.dart';
+import 'package:scrips_core/services/api/api.dart';
+import 'package:scrips_core/services/api/authentication_service.dart';
 //import 'package:provider/provider.dart';
 //import 'package:scrips_core/services/api/api.dart';
 import '../../datamodels/general/global.dart';
@@ -9,11 +13,13 @@ import '../base_model.dart';
 class GlobalModel extends BaseModel {
   Global data;
   final BuildContext context;
-//  Api _api;
+  Api _api;
+  AuthenticationService _authService;
 
   GlobalModel(this.context, {String userId})
       : data = Global(userId: userId),
-//        this._api = Provider.of<Api>(context),
+        this._api = Provider.of<Api>(context),
+        this._authService = Provider.of<AuthenticationService>(context),
         super();
 
   void init() {}
@@ -77,6 +83,23 @@ class GlobalModel extends BaseModel {
     this.data.localeCode = localeCode;
     this.data.localeCountry = localeCountry;
     setBusy(false);
+  }
+
+  login(String userName, String password) async {
+    setBusy(true);
+    try {
+      // whether to show or not
+      LoginResponse loginResponse = await _authService.login(this.context, userName: userName, password: password);
+      if (loginResponse.success) {
+        this.data.userId = loginResponse.userId;
+        this.data.loginMessage = loginResponse.message;
+      } else {
+        this.data.userId = '';
+        this.data.loginMessage = loginResponse.message;
+      }
+    } finally {
+      setBusy(false);
+    }
   }
 }
 

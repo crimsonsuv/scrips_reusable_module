@@ -1,7 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:scrips_core/datamodels/login/login.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
-
 import 'api.dart';
 
 class AuthenticationService {
@@ -9,18 +10,15 @@ class AuthenticationService {
 
   AuthenticationService({Api api}) : _api = api;
 
-  StreamController<User> _userController = StreamController<User>();
-
-  Stream<User> get user => _userController.stream;
-
-  Future<bool> login(String userId) async {
-    var fetchedUser = await _api.getUser(userId);
-
-    var hasUser = fetchedUser != null;
+  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
+    User fetchedUser = await _api.getUser(context, userName: userName, password: password);
+    //
+    var hasUser = fetchedUser?.userId != '';
     if (hasUser) {
-      _userController.add(fetchedUser);
+      // todo: localize
+      return LoginResponse(success: true, userId: fetchedUser.userId, message: 'Logged in');
+    } else {
+      return LoginResponse(success: false, userId: null, message: 'Failed to Log in Yser');
     }
-
-    return hasUser;
   }
 }

@@ -1,25 +1,25 @@
 class User {
-  String id;
-  String name;
-  String username;
+  String userId;
+  String fullName;
+  String userName;
   String phoneNumber;
   String email;
   String accessToken;
 
-  User({this.id, this.name, this.username, this.phoneNumber, this.email, this.accessToken});
+  User({this.userId, this.fullName, this.userName, this.phoneNumber, this.email, this.accessToken});
 
   User.initial()
-      : id = '',
-        name = '',
-        username = '',
+      : userId = '',
+        fullName = '',
+        userName = '',
         email = '',
         phoneNumber = '',
         accessToken = '';
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    username = json['username'];
+    userId = json['id'];
+    fullName = json['name'];
+    userName = json['username'];
     email = json['email'];
     phoneNumber = json['phoneNumber'];
     accessToken = json['accessToken'];
@@ -27,9 +27,9 @@ class User {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['username'] = this.username;
+    data['id'] = this.userId;
+    data['name'] = this.fullName;
+    data['username'] = this.userName;
     data['email'] = this.email;
     data['phoneNumber'] = this.phoneNumber;
     data['accessToken'] = this.accessToken;

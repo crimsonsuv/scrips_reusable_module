@@ -98,3 +98,45 @@ class _SheetButtonState extends State<SheetButton> {
               );
   }
 }
+
+class BottomSheetButton extends StatefulWidget {
+  final String label;
+  BottomSheetButton({Key key, this.label}) : super(key: key);
+
+  @override
+  _BottomSheetButtonState createState() => _BottomSheetButtonState();
+}
+
+class _BottomSheetButtonState extends State<BottomSheetButton> {
+  bool _show = true;
+  @override
+  Widget build(BuildContext context) {
+    return _show
+        ? PlatformButton(
+            androidFlat: (_) => MaterialFlatButtonData(),
+            child: PlatformText(this.widget.label ?? 'Show Bottomsheet'),
+            onPressed: () async {
+              _showButton(false);
+
+              var sheetController =
+                  /* todo: can also use showPlatformModalSheet and then the return value is the value passed to navigator.pop*/ /*showPlatformModalSheet*/
+                  await showPlatformModalSheet(
+                context: context,
+                builder: (context) => BottomSheetWidget(),
+              );
+
+              debugPrint(sheetController);
+              //              sheetController.closed.then((value) {
+              _showButton(true);
+              //              });
+            },
+          )
+        : Container();
+  }
+
+  void _showButton(bool value) {
+    setState(() {
+      _show = value;
+    });
+  }
+}

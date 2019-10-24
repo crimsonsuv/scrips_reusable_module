@@ -5,21 +5,18 @@ import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
-import '../../datamodels/pratice_management/main_view.dart';
+import '../../datamodels/pratice_management/pm_main_view.dart';
 import '../../widgets/general/text_view_and_label.dart';
 import '../base_model.dart';
 
-class MainViewModel extends BaseModel {
-  MainView data;
+class PmMainViewModel extends BaseModel {
+  PmMainView data;
   final BuildContext context;
   Api _api;
 
-  MainViewModel(this.context,
-      {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
-      : data = MainView(
-            mainMenuPath: mainMenuPath,
-            mainSubMenuPath: mainSubMenuPath,
-            mainSubMenuVisible: mainSubMenuVisible),
+  PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
+      : data =
+            PmMainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
         this._api = Provider.of(context),
         super();
 
@@ -35,14 +32,12 @@ class MainViewModel extends BaseModel {
     this.data.mainMenu = await _api.getMenuItems(globalModel.data.userId);
 
     // fix currentItem for mainMenu
-    this.data.mainMenu.currentItem =
-        this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);
+    this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);
 
     // fix each items submenu
     for (MainMenuItem item in data.mainMenu.items) {
       if (item.subMenu != null) {
-        item.subMenu.currentItem =
-            this.getMenuItemForId(items: item.subMenu.items, id: this.data.mainSubMenuPath);
+        item.subMenu.currentItem = this.getMenuItemForId(items: item.subMenu.items, id: this.data.mainSubMenuPath);
       }
     }
     //

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:scrips_core/datamodels/login/login.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/post/comment.dart';
@@ -38,16 +39,16 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<User> getUser(String userId) async {
+  Future<User> getUser(BuildContext context, {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
-    return User(id: userId, name: 'user $userId', phoneNumber: '$userId$userId$userId$userId$userId$userId$userId');
+    return User(userId: userName, fullName: 'user $userName', phoneNumber: '');
   }
 
   @override
-  Future<LoginResponse> login({String username, String password}) async {
+  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
 
-    String userId = username;
+    String userId = userName;
     return LoginResponse(userId: userId);
   }
 
