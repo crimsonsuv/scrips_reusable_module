@@ -9,8 +9,9 @@ class User {
   String phoneNumber;
   String email;
   String accessToken;
+  DateTime lastLoggedIn;
 
-  User({this.userId, this.fullName, this.userName, this.phoneNumber, this.email, this.accessToken});
+  User({this.userId, this.fullName, this.userName, this.phoneNumber, this.email, this.accessToken, this.lastLoggedIn});
 
   User.initial()
       : userId = '',
