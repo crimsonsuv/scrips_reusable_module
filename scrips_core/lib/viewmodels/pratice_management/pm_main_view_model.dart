@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/main_menu_item.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
@@ -13,36 +14,29 @@ import '../base_model.dart';
 class PmMainViewModel extends BaseModel {
   PmMainView data;
   final BuildContext context;
+  GlobalModel globalModel;
   Api _api;
 
   PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
       : data =
             PmMainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
         this._api = Provider.of(context),
+        this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
 
-  Future init({User user}) async {
-    this.loadMainMenuItems();
+  bool init() {
+    debugPrint('SCRIPSLOG pmMainModel.dart::init Called');
+    // clone main me u from global
+    this.data.mainMenu = MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
+    this.selectMenuItem(mainMenuPath: this.data.mainMenuPath, mainSubMenuPath: this.data.mainSubMenuPath);
+    return true;
   }
 
-  void loadMainMenuItems({String userId}) async {
-    //
-    setBusy(true);
-
-    GlobalModel globalModel = Provider.of<GlobalModel>(context, listen: false);
-    this.data.mainMenu = await _api.getMenuItems(globalModel.data?.user?.userId);
-
-    // fix currentItem for mainMenu
-    this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);
-
-    // fix each items submenu
-    for (MainMenuItem item in data.mainMenu.items) {
-      if (item.subMenu != null) {
-        item.subMenu.currentItem = this.getMenuItemForId(items: item.subMenu.items, id: this.data.mainSubMenuPath);
-      }
-    }
-    //
-    setBusy(false);
+  void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
+    debugPrint('SCRIPSLOG globalmodel.dart::selectMenuItem Called');
+    this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
+    this.data.mainMenu.currentItem.subMenu.currentItem =
+        this.getMenuItemForId(items: data.mainMenu?.currentItem?.subMenu?.items, id: mainSubMenuPath);
   }
 
   MenuItem getMenuItemForId({List<MenuItem> items, String id}) {
@@ -60,14 +54,8 @@ class PmMainViewModel extends BaseModel {
     return null;
   }
 
-  void setCurrentMainMenuItem(MenuItem item) {
-    setBusy(true);
-    this.data.mainMenu.currentItem = item;
-    this.data.mainSubMenuVisible = true;
-    setBusy(false);
-  }
-
   void toggleSubMenuVisible() {
+    debugPrint('SCRIPSLOG pmMainModel.dart::toggleSubMenuVisible Called');
     setBusy(true);
     // whether to show or not
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;

@@ -1,10 +1,9 @@
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 
 class PmMainView {
-  MainMenu mainMenu = MainMenu();
   String mainMenuPath;
   String mainSubMenuPath;
-
+  MainMenu mainMenu = MainMenu();
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
   String statusText = '';

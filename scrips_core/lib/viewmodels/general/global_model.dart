@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/datamodels/login/login.dart';
+import 'package:scrips_core/datamodels/menu/main_menu.dart';
+import 'package:scrips_core/datamodels/menu/main_menu_item.dart';
+import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/authentication_service.dart';
@@ -34,14 +37,8 @@ class GlobalModel extends BaseModel {
     bool ready = await _storageService.ready();
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
-      debugPrint('SCRIPSLOG   -- globalmodel.dart::init savedUserId: ${savedUser?.userId} Called');
-      if (savedUser?.userId != null && savedUser?.userId != '') {
-        setBusy(true);
-        // whether to show or not
-        this.data.user = savedUser;
-      }
-      setBusy(false);
-      //
+      debugPrint('SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId}');
+      this.setUser(savedUser);
       ready = true;
       return true;
     } else {
@@ -52,19 +49,38 @@ class GlobalModel extends BaseModel {
     }
   }
 
+  Future<bool> setUser(User user) async {
+    this.data.user = user;
+    await this.loadMainMenuItems(userId: user?.userId);
+    _storageService.setLoggedInUser(this.data.user);
+    return true;
+  }
+
+  Future<bool> loadMainMenuItems({String userId}) async {
+    debugPrint('SCRIPSLOG globalmodel.dart::loading menu items for $userId');
+    if (userId == null || userId == '') {
+      this.data.mainMenu = MainMenu();
+    } else {
+      this.data.mainMenu = await _api.getMenuItems(userId);
+//      this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: null);
+//      for (MainMenuItem item in data.mainMenu.items) {
+//        if (item.subMenu != null) {
+//          item.subMenu.currentItem = this.getMenuItemForId(items: item.subMenu.items, id: null);
+//        }
+//      }
+    }
+    return true;
+  }
+
   // ensure we don't call setBusy during build of child!!! setState() or markNeedsBuild() called during build.
   void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
-    if (callSetBusy) {
-      setBusy(true);
-    }
+    debugPrint('SCRIPSLOG globalmodel.dart::setVars Called');
     this.data.showOverlappedSubMenu = showOverlappedSubMenu;
     this.data.animateSubMenu = animateSubMenu;
-    if (callSetBusy) {
-      setBusy(false);
-    }
   }
 
   void setNewLocale(String localeCode, String localeCountry) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setNewLocale Called');
     setBusy(true);
     // whether to show or not
     this.data.localeCode = localeCode;
@@ -73,32 +89,34 @@ class GlobalModel extends BaseModel {
   }
 
   Future<bool> login(String userName, String password) async {
+    debugPrint('SCRIPSLOG globalmodel.dart::login Called');
     setBusy(true);
     try {
       // whether to show or not
       LoginResponse loginResponse = await _authService.login(this.context, userName: userName, password: password);
       if (loginResponse.success) {
-        this.data.user = loginResponse.user;
         this.data.loginMessage = loginResponse.message;
-
+        await this.setUser(loginResponse.user);
         return true;
       } else {
-        this.data.user = User();
         this.data.loginMessage = loginResponse.message;
+        await this.setUser(User());
         return false;
       }
     } finally {
-      _storageService.setLoggedInUser(this.data.user);
       setBusy(false);
+      debugPrint('SCRIPSLOG globalmodel.dart::login Finished');
     }
   }
 
   // utility function to get current platform from places without a buildContext
   TargetPlatform getCurrentPlatform() {
+    debugPrint('SCRIPSLOG globalmodel.dart::getCurrentPlatform Called');
     return Theme.of(context)?.platform;
   }
 
   void setShowOverlappedSubMenu(bool value) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setShowOverlappedSubMenu Called');
     setBusy(true);
     // whether to show or not
     this.data.showOverlappedSubMenu = value;
@@ -108,6 +126,7 @@ class GlobalModel extends BaseModel {
   }
 
   void setShowDevicePreview(bool value) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setShowDevicePreview Called');
     setBusy(true);
     // whether to show or not
     this.data.showDevicePreview = value;
@@ -117,6 +136,7 @@ class GlobalModel extends BaseModel {
   }
 
   void setLastException(Exception exception) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setLastException Called');
     setBusy(true);
     // whether to show or not
     this.data.lastException = exception;
@@ -126,6 +146,7 @@ class GlobalModel extends BaseModel {
   }
 
   void setAnimateSubMenu(bool value) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setAnimateSubMenu Called');
     setBusy(true);
     // whether to show or not
     this.data.animateSubMenu = value;
@@ -135,6 +156,7 @@ class GlobalModel extends BaseModel {
   }
 
   void setStatusText(String value) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setStatusText Called');
     setBusy(true);
     // whether to show or not
     this.data.statusText = value;
