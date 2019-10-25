@@ -24,6 +24,7 @@ class PmMainViewModel extends BaseModel {
         this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
 
+  // scrips: sumeet: we keep all menu items for the user in globalmodeland clone them here so they are loaded only once on user login
   bool init() {
     debugPrint('SCRIPSLOG pmMainModel.dart::init Called');
     // clone main me u from global

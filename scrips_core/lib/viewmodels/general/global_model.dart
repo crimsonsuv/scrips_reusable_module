@@ -56,6 +56,7 @@ class GlobalModel extends BaseModel {
     return true;
   }
 
+  // scrips: sumeet: we keep all menu items for the user here and clone them in pmMainViewModel for each view based on it  so they are loaded only once on user login
   Future<bool> loadMainMenuItems({String userId}) async {
     debugPrint('SCRIPSLOG globalmodel.dart::loading menu items for $userId');
     if (userId == null || userId == '') {
