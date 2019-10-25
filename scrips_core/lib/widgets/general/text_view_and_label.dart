@@ -75,18 +75,19 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
   String currentTextValue;
   String currentPlaceholder;
   String currentValidationMessage;
-  TextEditingController controller;
+  TextEditingController _controller;
 
   void initState() {
     super.initState();
-    controller = TextEditingController(text: this.widget.textValue);
-    controller.addListener(() {
-      final text = controller.text;
-      this.setState(() {
-        this.currentTextValue = text;
+    currentTextValue = widget.textValue ?? '';
+    _controller = TextEditingController(text: currentTextValue);
+    _controller.addListener(() {
+      final text = _controller.text;
+      setState(() {
+        currentTextValue = text;
       });
-      if (this.widget.onChange != null) {
-        this.widget.onChange(text);
+      if (widget.onChange != null) {
+        widget.onChange(text);
       }
     });
   }
@@ -94,40 +95,40 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: this.widget.width != null && this.widget.width > 0 ? this.widget.width : double.infinity,
+      width: widget.width != null && widget.width > 0 ? widget.width : double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(this.widget.padding ?? _textViewAndLabelPadding),
-            margin: EdgeInsets.all(this.widget.margin ?? _textViewAndLabelMargin),
-            decoration: this.widget.boxDecoration ?? _textViewAndLabelBorder,
+            padding: EdgeInsets.all(widget.padding ?? _textViewAndLabelPadding),
+            margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
+            decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Container(
-                    decoration: UIHelper.defaultLabelBoxDecoration(this.widget.labelBackgroundColor),
+                    decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
                     child: PlatformText(
-                      this.widget.labelValue,
-                      style: defaultLabelStyle(this.widget.labelTextColor, this.widget.labelBackgroundColor),
+                      widget.labelValue,
+                      style: defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
                       textAlign: TextAlign.start,
                     ),
                   ),
                   SizedBox(
                     height: _textViewAndLabelPadding / 2,
                   ),
-                  this.widget.validationMessage != null
+                  widget.validationMessage != null
                       ? SizedBox(
                           height: _textViewAndLabelPadding / 2,
                         )
                       : Container(),
                   Container(
-                    decoration: UIHelper.defaultLabelBoxDecoration(this.widget.fieldBackgroundColor),
-                    child: this.widget.validationMessage != null
+                    decoration: UIHelper.defaultLabelBoxDecoration(widget.fieldBackgroundColor),
+                    child: widget.validationMessage != null
                         ? PlatformText(
-                            this.currentValidationMessage ?? this.widget.validationMessage ?? null,
+                            currentValidationMessage ?? widget.validationMessage ?? null,
                             style: defaultValidationStyle(null, null),
                           )
                         : Container(),
@@ -136,14 +137,14 @@ class _TextViewAndLabelState extends State<TextViewAndLabel> {
                     height: _textViewAndLabelPadding / 2,
                   ),
                   PlatformTextField(
-                    obscureText: this.widget.isPassword != null ? true : false,
-                    style: defaultFieldStyle(this.widget.fieldTextColor, this.widget.fieldBackgroundColor),
+                    obscureText: widget.isPassword != null ? true : false,
+                    style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
                     textAlign: TextAlign.start,
-                    enabled: this.widget.enabled ?? true,
-                    controller: this.controller,
+                    enabled: widget.enabled ?? true,
+                    controller: _controller,
                     decoration: InputDecoration.collapsed(
                       border: OutlineInputBorder(),
-                      hintText: this.currentPlaceholder ?? this.widget.placeholder ?? null,
+                      hintText: currentPlaceholder ?? widget.placeholder ?? null,
                       hintStyle: defaultHintStyle(null, null),
                     ),
                   )

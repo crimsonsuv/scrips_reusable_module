@@ -5,6 +5,7 @@ class BaseModel extends ChangeNotifier {
   bool get busy => _busy;
 
   void setBusy(bool value) {
+    debugPrint('SCRIPSLOG   -- globalmodel.dart::setBusy isBusy $value');
     _busy = value;
     notifyListeners();
   }

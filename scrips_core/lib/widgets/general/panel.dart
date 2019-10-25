@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class Panel extends StatelessWidget {
   final String suffix;
-  final Color backgroundColor;
+  final Color emptyBackgroundColor;
+  final Color panelBackgroundColor;
+
   final Color labelTextColor;
   final Color labelBackgroundColor;
   final Color fieldBackgroundColor;
@@ -12,7 +14,8 @@ class Panel extends StatelessWidget {
   Panel(
       {Key key,
       this.suffix,
-      this.backgroundColor,
+      this.emptyBackgroundColor,
+      this.panelBackgroundColor,
       this.labelBackgroundColor,
       this.labelTextColor,
       this.fieldBackgroundColor,

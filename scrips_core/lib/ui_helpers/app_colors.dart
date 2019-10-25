@@ -4,20 +4,21 @@ const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
 // mainMenuBackground
-const Color defaultMainBackgroundColor = Color(0xffF7F7F7);
-const Color defaultMainMenuBackgroundColor = Color(0xff233D93);
-const Color defaultMainSubMenuBackgroundColor = Color(0xff1F3888);
-const Color defaultMainAppBarBackgroundColor = Color(0xff233D93);
-const Color defaultMainStatusBarBackgroundColor = Color(0xff233D93);
-final Color defaultMainContainedAreaBackgroundColor = Colors.deepOrange[100];
+const Color defaultMainMenuBackgroundColor = Color.fromARGB(225, 31, 56, 136);
+const Color defaultMainSubMenuBackgroundColor = Color.fromARGB(225, 35, 61, 147);
+const Color defaultMainAppBarBackgroundColor = defaultMainMenuBackgroundColor;
+const Color defaultMainStatusBarBackgroundColor = defaultMainMenuBackgroundColor;
+final Color defaultMainContainedAreaBackgroundColor = Color.fromARGB(225, 229, 229, 229);
+final Color defaultPanelBackgroundColor = Colors.white;
+final Color defaultMainBackgroundColor = defaultMainContainedAreaBackgroundColor;
 
 //
 const Color defaultHeaderBackgroundColor = defaultMainAppBarBackgroundColor;
 const Color defaultSubHeaderBackgroundColor = defaultMainAppBarBackgroundColor;
 const Color defaultLabelBackgroundColor = Colors.transparent;
 const Color defaultFieldBackgroundColor = Colors.transparent;
-const Color defaultReversedLabelBackgroundColor = defaultMainAppBarBackgroundColor;
-const Color defaultReversedFieldBackgroundColor = defaultMainAppBarBackgroundColor;
+const Color defaultReversedLabelBackgroundColor = Colors.transparent;
+const Color defaultReversedFieldBackgroundColor = Colors.transparent;
 //
 const Color defaultHeaderTextColor = Colors.white;
 const Color defaultSubHeaderTextColor = Colors.white;

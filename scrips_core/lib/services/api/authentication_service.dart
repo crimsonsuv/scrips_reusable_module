@@ -16,9 +16,9 @@ class AuthenticationService {
     var hasUser = fetchedUser?.userId != '';
     if (hasUser) {
       // todo: localize
-      return LoginResponse(success: true, userId: fetchedUser.userId, message: 'Logged in');
+      return LoginResponse(success: true, user: fetchedUser, message: 'Logged in');
     } else {
-      return LoginResponse(success: false, userId: null, message: 'Failed to Log in Yser');
+      return LoginResponse(success: false, user: null, message: 'Failed to Log in Yser');
     }
   }
 }

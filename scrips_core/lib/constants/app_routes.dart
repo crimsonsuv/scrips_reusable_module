@@ -12,8 +12,6 @@ class RoutePaths {
   static const String Settings = '/settings';
   static const String Settings1 = '/settings-1';
   static const String Settings2 = '/settings-2';
-  static const String Posts = 'posts';
-  static const String Post = 'post';
   static const String LocationView = 'location-view';
   static const String DialogTest = 'dialog-test';
   static const String Splash = 'dialog-test';

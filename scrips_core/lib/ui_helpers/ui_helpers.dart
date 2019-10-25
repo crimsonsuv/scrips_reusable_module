@@ -36,6 +36,7 @@ class UIHelper {
   static EdgeInsets defaultPaddingLarge = EdgeInsets.all(8.0);
   static EdgeInsets defaultPaddingVeryLarge = EdgeInsets.all(16.0);
   static EdgeInsets defaultMargin = EdgeInsets.all(4.0);
+  static EdgeInsets defaultButtonPadding = EdgeInsets.all(16.0);
 
   static BoxDecoration defaultButtonBorder = BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
 

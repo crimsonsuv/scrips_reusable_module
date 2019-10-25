@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scrips_core/datamodels/menu/main_menu_item.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
 import '../../datamodels/pratice_management/pm_main_view.dart';
@@ -20,7 +21,7 @@ class PmMainViewModel extends BaseModel {
         this._api = Provider.of(context),
         super();
 
-  Future init({String userId}) async {
+  Future init({User user}) async {
     this.loadMainMenuItems();
   }
 
@@ -29,7 +30,7 @@ class PmMainViewModel extends BaseModel {
     setBusy(true);
 
     GlobalModel globalModel = Provider.of<GlobalModel>(context, listen: false);
-    this.data.mainMenu = await _api.getMenuItems(globalModel.data.userId);
+    this.data.mainMenu = await _api.getMenuItems(globalModel.data?.user?.userId);
 
     // fix currentItem for mainMenu
     this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: this.data.mainMenuPath);

@@ -10,6 +10,8 @@ import 'package:scrips_core/services/api/http_api.dart';
 // import 'datamodels/location/user_location.dart';
 // import 'package:scrips_core/services/api/location_service.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
+import 'package:scrips_core/services/storage/localstorage_service.dart';
+import 'package:scrips_core/services/storage/storage_service.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -19,7 +21,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => BackgroundFetchService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
-
+  // instantiate now itself so localStorage is available early
+  LocalStorageService localStorageService = LocalStorageService();
+  locator.registerSingleton<StorageService>(localStorageService);
+  //
   WidgetsFlutterBinding.ensureInitialized();
   //scrips: sumeet: note dart:io not supported on Web!
 //  // check which services are availablke in platform, and add them to providers and register in locator
