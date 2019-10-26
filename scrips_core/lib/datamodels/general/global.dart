@@ -1,8 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 
+enum AppType {
+  PM,
+  PA,
+  UA,
+  UK,
+}
+
 class Global {
+  AppType appType = AppType.PM;
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
   bool showDevicePreview = false;
@@ -14,7 +23,12 @@ class Global {
   Exception lastException;
   MainMenu mainMenu = MainMenu();
 
-  Global({this.user, this.showOverlappedSubMenu, this.showDevicePreview, this.animateSubMenu});
+  Global(
+      {@required this.appType,
+      @required this.user,
+      this.showOverlappedSubMenu,
+      this.showDevicePreview,
+      this.animateSubMenu});
 
   Global.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

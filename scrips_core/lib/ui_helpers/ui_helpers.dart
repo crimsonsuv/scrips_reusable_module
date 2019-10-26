@@ -46,6 +46,11 @@ class UIHelper {
   static BoxDecoration defaultFieldBoxDecoration(color) => BoxDecoration(
       border: Border.all(color: color ?? defaultFieldBackgroundColor), color: color ?? defaultFieldBackgroundColor);
 
+  static EdgeInsets defaultPanelPadding = EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0, left: 8.0);
+  static BoxDecoration defaultPanelBorder =
+      BoxDecoration(color: Colors.transparent, borderRadius: BorderRadius.circular(5.0));
+  static EdgeInsets defaultPanelMargin = EdgeInsets.only(top: 0.0, right: 0.0, bottom: 8.0, left: 0.0);
+
   static Widget fullScreenButton({String title, Function onTap}) {
     return GestureDetector(
       onTap: onTap,

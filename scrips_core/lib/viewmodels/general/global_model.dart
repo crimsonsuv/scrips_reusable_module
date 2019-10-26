@@ -24,8 +24,8 @@ class GlobalModel extends BaseModel {
   StorageService _storageService;
   AuthenticationService _authService;
 
-  GlobalModel(this.context, {User user})
-      : data = Global(user: user),
+  GlobalModel(this.context, {@required AppType appType, @required User user})
+      : data = Global(appType: appType, user: user),
         this._api = Provider.of<Api>(context),
         this._storageService = Provider.of<StorageService>(context),
         this._authService = Provider.of<AuthenticationService>(context),
