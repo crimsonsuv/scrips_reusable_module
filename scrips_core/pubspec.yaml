@@ -26,7 +26,7 @@ dependencies:
   connectivity:
   json_serializable:
   device_preview:
-  zefyr:
+#  zefyr:
   # cloud_firestore:
   # scoped model packages
   scoped_model:

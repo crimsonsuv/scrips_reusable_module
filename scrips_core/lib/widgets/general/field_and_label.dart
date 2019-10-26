@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
-import 'package:zefyr/zefyr.dart';
+//import 'package:zefyr/zefyr.dart';
 
 final BoxDecoration _textViewAndLabelBorder = null; // BoxDecoration(border: Border.all(color: Colors.grey));
 final double _textViewAndLabelMargin = 8.0;
@@ -88,8 +88,8 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
   String currentPlaceholder;
   String currentValidationMessage;
   TextEditingController _textEditController;
-  ZefyrController _richTextEditController;
-  FocusNode _richTextEditFocusNode;
+//  ZefyrController _richTextEditController;
+//  FocusNode _richTextEditFocusNode;
 
   void initState() {
     super.initState();
@@ -97,13 +97,13 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
     if (widget.fieldType == FieldType.TextField) {
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
-      _richTextEditController = ZefyrController(widget.fieldValue);
-      _richTextEditFocusNode = FocusNode();
-
-      _richTextEditController.addListener(() {
-        dynamic value = _richTextEditController.document;
-        onChangedInternal(value);
-      });
+//      _richTextEditController = ZefyrController(widget.fieldValue);
+//      _richTextEditFocusNode = FocusNode();
+//
+//      _richTextEditController.addListener(() {
+//        dynamic value = _richTextEditController.document;
+//        onChangedInternal(value);
+//      });
     }
   }
 
@@ -133,6 +133,11 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+            widget.labelValue != null && widget.labelValue.isNotEmpty
+            ? Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                   Container(
                     decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
                     child: PlatformText(
@@ -143,9 +148,14 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                   ),
                   SizedBox(
                     height: _textViewAndLabelPadding / 2,
-                  ),
+                  )
+                ],
+                )
+            : Container(),
                   widget.validationMessage != null && widget.fieldType != FieldType.DropDownList
-                      ? Column(
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             SizedBox(
                               height: _textViewAndLabelPadding / 2,
@@ -164,7 +174,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                       : Container(),
                   widget.fieldType == FieldType.TextField
                       ? PlatformTextField(
-                          obscureText: widget.isPassword != null ? true : false,
+                          obscureText: widget.isPassword == false || widget.isPassword == null ? false: true,
                           style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
                           textAlign: TextAlign.start,
                           enabled: widget.enabled ?? true,
@@ -184,13 +194,15 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                         )
                       : Container(),
                   widget.fieldType == FieldType.RichTextEdit
-                      ? ZefyrScaffold(
-                          child: ZefyrEditor(
-                            padding: EdgeInsets.all(8),
-                            controller: _richTextEditController,
-                            focusNode: _richTextEditFocusNode,
-                          ),
-                        )
+                      ?
+//                  ZefyrScaffold(
+//                          child: ZefyrEditor(
+//                            padding: EdgeInsets.all(8),
+//                            controller: _richTextEditController,
+//                            focusNode: _richTextEditFocusNode,
+//                          ),
+//                        )
+                  Container(child: PlatformText('RichTextEdit is not yet supprted'))
                       : Container(),
                   widget.fieldType == FieldType.DropDownList
                       ? DropdownButton(
