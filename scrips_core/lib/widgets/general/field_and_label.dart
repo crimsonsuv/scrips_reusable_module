@@ -3,12 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
+import 'package:zefyr/zefyr.dart';
 
 final BoxDecoration _textViewAndLabelBorder = null; // BoxDecoration(border: Border.all(color: Colors.grey));
 final double _textViewAndLabelMargin = 8.0;
 final double _textViewAndLabelPadding = 8.0;
 
-enum FieldType { TextField, DropDownList, List, RichEdit }
+enum FieldType {
+  TextField,
+  DropDownList,
+  List,
+  RichText,
+  RichTextEdit,
+}
 
 class FieldAndLabel<ListItemType> extends StatefulWidget {
   final FieldType fieldType;
@@ -81,12 +88,22 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
   String currentPlaceholder;
   String currentValidationMessage;
   TextEditingController _textEditController;
+  ZefyrController _richTextEditController;
+  FocusNode _richTextEditFocusNode;
 
   void initState() {
     super.initState();
     currentFieldValue = widget.fieldValue ?? null;
     if (widget.fieldType == FieldType.TextField) {
       _textEditController = TextEditingController(text: currentFieldValue);
+    } else if (widget.fieldType == FieldType.RichTextEdit) {
+      _richTextEditController = ZefyrController(widget.fieldValue);
+      _richTextEditFocusNode = FocusNode();
+
+      _richTextEditController.addListener(() {
+        dynamic value = _richTextEditController.document;
+        onChangedInternal(value);
+      });
     }
   }
 
@@ -157,6 +174,21 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                             border: OutlineInputBorder(),
                             hintText: currentPlaceholder ?? widget.placeholder ?? null,
                             hintStyle: defaultHintStyle(null, null),
+                          ),
+                        )
+                      : Container(),
+                  widget.fieldType == FieldType.RichText
+                      ? RichText(
+                          text: currentFieldValue ?? widget.fieldValue,
+                          textAlign: TextAlign.start,
+                        )
+                      : Container(),
+                  widget.fieldType == FieldType.RichTextEdit
+                      ? ZefyrScaffold(
+                          child: ZefyrEditor(
+                            padding: EdgeInsets.all(8),
+                            controller: _richTextEditController,
+                            focusNode: _richTextEditFocusNode,
                           ),
                         )
                       : Container(),
