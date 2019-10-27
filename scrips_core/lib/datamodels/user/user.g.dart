@@ -17,6 +17,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
     userName: json['userName'] == null
         ? null
         : PropertyInfo.fromJson(json['userName'] as Map<String, dynamic>),
+    gender: json['gender'] == null
+        ? null
+        : PropertyInfo.fromJson(json['gender'] as Map<String, dynamic>),
     phoneNumber: json['phoneNumber'] == null
         ? null
         : PropertyInfo.fromJson(json['phoneNumber'] as Map<String, dynamic>),
@@ -36,6 +39,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'userId': instance.userId?.toJson(),
       'fullName': instance.fullName?.toJson(),
       'userName': instance.userName?.toJson(),
+      'gender': instance.gender?.toJson(),
       'phoneNumber': instance.phoneNumber?.toJson(),
       'email': instance.email?.toJson(),
       'accessToken': instance.accessToken?.toJson(),
