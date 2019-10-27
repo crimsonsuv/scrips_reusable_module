@@ -11,7 +11,7 @@ class FakeApi implements Api {
   @override
   Future<User> getUser(BuildContext context, {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
-    return User(userId: PropertyInfo(userName), fullName: PropertyInfo('user $userName'), phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'), gender: PropertyInfo( 'M'));
+    return User(userId: PropertyInfo(userName), userName: PropertyInfo(userName),  fullName: PropertyInfo('user $userName'), phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'), gender: PropertyInfo( 'M'));
   }
 
   @override
