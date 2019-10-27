@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 //import 'package:zefyr/zefyr.dart';
@@ -25,6 +26,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Color fieldTextColor;
   final String labelValue;
   final dynamic fieldValue;
+  final PropertyInfo fieldProperty;
   final bool enabled;
   final double width;
   final Axis axis;
@@ -37,14 +39,13 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String validationMessage;
   final Function onChanged;
   final List<ListItemType> listItems;
-//  _TextViewAndLabelState state;
-
   //
   FieldAndLabel(
       {Key key,
-      @required this.labelValue,
-      @required this.fieldValue,
-      @required this.onChanged,
+      this.labelValue,
+      this.fieldValue,
+      this.fieldProperty,
+      this.onChanged,
       this.fieldType = FieldType.TextField,
       this.listItems,
       this.axis,
@@ -62,6 +63,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldBackgroundColor,
       this.fieldTextColor})
       : super(key: key);
+
+//  _TextViewAndLabelState state;
 
   static _FieldAndLabelState of(BuildContext context, {bool root = false}) => root
       ? context.rootAncestorStateOfType(const TypeMatcher<_FieldAndLabelState>())
@@ -93,7 +96,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
 
   void initState() {
     super.initState();
-    currentFieldValue = widget.fieldValue ?? null;
+    currentFieldValue = widget.fieldProperty != null? widget.fieldProperty?.value : (widget.fieldValue ?? null);
     if (widget.fieldType == FieldType.TextField) {
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
@@ -111,6 +114,9 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
     debugPrint(value);
     setState(() {
       currentFieldValue = value;
+      if (widget.fieldProperty != null) {
+        widget.fieldProperty.setValue(currentFieldValue);
+      }
     });
     if (widget.onChanged != null) {
       widget.onChanged(value);

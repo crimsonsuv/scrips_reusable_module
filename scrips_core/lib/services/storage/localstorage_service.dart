@@ -32,7 +32,7 @@ class LocalStorageService implements StorageService {
       debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser exception ${ex?.toString()}');
       user = User();
     } finally {
-      debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser returning userId: ${user?.userId}');
+      debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser returning userId: ${user?.userId?.value}');
     }
     return user;
   }

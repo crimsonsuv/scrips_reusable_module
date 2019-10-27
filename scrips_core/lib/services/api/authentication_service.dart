@@ -13,7 +13,7 @@ class AuthenticationService {
   Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
     User fetchedUser = await _api.getUser(context, userName: userName, password: password);
     //
-    var hasUser = fetchedUser?.userId != '';
+    var hasUser = fetchedUser?.userId?.value != '';
     if (hasUser) {
       // todo: localize
       return LoginResponse(success: true, user: fetchedUser, message: 'Logged in');

@@ -8,24 +8,36 @@ part of 'user.dart';
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
-    userId: json['userId'] as String,
-    fullName: json['fullName'] as String,
-    userName: json['userName'] as String,
-    phoneNumber: json['phoneNumber'] as String,
-    email: json['email'] as String,
-    accessToken: json['accessToken'] as String,
+    userId: json['userId'] == null
+        ? null
+        : PropertyInfo.fromJson(json['userId'] as Map<String, dynamic>),
+    fullName: json['fullName'] == null
+        ? null
+        : PropertyInfo.fromJson(json['fullName'] as Map<String, dynamic>),
+    userName: json['userName'] == null
+        ? null
+        : PropertyInfo.fromJson(json['userName'] as Map<String, dynamic>),
+    phoneNumber: json['phoneNumber'] == null
+        ? null
+        : PropertyInfo.fromJson(json['phoneNumber'] as Map<String, dynamic>),
+    email: json['email'] == null
+        ? null
+        : PropertyInfo.fromJson(json['email'] as Map<String, dynamic>),
+    accessToken: json['accessToken'] == null
+        ? null
+        : PropertyInfo.fromJson(json['accessToken'] as Map<String, dynamic>),
     lastLoggedIn: json['lastLoggedIn'] == null
         ? null
-        : DateTime.parse(json['lastLoggedIn'] as String),
+        : PropertyInfo.fromJson(json['lastLoggedIn'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'userId': instance.userId,
-      'fullName': instance.fullName,
-      'userName': instance.userName,
-      'phoneNumber': instance.phoneNumber,
-      'email': instance.email,
-      'accessToken': instance.accessToken,
-      'lastLoggedIn': instance.lastLoggedIn?.toIso8601String(),
+      'userId': instance.userId?.toJson(),
+      'fullName': instance.fullName?.toJson(),
+      'userName': instance.userName?.toJson(),
+      'phoneNumber': instance.phoneNumber?.toJson(),
+      'email': instance.email?.toJson(),
+      'accessToken': instance.accessToken?.toJson(),
+      'lastLoggedIn': instance.lastLoggedIn?.toJson(),
     };

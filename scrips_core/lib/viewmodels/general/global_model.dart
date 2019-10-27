@@ -37,7 +37,7 @@ class GlobalModel extends BaseModel {
     bool ready = await _storageService.ready();
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
-      debugPrint('SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId}');
+      debugPrint('SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
       this.setUser(savedUser);
       ready = true;
       return true;
@@ -51,7 +51,7 @@ class GlobalModel extends BaseModel {
 
   Future<bool> setUser(User user) async {
     this.data.user = user;
-    await this.loadMainMenuItems(userId: user?.userId);
+    await this.loadMainMenuItems(userId: user?.userId?.value);
     _storageService.setLoggedInUser(this.data.user);
     return true;
   }
