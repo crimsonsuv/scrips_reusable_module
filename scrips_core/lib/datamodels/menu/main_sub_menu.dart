@@ -1,5 +1,6 @@
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:scrips_core/datamodels/menu/menu_item.dart';
+
 part 'main_sub_menu.g.dart';
 
 @JsonSerializable(explicitToJson: true)

@@ -7,8 +7,6 @@ import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/background_fetch_service.dart';
 import 'package:scrips_core/services/api/fake_api.dart';
 import 'package:scrips_core/services/api/http_api.dart';
-// import 'datamodels/location/user_location.dart';
-// import 'package:scrips_core/services/api/location_service.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
 import 'package:scrips_core/services/storage/localstorage_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';

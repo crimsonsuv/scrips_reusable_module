@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'menu_item.g.dart';
 
 @JsonSerializable(explicitToJson: true)

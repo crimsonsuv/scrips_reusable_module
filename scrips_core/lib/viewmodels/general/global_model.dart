@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/datamodels/login/login.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/menu/main_menu_item.dart';
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/authentication_service.dart';

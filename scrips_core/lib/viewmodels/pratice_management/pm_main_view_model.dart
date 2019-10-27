@@ -3,23 +3,21 @@ import 'package:provider/provider.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_core/services/api/api.dart';
-import 'package:scrips_core/ui_helpers/ui_helpers.dart';
+//import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
 import '../../datamodels/pratice_management/pm_main_view.dart';
-import '../../widgets/general/field_and_label.dart';
 import '../base_model.dart';
 
 class PmMainViewModel extends BaseModel {
   PmMainView data;
   final BuildContext context;
   GlobalModel globalModel;
-  Api _api;
+//  Api _api;
 
   PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
       : data =
             PmMainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
-        this._api = Provider.of(context),
+//        this._api = Provider.of(context),
         this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
 

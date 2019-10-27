@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/datamodels/login/login.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
+
 import 'api.dart';
 
 class AuthenticationService {
