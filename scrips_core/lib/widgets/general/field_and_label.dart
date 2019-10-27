@@ -98,6 +98,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
     super.initState();
     currentFieldValue = widget.fieldProperty != null? widget.fieldProperty?.value : (widget.fieldValue ?? null);
     if (widget.fieldType == FieldType.TextField) {
+      // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
 //      _richTextEditController = ZefyrController(widget.fieldValue);
