@@ -116,7 +116,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
     setState(() {
       currentFieldValue = value;
       if (widget.fieldProperty != null) {
-        widget.fieldProperty.setValue(currentFieldValue);
+        widget.fieldProperty.value = currentFieldValue;
       }
     });
     if (widget.onChanged != null) {
