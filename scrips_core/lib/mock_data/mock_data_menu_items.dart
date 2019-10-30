@@ -13,12 +13,12 @@ Map<String, dynamic> mockDataMenuItems = {
       'subMenu': {
         'items': [
           {
-            'id': RoutePaths.Home1,
+            'id': RoutePaths.HomeSubMenu1,
             'label': 'Home - Home',
             'iconName': 'home',
             'enabled': true,
             'semanticLabel': '',
-            'navigationRoute': RoutePaths.Home1,
+            'navigationRoute': RoutePaths.HomeSubMenu1,
           },
         ],
         'currentItem': null,
@@ -34,20 +34,20 @@ Map<String, dynamic> mockDataMenuItems = {
       'subMenu': {
         'items': [
           {
-            'id': RoutePaths.PracticeOnBoardingWizard1,
+            'id': RoutePaths.PracticeOnBoardingWizardSubMenu1,
             'label': 'OnBoarding - 1',
             'iconName': 'directions_transit',
             'enabled': true,
             'semanticLabel': '',
-            'navigationRoute': RoutePaths.PracticeOnBoardingWizard1,
+            'navigationRoute': RoutePaths.PracticeOnBoardingWizardSubMenu1,
           },
           {
-            'id': RoutePaths.PracticeOnBoardingWizard2,
+            'id': RoutePaths.PracticeOnBoardingWizardSubMenu2,
             'label': 'OnBoarding - 2',
             'iconName': 'directions_boat',
             'enabled': true,
             'semanticLabel': '',
-            'navigationRoute': RoutePaths.PracticeOnBoardingWizard2,
+            'navigationRoute': RoutePaths.PracticeOnBoardingWizardSubMenu2,
           },
         ],
         'currentItem': null,
@@ -63,20 +63,20 @@ Map<String, dynamic> mockDataMenuItems = {
       'subMenu': {
         'items': [
           {
-            'id': RoutePaths.Settings1,
+            'id': RoutePaths.SettingsSubMenu1,
             'label': 'Settings - 1',
             'iconName': 'settings_applications',
             'enabled': true,
             'semanticLabel': '',
-            'navigationRoute': RoutePaths.PracticeOnBoardingWizard1,
+            'navigationRoute': RoutePaths.PracticeOnBoardingWizardSubMenu1,
           },
           {
-            'id': RoutePaths.Settings2,
+            'id': RoutePaths.SettingsSubMenu2,
             'label': 'Settings - 2',
             'iconName': 'settings_backup_restore',
             'enabled': true,
             'semanticLabel': '',
-            'navigationRoute': RoutePaths.Settings2,
+            'navigationRoute': RoutePaths.SettingsSubMenu2,
           },
         ],
         'currentItem': null,
