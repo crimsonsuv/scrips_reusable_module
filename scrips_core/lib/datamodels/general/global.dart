@@ -3,15 +3,9 @@ import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 
-enum AppType {
-  PM,
-  PA,
-  UA,
-  UK,
-}
+
 
 class Global {
-  AppType appType = AppType.PM;
   bool showOverlappedSubMenu = false;
   bool animateSubMenu = false;
   bool showDevicePreview = false;
@@ -24,7 +18,7 @@ class Global {
   MainMenu mainMenu = MainMenu();
 
   Global(
-      {@required this.appType,
+      {
       @required this.user,
       this.showOverlappedSubMenu,
       this.showDevicePreview,

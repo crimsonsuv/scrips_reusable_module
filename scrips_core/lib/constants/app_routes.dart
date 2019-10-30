@@ -10,6 +10,7 @@ class RoutePaths {
   static const String Undefined = '/undefined-route';
   static const String SettingsLocale = 'settings-locale';
   static const String Empty = '';
+  
 
   // test temp paths - delete when not needed
   static const String HomeSubMenu1 = '/1';

@@ -11,7 +11,7 @@ final BoxDecoration _mainBorder = BoxDecoration(border: Border.all(color: Colors
 class ErrorView extends StatelessWidget {
   final Exception exception;
 //
-  ErrorView({Key key, this.exception}) : super(key: key);
+  ErrorView({Key key, @required this.exception}) : super(key: key);
 //
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ErrorView extends StatelessWidget {
       //        key: globalKeyMainScaffold,
       appBar: PlatformAppBar(
         //          key: globalKeyMainAppBar,
-        title: Text(PM_APP_NAME),
+        title: Text(currentAppName),
         backgroundColor: backgroundColor,
       ),
       body: Padding(
