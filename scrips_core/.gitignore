@@ -9,6 +9,8 @@
 !**/.idea/vcs.xml
 !**/.idea/misc.xml
 
+lib/generated/i18n.dart
+
 # Miscellaneous
 *.class
 *.log
