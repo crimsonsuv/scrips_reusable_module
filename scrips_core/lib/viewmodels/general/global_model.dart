@@ -160,4 +160,11 @@ class GlobalModel extends BaseModel {
     this.data.statusText = value;
     setBusy(false);
   }
+
+  Future<bool> logout() async {
+    setBusy(true);
+    await this.setUser(null);
+    setBusy(false);
+    return true;
+  }
 }
