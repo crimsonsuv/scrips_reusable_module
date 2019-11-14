@@ -31,7 +31,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final double width;
   final Axis axis;
   final BoxDecoration boxDecoration;
-  final double padding;
+  final EdgeInsets padding;
   final double margin;
   final bool isPassword;
   final double spaceBetweenTitle;
