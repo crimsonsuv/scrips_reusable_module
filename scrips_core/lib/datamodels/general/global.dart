@@ -4,12 +4,11 @@ import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 
-
-
 class Global {
   PropertyInfo<bool> showOverlappedSubMenu = PropertyInfo(false);
-  PropertyInfo<bool>  animateSubMenu = PropertyInfo(false);
-  PropertyInfo<bool>  showDevicePreview = PropertyInfo(false);
+  PropertyInfo<bool> animateSubMenu = PropertyInfo(false);
+  PropertyInfo<bool> showBottomTabBar = PropertyInfo(false);
+  PropertyInfo<bool> showDevicePreview = PropertyInfo(false);
   PropertyInfo<String> statusText = PropertyInfo('');
   PropertyInfo<String> loginMessage = PropertyInfo('');
   PropertyInfo<String> localeCode = PropertyInfo(PM_DEFAULT_LOCALE_CODE);
@@ -18,12 +17,7 @@ class Global {
   User user = User();
   MainMenu mainMenu = MainMenu();
 
-  Global(
-      {
-      @required this.user,
-      this.showOverlappedSubMenu,
-      this.showDevicePreview,
-      this.animateSubMenu});
+  Global({@required this.user, this.showOverlappedSubMenu, this.showDevicePreview, this.animateSubMenu});
 
   Global.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

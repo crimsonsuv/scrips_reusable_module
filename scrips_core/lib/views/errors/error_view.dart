@@ -28,7 +28,7 @@ class ErrorView extends StatelessWidget {
       body: Padding(
         padding: _mainPadding,
         child: Container(
-          decoration: _mainBorder,
+//          decoration: _mainBorder,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,

@@ -15,8 +15,8 @@ class PmMainViewModel extends BaseModel {
 //  Api _api;
 
   PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
-      : data =
-            PmMainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
+      : data = PmMainView(
+            mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
 //        this._api = Provider.of(context),
         this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
@@ -33,7 +33,7 @@ class PmMainViewModel extends BaseModel {
   void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
     debugPrint('SCRIPSLOG globalmodel.dart::selectMenuItem Called');
     this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
-    this.data.mainMenu.currentItem.subMenu.currentItem =
+    this.data.mainMenu.currentItem?.subMenu?.currentItem =
         this.getMenuItemForId(items: data.mainMenu?.currentItem?.subMenu?.items, id: mainSubMenuPath);
   }
 
