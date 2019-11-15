@@ -21,6 +21,8 @@ enum FieldType {
 class FieldAndLabel<ListItemType> extends StatefulWidget {
   final FieldType fieldType;
   final Color labelTextColor;
+  final TextStyle labelTextStyle;
+  final TextStyle textFieldTextStyle;
   final Color labelBackgroundColor;
   final Color fieldBackgroundColor;
   final Color fieldTextColor;
@@ -43,6 +45,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   FieldAndLabel(
       {Key key,
       this.labelValue,
+        this.labelTextStyle,
+        this.textFieldTextStyle,
       this.fieldValue,
       this.fieldProperty,
       this.onChanged,
@@ -133,7 +137,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(widget.padding ?? _textViewAndLabelPadding),
+            padding: widget.padding ?? EdgeInsets.all(8.0),
             margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
             decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
             child: Column(
@@ -149,7 +153,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                     decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
                     child: PlatformText(
                       widget.labelValue,
-                      style: defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
+                      style: this.widget.labelTextStyle ?? defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -180,7 +184,11 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                         )
                       : Container(),
                   widget.fieldType == FieldType.TextField
-                      ? PlatformTextField(
+                      ? Container(
+                      decoration: new BoxDecoration(
+                        color: widget.fieldBackgroundColor,
+                        ),
+                      child: PlatformTextField(
                           obscureText: widget.isPassword == false || widget.isPassword == null ? false: true,
                           style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
                           textAlign: TextAlign.start,
@@ -188,11 +196,11 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                           controller: _textEditController,
                           onChanged: onChangedInternal,
                           decoration: InputDecoration.collapsed(
-                            border: OutlineInputBorder(),
                             hintText: currentPlaceholder ?? widget.placeholder ?? null,
                             hintStyle: defaultHintStyle(null, null),
                           ),
-                        )
+                        ),
+                      )
                       : Container(),
                   widget.fieldType == FieldType.RichText
                       ? RichText(
@@ -213,6 +221,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                       : Container(),
                   widget.fieldType == FieldType.DropDownList
                       ? DropdownButton(
+
                           value: currentFieldValue ?? widget.fieldValue,
                           items: widget.listItems ?? [],
                           onChanged: onChangedInternal,
