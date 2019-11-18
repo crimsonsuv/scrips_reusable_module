@@ -8,7 +8,7 @@ Map<String, dynamic> mockDataMenuItems = {
       'label': 'Home',
       'enabled': true,
       'semanticLabel': '',
-      'iconName': 'home',
+      'iconName': 'dashboard',
       'navigationRoute': RoutePaths.Home,
       'subMenu': {
         'items': [
