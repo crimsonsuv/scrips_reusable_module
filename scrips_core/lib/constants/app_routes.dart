@@ -21,6 +21,7 @@ class RoutePaths {
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
   static const String DialogTest = 'dialog-test';
+  static const String PmSignUpStep1 = 'pm_sign_up_step1';
 
 
 }

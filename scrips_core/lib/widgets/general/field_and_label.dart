@@ -220,6 +220,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                   Container(child: PlatformText('RichTextEdit is not yet supprted'))
                       : Container(),
                   widget.fieldType == FieldType.DropDownList
+<<<<<<< HEAD
                       ? DropdownButton(
 
                           value: currentFieldValue ?? widget.fieldValue,
@@ -230,6 +231,34 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                           hint: PlatformText(widget.placeholder ?? ''),
                           disabledHint: PlatformText(widget.validationMessage ?? ''),
                         )
+=======
+                      ? Container(
+                          height: 42.0,
+                          //
+                          decoration: new BoxDecoration(
+
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: Border.all(color: widget.fieldBackgroundColor),
+                            color: widget.fieldBackgroundColor,
+                          ),
+                            child: DropdownButtonFormField(
+
+                                decoration: InputDecoration(
+                                            enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.transparent))),
+                                value: currentFieldValue ?? widget.fieldValue,
+                                items: widget.listItems ?? [],
+                                icon: Image(image: AssetImage("assets/DropDownIcon.png")),
+                                iconSize: 36.0,
+                                onChanged: onChangedInternal,
+                                style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+                                isExpanded: false,
+                                hint: PlatformText(widget.placeholder ?? ''),
+                                disabledHint: PlatformText(widget.validationMessage ?? ''),
+                                ),
+
+                      )
+>>>>>>> origin/dev_nilesh
                       : Container(),
                 ]),
           ),
