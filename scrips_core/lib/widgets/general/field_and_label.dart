@@ -220,16 +220,32 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                   Container(child: PlatformText('RichTextEdit is not yet supprted'))
                       : Container(),
                   widget.fieldType == FieldType.DropDownList
-                      ? DropdownButton(
+                      ? Container(
+                          height: 42.0,
+                          //
+                          decoration: new BoxDecoration(
 
-                          value: currentFieldValue ?? widget.fieldValue,
-                          items: widget.listItems ?? [],
-                          onChanged: onChangedInternal,
-                          style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-                          isExpanded: false,
-                          hint: PlatformText(widget.placeholder ?? ''),
-                          disabledHint: PlatformText(widget.validationMessage ?? ''),
-                        )
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: Border.all(color: widget.fieldBackgroundColor),
+                            color: widget.fieldBackgroundColor,
+                          ),
+                            child: DropdownButtonFormField(
+
+                                decoration: InputDecoration(
+                                            enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.transparent))),
+                                value: currentFieldValue ?? widget.fieldValue,
+                                items: widget.listItems ?? [],
+                                icon: Image(image: AssetImage("assets/DropDownIcon.png")),
+                                iconSize: 36.0,
+                                onChanged: onChangedInternal,
+                                style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+                                isExpanded: false,
+                                hint: PlatformText(widget.placeholder ?? ''),
+                                disabledHint: PlatformText(widget.validationMessage ?? ''),
+                                ),
+
+                      )
                       : Container(),
                 ]),
           ),
