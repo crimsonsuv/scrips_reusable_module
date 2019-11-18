@@ -28,19 +28,19 @@ class MenuItem {
     switch (iconName) {
       case 'home':
         return Image.asset('assets/dashboard.png');
-      case 'directions_railway':
-      case 'directions_transit':
-        return //Icons.directions_railway;
-      case 'directions_boat':
-        return Icons.directions_boat;
-      case 'directions_subway':
-        return Icons.directions_subway;
-      case 'settings':
-        return Icons.settings;
-      case 'settings_applications':
-        return Icons.settings_applications;
-      case 'settings_backup_restore':
-        return Icons.settings_backup_restore;
+//      case 'directions_railway':
+//      case 'directions_transit':
+//        return //Icons.directions_railway;
+//      case 'directions_boat':
+//        return Icons.directions_boat;
+//      case 'directions_subway':
+//        return Icons.directions_subway;
+//      case 'settings':
+//        return Icons.settings;
+//      case 'settings_applications':
+//        return Icons.settings_applications;
+//      case 'settings_backup_restore':
+//        return Icons.settings_backup_restore;
       default:
         return null;
         break;

@@ -48,11 +48,12 @@ class MainMenuListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   this.showIcon && this.item?.icon != null
-                      ? Icon(
-                          this.item?.icon,
-                          size: _iconHeight,
-                          semanticLabel: this.item?.semanticLabel,
-                        )
+                      ? this.item.icon
+//                      ? Icon(
+//                          this.item?.icon,
+//                          size: _iconHeight,
+//                          semanticLabel: this.item?.semanticLabel,
+//                        )
                       : Container(),
                   this.showLabel && this.item?.label != null && this.item?.label != ''
                       ? Padding(
