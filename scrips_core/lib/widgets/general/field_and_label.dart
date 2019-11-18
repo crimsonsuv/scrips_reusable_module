@@ -220,18 +220,6 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                   Container(child: PlatformText('RichTextEdit is not yet supprted'))
                       : Container(),
                   widget.fieldType == FieldType.DropDownList
-<<<<<<< HEAD
-                      ? DropdownButton(
-
-                          value: currentFieldValue ?? widget.fieldValue,
-                          items: widget.listItems ?? [],
-                          onChanged: onChangedInternal,
-                          style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-                          isExpanded: false,
-                          hint: PlatformText(widget.placeholder ?? ''),
-                          disabledHint: PlatformText(widget.validationMessage ?? ''),
-                        )
-=======
                       ? Container(
                           height: 42.0,
                           //
@@ -258,7 +246,6 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                                 ),
 
                       )
->>>>>>> origin/dev_nilesh
                       : Container(),
                 ]),
           ),
