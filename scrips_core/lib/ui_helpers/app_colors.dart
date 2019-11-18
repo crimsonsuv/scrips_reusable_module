@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'ui_helpers.dart';
 
 const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
 // mainMenuBackground
-const Color defaultMainMenuBackgroundColor = Color(0xFF381F88); //Color(0xFF381F88); // #381F88
+const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888); //Color(0xFF381F88); // #381F88
 
-//Color defaultMainMenuBackgroundColor = HexColor.fromHex('381F88'); //Color(0xFF381F88); // #381F88
-const Color defaultMainSubMenuBackgroundColor = Color.fromARGB(225, 35, 61, 147);
+const Color defaultMainSubMenuBackgroundColor = defaultMainMenuBackgroundColor;
 const Color defaultMainAppBarBackgroundColor = defaultMainMenuBackgroundColor;
 const Color defaultMainStatusBarBackgroundColor = defaultMainMenuBackgroundColor;
-final Color defaultMainContainedAreaBackgroundColor = Color(0xFF381F88);
+const Color defaultMainContainedAreaBackgroundColor = Color(0xFFE5E5E5);
 final Color defaultPanelBackgroundColor = Colors.white;
 final Color defaultMainBackgroundColor = defaultMainContainedAreaBackgroundColor;
 

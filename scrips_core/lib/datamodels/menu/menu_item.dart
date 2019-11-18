@@ -11,27 +11,26 @@ class MenuItem {
   String iconName;
   //
   @JsonKey(ignore: true)
-  IconData icon;
+  Widget icon;
   String label;
   String semanticLabel;
   bool enabled;
   String navigationRoute;
 
-  MenuItem(
-      {this.id, this.iconName, this.label, this.enabled, this.semanticLabel, this.navigationRoute})
+  MenuItem({this.id, this.iconName, this.label, this.enabled, this.semanticLabel, this.navigationRoute})
       : this.icon = _iconFromName(iconName);
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$MenuItemToJson(this);
 
-  static IconData _iconFromName(String iconName) {
+  static Widget _iconFromName(String iconName) {
     switch (iconName) {
       case 'home':
-        return Icons.home;
+        return Image.asset('assets/dashboard.png');
       case 'directions_railway':
       case 'directions_transit':
-        return Icons.directions_railway;
+        return //Icons.directions_railway;
       case 'directions_boat':
         return Icons.directions_boat;
       case 'directions_subway':
