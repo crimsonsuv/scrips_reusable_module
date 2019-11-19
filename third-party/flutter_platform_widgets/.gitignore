@@ -1,13 +1,21 @@
 # ignore idea directory but include certain common config files
-.idea/
-**/.idea/workspace.xml
-**/.idea/deplyment.xml
-**/.idea/webServers.xml
 !**/.idea/codeStyles/*
+!**/.idea/dictionaries/*
 !**/.idea/filetypes/*
 !**/.idea/inspection/*
 !**/.idea/vcs.xml
-!**/.idea/misc.xml
+!**/.idea/httpRequests
+**/.idea/misc.xml
+**/.idea/modules.xml
+**/.idea/workspace.xml
+**/.idea/deployment.xml
+**/.idea/webServers.xml
+**/.idea/libraries
+**/.idea/git_*.xml
+**/.idea/*.xml
+**/.idea
+**/cache
+**/caches
 
 # Miscellaneous
 *.class
@@ -32,7 +40,6 @@
 # Flutter/Dart/Pub related
 **/pubspec.lock
 **/doc/api/
-**/.packages/
 **/.packages/
 **/.dart_tool/
 **/build/
@@ -84,3 +91,4 @@ t
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
