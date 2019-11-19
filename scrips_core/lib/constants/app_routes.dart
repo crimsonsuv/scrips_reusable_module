@@ -17,11 +17,6 @@ class RoutePaths {
   static const String PmSignUpStep2 = 'pm_sign_up_step2';
   static const String PmSignUpStep3 = 'pm_sign_up_step3';
 
-  //todo: @nilesh: add all routes here for signup
-//  static const String SignUpStep1 = 'pm_sign_up_step1';
-//  static const String SignUpStep2 = 'pm_sign_up_step2';
-//  static const String SignUpStep2 = 'pm_sign_up_step2';
-
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
   static const String PracticeOnBoardingWizardSubMenu1 = '/practice-onboard-wizard-1';
@@ -30,6 +25,4 @@ class RoutePaths {
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
   static const String DialogTest = 'dialog-test';
-
-
 }
