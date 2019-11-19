@@ -3,7 +3,7 @@
 // duplicate variable names.
 class RoutePaths {
   // paths common to all; 4 apps
-  static const String Splash = 'splash-test';
+  static const String Splash = 'splash';
   static const String Login = 'login';
   static const String Home = '/';
   static const String Settings = '/settings';
