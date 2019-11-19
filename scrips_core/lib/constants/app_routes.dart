@@ -16,6 +16,8 @@ class RoutePaths {
   static const String PmSignUpStep1 = 'pm_sign_up_step1';
   static const String PmSignUpStep2 = 'pm_sign_up_step2';
   static const String PmSignUpStep3 = 'pm_sign_up_step3';
+
+  //todo: @nilesh: add all routes here for signup
 //  static const String SignUpStep1 = 'pm_sign_up_step1';
 //  static const String SignUpStep2 = 'pm_sign_up_step2';
 //  static const String SignUpStep2 = 'pm_sign_up_step2';
