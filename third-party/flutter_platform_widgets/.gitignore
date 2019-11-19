@@ -1,10 +1,10 @@
 # ignore idea directory but include certain common config files
-!**/.idea/codeStyles/*
-!**/.idea/dictionaries/*
-!**/.idea/filetypes/*
-!**/.idea/inspection/*
-!**/.idea/vcs.xml
-!**/.idea/httpRequests
+#!**/.idea/codeStyles/*
+#!**/.idea/dictionaries/*
+#!**/.idea/filetypes/*
+#!**/.idea/inspection/*
+#!**/.idea/vcs.xml
+#!**/.idea/httpRequests
 **/.idea/misc.xml
 **/.idea/modules.xml
 **/.idea/workspace.xml
@@ -91,4 +91,5 @@ t
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
 
