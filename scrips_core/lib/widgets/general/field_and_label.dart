@@ -45,8 +45,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   FieldAndLabel(
       {Key key,
       this.labelValue,
-        this.labelTextStyle,
-        this.textFieldTextStyle,
+      this.labelTextStyle,
+      this.textFieldTextStyle,
       this.fieldValue,
       this.fieldProperty,
       this.onChanged,
@@ -100,7 +100,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
 
   void initState() {
     super.initState();
-    currentFieldValue = widget.fieldProperty != null? widget.fieldProperty?.value : (widget.fieldValue ?? null);
+    currentFieldValue = widget.fieldProperty != null ? widget.fieldProperty?.value : (widget.fieldValue ?? null);
     if (widget.fieldType == FieldType.TextField) {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
@@ -130,86 +130,88 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width != null && widget.width > 0 ? widget.width : double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            padding: widget.padding ?? EdgeInsets.all(8.0),
-            margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
-            decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-            widget.labelValue != null && widget.labelValue.isNotEmpty
-            ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
-                    child: PlatformText(
-                      widget.labelValue,
-                      style: this.widget.labelTextStyle ?? defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  SizedBox(
-                    height: _textViewAndLabelPadding / 2,
-                  )
-                ],
-                )
-            : Container(),
-                  widget.validationMessage != null && widget.fieldType != FieldType.DropDownList
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            SizedBox(
-                              height: _textViewAndLabelPadding / 2,
-                            ),
-                            Container(
-                                decoration: UIHelper.defaultLabelBoxDecoration(widget.fieldBackgroundColor),
+    return Expanded(
+      child: Container(
+//      width: widget.width != null && widget.width > 0 ? widget.width : MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              padding: widget.padding ?? EdgeInsets.all(8.0),
+              margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
+              decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    widget.labelValue != null && widget.labelValue.isNotEmpty
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Container(
+                                decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
                                 child: PlatformText(
-                                  currentValidationMessage ?? widget.validationMessage ?? null,
-                                  style: defaultValidationStyle(null, null),
-                                )),
-                            SizedBox(
-                              height: _textViewAndLabelPadding / 2,
-                            )
-                          ],
-                        )
-                      : Container(),
-                  widget.fieldType == FieldType.TextField
-                      ? Container(
-                      decoration: new BoxDecoration(
-                        color: widget.fieldBackgroundColor,
-                        ),
-                      child: PlatformTextField(
-                          obscureText: widget.isPassword == false || widget.isPassword == null ? false: true,
-                          style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-                          textAlign: TextAlign.start,
-                          enabled: widget.enabled ?? true,
-                          controller: _textEditController,
-                          onChanged: onChangedInternal,
-                          decoration: InputDecoration.collapsed(
-                            hintText: currentPlaceholder ?? widget.placeholder ?? null,
-                            hintStyle: defaultHintStyle(null, null),
-                          ),
-                        ),
-                      )
-                      : Container(),
-                  widget.fieldType == FieldType.RichText
-                      ? RichText(
-                          text: currentFieldValue ?? widget.fieldValue,
-                          textAlign: TextAlign.start,
-                        )
-                      : Container(),
-                  widget.fieldType == FieldType.RichTextEdit
-                      ?
+                                  widget.labelValue,
+                                  style: this.widget.labelTextStyle ??
+                                      defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              SizedBox(
+                                height: _textViewAndLabelPadding / 2,
+                              )
+                            ],
+                          )
+                        : Container(),
+                    widget.validationMessage != null && widget.fieldType != FieldType.DropDownList
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(
+                                height: _textViewAndLabelPadding / 2,
+                              ),
+                              Container(
+                                  decoration: UIHelper.defaultLabelBoxDecoration(widget.fieldBackgroundColor),
+                                  child: PlatformText(
+                                    currentValidationMessage ?? widget.validationMessage ?? null,
+                                    style: defaultValidationStyle(null, null),
+                                  )),
+                              SizedBox(
+                                height: _textViewAndLabelPadding / 2,
+                              )
+                            ],
+                          )
+                        : Container(),
+                    widget.fieldType == FieldType.TextField
+                        ? Container(
+                            decoration: new BoxDecoration(
+                              color: widget.fieldBackgroundColor,
+                            ),
+                            child: PlatformTextField(
+                              obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
+                              style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+                              textAlign: TextAlign.start,
+                              enabled: widget.enabled ?? true,
+                              controller: _textEditController,
+                              onChanged: onChangedInternal,
+                              decoration: InputDecoration.collapsed(
+                                hintText: currentPlaceholder ?? widget.placeholder ?? null,
+                                hintStyle: defaultHintStyle(null, null),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    widget.fieldType == FieldType.RichText
+                        ? RichText(
+                            text: currentFieldValue ?? widget.fieldValue,
+                            textAlign: TextAlign.start,
+                          )
+                        : Container(),
+                    widget.fieldType == FieldType.RichTextEdit
+                        ?
 //                  ZefyrScaffold(
 //                          child: ZefyrEditor(
 //                            padding: EdgeInsets.all(8),
@@ -217,39 +219,36 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
 //                            focusNode: _richTextEditFocusNode,
 //                          ),
 //                        )
-                  Container(child: PlatformText('RichTextEdit is not yet supprted'))
-                      : Container(),
-                  widget.fieldType == FieldType.DropDownList
-                      ? Container(
-                          height: 42.0,
-                          //
-                          decoration: new BoxDecoration(
-
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: Border.all(color: widget.fieldBackgroundColor),
-                            color: widget.fieldBackgroundColor,
-                          ),
+                        Container(child: PlatformText('RichTextEdit is not yet supprted'))
+                        : Container(),
+                    widget.fieldType == FieldType.DropDownList
+                        ? Container(
+                            height: 42.0,
+                            //
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              border: Border.all(color: widget.fieldBackgroundColor),
+                              color: widget.fieldBackgroundColor,
+                            ),
                             child: DropdownButtonFormField(
-
-                                decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.transparent))),
-                                value: currentFieldValue ?? widget.fieldValue,
-                                items: widget.listItems ?? [],
-                                icon: Image(image: AssetImage("assets/DropDownIcon.png")),
-                                iconSize: 36.0,
-                                onChanged: onChangedInternal,
-                                style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-                                isExpanded: false,
-                                hint: PlatformText(widget.placeholder ?? ''),
-                                disabledHint: PlatformText(widget.validationMessage ?? ''),
-                                ),
-
-                      )
-                      : Container(),
-                ]),
-          ),
-        ],
+                              decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
+                              value: currentFieldValue ?? widget.fieldValue,
+                              items: widget.listItems ?? [],
+                              icon: Image(image: AssetImage("assets/DropDownIcon.png")),
+                              iconSize: 36.0,
+                              onChanged: onChangedInternal,
+                              style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+                              isExpanded: false,
+                              hint: PlatformText(widget.placeholder ?? ''),
+                              disabledHint: PlatformText(widget.validationMessage ?? ''),
+                            ),
+                          )
+                        : Container(),
+                  ]),
+            ),
+          ],
+        ),
       ),
     );
   }
