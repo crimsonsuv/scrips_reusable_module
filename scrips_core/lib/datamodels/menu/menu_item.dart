@@ -28,6 +28,8 @@ class MenuItem {
     switch (iconName) {
       case 'home':
         Widget i = Image.asset('assets/dashboard.png');
+//        assert(i != null);
+        debugPrint('Here.$i');
         return i;
 //      case 'directions_railway':
 //      case 'directions_transit':
@@ -43,8 +45,8 @@ class MenuItem {
 //      case 'settings_backup_restore':
 //        return Icons.settings_backup_restore;
       default:
-        return null;
-        break;
+        Widget i = Image.asset('assets/blank.png');
+        return i;
     }
   }
 }
