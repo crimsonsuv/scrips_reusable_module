@@ -5,7 +5,7 @@ import 'app_colors.dart';
 import 'app_sizes.dart';
 
 String defaultFontFamily = "Roboto";
-Color defaultBackgroundColor = HexColor.fromHex("0xFFE5E5E5");
+Color defaultBackgroundColor = HexColor.fromHex("#FFE5E5E5");
 
 TextStyle defaultHeaderStyle(color, backgroundColor) => TextStyle(
       fontSize: headerTextSize,
@@ -65,4 +65,3 @@ TextStyle defaultHintStyle(color, backgroundColor, {bool isReversed = false}) =>
       color: defaultFieldHintColor,
       backgroundColor: backgroundColor ?? defaultFieldBackgroundColor,
     );
-
