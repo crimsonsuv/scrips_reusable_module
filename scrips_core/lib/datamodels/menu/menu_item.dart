@@ -27,7 +27,8 @@ class MenuItem {
   static Widget _iconFromName(String iconName) {
     switch (iconName) {
       case 'home':
-        return Image.asset('assets/dashboard.png');
+        Widget i = Image.asset('assets/dashboard.png');
+        return i;
 //      case 'directions_railway':
 //      case 'directions_transit':
 //        return //Icons.directions_railway;
