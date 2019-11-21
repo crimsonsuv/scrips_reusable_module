@@ -82,15 +82,15 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
     return myState;
   }
 
-  String getValue(BuildContext context) {
+  String getValue() {
     return myState.currentFieldValue;
   }
 
-  String getValidationMessage(BuildContext context) {
+  String getValidationMessage() {
     return myState.currentValidationMessage;
   }
 
-  void setValidationMessage(BuildContext context, value) {
+  void setValidationMessage(value) {
     myState.setValidationMessage(value);
   }
 }
