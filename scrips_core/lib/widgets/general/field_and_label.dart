@@ -211,15 +211,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
                           )
                         : Container(),
                     widget.fieldType == FieldType.RichTextEdit
-                        ?
-//                  ZefyrScaffold(
-//                          child: ZefyrEditor(
-//                            padding: EdgeInsets.all(8),
-//                            controller: _richTextEditController,
-//                            focusNode: _richTextEditFocusNode,
-//                          ),
-//                        )
-                        Container(child: PlatformText('RichTextEdit is not yet supprted'))
+                        ? Container(child: PlatformText('RichTextEdit is not yet supprted'))
                         : Container(),
                     widget.fieldType == FieldType.DropDownList
                         ? Container(
