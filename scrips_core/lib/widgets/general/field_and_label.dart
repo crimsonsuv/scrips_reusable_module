@@ -43,7 +43,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String validationMessage;
   final Function onChanged;
   final List<ListItemType> listItems;
-  _FieldAndLabelState myState;
+  FieldAndLabelState _myState;
 
   //
   FieldAndLabel(
@@ -77,25 +77,17 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
 
   //
   @override
-  _FieldAndLabelState createState() {
-    myState = _FieldAndLabelState();
-    return myState;
+  FieldAndLabelState createState() {
+    _myState = FieldAndLabelState();
+    return _myState;
   }
 
-  String getValue() {
-    return myState.currentFieldValue;
-  }
-
-  String getValidationMessage() {
-    return myState.currentValidationMessage;
-  }
-
-  void setValidationMessage(value) {
-    myState.setValidationMessage(value);
+  FieldAndLabelState getState() {
+    return _myState;
   }
 }
 
-class _FieldAndLabelState extends State<FieldAndLabel> {
+class FieldAndLabelState extends State<FieldAndLabel> {
   //
   var currentFieldValue;
   String currentPlaceholder;
@@ -125,7 +117,7 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   onChangedInternal(value) {
-    debugPrint(value);
+    debugPrint('onChangedInternal $value');
     setState(() {
       currentFieldValue = value;
       if (widget.fieldProperty != null) {
@@ -134,12 +126,12 @@ class _FieldAndLabelState extends State<FieldAndLabel> {
     });
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage
-      widget.onChanged(value, this.widget);
+      widget.onChanged(value, this);
     }
   }
 
   setValidationMessage(value) {
-    debugPrint(value);
+//    debugPrint(value);
     setState(() {
       currentValidationMessage = value;
     });
