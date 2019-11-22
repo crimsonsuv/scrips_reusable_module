@@ -187,7 +187,6 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                             ],
                           )
                         : Container(),
-                    buildValidationMessage(),
                     widget.fieldType == FieldType.TextField
                         ? Container(
                             decoration: new BoxDecoration(
@@ -262,6 +261,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                             ),
                           )
                         : Container(),
+                    buildValidationMessage(),
                   ]),
             ),
           ],

@@ -4,12 +4,15 @@
  * See LICENSE for distribution and usage details.
  */
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'platform.dart' show isMaterial;
 
-String formatData(BuildContext context, String data) {
-  if (isMaterial(context)) {
+String formatData(
+    BuildContext context, String data, TextCapitalization textCapitalization) {
+  if (/*isMaterial(context) &&*/ textCapitalization ==
+      TextCapitalization.characters) {
     return data?.toUpperCase();
   }
   return data;
@@ -36,11 +39,12 @@ class PlatformText extends StatelessWidget {
     String semanticsLabel,
     StrutStyle strutStyle,
     TextWidthBasis textWidthBasis,
+    TextCapitalization textCapitalization = TextCapitalization.none,
   }) {
     return PlatformText._(
         key,
         (BuildContext context) => Text(
-              formatData(context, data),
+              formatData(context, data, textCapitalization),
               key: key,
               style: style,
               textAlign: textAlign,
