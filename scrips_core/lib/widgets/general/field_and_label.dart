@@ -42,6 +42,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String placeholder;
   final String validationMessage;
   final Function onChanged;
+
   final List<ListItemType> listItems;
   FieldAndLabelState _myState;
 
@@ -203,12 +204,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                               enabled: widget.enabled ?? true,
                               controller: _textEditController,
                               onChanged: onChangedInternal,
-                              decoration: InputDecoration.collapsed(
-                                hintText: currentPlaceholder ??
-                                    widget.placeholder ??
-                                    null,
-                                hintStyle: defaultHintStyle(null, null),
-                              ),
+                              placeholder: currentPlaceholder ??
+                                  widget.placeholder ??
+                                  null,
+                              placeholderStyle: defaultHintStyle(null, null),
                             ),
                           )
                         : Container(),

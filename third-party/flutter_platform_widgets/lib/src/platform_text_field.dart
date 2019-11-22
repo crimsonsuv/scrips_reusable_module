@@ -3,13 +3,20 @@
  * Copyright (c) 2018 Lance Johnstone. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
+import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 import 'package:flutter/cupertino.dart'
     show CupertinoTextField, CupertinoColors, OverlayVisibilityMode;
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' show InputDecoration, TextField, InputCounterWidgetBuilder;
+import 'package:flutter/material.dart'
+    show InputDecoration, TextField, InputCounterWidgetBuilder;
 import 'package:flutter/services.dart'
-    show Brightness, TextInputFormatter, TextInputType, TextInputAction, TextCapitalization;
+    show
+        Brightness,
+        TextInputFormatter,
+        TextInputType,
+        TextInputAction,
+        TextCapitalization;
 import 'package:flutter/widgets.dart';
 
 import 'widget_base.dart';
@@ -217,7 +224,8 @@ class CupertinoTextFieldData {
   final GestureTapCallback onTap;
 }
 
-class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField> {
+class PlatformTextField
+    extends PlatformWidgetBase<CupertinoTextField, TextField> {
   final Key widgetKey;
 
   final PlatformBuilder<MaterialTextFieldData> android;
@@ -263,8 +271,25 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
   final Brightness keyboardAppearance;
   final EdgeInsets scrollPadding;
 
-  //sumeet
-  final InputDecoration decoration;
+  /// A lighter colored placeholder hint that appears on the first line of the
+  /// text field when the text entry is empty.
+  ///
+  /// Defaults to having no placeholder text.
+  ///
+  /// The text style of the placeholder text matches that of the text field's
+  /// main text entry except a lighter font weight and a grey font color.
+  final String placeholder;
+
+  /// The style to use for the placeholder text.
+  ///
+  /// The [placeholderStyle] is merged with the [style] [TextStyle] when applied
+  /// to the [placeholder] text. To avoid merging with [style], specify
+  /// [TextStyle.inherit] as false.
+  ///
+  /// Defaults to the [style] property with w300 font weight and grey color.
+  ///
+  /// If specifically set to null, placeholder's style will be the same as [style].
+  final TextStyle placeholderStyle;
 
   PlatformTextField(
       {Key key,
@@ -306,9 +331,10 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       this.toolbarOptions,
       this.android,
       this.ios,
-      this.decoration})
-      : keyboardType =
-            keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+      this.placeholder,
+      this.placeholderStyle})
+      : keyboardType = keyboardType ??
+            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
         super(key: key);
 
   @override
@@ -316,6 +342,15 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
     MaterialTextFieldData data;
     if (android != null) {
       data = android(context);
+    }
+
+    //sumeet: create inputDecoratiopn for Android
+    InputDecoration decoration;
+    if (this.placeholder != null && this.placeholder != '') {
+      decoration = InputDecoration.collapsed(
+        hintText: this.placeholder,
+        hintStyle: this.placeholderStyle ?? defaultHintStyle(null, null),
+      );
     }
 
     return TextField(
@@ -344,16 +379,20 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       textCapitalization: data?.textCapitalization ?? textCapitalization,
       textInputAction: data?.textInputAction ?? textInputAction,
       //sumeet
-      decoration: this.decoration ?? data?.decoration ?? _kDefaultRoundedBorderDecoration,
+      decoration:
+          decoration ?? data?.decoration ?? _kDefaultRoundedBorderDecoration,
       // sumeet END
       textDirection: data?.textDirection,
       buildCounter: data?.buildCounter,
-      dragStartBehavior: data?.dragStartBehavior ?? dragStartBehavior ?? DragStartBehavior.start,
+      dragStartBehavior: data?.dragStartBehavior ??
+          dragStartBehavior ??
+          DragStartBehavior.start,
       expands: data?.expands ?? expands ?? false,
       minLines: data?.minLines ?? minLines,
       scrollPhysics: data?.scrollPhysics ?? scrollPhysics,
       strutStyle: data?.strutStyle ?? strutStyle,
-      enableInteractiveSelection: data?.enableInteractiveSelection ?? enableInteractiveSelection,
+      enableInteractiveSelection:
+          data?.enableInteractiveSelection ?? enableInteractiveSelection,
       scrollController: data?.scrollController ?? scrollController,
       onTap: data?.onTap ?? onTap,
       readOnly: data?.readOnly ?? readOnly ?? false,
@@ -370,12 +409,14 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       data = ios(context);
     }
 
+    //todo: @nil: show TextPlaceholder (passed in InputDecoration from FieldAndLabel on iOS!
     return CupertinoTextField(
       key: data?.widgetKey ?? widgetKey,
       autocorrect: data?.autocorrect ?? autocorrect,
       autofocus: data?.autofocus ?? autofocus,
       controller: data?.controller ?? controller,
-      cursorColor: data?.cursorColor ?? cursorColor ?? CupertinoColors.activeBlue,
+      cursorColor:
+          data?.cursorColor ?? cursorColor ?? CupertinoColors.activeBlue,
       cursorRadius: data?.cursorRadius ?? cursorRadius,
       cursorWidth: data?.cursorWidth ?? cursorWidth,
       enabled: data?.enabled ?? enabled,
@@ -395,23 +436,23 @@ class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField
       textAlign: data?.textAlign ?? textAlign,
       textCapitalization: data?.textCapitalization ?? textCapitalization,
       textInputAction: data?.textInputAction ?? textInputAction,
-      //sumeet - decoration NOT supported?
-      // decoration: this.decoration ?? data?.decoration ?? _kDefaultRoundedBorderDecoration,
-      // sumeet END
       clearButtonMode: data?.clearButtonMode ?? OverlayVisibilityMode.never,
       padding: data?.padding ?? const EdgeInsets.all(6.0),
-      placeholder: data?.placeholder,
-      placeholderStyle: data?.placeholderStyle,
+      placeholder: this.placeholder ?? data?.placeholder,
+      placeholderStyle: this.placeholderStyle ?? data?.placeholderStyle,
       prefix: data?.prefix,
       prefixMode: data?.prefixMode ?? OverlayVisibilityMode.always,
       suffix: data?.suffix,
       suffixMode: data?.suffixMode ?? OverlayVisibilityMode.always,
-      dragStartBehavior: data?.dragStartBehavior ?? dragStartBehavior ?? DragStartBehavior.start,
+      dragStartBehavior: data?.dragStartBehavior ??
+          dragStartBehavior ??
+          DragStartBehavior.start,
       expands: data?.expands ?? expands ?? false,
       minLines: data?.minLines ?? minLines,
       scrollPhysics: data?.scrollPhysics ?? scrollPhysics,
       strutStyle: data?.strutStyle ?? strutStyle,
-      enableInteractiveSelection: data?.enableInteractiveSelection ?? enableInteractiveSelection,
+      enableInteractiveSelection:
+          data?.enableInteractiveSelection ?? enableInteractiveSelection,
       scrollController: data?.scrollController ?? scrollController,
       onTap: data?.onTap ?? onTap,
       readOnly: data?.readOnly ?? readOnly ?? false,
