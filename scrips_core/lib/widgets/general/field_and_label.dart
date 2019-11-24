@@ -162,7 +162,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              padding: widget.padding ?? EdgeInsets.all(8.0),
+              padding: widget.padding ?? UIHelper.defaultFieldAndLabelPadding,
               margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
               decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
               child: Column(
@@ -247,7 +247,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         break;
     }
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+      padding: UIHelper.defaultFieldInternalPadding,
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
         border: Border.all(color: widget.fieldBackgroundColor),
