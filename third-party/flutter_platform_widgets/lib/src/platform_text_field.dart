@@ -409,7 +409,6 @@ class PlatformTextField
       data = ios(context);
     }
 
-    //todo: @nil: show TextPlaceholder (passed in InputDecoration from FieldAndLabel on iOS!
     return CupertinoTextField(
       key: data?.widgetKey ?? widgetKey,
       autocorrect: data?.autocorrect ?? autocorrect,
