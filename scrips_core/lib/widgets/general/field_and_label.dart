@@ -270,28 +270,25 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildDropDownList(BuildContext context) {
     return Container(
-//      height: 42.0,
-//      //
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(
-            color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
+        border: Border.all(color: widget.fieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
-      child: DropdownButtonFormField(
-        decoration: InputDecoration(
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent))),
+      child: DropdownButton(
+        underline: Container(),
+        isExpanded: true,
         value: currentFieldValue ?? widget.fieldValue,
         items: widget.listItems ?? [],
         icon: Image(image: AssetImage("assets/DropDownIcon.png")),
-//        iconSize: 36.0,
+        iconSize: 36.0,
         onChanged: onChangedInternal,
         style: defaultFieldStyle(
             widget.fieldTextColor, widget.fieldBackgroundColor),
-        isExpanded: false,
-        hint: PlatformText(widget.placeholder ?? ''),
-        disabledHint: PlatformText(widget.validationMessage ?? ''),
+        hint: PlatformText(widget.placeholder ?? '',
+            style: defaultHintStyle(null, null)),
+        disabledHint: PlatformText(widget.validationMessage ?? '',
+            style: defaultHintStyle(null, null)),
       ),
     );
   }
