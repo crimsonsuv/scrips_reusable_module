@@ -228,18 +228,33 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildField(BuildContext context) {
+    Widget field;
     switch (widget.fieldType) {
       case FieldType.TextField:
-        return buildTextField(context);
+        field = buildTextField(context);
+        break;
       case FieldType.RichText:
-        return buildRichText(context);
+        field = buildRichText(context);
+        break;
       case FieldType.RichTextEdit:
-        return buildRichTextEdit(context);
+        field = buildRichTextEdit(context);
+        break;
       case FieldType.DropDownList:
-        return buildDropDownList(context);
+        field = buildDropDownList(context);
+        break;
       default:
-        return Container();
+        field = Container();
+        break;
     }
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+      decoration: new BoxDecoration(
+        borderRadius: BorderRadius.circular(5.0),
+        border: Border.all(color: widget.fieldBackgroundColor),
+        color: widget.fieldBackgroundColor,
+      ),
+      child: field,
+    );
   }
 
   Widget buildValidationMessage(BuildContext context) {
@@ -269,48 +284,36 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildDropDownList(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(color: widget.fieldBackgroundColor),
-        color: widget.fieldBackgroundColor,
-      ),
-      child: DropdownButton(
-        underline: Container(),
-        isExpanded: true,
-        value: currentFieldValue ?? widget.fieldValue,
-        items: widget.listItems ?? [],
-        icon: Image(image: AssetImage("assets/DropDownIcon.png")),
-        iconSize: 36.0,
-        onChanged: onChangedInternal,
-        style: defaultFieldStyle(
-            widget.fieldTextColor, widget.fieldBackgroundColor),
-        hint: PlatformText(widget.placeholder ?? '',
-            style: defaultHintStyle(null, null)),
-        disabledHint: PlatformText(widget.validationMessage ?? '',
-            style: defaultHintStyle(null, null)),
-      ),
+    return DropdownButton(
+      underline: Container(),
+      isExpanded: true,
+      value: currentFieldValue ?? widget.fieldValue,
+      items: widget.listItems ?? [],
+      icon: Image(image: AssetImage("assets/DropDownIcon.png")),
+      iconSize: 36.0,
+      onChanged: onChangedInternal,
+      style:
+          defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+      hint: PlatformText(widget.placeholder ?? '',
+          style: defaultHintStyle(null, null)),
+      disabledHint: PlatformText(widget.validationMessage ?? '',
+          style: defaultHintStyle(null, null)),
     );
   }
 
   Widget buildTextField(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-        color: widget.fieldBackgroundColor,
-      ),
-      child: PlatformTextField(
-        obscureText: widget.isPassword == false || widget.isPassword == null
-            ? false
-            : true,
-        style: defaultFieldStyle(
-            widget.fieldTextColor, widget.fieldBackgroundColor),
-        textAlign: TextAlign.start,
-        enabled: widget.enabled ?? true,
-        controller: _textEditController,
-        onChanged: onChangedInternal,
-        placeholder: currentPlaceholder ?? widget.placeholder ?? null,
-        placeholderStyle: defaultHintStyle(null, null),
-      ),
+    return PlatformTextField(
+      obscureText: widget.isPassword == false || widget.isPassword == null
+          ? false
+          : true,
+      style:
+          defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+      textAlign: TextAlign.start,
+      enabled: widget.enabled ?? true,
+      controller: _textEditController,
+      onChanged: onChangedInternal,
+      placeholder: currentPlaceholder ?? widget.placeholder ?? null,
+      placeholderStyle: defaultHintStyle(null, null),
     );
   }
 
