@@ -43,6 +43,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final double spaceBetweenTitle;
   final String placeholder;
   final String validationMessage;
+  final TextCapitalization labelTextCapitalization;
   final Function onChanged;
 
   final List<ListItemType> listItems;
@@ -52,6 +53,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   FieldAndLabel(
       {Key key,
       this.labelValue,
+      this.labelTextCapitalization = TextCapitalization.characters,
       this.labelTextStyle,
       this.textFieldTextStyle,
       this.fieldValue,
@@ -196,6 +198,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     defaultLabelStyle(
                         widget.labelTextColor, widget.labelBackgroundColor),
                 textAlign: TextAlign.start,
+                textCapitalization: this.widget.labelTextCapitalization ??
+                    TextCapitalization.characters,
               ),
               this.widget.isMandatory
                   ? SizedBox(
