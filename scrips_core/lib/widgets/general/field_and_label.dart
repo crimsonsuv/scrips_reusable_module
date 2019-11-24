@@ -199,7 +199,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               ),
               this.widget.isMandatory
                   ? SizedBox(
-                      width: 10,
+                      width: _textViewAndLabelPadding / 2,
                     )
                   : Container(),
               this.widget.isMandatory
@@ -270,11 +270,12 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildDropDownList(BuildContext context) {
     return Container(
-      height: 42.0,
-      //
+//      height: 42.0,
+//      //
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(color: widget.fieldBackgroundColor),
+        border: Border.all(
+            color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
       child: DropdownButtonFormField(
@@ -284,7 +285,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         value: currentFieldValue ?? widget.fieldValue,
         items: widget.listItems ?? [],
         icon: Image(image: AssetImage("assets/DropDownIcon.png")),
-        iconSize: 36.0,
+//        iconSize: 36.0,
         onChanged: onChangedInternal,
         style: defaultFieldStyle(
             widget.fieldTextColor, widget.fieldBackgroundColor),
