@@ -32,6 +32,7 @@ dependencies:
   scoped_model:
   flutter_platform_widgets:
     path: ../third-party/flutter_platform_widgets
+  google_maps_flutter: ^0.5.21+12
 
 
 dev_dependencies:
