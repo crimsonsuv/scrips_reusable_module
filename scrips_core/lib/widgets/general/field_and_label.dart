@@ -5,12 +5,6 @@ import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
-//import 'package:zefyr/zefyr.dart';
-
-final BoxDecoration _textViewAndLabelBorder =
-    null; // BoxDecoration(border: Border.all(color: Colors.grey));
-final double _textViewAndLabelMargin = 8.0;
-final double _textViewAndLabelPadding = 8.0;
 
 enum FieldType {
   TextField,
@@ -36,7 +30,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Axis axis;
   final BoxDecoration boxDecoration;
   final EdgeInsets padding;
-  final double margin;
+  final EdgeInsets margin;
   final bool isPassword;
   final bool isMandatory;
   final bool wrapWithRow;
@@ -158,26 +152,17 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   Widget buildContents(BuildContext context) {
     return Expanded(
       child: Container(
-        //      width: widget.width != null && widget.width > 0 ? widget.width : MediaQuery.of(context).size.width,
+        padding: widget.padding ?? UIHelper.defaultFieldAndLabelPadding,
+        margin: widget.margin ?? UIHelper.defaultFieldAndLabelMargin,
+        decoration: widget.boxDecoration ?? UIHelper.defaultFieldAndLabelBorder,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              padding: widget.padding ?? UIHelper.defaultFieldAndLabelPadding,
-              margin: EdgeInsets.all(widget.margin ?? _textViewAndLabelMargin),
-              decoration: widget.boxDecoration ?? _textViewAndLabelBorder,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    buildLabel(context),
-                    buildField(context),
-                    buildValidationMessage(context),
-                  ]),
-            ),
-          ],
-        ),
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildLabel(context),
+              buildField(context),
+              buildValidationMessage(context),
+            ]),
       ),
     );
   }
@@ -203,7 +188,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               ),
               this.widget.isMandatory
                   ? SizedBox(
-                      width: _textViewAndLabelPadding / 2,
+                      width: UIHelper.defaultFieldAndLabelPaddingSize / 2,
                     )
                   : Container(),
               this.widget.isMandatory
@@ -222,7 +207,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
             ]),
           ),
           SizedBox(
-            height: _textViewAndLabelPadding / 2,
+            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
           )
         ],
       );
@@ -268,7 +253,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
-            height: _textViewAndLabelPadding / 2,
+            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
           ),
           Container(
               decoration: UIHelper.defaultLabelBoxDecoration(
@@ -278,7 +263,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 style: defaultValidationStyle(null, null),
               )),
           SizedBox(
-            height: _textViewAndLabelPadding / 2,
+            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
           )
         ],
       );

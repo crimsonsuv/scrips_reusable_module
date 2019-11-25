@@ -29,16 +29,25 @@ class UIHelper {
   static EdgeInsets defaultPadding = EdgeInsets.all(defaultPaddingSize);
   static EdgeInsets defaultPaddingLarge =
       EdgeInsets.all(defaultPaddingLargeSize);
-  static EdgeInsets defaultFieldAndLabelPadding =
-      EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0);
-  static EdgeInsets defaultFieldInternalPadding =
-      EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0);
   static EdgeInsets defaultPaddingVeryLarge =
       EdgeInsets.all(defaultPaddingVeryLargeSize);
   static EdgeInsets defaultMargin = EdgeInsets.all(defaultMarginSize);
   static EdgeInsets defaultButtonPadding =
       EdgeInsets.all(defaultButtonPaddingSize);
 
+  // for FieldAndLabel
+  static double defaultFieldAndLabelPaddingSize = 8.0;
+  static EdgeInsets defaultFieldAndLabelPadding = EdgeInsets.symmetric(
+      vertical: defaultFieldAndLabelPaddingSize,
+      horizontal: defaultFieldAndLabelPaddingSize);
+  static EdgeInsets defaultFieldAndLabelMargin = EdgeInsets.symmetric(
+      vertical: defaultFieldAndLabelPaddingSize,
+      horizontal: defaultFieldAndLabelPaddingSize);
+  static BoxDecoration defaultFieldAndLabelBorder;
+  static EdgeInsets defaultFieldInternalPadding = EdgeInsets.symmetric(
+      vertical: 0.0, horizontal: defaultFieldAndLabelPaddingSize);
+
+  //
   static BoxDecoration defaultButtonBorder =
       BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
 
