@@ -16,7 +16,8 @@ class LocalStorageService implements StorageService {
 ////
   @override
   Future<User> getLoggedInUser() async {
-    debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser called'); // Get all the current posts
+    debugPrint(
+        'SCRIPSLOG StorageService.dart::getLoggedInUser called'); // Get all the current posts
     User user;
     Map<String, dynamic> data = _scripsStorage.getItem(_loggedInUserKey);
     try {
@@ -26,13 +27,15 @@ class LocalStorageService implements StorageService {
         user = User.fromJson(data);
         return user;
       } else {
-        user = User();
+        user = User.defaults();
       }
     } catch (ex) {
-      debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser exception ${ex?.toString()}');
-      user = User();
+      debugPrint(
+          'SCRIPSLOG StorageService.dart::getLoggedInUser exception ${ex?.toString()}');
+      user = User.defaults();
     } finally {
-      debugPrint('SCRIPSLOG StorageService.dart::getLoggedInUser returning userId: ${user?.userId?.value}');
+      debugPrint(
+          'SCRIPSLOG StorageService.dart::getLoggedInUser returning userId: ${user?.userId?.value}');
     }
     return user;
   }
@@ -42,7 +45,7 @@ class LocalStorageService implements StorageService {
     try {
       // check if the one we're liking is in the collection
       if (user == null) {
-        user = User();
+        user = User.defaults();
       }
       // convert to a user json
       Map<String, dynamic> data = user.toJson();

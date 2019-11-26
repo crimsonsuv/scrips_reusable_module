@@ -23,7 +23,7 @@ class GlobalModel extends BaseModel {
   AuthenticationService _authService;
 
   GlobalModel(this.context, {@required User user})
-      : data = Global(user: user),
+      : data = Global(user: user ?? User.defaults()),
         this._api = Provider.of<Api>(context),
         this._storageService = Provider.of<StorageService>(context),
         this._authService = Provider.of<AuthenticationService>(context),
@@ -105,7 +105,7 @@ class GlobalModel extends BaseModel {
         return true;
       } else {
         this.data.loginMessage = PropertyInfo(loginResponse.message);
-        await this.setUser(User());
+        await this.setUser(User.defaults());
         return false;
       }
     } finally {

@@ -9,16 +9,42 @@ import 'api.dart';
 
 class FakeApi implements Api {
   @override
-  Future<User> getUser(BuildContext context, {String userName, String password}) async {
+  Future<User> getUser(BuildContext context,
+      {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
-    return User(userId: PropertyInfo(userName), userName: PropertyInfo(userName),  fullName: PropertyInfo('user $userName'), phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'), gender: PropertyInfo( 'M'));
+    return User(
+      userId: PropertyInfo(userName),
+      userName: PropertyInfo(userName),
+      fullName: PropertyInfo('user $userName'),
+      phoneNumber:
+          PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+      gender: PropertyInfo('M'),
+      lastLoggedIn: PropertyInfo(null),
+      accessToken: PropertyInfo('xyashgdcfbdb'),
+      email: PropertyInfo('2@a.com'),
+      password: PropertyInfo(password),
+    );
   }
 
   @override
-  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
+  Future<LoginResponse> login(BuildContext context,
+      {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
 
-    return LoginResponse(user: User(userId: PropertyInfo(userName), fullName: PropertyInfo(userName)));
+    return LoginResponse(
+      user: User(
+        userId: PropertyInfo(userName),
+        userName: PropertyInfo(userName),
+        fullName: PropertyInfo('user $userName'),
+        phoneNumber:
+            PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+        gender: PropertyInfo('M'),
+        lastLoggedIn: PropertyInfo(null),
+        accessToken: PropertyInfo('xyashgdcfbdb'),
+        email: PropertyInfo('2@a.com'),
+        password: PropertyInfo(password),
+      ),
+    );
   }
 
   @override

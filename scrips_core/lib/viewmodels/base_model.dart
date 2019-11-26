@@ -9,4 +9,6 @@ class BaseModel extends ChangeNotifier {
     _busy = value;
     notifyListeners();
   }
+
+  dynamic init() {}
 }

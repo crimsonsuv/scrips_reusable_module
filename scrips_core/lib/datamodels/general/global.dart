@@ -15,7 +15,7 @@ class Global {
   PropertyInfo<String> localeCode = PropertyInfo(PM_DEFAULT_LOCALE_CODE);
   PropertyInfo<String> localeCountry = PropertyInfo(PM_DEFAULT_LOCALE_COUNTRY);
   PropertyInfo<Exception> lastException = PropertyInfo(null);
-  User user = User();
+  User user = User.defaults();
   MainMenu mainMenu = MainMenu();
 
   Global(
