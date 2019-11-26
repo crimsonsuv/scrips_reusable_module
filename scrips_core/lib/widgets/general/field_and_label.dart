@@ -5,7 +5,7 @@ import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
-import 'package:scrips_core/ui_helpers/app_assets.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 
 enum FieldType {
   TextField,
@@ -280,7 +280,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       isExpanded: true,
       value: currentFieldValue ?? widget.fieldValue,
       items: widget.listItems ?? [],
-      icon: PmImages.dropDownIcon,
+      icon: Images.dropDownIcon,
       iconSize: 36.0,
       onChanged: onChangedInternal,
       style:
