@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:scrips_core/general/property_info.dart';
 
 //part 'user.g.dart';

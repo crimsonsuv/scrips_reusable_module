@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
-//import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
 
 import '../base_model.dart';

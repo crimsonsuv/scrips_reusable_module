@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/menu/menu_item.dart';
-import 'package:flutter/material.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
+
 import '../../datamodels/pratice_management/pm_main_view.dart';
 import '../base_model.dart';
 
@@ -13,9 +14,12 @@ class PmMainViewModel extends BaseModel {
   GlobalModel globalModel;
 //  Api _api;
 
-  PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
+  PmMainViewModel(this.context,
+      {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
       : data = PmMainView(
-            mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
+            mainMenuPath: mainMenuPath,
+            mainSubMenuPath: mainSubMenuPath,
+            mainSubMenuVisible: mainSubMenuVisible),
 //        this._api = Provider.of(context),
         this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
@@ -24,16 +28,22 @@ class PmMainViewModel extends BaseModel {
   bool init() {
     debugPrint('SCRIPSLOG pmMainModel.dart::init Called');
     // clone main me u from global
-    this.data.mainMenu = MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
-    this.selectMenuItem(mainMenuPath: this.data.mainMenuPath, mainSubMenuPath: this.data.mainSubMenuPath);
+    this.data.mainMenu =
+        MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
+    this.selectMenuItem(
+        mainMenuPath: this.data.mainMenuPath,
+        mainSubMenuPath: this.data.mainSubMenuPath);
     return true;
   }
 
   void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
     debugPrint('SCRIPSLOG globalmodel.dart::selectMenuItem Called');
-    this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
-    this.data.mainMenu.currentItem?.subMenu?.currentItem =
-        this.getMenuItemForId(items: data.mainMenu?.currentItem?.subMenu?.items, id: mainSubMenuPath);
+    this.data.mainMenu.currentItem = this
+        .getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
+    this.data.mainMenu.currentItem?.subMenu?.currentItem = this
+        .getMenuItemForId(
+            items: data.mainMenu?.currentItem?.subMenu?.items,
+            id: mainSubMenuPath);
   }
 
   MenuItem getMenuItemForId({List<MenuItem> items, String id}) {
@@ -58,7 +68,8 @@ class PmMainViewModel extends BaseModel {
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
     this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
-    this.data.statusText = this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
+    this.data.statusText =
+        this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
     setBusy(false);
   }
 }
