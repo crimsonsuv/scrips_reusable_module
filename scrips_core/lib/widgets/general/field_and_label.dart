@@ -239,7 +239,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       padding: UIHelper.defaultFieldInternalPadding,
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
-        border: Border.all(color: widget.fieldBackgroundColor),
+        border: Border.all(
+            color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
       child: field,
