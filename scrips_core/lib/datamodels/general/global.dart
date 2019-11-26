@@ -11,13 +11,18 @@ class Global {
   PropertyInfo<bool> showDevicePreview = PropertyInfo(false);
   PropertyInfo<String> statusText = PropertyInfo('');
   PropertyInfo<String> loginMessage = PropertyInfo('');
+  PropertyInfo<String> loginError = PropertyInfo('');
   PropertyInfo<String> localeCode = PropertyInfo(PM_DEFAULT_LOCALE_CODE);
   PropertyInfo<String> localeCountry = PropertyInfo(PM_DEFAULT_LOCALE_COUNTRY);
   PropertyInfo<Exception> lastException = PropertyInfo(null);
   User user = User();
   MainMenu mainMenu = MainMenu();
 
-  Global({@required this.user, this.showOverlappedSubMenu, this.showDevicePreview, this.animateSubMenu});
+  Global(
+      {@required this.user,
+      this.showOverlappedSubMenu,
+      this.showDevicePreview,
+      this.animateSubMenu});
 
   Global.fromJson(Map<String, dynamic> json) {
     //todo: fromJson

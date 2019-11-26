@@ -35,12 +35,14 @@ class GlobalModel extends BaseModel {
     bool ready = await _storageService.ready();
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
-      debugPrint('SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
+      debugPrint(
+          'SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
       this.setUser(savedUser);
       ready = true;
       return true;
     } else {
-      debugPrint('SCRIPSLOG   -- globalmodel.dart::init setting timeout in some ms');
+      debugPrint(
+          'SCRIPSLOG   -- globalmodel.dart::init setting timeout in some ms');
       //
       Future.delayed(Duration(milliseconds: 500), init);
       return false;
@@ -72,7 +74,10 @@ class GlobalModel extends BaseModel {
   }
 
   // ensure we don't call setBusy during build of child!!! setState() or markNeedsBuild() called during build.
-  void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
+  void setVars(
+      {bool showOverlappedSubMenu,
+      bool animateSubMenu,
+      bool callSetBusy = false}) {
     debugPrint('SCRIPSLOG globalmodel.dart::setVars Called');
     this.data.showOverlappedSubMenu = PropertyInfo(showOverlappedSubMenu);
     this.data.animateSubMenu = PropertyInfo(animateSubMenu);
@@ -92,19 +97,32 @@ class GlobalModel extends BaseModel {
     setBusy(true);
     try {
       // whether to show or not
-      LoginResponse loginResponse = await _authService.login(this.context, userName: userName, password: password);
+      LoginResponse loginResponse = await _authService.login(this.context,
+          userName: userName, password: password);
       if (loginResponse.success) {
         this.data.loginMessage = PropertyInfo(loginResponse.message);
         await this.setUser(loginResponse.user);
         return true;
       } else {
-        this.data.loginMessage =PropertyInfo(loginResponse.message);
+        this.data.loginMessage = PropertyInfo(loginResponse.message);
         await this.setUser(User());
         return false;
       }
     } finally {
       setBusy(false);
       debugPrint('SCRIPSLOG globalmodel.dart::login Finished');
+    }
+  }
+
+  void setLoginError(String value) {
+    debugPrint('SCRIPSLOG globalmodel.dart::setLoginError Called');
+    setBusy(true);
+    try {
+      // whether to show or not
+      this.data.loginError.value = value;
+    } finally {
+      setBusy(false);
+      debugPrint('SCRIPSLOG globalmodel.dart::setLoginError Finished');
     }
   }
 
@@ -119,7 +137,9 @@ class GlobalModel extends BaseModel {
     setBusy(true);
     // whether to show or not
     this.data.showOverlappedSubMenu = PropertyInfo(value);
-    this.data.statusText = (this.data.showOverlappedSubMenu?.value ?? false) ? PropertyInfo('Showing Overlapped Menu') : PropertyInfo('Showing Fixed Menu');
+    this.data.statusText = (this.data.showOverlappedSubMenu?.value ?? false)
+        ? PropertyInfo('Showing Overlapped Menu')
+        : PropertyInfo('Showing Fixed Menu');
 
     setBusy(false);
   }
@@ -129,7 +149,9 @@ class GlobalModel extends BaseModel {
     setBusy(true);
     // whether to show or not
     this.data.showDevicePreview = PropertyInfo(value);
-    this.data.statusText = (this.data?.showDevicePreview?.value ?? false)? PropertyInfo('Showing Device Preview') : PropertyInfo('Not Showing Device Preview');
+    this.data.statusText = (this.data?.showDevicePreview?.value ?? false)
+        ? PropertyInfo('Showing Device Preview')
+        : PropertyInfo('Not Showing Device Preview');
 
     setBusy(false);
   }
@@ -139,7 +161,9 @@ class GlobalModel extends BaseModel {
     setBusy(true);
     // whether to show or not
     this.data.lastException = PropertyInfo(exception);
-    this.data.statusText = this.data?.lastException?.value != null ? PropertyInfo(this.data.lastException.toString()) : PropertyInfo('');
+    this.data.statusText = this.data?.lastException?.value != null
+        ? PropertyInfo(this.data.lastException.toString())
+        : PropertyInfo('');
 
     setBusy(false);
   }
@@ -149,7 +173,9 @@ class GlobalModel extends BaseModel {
     setBusy(true);
     // whether to show or not
     this.data.animateSubMenu = PropertyInfo(value);
-    this.data.statusText = (this.data?.animateSubMenu?.value ?? false) ? PropertyInfo('Showing Animated Menu') : PropertyInfo('Showing Non Animated Menu');
+    this.data.statusText = (this.data?.animateSubMenu?.value ?? false)
+        ? PropertyInfo('Showing Animated Menu')
+        : PropertyInfo('Showing Non Animated Menu');
 
     setBusy(false);
   }

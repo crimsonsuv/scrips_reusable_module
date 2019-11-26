@@ -11,10 +11,21 @@ class User {
   PropertyInfo<String> gender;
   PropertyInfo<String> phoneNumber;
   PropertyInfo<String> email;
+  PropertyInfo<String> password;
   PropertyInfo<String> accessToken;
   PropertyInfo<DateTime> lastLoggedIn;
 
-  User({this.userId, this.fullName, this.userName, this.gender, this.phoneNumber, this.email, this.accessToken, this.lastLoggedIn});
+  User({
+    this.userId,
+    this.fullName,
+    this.userName,
+    this.gender,
+    this.phoneNumber,
+    this.email,
+    this.accessToken,
+    this.lastLoggedIn,
+    this.password,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
