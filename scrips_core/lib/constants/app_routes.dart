@@ -24,13 +24,12 @@ class RoutePaths {
   static const String PmForgotPassword = 'pm_forgot_password';
   static const String PmEnterNewPassword = 'pm_enter_new_password';
   static const String PmPasswordSent = 'pm_password_sent';
+  static const String LoginView = 'login_view';
 
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
-  static const String PracticeOnBoardingWizardSubMenu1 =
-      '/practice-onboard-wizard-1';
-  static const String PracticeOnBoardingWizardSubMenu2 =
-      '/practice-onboard-wizard-2';
+  static const String PracticeOnBoardingWizardSubMenu1 = '/practice-onboard-wizard-1';
+  static const String PracticeOnBoardingWizardSubMenu2 = '/practice-onboard-wizard-2';
   static const String SettingsSubMenu1 = '/settings-1';
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
