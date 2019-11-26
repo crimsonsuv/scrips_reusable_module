@@ -51,7 +51,7 @@ class GlobalModel extends BaseModel {
 
   Future<bool> setUser(User user) async {
     this.data.user = user;
-    await this.loadMainMenuItems(userId: user?.userId?.value);
+    this.loadMainMenuItems(userId: user?.userId?.value);
     _storageService.setLoggedInUser(this.data?.user);
     return true;
   }
@@ -59,6 +59,7 @@ class GlobalModel extends BaseModel {
   // scrips: sumeet: we keep all menu items for the user here and clone them in pmMainViewModel for each view based on it  so they are loaded only once on user login
   Future<bool> loadMainMenuItems({String userId}) async {
     debugPrint('SCRIPSLOG globalmodel.dart::loading menu items for $userId');
+    setBusy(true);
     if (userId == null || userId == '') {
       this.data.mainMenu = MainMenu();
     } else {
@@ -70,6 +71,8 @@ class GlobalModel extends BaseModel {
 //        }
 //      }
     }
+    setBusy(false);
+    debugPrint('SCRIPSLOG globalmodel.dart::loaded menu items for $userId');
     return true;
   }
 
