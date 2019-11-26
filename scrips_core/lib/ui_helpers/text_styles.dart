@@ -5,7 +5,7 @@ import 'app_colors.dart';
 import 'app_sizes.dart';
 
 String defaultFontFamily = "Roboto";
-Color defaultBackgroundColor = HexColor.fromHex("#FFE5E5E5");
+//Color defaultBackgroundColor = mainContainedAreaBackgroundColor;
 
 TextStyle defaultHeaderStyle(color, backgroundColor) => TextStyle(
       fontSize: headerTextSize,

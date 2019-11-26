@@ -4,19 +4,15 @@ const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
 // mainMenuBackground
-const Color defaultMainMenuBackgroundColor =
-    Color(0xFF1F3888); //Color(0xFF381F88); // #381F88
-
+const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888);
 const Color defaultMainSubMenuBackgroundColor = defaultMainMenuBackgroundColor;
 const Color defaultMainAppBarBackgroundColor = defaultMainMenuBackgroundColor;
-const Color defaultMainStatusBarBackgroundColor =
-    defaultMainMenuBackgroundColor;
-const Color defaultMainContainedAreaBackgroundColor = Color(0xFFE5E5E5);
+const Color defaultMainStatusBarBackgroundColor = defaultMainMenuBackgroundColor;
+const Color mainContainedAreaBackgroundColor = Color(0xFFF4F7F8);
 final Color defaultPanelBackgroundColor = Colors.white;
-final Color defaultMainBackgroundColor =
-    defaultMainContainedAreaBackgroundColor;
+final Color defaultMainBackgroundColor = mainContainedAreaBackgroundColor;
 
-//
+// Content
 const Color defaultHeaderBackgroundColor = defaultMainAppBarBackgroundColor;
 const Color defaultSubHeaderBackgroundColor = defaultMainAppBarBackgroundColor;
 const Color defaultLabelBackgroundColor = Colors.transparent;

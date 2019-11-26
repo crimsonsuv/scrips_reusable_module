@@ -18,10 +18,10 @@ class Panel extends StatelessWidget {
     return Container(
       padding: UIHelper.defaultPanelPadding,
       margin: UIHelper.defaultPanelMargin,
-      decoration: UIHelper.defaultPanelBorder,
+//      decoration: UIHelper.defaultPanelBorder,
       child: Column(children: <Widget>[
         Container(
-          decoration: BoxDecoration(color: this.panelBackgroundColor ?? defaultPanelBackgroundColor),
+//          decoration: BoxDecoration(color: this.panelBackgroundColor ?? defaultPanelBackgroundColor),
           child: Column(
             children: this.children,
           ),
