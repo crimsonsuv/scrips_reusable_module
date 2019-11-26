@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
+import 'package:scrips_core/ui_helpers/text_styles.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 import 'app_sizes.dart';
 
@@ -66,6 +69,33 @@ class UIHelper {
   );
 
   static EdgeInsets defaultPanelMargin = EdgeInsets.all(defaultPanelMarginSize);
+
+  static Widget buildValidationMessage(BuildContext context,
+      {String validationMessage}) {
+    if (!isBlank(validationMessage))
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
+          ),
+          Container(
+              decoration: UIHelper.defaultLabelBoxDecoration(
+                  defaultValidationBackgroundColor),
+              child: PlatformText(
+                validationMessage,
+                style: defaultValidationStyle(null, null),
+              )),
+          SizedBox(
+            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
+          )
+        ],
+      );
+    else {
+      return Container();
+    }
+  }
 }
 
 extension HexColor on Color {

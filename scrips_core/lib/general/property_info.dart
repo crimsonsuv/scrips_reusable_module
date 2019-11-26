@@ -10,7 +10,7 @@ class PropertyInfo<T> {
   }
 
   set value(T value) {
-    this.value = value;
+    _value = value;
     if (onValueSet != null) {
       onValueSet(value);
     }
@@ -21,9 +21,9 @@ class PropertyInfo<T> {
   }
 
   set validationError(String validationError) {
-    this.validationError = validationError;
-    if (onValueSet != null) {
-      onValueSet(validationError);
+    _validationError = validationError;
+    if (onValidationSet != null) {
+      onValidationSet(validationError);
     }
   }
 

@@ -249,29 +249,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildValidationMessage(BuildContext context) {
-    if (currentValidationMessage != null || widget.validationMessage != null)
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
-          ),
-          Container(
-              decoration: UIHelper.defaultLabelBoxDecoration(
-                  widget.fieldBackgroundColor),
-              child: PlatformText(
-                currentValidationMessage ?? widget.validationMessage ?? null,
-                style: defaultValidationStyle(null, null),
-              )),
-          SizedBox(
-            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
-          )
-        ],
-      );
-    else {
-      return Container();
-    }
+    return UIHelper.buildValidationMessage(context,
+        validationMessage:
+            currentValidationMessage ?? widget.validationMessage ?? null);
   }
 
   Widget buildDropDownList(BuildContext context) {
