@@ -5,8 +5,7 @@ class Fonts {
 }
 
 class Images {
-  static Image back =
-      Image(image: AssetImage("assets/pratice-management/back.png"));
+  static Image back = Image(image: AssetImage("assets/back.png"));
   static Image dropDownIcon =
-      Image(image: AssetImage("assets/pratice-management/drop_down_icon.png"));
+      Image(image: AssetImage("assets/drop_down_icon.png"));
 }
