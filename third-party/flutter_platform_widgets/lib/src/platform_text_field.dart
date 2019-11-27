@@ -3,23 +3,16 @@
  * Copyright (c) 2018 Lance Johnstone. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
-import 'package:scrips_core/ui_helpers/text_styles.dart';
 
-import 'package:flutter/cupertino.dart'
-    show CupertinoTextField, CupertinoColors, OverlayVisibilityMode;
+import 'package:flutter/cupertino.dart' show CupertinoTextField, CupertinoColors, OverlayVisibilityMode;
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart'
-    show InputDecoration, TextField, InputCounterWidgetBuilder;
+import 'package:flutter/material.dart' show InputDecoration, TextField, InputCounterWidgetBuilder;
 import 'package:flutter/services.dart'
-    show
-        Brightness,
-        TextInputFormatter,
-        TextInputType,
-        TextInputAction,
-        TextCapitalization;
+    show Brightness, TextInputFormatter, TextInputType, TextInputAction, TextCapitalization;
 import 'package:flutter/widgets.dart';
 
 import 'widget_base.dart';
+import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 const TextStyle _kDefaultTextStyle = TextStyle(
   fontFamily: '.SF Pro Text',
@@ -224,8 +217,7 @@ class CupertinoTextFieldData {
   final GestureTapCallback onTap;
 }
 
-class PlatformTextField
-    extends PlatformWidgetBase<CupertinoTextField, TextField> {
+class PlatformTextField extends PlatformWidgetBase<CupertinoTextField, TextField> {
   final Key widgetKey;
 
   final PlatformBuilder<MaterialTextFieldData> android;
@@ -333,8 +325,7 @@ class PlatformTextField
       this.ios,
       this.placeholder,
       this.placeholderStyle})
-      : keyboardType = keyboardType ??
-            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+      : keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
         super(key: key);
 
   @override
@@ -379,20 +370,16 @@ class PlatformTextField
       textCapitalization: data?.textCapitalization ?? textCapitalization,
       textInputAction: data?.textInputAction ?? textInputAction,
       //sumeet
-      decoration:
-          decoration ?? data?.decoration ?? _kDefaultRoundedBorderDecoration,
+      decoration: decoration ?? data?.decoration ?? _kDefaultRoundedBorderDecoration,
       // sumeet END
       textDirection: data?.textDirection,
       buildCounter: data?.buildCounter,
-      dragStartBehavior: data?.dragStartBehavior ??
-          dragStartBehavior ??
-          DragStartBehavior.start,
+      dragStartBehavior: data?.dragStartBehavior ?? dragStartBehavior ?? DragStartBehavior.start,
       expands: data?.expands ?? expands ?? false,
       minLines: data?.minLines ?? minLines,
       scrollPhysics: data?.scrollPhysics ?? scrollPhysics,
       strutStyle: data?.strutStyle ?? strutStyle,
-      enableInteractiveSelection:
-          data?.enableInteractiveSelection ?? enableInteractiveSelection,
+      enableInteractiveSelection: data?.enableInteractiveSelection ?? enableInteractiveSelection,
       scrollController: data?.scrollController ?? scrollController,
       onTap: data?.onTap ?? onTap,
       readOnly: data?.readOnly ?? readOnly ?? false,
@@ -414,8 +401,7 @@ class PlatformTextField
       autocorrect: data?.autocorrect ?? autocorrect,
       autofocus: data?.autofocus ?? autofocus,
       controller: data?.controller ?? controller,
-      cursorColor:
-          data?.cursorColor ?? cursorColor ?? CupertinoColors.activeBlue,
+      cursorColor: data?.cursorColor ?? cursorColor ?? CupertinoColors.activeBlue,
       cursorRadius: data?.cursorRadius ?? cursorRadius,
       cursorWidth: data?.cursorWidth ?? cursorWidth,
       enabled: data?.enabled ?? enabled,
@@ -443,15 +429,12 @@ class PlatformTextField
       prefixMode: data?.prefixMode ?? OverlayVisibilityMode.always,
       suffix: data?.suffix,
       suffixMode: data?.suffixMode ?? OverlayVisibilityMode.always,
-      dragStartBehavior: data?.dragStartBehavior ??
-          dragStartBehavior ??
-          DragStartBehavior.start,
+      dragStartBehavior: data?.dragStartBehavior ?? dragStartBehavior ?? DragStartBehavior.start,
       expands: data?.expands ?? expands ?? false,
       minLines: data?.minLines ?? minLines,
       scrollPhysics: data?.scrollPhysics ?? scrollPhysics,
       strutStyle: data?.strutStyle ?? strutStyle,
-      enableInteractiveSelection:
-          data?.enableInteractiveSelection ?? enableInteractiveSelection,
+      enableInteractiveSelection: data?.enableInteractiveSelection ?? enableInteractiveSelection,
       scrollController: data?.scrollController ?? scrollController,
       onTap: data?.onTap ?? onTap,
       readOnly: data?.readOnly ?? readOnly ?? false,

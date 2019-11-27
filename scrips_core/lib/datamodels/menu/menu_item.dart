@@ -18,17 +18,10 @@ class MenuItem {
   bool enabled;
   String navigationRoute;
 
-  MenuItem(
-      {this.id,
-      this.iconName,
-      this.label,
-      this.enabled,
-      this.semanticLabel,
-      this.navigationRoute})
+  MenuItem({this.id, this.iconName, this.label, this.enabled, this.semanticLabel, this.navigationRoute})
       : this.icon = _iconFromName(iconName);
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) =>
-      _$MenuItemFromJson(json);
+  factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$MenuItemToJson(this);
 
