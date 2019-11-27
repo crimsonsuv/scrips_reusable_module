@@ -1,3 +1,4 @@
+import 'package:scrips_core/utils/utils.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ class LocalStorageService implements StorageService {
 ////
   @override
   Future<User> getLoggedInUser() async {
-    debugPrint(
-        'SCRIPSLOG StorageService.dart::getLoggedInUser called'); // Get all the current posts
+    debugLog(
+        'StorageService.dart::getLoggedInUser called'); // Get all the current posts
     User user;
     Map<String, dynamic> data = _scripsStorage.getItem(_loggedInUserKey);
     try {
@@ -30,12 +31,12 @@ class LocalStorageService implements StorageService {
         user = User.defaults();
       }
     } catch (ex) {
-      debugPrint(
-          'SCRIPSLOG StorageService.dart::getLoggedInUser exception ${ex?.toString()}');
+      debugLog(
+          'StorageService.dart::getLoggedInUser exception ${ex?.toString()}');
       user = User.defaults();
     } finally {
-      debugPrint(
-          'SCRIPSLOG StorageService.dart::getLoggedInUser returning userId: ${user?.userId?.value}');
+      debugLog(
+          'StorageService.dart::getLoggedInUser returning userId: ${user?.userId?.value}');
     }
     return user;
   }

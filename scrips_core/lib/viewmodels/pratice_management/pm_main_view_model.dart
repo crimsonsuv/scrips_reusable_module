@@ -1,3 +1,4 @@
+import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class PmMainViewModel extends BaseModel {
 
   // scrips: sumeet: we keep all menu items for the user in globalmodeland clone them here so they are loaded only once on user login
   bool init() {
-    debugPrint('SCRIPSLOG pmMainModel.dart::init Called');
+    debugLog('pmMainModel.dart::init Called');
     // clone main me u from global
     this.data.mainMenu =
         MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
@@ -37,7 +38,7 @@ class PmMainViewModel extends BaseModel {
   }
 
   void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
-    debugPrint('SCRIPSLOG globalmodel.dart::selectMenuItem Called');
+    debugLog('globalmodel.dart::selectMenuItem Called');
     this.data.mainMenu.currentItem = this
         .getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
     this.data.mainMenu.currentItem?.subMenu?.currentItem = this
@@ -62,15 +63,15 @@ class PmMainViewModel extends BaseModel {
   }
 
   void toggleSubMenuVisible() {
-    debugPrint('SCRIPSLOG pmMainModel.dart::toggleSubMenuVisible Called');
-    setBusy(true);
+    debugLog('pmMainModel.dart::toggleSubMenuVisible Called');
+    setBusy(true, calledFrom: 'toggleSubMenuVisible');
     // whether to show or not
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
     this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
     this.data.statusText =
         this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
-    setBusy(false);
+    setBusy(false, calledFrom: 'toggleSubMenuVisible');
   }
 }
 

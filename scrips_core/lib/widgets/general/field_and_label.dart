@@ -1,3 +1,4 @@
+import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -118,7 +119,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   onChangedInternal(value) {
-    debugPrint('onChangedInternal $value');
+    debugLog('onChangedInternal $value');
     setState(() {
       currentFieldValue = value;
       if (widget.fieldProperty != null) {
@@ -132,7 +133,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   setValidationMessage(value) {
-//    debugPrint(value);
+//    debugLog(value);
     setState(() {
       currentValidationMessage = value;
     });

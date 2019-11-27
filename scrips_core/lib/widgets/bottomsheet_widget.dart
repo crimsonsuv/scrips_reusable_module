@@ -1,3 +1,4 @@
+import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -23,7 +24,10 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
-                boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey[300], spreadRadius: 5)]),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 10, color: Colors.grey[300], spreadRadius: 5)
+                ]),
             child: Column(
               children: <Widget>[DecoratedTextField(), SheetButton()],
             ),
@@ -47,7 +51,8 @@ class DecoratedTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
-        decoration: InputDecoration.collapsed(hintText: 'Enter your reference number'),
+        decoration:
+            InputDecoration.collapsed(hintText: 'Enter your reference number'),
       ),
     );
   }
@@ -125,7 +130,7 @@ class _BottomSheetButtonState extends State<BottomSheetButton> {
                 builder: (context) => BottomSheetWidget(),
               );
 
-              debugPrint(sheetController);
+              debugLog(sheetController);
               //              sheetController.closed.then((value) {
               _showButton(true);
               //              });
