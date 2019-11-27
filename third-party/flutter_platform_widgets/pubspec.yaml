@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  scrips_core:
+    path: ../../scrips_core
 
 
 dev_dependencies:
