@@ -53,7 +53,7 @@ class MenuItem {
 //      case 'settings_backup_restore':
 //        return Icons.settings_backup_restore;
       default:
-        Widget i = Image.asset('assets/blank.png');
+        Widget i = Image.asset('assets/dashboard.png');
         return i;
     }
   }
