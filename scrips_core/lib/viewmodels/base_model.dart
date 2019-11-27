@@ -8,7 +8,7 @@ class BaseModel extends ChangeNotifier {
 
   void setBusy(bool value, {String calledFrom}) {
     debugLog(
-        'SCRIPSLOG   -- BaseModel.dart::setBusy isBusy $value ${!isBlank(calledFrom) ? ' ' + calledFrom : ''}');
+        '-- BaseModel.dart::setBusy isBusy $value ${!isBlank(calledFrom) ? ' ' + calledFrom : ''}');
     _busy = value;
     notifyListeners();
   }

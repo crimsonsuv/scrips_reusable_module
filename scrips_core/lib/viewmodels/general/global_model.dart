@@ -37,13 +37,12 @@ class GlobalModel extends BaseModel {
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
       debugLog(
-          'SCRIPSLOG   -- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
+          '-- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
       this.setUser(savedUser);
       ready = true;
       return true;
     } else {
-      debugLog(
-          'SCRIPSLOG   -- globalmodel.dart::init setting timeout in some ms');
+      debugLog('-- globalmodel.dart::init setting timeout in some ms');
       //
       Future.delayed(Duration(milliseconds: 500), init);
       return false;
@@ -73,7 +72,8 @@ class GlobalModel extends BaseModel {
 //      }
     }
     setBusy(false, calledFrom: 'loadMainMenuItems');
-    debugLog('globalmodel.dart::loaded menu items for $userId');
+    debugLog(
+        'globalmodel.dart::loaded ${this.data?.mainMenu?.items?.length} menu items for $userId');
     return true;
   }
 
