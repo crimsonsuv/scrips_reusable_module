@@ -1,9 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_core/general/property_info.dart';
 
 //part 'user.g.dart';
 
-//@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true)
 class User {
   PropertyInfo<String> userId;
   PropertyInfo<String> fullName;

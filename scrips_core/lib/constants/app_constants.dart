@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/datamodels/locale/supported_locale.dart';
+import 'package:scrips_core/general/property_info.dart';
 
 enum AppType {
   PM,
@@ -45,12 +46,10 @@ final List<SupportedLocale> supportedLocales = [
   SupportedLocale(label: 'Arabic', localeCode: 'ar', localeCountry: ''),
 ];
 
-
-String getCurrentAppName(BuildContext context, dynamic sInstance, AppType appType)
-{
-  if (sInstance != null ) {
-    switch (currentAppType)
-    {
+String getCurrentAppName(
+    BuildContext context, dynamic sInstance, AppType appType) {
+  if (sInstance != null) {
+    switch (currentAppType) {
       case AppType.PM:
         return sInstance.pm_app_name;
         break;
@@ -66,34 +65,31 @@ String getCurrentAppName(BuildContext context, dynamic sInstance, AppType appTyp
       default:
         return '';
     }
-  }  else
+  } else
     return 'Scrips';
 }
 
-Color getCurrentAppPrimarySwatch(BuildContext context)
-{
-    switch (currentAppType)
-    {
-      case AppType.PM:
-        return PM_APP_PRIMARY_SWATCH;
-        break;
-      case AppType.PA:
-        return PA_APP_PRIMARY_SWATCH;
-        break;
-      case AppType.UA:
-        return UA_APP_PRIMARY_SWATCH;
-        break;
-      case AppType.UK:
-        return UK_APP_PRIMARY_SWATCH;
-        break;
-      default:
-        return Colors.blue;
-    }
-
+Color getCurrentAppPrimarySwatch(BuildContext context) {
+  switch (currentAppType) {
+    case AppType.PM:
+      return PM_APP_PRIMARY_SWATCH;
+      break;
+    case AppType.PA:
+      return PA_APP_PRIMARY_SWATCH;
+      break;
+    case AppType.UA:
+      return UA_APP_PRIMARY_SWATCH;
+      break;
+    case AppType.UK:
+      return UK_APP_PRIMARY_SWATCH;
+      break;
+    default:
+      return Colors.blue;
+  }
 }
 
-void setCurrentAppType(BuildContext context, dynamic sInstance, AppType appType)
-{
+void setCurrentAppType(
+    BuildContext context, dynamic sInstance, AppType appType) {
   currentAppType = appType;
   currentAppName = getCurrentAppName(context, sInstance, appType);
 }
