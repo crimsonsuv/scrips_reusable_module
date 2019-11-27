@@ -11,7 +11,6 @@ import 'package:scrips_core/services/api/authentication_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
 import '../../datamodels/general/global.dart';
 import '../base_model.dart';
-import 'package:scrips_core/utils/utils.dart';
 
 class GlobalModel extends BaseModel {
 //
