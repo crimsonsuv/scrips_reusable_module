@@ -2,18 +2,28 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_core/general/property_info.dart';
 
-//part 'user.g.dart';
+part 'user.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class User {
+  //   sumeet: essential to mark all fields with @JsonKey(nullable: false)to ensure all PropertyInfos are created properly in fromJson
+  @JsonKey(nullable: false)
   PropertyInfo<String> userId;
+  @JsonKey(nullable: false)
   PropertyInfo<String> fullName;
+  @JsonKey(nullable: false)
   PropertyInfo<String> userName;
+  @JsonKey(nullable: false)
   PropertyInfo<String> gender;
+  @JsonKey(nullable: false)
   PropertyInfo<String> phoneNumber;
+  @JsonKey(nullable: false)
   PropertyInfo<String> email;
+  @JsonKey(nullable: false)
   PropertyInfo<String> password;
+  @JsonKey(nullable: false)
   PropertyInfo<String> accessToken;
+  @JsonKey(nullable: false)
   PropertyInfo<DateTime> lastLoggedIn;
 
   User({
@@ -45,46 +55,4 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
-  static User _$UserFromJson(Map<String, dynamic> json) {
-    return User(
-      userId: json['userId'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['userId'] as Map<String, dynamic>),
-      fullName: json['fullName'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['fullName'] as Map<String, dynamic>),
-      userName: json['userName'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['userName'] as Map<String, dynamic>),
-      gender: json['gender'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['gender'] as Map<String, dynamic>),
-      phoneNumber: json['phoneNumber'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['phoneNumber'] as Map<String, dynamic>),
-      email: json['email'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['email'] as Map<String, dynamic>),
-      accessToken: json['accessToken'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['accessToken'] as Map<String, dynamic>),
-      lastLoggedIn: json['lastLoggedIn'] == null
-          ? PropertyInfo(null)
-          : PropertyInfo.fromJson(json['lastLoggedIn'] as Map<String, dynamic>),
-      password: PropertyInfo(null),
-    );
-  }
-
-  static Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-        'userId': instance.userId?.toJson(),
-        'fullName': instance.fullName?.toJson(),
-        'userName': instance.userName?.toJson(),
-        'gender': instance.gender?.toJson(),
-        'phoneNumber': instance.phoneNumber?.toJson(),
-        'email': instance.email?.toJson(),
-        'accessToken': instance.accessToken?.toJson(),
-        'lastLoggedIn': instance.lastLoggedIn?.toJson(),
-        'password': '',
-      };
 }
