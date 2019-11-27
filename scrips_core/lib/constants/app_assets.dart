@@ -36,4 +36,18 @@ class Images {
           fit: fit,
           color: color,
           colorBlendMode: colorBlendMode);
+
+  Image dashboard(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/dashboard.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:scrips_pm/constants/app_assets.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 
 part 'menu_item.g.dart';
 
