@@ -25,6 +25,8 @@ class RoutePaths {
   static const String PmEnterNewPassword = 'pm_enter_new_password';
   static const String PmPasswordSent = 'pm_password_sent';
   static const String LoginView = 'login_view';
+  static const String OrganizationList = 'organization_list';
+  static const String CreateOrganization = 'create_organization';
 
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
