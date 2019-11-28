@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
+final Color bgColor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
+final Color enabledBtnTextColor = Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
+final Color enabledBtnBGColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
+
+final Color disabledBtnTextColor = Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
+final Color disabledBtnBGColor = Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
+
+final Color normalBtnTextColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
+final Color textInputColor = Color(0xFF233D93); //getColorFromHex('#233D93');
+final Color textFieldBGcolor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
+
+final Color labelTextStyleTextColor = Color(0xFFAAAFC0); //getColorFromHex('#AAAFC0');
+
 // mainMenuBackground
 const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888);
 const Color defaultMainSubMenuBackgroundColor = defaultMainMenuBackgroundColor;
