@@ -15,10 +15,11 @@ GetIt locator = GetIt.instance;
 
 const bool USE_FAKE_IMPLEMENTATION = true;
 
-void setupLocator() {
+Future<bool> setupLocator() async {
   locator.registerLazySingleton(() => BackgroundFetchService());
   locator.registerLazySingleton(() => DialogService());
-  locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
+  locator.registerLazySingleton<Api>(
+      () => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
   // instantiate now itself so localStorage is available early
   LocalStorageService localStorageService = LocalStorageService();
   locator.registerSingleton<StorageService>(localStorageService);
@@ -35,4 +36,6 @@ void setupLocator() {
 //    print('Not Instantiating Locator Service for Platform ${Platform.operatingSystem}');
 //    print('Not registering Locator Service for Platform ${Platform.operatingSystem}');
 //  }
+
+  return true;
 }
