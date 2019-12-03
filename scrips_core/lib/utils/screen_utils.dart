@@ -5,10 +5,10 @@
 
 import 'package:flutter/material.dart';
 
-class ScreenUtil {
-  static ScreenUtil instance = new ScreenUtil();
+class Scr {
+  static Scr instance = Scr();
 
-  /// Size of the device screen as designed in some tool , px
+  /// Size of the device screen as designed in some tool (Figma? InVision?) , px
   double width = 1024;
   double height = 768;
 
@@ -28,30 +28,39 @@ class ScreenUtil {
   static double _screenHeight;
   static double _pixelRatio;
   static double _statusBarHeight;
-
   static double _bottomBarHeight;
-
   static double _textScaleFactor;
 
-  ScreenUtil({
-    this.width = 1080,
-    this.height = 1920,
+  Scr({
+    this.width = 1024,
+    this.height = 768,
     this.allowFontScaling = false,
   });
 
-  static ScreenUtil getInstance() {
+  static Scr getInstance() {
     return instance;
   }
 
+
+  static Scr of(BuildContext context) {
+    _verifyMediaQuery(context);
+    return instance;
+  }
+
+  static void _verifyMediaQuery(BuildContext context) {
+    if (_mediaQueryData == null) {
+      _mediaQueryData = MediaQuery.of(context);
+      _pixelRatio = _mediaQueryData.devicePixelRatio;
+      _screenWidth = _mediaQueryData.size.width;
+      _screenHeight = _mediaQueryData.size.height;
+      _statusBarHeight = _mediaQueryData.padding.top;
+      _bottomBarHeight = _mediaQueryData.padding.bottom;
+      _textScaleFactor = _mediaQueryData.textScaleFactor;
+    }
+  }
+
   void init(BuildContext context) {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
-    _mediaQueryData = mediaQuery;
-    _pixelRatio = mediaQuery.devicePixelRatio;
-    _screenWidth = mediaQuery.size.width;
-    _screenHeight = mediaQuery.size.height;
-    _statusBarHeight = mediaQuery.padding.top;
-    _bottomBarHeight = _mediaQueryData.padding.bottom;
-    _textScaleFactor = mediaQuery.textScaleFactor;
+    _verifyMediaQuery(context);
   }
 
   static MediaQueryData get mediaQueryData => _mediaQueryData;
@@ -82,7 +91,6 @@ class ScreenUtil {
 
   /// The ratio of the actual dp to the design draft px
   double get scaleWidth => _screenWidth / instance.width;
-
   double get scaleHeight => _screenHeight / instance.height;
 
   /// Adapted to the device width of the UI Design.
