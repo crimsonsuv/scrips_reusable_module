@@ -4,6 +4,8 @@
 class RoutePaths {
   // paths common to all; 4 apps
   static const String Splash = 'splash';
+  static const String LoginSignUp = 'login-sign-up';
+  static const String LoginSignUpWithAccessCode = 'login-sign-up-access-code';
   static const String Login = 'login';
   static const String Home = '/';
   static const String Settings = '/settings';
@@ -14,6 +16,10 @@ class RoutePaths {
 
   // test temp paths - delete when not needed
   static const String PmSettings = '/pm-settings';
+  static const String PmSignUpStepWithAccessCode =
+      'pm_sign_up_step-access-code';
+  static const String PmSignUpStepCreatePassword =
+      'pm_sign_up_step-create-password';
   static const String PmSignUpStep1 = 'pm_sign_up_step1';
   static const String PmSignUpStep2 = 'pm_sign_up_step2';
   static const String PmSignUpStep3 = 'pm_sign_up_step3';
@@ -30,8 +36,10 @@ class RoutePaths {
 
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
-  static const String PracticeOnBoardingWizardSubMenu1 = '/practice-onboard-wizard-1';
-  static const String PracticeOnBoardingWizardSubMenu2 = '/practice-onboard-wizard-2';
+  static const String PracticeOnBoardingWizardSubMenu1 =
+      '/practice-onboard-wizard-1';
+  static const String PracticeOnBoardingWizardSubMenu2 =
+      '/practice-onboard-wizard-2';
   static const String SettingsSubMenu1 = '/settings-1';
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
