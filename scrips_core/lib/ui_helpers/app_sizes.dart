@@ -6,7 +6,7 @@ const double labelSmallTextSize = 12;
 const double labelMediumTextSize = labelTextSize;
 const double labelLargeTextSize = 24;
 const double fieldTextSize = 16;
-const double hintTextSize = 16;
+const double hintTextSize = 15;
 const double menuItemTextSize = 16;
 const double validationTextSize = 16;
 

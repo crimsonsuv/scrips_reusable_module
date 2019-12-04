@@ -80,7 +80,7 @@ TextStyle defaultFieldStyle(color, backgroundColor, {bool isReversed = false}) =
 
 TextStyle defaultHintStyle(color, backgroundColor, {bool isReversed = false}) => TextStyle(
       fontSize: hintTextSize,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.normal,
       color: defaultFieldHintColor,
       backgroundColor: backgroundColor ?? defaultFieldBackgroundColor,
     );

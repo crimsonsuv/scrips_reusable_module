@@ -244,30 +244,36 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildDropDownList(BuildContext context) {
-    return DropdownButton(
-      underline: Container(),
-      isExpanded: true,
-      value: currentFieldValue ?? widget.fieldValue,
-      items: widget.listItems ?? [],
-      icon: Images.instance.dropDownIcon(),
-      iconSize: 36.0,
-      onChanged: onChangedInternal,
-      style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-      hint: PlatformText(widget.placeholder ?? '', style: defaultHintStyle(null, null)),
-      disabledHint: PlatformText(widget.validationMessage ?? '', style: defaultHintStyle(null, null)),
+    return Container(
+      height: 36.0,
+      child: DropdownButton(
+        underline: Container(),
+        isExpanded: true,
+        value: currentFieldValue ?? widget.fieldValue,
+        items: widget.listItems ?? [],
+        icon: Images.instance.dropDownIcon(),
+        iconSize: 12.0,
+        onChanged: onChangedInternal,
+        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+        hint: PlatformText(widget.placeholder ?? '', style: defaultHintStyle(null, null)),
+        disabledHint: PlatformText(widget.validationMessage ?? '', style: defaultHintStyle(null, null)),
+      ),
     );
   }
 
   Widget buildTextField(BuildContext context) {
-    return PlatformTextField(
-      obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
-      style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-      textAlign: TextAlign.start,
-      enabled: widget.enabled ?? true,
-      controller: _textEditController,
-      onChanged: onChangedInternal,
-      placeholder: currentPlaceholder ?? widget.placeholder ?? null,
-      placeholderStyle: defaultHintStyle(null, null),
+    return Container(
+      height: 36.0,
+      child: PlatformTextField(
+        obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
+        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+        textAlign: TextAlign.start,
+        enabled: widget.enabled ?? true,
+        controller: _textEditController,
+        onChanged: onChangedInternal,
+        placeholder: currentPlaceholder ?? widget.placeholder ?? null,
+        placeholderStyle: defaultHintStyle(null, null),
+      ),
     );
   }
 
