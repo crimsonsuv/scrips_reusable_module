@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:scrips_core/datamodels/login/login.dart';
 import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/datamodels/pratice_management/practice_details.dart';
 
 import 'api.dart';
 
@@ -32,6 +33,19 @@ class HttpApi implements Api {
   @override
   Future<LoginResponse> login(BuildContext context, {String userName, String password}) {
     // TODO: implement login
+    return null;
+  }
+
+  @override
+  Future<List<PracticeDetailsModel>> getPractices(/*TODO*/) {
+    return null;
+  }
+
+  Future<List<PracticeDetailsModel>> getPractice(/*TODO*/) {
+    return null;
+  }
+
+  Future<PracticeDetailsModel> addPractice(/*TODO*/) {
     return null;
   }
 }

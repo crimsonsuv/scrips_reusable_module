@@ -4,6 +4,7 @@ import 'package:scrips_core/datamodels/menu/main_menu.dart';
 import 'package:scrips_core/datamodels/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
+import 'package:scrips_core/datamodels/pratice_management/practice_details.dart';
 
 import 'api.dart';
 
@@ -53,5 +54,18 @@ class FakeApi implements Api {
     Map<String, dynamic> json = mockDataMenuItems;
     MainMenu mainMenu = MainMenu.fromJson(json);
     return mainMenu;
+  }
+
+  @override
+  Future<List<PracticeDetailsModel>> getPractices(/*TODO*/) {
+    return null;
+  }
+
+  Future<List<PracticeDetailsModel>> getPractice(/*TODO*/) {
+    return null;
+  }
+
+  Future<PracticeDetailsModel> addPractice(/*TODO*/) {
+    return null;
   }
 }

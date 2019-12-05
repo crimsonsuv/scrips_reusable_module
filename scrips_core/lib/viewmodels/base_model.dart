@@ -1,6 +1,5 @@
 import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_core/utils/utils.dart';
 
 class BaseModel extends ChangeNotifier {
   bool _busy = false;
