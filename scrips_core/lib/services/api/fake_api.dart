@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_core/datamodels/login/login.dart';
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/login/login.dart';
+import 'package:scrips_core/data_models/menu/main_menu.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
-import 'package:scrips_core/datamodels/pratice_management/practice_details.dart';
+import 'package:scrips_core/data_models/practice.dart';
 
 import 'api.dart';
 
@@ -57,15 +57,15 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<List<PracticeDetailsModel>> getPractices(/*TODO*/) {
+  Future<List<Practice>> getPractices(/*TODO*/) {
     return null;
   }
 
-  Future<List<PracticeDetailsModel>> getPractice(/*TODO*/) {
+  Future<List<Practice>> getPractice(/*TODO*/) {
     return null;
   }
 
-  Future<PracticeDetailsModel> addPractice(/*TODO*/) {
+  Future<Practice> addPractice(/*TODO*/) {
     return null;
   }
 }

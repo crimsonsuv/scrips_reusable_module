@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:location/location.dart';
-import 'package:scrips_core/datamodels/location/user_location.dart';
+import 'package:scrips_core/data_models/location/user_location.dart';
 import 'package:scrips_core/services/api/stoppable_service.dart';
 
 class LocationService extends StoppableService {

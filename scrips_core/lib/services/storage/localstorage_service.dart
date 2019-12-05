@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
 
 class LocalStorageService implements StorageService {

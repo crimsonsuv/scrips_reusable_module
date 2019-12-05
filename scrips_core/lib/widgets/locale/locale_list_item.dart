@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:scrips_core/datamodels/locale/supported_locale.dart';
+import 'package:scrips_core/data_models/locale/supported_locale.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 final _boxDecoration = BoxDecoration(

@@ -2,14 +2,14 @@ import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/datamodels/login/login.dart';
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/login/login.dart';
+import 'package:scrips_core/data_models/menu/main_menu.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/authentication_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
-import '../../datamodels/general/global.dart';
+import '../../data_models/general/global.dart';
 import '../base_model.dart';
 
 class GlobalModel extends BaseModel {

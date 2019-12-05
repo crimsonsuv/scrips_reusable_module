@@ -2,11 +2,11 @@ import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
+import 'package:scrips_core/data_models/menu/main_menu.dart';
+import 'package:scrips_core/data_models/menu/menu_item.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
 
-import '../../datamodels/pratice_management/pm_main_view.dart';
+import '../../data_models/pratice_management/pm_main_view.dart';
 import '../base_model.dart';
 
 class PmMainViewModel extends BaseModel {

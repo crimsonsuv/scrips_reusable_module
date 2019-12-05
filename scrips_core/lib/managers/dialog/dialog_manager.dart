@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:scrips_core/datamodels/dialog/alert_request.dart';
-import 'package:scrips_core/datamodels/dialog/alert_response.dart';
+import 'package:scrips_core/data_models/dialog/alert_request.dart';
+import 'package:scrips_core/data_models/dialog/alert_response.dart';
 import 'package:scrips_core/locator.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
 

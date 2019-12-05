@@ -1,4 +1,4 @@
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 
 class LoginResponse {
   final bool success;

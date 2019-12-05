@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_core/datamodels/locale/supported_locale.dart';
+import 'package:scrips_core/data_models/locale/supported_locale.dart';
 import 'package:scrips_core/general/property_info.dart';
 
 enum AppType {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/app_constants.dart';
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/menu/main_menu.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 
 class Global {

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:scrips_core/datamodels/dialog/alert_request.dart';
-import 'package:scrips_core/datamodels/dialog/alert_response.dart';
+import 'package:scrips_core/data_models/dialog/alert_request.dart';
+import 'package:scrips_core/data_models/dialog/alert_response.dart';
 
 class DialogService {
   Function(AlertRequest) _showDialogListener;

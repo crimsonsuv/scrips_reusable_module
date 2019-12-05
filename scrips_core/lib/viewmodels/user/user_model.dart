@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/datamodels/user/user.dart';
+import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/viewmodels/general/global_model.dart';
 

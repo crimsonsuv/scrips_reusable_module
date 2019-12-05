@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:scrips_core/datamodels/menu/menu_item.dart';
+import 'package:scrips_core/data_models/menu/menu_item.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 final _boxDecoration = BoxDecoration(

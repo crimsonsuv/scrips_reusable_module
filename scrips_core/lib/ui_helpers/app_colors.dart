@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'design.dart';
 
 const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];

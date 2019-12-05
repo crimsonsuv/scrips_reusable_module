@@ -1,4 +1,4 @@
-import 'package:scrips_core/datamodels/menu/main_menu.dart';
+import 'package:scrips_core/data_models/menu/main_menu.dart';
 
 class PmMainView {
   String mainMenuPath;
