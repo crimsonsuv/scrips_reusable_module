@@ -5,20 +5,19 @@ import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
 import 'package:scrips_core/data_models/practice.dart';
+import 'package:scrips_core/data_models/organization.dart';
 
 import 'api.dart';
 
 class FakeApi implements Api {
   @override
-  Future<User> getUser(BuildContext context,
-      {String userName, String password}) async {
+  Future<User> getUser(BuildContext context, {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
     return User(
       userId: PropertyInfo(userName),
       userName: PropertyInfo(userName),
       fullName: PropertyInfo('user $userName'),
-      phoneNumber:
-          PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+      phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
       gender: PropertyInfo('M'),
       lastLoggedIn: PropertyInfo(null),
       accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -28,8 +27,7 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<LoginResponse> login(BuildContext context,
-      {String userName, String password}) async {
+  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
 
     return LoginResponse(
@@ -37,8 +35,7 @@ class FakeApi implements Api {
         userId: PropertyInfo(userName),
         userName: PropertyInfo(userName),
         fullName: PropertyInfo('user $userName'),
-        phoneNumber:
-            PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+        phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
         gender: PropertyInfo('M'),
         lastLoggedIn: PropertyInfo(null),
         accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -56,6 +53,9 @@ class FakeApi implements Api {
     return mainMenu;
   }
 
+  //
+  // Practice
+  //
   @override
   Future<List<Practice>> getPractices(/*TODO*/) {
     return null;
@@ -67,5 +67,16 @@ class FakeApi implements Api {
 
   Future<Practice> addPractice(/*TODO*/) {
     return null;
+  }
+
+  //
+  // Organization
+  //
+  Future<List<Organization>> getOrganizations({String query}) {
+    return Future<List<Organization>>.value([
+      Organization(name: 'Org1'),
+      Organization(name: 'Org2'),
+
+    ]);
   }
 }

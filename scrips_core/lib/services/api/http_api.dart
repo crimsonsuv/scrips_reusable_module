@@ -6,6 +6,7 @@ import 'package:scrips_core/data_models/login/login.dart';
 import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/data_models/practice.dart';
+import 'package:scrips_core/data_models/organization.dart';
 
 import 'api.dart';
 
@@ -13,7 +14,7 @@ import 'api.dart';
 class HttpApi implements Api {
   static const endpoint = 'https://jsonplaceholder.typicode.com';
 
-  var client = new http.Client();
+  var client = http.Client();
 
   @override
   Future<User> getUser(BuildContext context, {String userName, String password}) async {
@@ -47,5 +48,23 @@ class HttpApi implements Api {
 
   Future<Practice> addPractice(/*TODO*/) {
     return null;
+  }
+
+  //
+  // Organization
+  //
+  Future<List<Organization>> getOrganizations({String query}) async {
+    var organizations = List<Organization>();
+    var response = await client.get('$endpoint/Organization?Query=$query');
+
+    // Parse into List
+    var parsed = json.decode(response.body) as List<dynamic>;
+
+    // Loop and convert each item to a Comment
+    for (var org in parsed) {
+      organizations.add(Organization.fromJson(org));
+    }
+
+    return organizations;
   }
 }
