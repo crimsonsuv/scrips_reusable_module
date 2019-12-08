@@ -16,16 +16,15 @@ class RoutePaths {
 
   // test temp paths - delete when not needed
   static const String PmSettings = '/pm-settings';
-  static const String PmSignUpStepWithAccessCode =
-      'pm_sign_up_step-access-code';
-  static const String PmSignUpStepCreatePassword =
-      'pm_sign_up_step-create-password';
+  static const String PmSignUpStepWithAccessCode = 'pm_sign_up_step-access-code';
+  static const String PmSignUpStepCreatePassword = 'pm_sign_up_step-create-password';
   static const String PmSignUpStep1 = 'pm_sign_up_step1';
   static const String PmSignUpStep2 = 'pm_sign_up_step2';
   static const String PmSignUpStep3 = 'pm_sign_up_step3';
   static const String PmSignUpAddManager = 'pm_sign_up_add_manager';
   static const String PmSignUpInvite = 'pm_sign_up_invite';
   static const String PmSignUpQuestion = 'pm_sign_up_question';
+  static const String PmSignUpQuestionSuccess = 'pm_sign_up_question_success';
   static const String PmLoginView = 'pm_login';
   static const String PmForgotPassword = 'pm_forgot_password';
   static const String PmEnterNewPassword = 'pm_enter_new_password';
@@ -36,10 +35,8 @@ class RoutePaths {
 
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
-  static const String PracticeOnBoardingWizardSubMenu1 =
-      '/practice-onboard-wizard-1';
-  static const String PracticeOnBoardingWizardSubMenu2 =
-      '/practice-onboard-wizard-2';
+  static const String PracticeOnBoardingWizardSubMenu1 = '/practice-onboard-wizard-1';
+  static const String PracticeOnBoardingWizardSubMenu2 = '/practice-onboard-wizard-2';
   static const String SettingsSubMenu1 = '/settings-1';
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
