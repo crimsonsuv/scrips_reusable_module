@@ -251,7 +251,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         isExpanded: true,
         value: currentFieldValue ?? widget.fieldValue,
         items: widget.listItems ?? [],
-        icon: Images.instance.dropDownIcon(),
+        icon: Images.instance.dropDownIcon(width: 13, height: 13),
         iconSize: 12.0,
         onChanged: onChangedInternal,
         style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
