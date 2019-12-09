@@ -3,6 +3,8 @@
 // take a look:https://flutter.dev/docs/development/data-and-backend/json
 // and then: https://flutter.dev/docs/cookbook/networking/background-parsing (not yet implemented)
 //
+import 'data_model.dart';
+
 class Organization {
   // should be all finals, but not until we get all from service
   final String organizationId;
@@ -13,34 +15,35 @@ class Organization {
   final OrganizationStatus status;
 
   //
-  Country country;
-  String licenseNumber;
-  String licenseIssuingAuthority;
-  DateTime licenseExpirationDate;
-  String billingTaxID;
-  String practiceDescription;
-  bool isPrimary;
+//  Country country;
+//  String licenseNumber;
+//  String licenseIssuingAuthority;
+//  DateTime licenseExpirationDate;
+//  String billingTaxID;
+//  String practiceDescription;
+//  bool isPrimary;
 
-  Organization(
-      {this.organizationId,
-      this.dateOfSignUp,
-      this.numberOfUsers,
-      this.mobileNumber,
-      this.status,
-      this.name,
-      this.country,
-      this.licenseNumber,
-      this.licenseIssuingAuthority,
-      this.licenseExpirationDate,
-      this.billingTaxID,
-      this.practiceDescription,
-      this.isPrimary});
+  Organization({
+    this.organizationId,
+    this.dateOfSignUp,
+    this.numberOfUsers,
+    this.mobileNumber,
+    this.status,
+    this.name,
+//    this.country,
+//    this.licenseNumber,
+//    this.licenseIssuingAuthority,
+//    this.licenseExpirationDate,
+//    this.billingTaxID,
+//    this.practiceDescription,
+//    this.isPrimary,
+  });
 
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
   Organization.fromJson(Map<String, dynamic> json)
       : this.name = json['name'],
         this.organizationId = json['organizationId'],
-        this.dateOfSignUp = DateTime.parse(json['dateOfSignUp']),
+        this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
         this.numberOfUsers = json['numberOfUsers'],
         this.mobileNumber = json['mobileNumber'],
         this.status = json['status'] == "active" ? OrganizationStatus.Active : OrganizationStatus.None;
