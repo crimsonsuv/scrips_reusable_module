@@ -13,7 +13,7 @@ class OrganizationViewModel extends BaseModel { // BaseModel is mostly ChangeNot
 
   Future fetchOrganizations() async {
     setBusy(true);
-    organizations = await _api.getOrganizations(query: "a");
+    organizations = await _api.getOrganizations(query: "");
     setBusy(false);
   }
 }
