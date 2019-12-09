@@ -10,10 +10,12 @@ import 'package:scrips_core/services/api/http_api.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
 import 'package:scrips_core/services/storage/localstorage_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
+import 'package:scrips_core/viewmodels/organization_view_model.dart';
+
 
 GetIt locator = GetIt.instance;
 
-const bool USE_FAKE_IMPLEMENTATION = true;
+const bool USE_FAKE_IMPLEMENTATION = false;
 
 Future<bool> setupLocator() async {
   locator.registerLazySingleton(() => BackgroundFetchService());
@@ -23,6 +25,8 @@ Future<bool> setupLocator() async {
   // instantiate now itself so localStorage is available early
   LocalStorageService localStorageService = LocalStorageService();
   locator.registerSingleton<StorageService>(localStorageService);
+
+  locator.registerFactory(() => OrganizationViewModel());
   //
   WidgetsFlutterBinding.ensureInitialized();
   //scrips: sumeet: note dart:io not supported on Web!
