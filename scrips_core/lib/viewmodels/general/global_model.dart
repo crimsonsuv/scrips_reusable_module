@@ -35,8 +35,7 @@ class GlobalModel extends BaseModel {
     bool ready = await _storageService.ready();
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
-      debugLog(
-          '-- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
+      debugLog('-- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
       this.setUser(savedUser);
       ready = true;
       return true;
@@ -71,16 +70,12 @@ class GlobalModel extends BaseModel {
 //      }
     }
     setState(ViewState.Idle, calledFrom: 'loadMainMenuItems');
-    debugLog(
-        'globalmodel.dart::loaded ${this.data?.mainMenu?.items?.length} menu items for $userId');
+    debugLog('globalmodel.dart::loaded ${this.data?.mainMenu?.items?.length} menu items for $userId');
     return true;
   }
 
   // ensure we don't call setBusy during build of child!!! setState() or markNeedsBuild() called during build.
-  void setVars(
-      {bool showOverlappedSubMenu,
-      bool animateSubMenu,
-      bool callSetBusy = false}) {
+  void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
     debugLog('globalmodel.dart::setVars Called');
     this.data.showOverlappedSubMenu = PropertyInfo(showOverlappedSubMenu);
     this.data.animateSubMenu = PropertyInfo(animateSubMenu);
@@ -100,8 +95,7 @@ class GlobalModel extends BaseModel {
     setState(ViewState.Busy, calledFrom: 'login');
     try {
       // whether to show or not
-      LoginResponse loginResponse = await _authService.login(this.context,
-          userName: userName, password: password);
+      LoginResponse loginResponse = await _authService.login(this.context, userName: userName, password: password);
       if (loginResponse.success) {
         this.data.loginMessage = PropertyInfo(loginResponse.message);
         await this.setUser(loginResponse.user);
@@ -164,9 +158,8 @@ class GlobalModel extends BaseModel {
     setState(ViewState.Busy, calledFrom: 'setLastException');
     // whether to show or not
     this.data.lastException = PropertyInfo(exception);
-    this.data.statusText = this.data?.lastException?.value != null
-        ? PropertyInfo(this.data.lastException.toString())
-        : PropertyInfo('');
+    this.data.statusText =
+        this.data?.lastException?.value != null ? PropertyInfo(this.data.lastException.toString()) : PropertyInfo('');
 
     setState(ViewState.Idle, calledFrom: 'setLastException');
   }
