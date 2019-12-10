@@ -41,11 +41,11 @@ class Organization {
 
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
   Organization.fromJson(Map<String, dynamic> json)
-      : this.name = json['name'],
-        this.organizationId = json['organizationId'],
+      : this.name = json['name'] ?? "",
+        this.organizationId = json['organizationId'] ?? 'N/A',
         this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
-        this.numberOfUsers = json['numberOfUsers'],
-        this.mobileNumber = json['mobileNumber'],
+        this.numberOfUsers = json['numberOfUsers'] ?? "",
+        this.mobileNumber = json['mobileNumber'] ?? "",
         this.status = json['status'] == "active" ? OrganizationStatus.Active : OrganizationStatus.None;
 
   Map<String, dynamic> toJson() {

@@ -96,7 +96,7 @@ class HttpApi implements Api {
 
     var response = await client.get('$endpoint/Organization?Query=$query', headers: {'accept': 'text/json'}).timeout(
         Duration(seconds: 3), onTimeout: () {
-      return null;
+      throw Exception('Something happened! Please retry in a few seconds.');
     });
 
 //    var response = await myWait10secondsFuture().timeout(Duration(seconds: 3), onTimeout: () {
