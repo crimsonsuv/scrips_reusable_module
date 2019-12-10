@@ -64,15 +64,14 @@ class PmMainViewModel extends BaseModel {
 
   void toggleSubMenuVisible() {
     debugLog('pmMainModel.dart::toggleSubMenuVisible Called');
-    setBusy(true, calledFrom: 'toggleSubMenuVisible');
+    setState(ViewState.Busy, calledFrom: 'toggleSubMenuVisible');
     // whether to show or not
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
     this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
     this.data.statusText =
         this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
-    setBusy(false, calledFrom: 'toggleSubMenuVisible');
+    setState(ViewState.Idle, calledFrom: 'toggleSubMenuVisible');
   }
 }
 
-////

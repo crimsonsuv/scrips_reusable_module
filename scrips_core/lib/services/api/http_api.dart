@@ -20,7 +20,6 @@ class HttpApi implements Api {
 
   @override
   Future<User> getUser(BuildContext context, {String userName, String password}) async {
-
     await Future.delayed(Duration(seconds: 1));
     return User(
       userId: PropertyInfo(userName),
@@ -68,7 +67,8 @@ class HttpApi implements Api {
         email: PropertyInfo('2@a.com'),
         password: PropertyInfo(password),
       ),
-    );  }
+    );
+  }
 
   @override
   Future<List<Practice>> getPractices(/*TODO*/) {
@@ -86,10 +86,23 @@ class HttpApi implements Api {
   //
   // Organization
   //
+
+  Future myWait10secondsFuture() async {
+    await Future.delayed(Duration(seconds: 10));
+  }
+
   Future<List<Organization>> getOrganizations({String query}) async {
     var organizations = List<Organization>();
 
-    var response = await client.get('$endpoint/Organization?Query=$query', headers: {'accept': 'text/json'});
+    var response = await client.get('$endpoint/Organization?Query=$query', headers: {'accept': 'text/json'}).timeout(
+        Duration(seconds: 3), onTimeout: () {
+      return null;
+    });
+
+//    var response = await myWait10secondsFuture().timeout(Duration(seconds: 3), onTimeout: () {
+//      throw Exception('Timeout');
+//    });
+//    return Future<Null>(null);
 
 //    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
 //    String prettyprint = encoder.convert(response.body);

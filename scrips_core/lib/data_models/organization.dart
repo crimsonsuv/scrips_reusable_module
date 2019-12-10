@@ -47,6 +47,16 @@ class Organization {
         this.numberOfUsers = json['numberOfUsers'],
         this.mobileNumber = json['mobileNumber'],
         this.status = json['status'] == "active" ? OrganizationStatus.Active : OrganizationStatus.None;
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['organizationId'] = this.organizationId;
+    data['name'] = this.name;
+    data['dateOfSignUp'] = this.dateOfSignUp.toIso8601String();
+    data['mobileNumber'] = this.mobileNumber;
+    data['status'] = this.status;
+    return data;
+  }
 }
 
 enum OrganizationStatus { None, Active }
