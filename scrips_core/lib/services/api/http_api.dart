@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -32,12 +33,6 @@ class HttpApi implements Api {
       email: PropertyInfo('2@a.com'),
       password: PropertyInfo(password),
     );
-
-//    // Get user profile for id
-//    var response = await client.get('$endpoint/users/$userName');
-//
-//    // Convert and return
-//    return User.fromJson(json.decode(response.body));
   }
 
   @override
@@ -95,7 +90,7 @@ class HttpApi implements Api {
     var organizations = List<Organization>();
 
     var response = await client.get('$endpoint/Organization?Query=$query', headers: {'accept': 'text/json'}).timeout(
-        Duration(seconds: 3), onTimeout: () {
+        Duration(seconds: 10), onTimeout: () {
       throw Exception('Something happened! Please retry in a few seconds.');
     });
 
@@ -120,5 +115,26 @@ class HttpApi implements Api {
     }
 
     return organizations;
+  }
+
+  Future<Organization> getOrganization({String organizationID}) async {
+    var response = await client.get('$endpoint/Organization/$organizationID', headers: {'accept': 'text/json'}).timeout(
+        Duration(seconds: 10), onTimeout: () {
+      throw Exception('Cannot fetch Organization $organizationID');
+    });
+
+    var parsed = json.decode(response.body);
+    Organization org = Organization.fromJson(parsed);
+    return org;
+  }
+
+  Future<void> createOrganization(Organization organization) async {
+    var body = json.encode(organization.toJson());
+    var response = await client
+        .post('$endpoint/Organization', headers: {'accept': 'text/plain', 'Content-Type': 'application/json'}, body: body).timeout(
+            Duration(seconds: 10), onTimeout: () {
+      throw Exception('Cannot create Organization');
+    });
+    print(response);
   }
 }

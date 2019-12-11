@@ -9,8 +9,8 @@ class PracticeViewModel extends BaseModel {
   Practice practice;
 
   void fetchPracticeDetails() {
-    setState(ViewState.Busy);
+    setViewModelState(ViewState.Busy);
     _api.getPractice();
-    setState(ViewState.Idle);
+    setViewModelState(ViewState.Idle);
   }
 }

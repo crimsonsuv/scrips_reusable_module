@@ -76,7 +76,12 @@ class FakeApi implements Api {
     return Future<List<Organization>>.value([
       Organization(name: 'Org1'),
       Organization(name: 'Org2'),
-
     ]);
   }
+
+  Future<Organization> getOrganization({String organizationID}) async {
+    return Organization(name: "Organization 12", organizationId: '1234');
+  }
+
+  Future<void> createOrganization(Organization organization) async {}
 }

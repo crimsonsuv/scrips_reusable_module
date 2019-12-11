@@ -13,14 +13,30 @@ class OrganizationViewModel extends BaseModel {
   List<Organization> organizations;
 
   Future fetchOrganizations() async {
-    setState(ViewState.Busy);
+    setViewModelState(ViewState.Busy);
     try {
-      organizations = await _api.getOrganizations(query: "");
-    }
-    catch (e) {
+      organizations =
+          await _api.getOrganizations(query: ""); // TODO: this should be optional parameter with default null
+    } catch (e) {
       organizations.clear();
-      setState(ViewState.Err);
+      setViewModelState(ViewState.Err);
     }
-    setState(ViewState.Idle);
+    setViewModelState(ViewState.Idle);
+  }
+
+  Future<void> fetchOrganization(String orgID) async {
+    assert(orgID != null);
+  }
+
+  Future<void> createOrganization(Organization organization) async {
+    setViewModelState(ViewState.Busy);
+    try {
+      await _api.createOrganization(organization);
+    } catch (e) {
+      organizations.clear();
+      setViewModelState(ViewState.Err);
+    }
+    setViewModelState(ViewState.Idle);
+
   }
 }

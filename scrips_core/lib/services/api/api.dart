@@ -19,4 +19,6 @@ abstract class Api {
 
 //  Organization API
   Future<List<Organization>> getOrganizations({String query});
+  Future<Organization> getOrganization({String organizationID});
+  Future<void> createOrganization(Organization organization);
 }

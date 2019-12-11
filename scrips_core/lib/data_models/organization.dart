@@ -3,16 +3,19 @@
 // take a look:https://flutter.dev/docs/development/data-and-backend/json
 // and then: https://flutter.dev/docs/cookbook/networking/background-parsing (not yet implemented)
 //
+import 'dart:convert';
+
 import 'data_model.dart';
+import 'dart:math';
 
 class Organization {
   // should be all finals, but not until we get all from service
-  final String organizationId;
-  final String name;
-  final DateTime dateOfSignUp;
-  final int numberOfUsers;
-  final String mobileNumber;
-  final OrganizationStatus status;
+  String organizationId;
+  String name;
+  DateTime dateOfSignUp;
+  int numberOfUsers;
+  String mobileNumber;
+  OrganizationStatus status;
 
   //
 //  Country country;
@@ -26,10 +29,10 @@ class Organization {
   Organization({
     this.organizationId,
     this.dateOfSignUp,
-    this.numberOfUsers,
-    this.mobileNumber,
-    this.status,
-    this.name,
+    this.numberOfUsers = 0,
+    this.mobileNumber = "",
+    this.status = OrganizationStatus.None,
+    this.name = "",
 //    this.country,
 //    this.licenseNumber,
 //    this.licenseIssuingAuthority,
@@ -46,15 +49,15 @@ class Organization {
         this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
         this.numberOfUsers = json['numberOfUsers'] ?? "",
         this.mobileNumber = json['mobileNumber'] ?? "",
-        this.status = json['status'] == "active" ? OrganizationStatus.Active : OrganizationStatus.None;
+        this.status = json['isActive'] == true ? OrganizationStatus.Active : OrganizationStatus.None;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['organizationId'] = this.organizationId;
     data['name'] = this.name;
-    data['dateOfSignUp'] = this.dateOfSignUp.toIso8601String();
+    data['dateOfSignUp'] = this.dateOfSignUp?.toIso8601String();
     data['mobileNumber'] = this.mobileNumber;
-    data['status'] = this.status;
+    data['isActive'] = this.status == OrganizationStatus.Active;
     return data;
   }
 }
