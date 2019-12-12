@@ -18,7 +18,7 @@ final Color textFieldBGcolor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
 final Color labelTextStyleTextColor = Color(0xFFAAAFC0); //getColorFromHex('#AAAFC0');
 
 final Color regularTextColor = Color(0xFF485685);
-final Color searchBGColour = Color(0xFF8E8E93).withAlpha(88); //
+final Color searchBGColour = Color(0xFF8E8E93).withOpacity(0.12); //
 
 // mainMenuBackground
 const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888);
