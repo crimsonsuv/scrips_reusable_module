@@ -69,18 +69,27 @@ class FakeApi implements Api {
     return null;
   }
 
+
+
   //
-  // Organization
+  // Organizations
   //
   Future<List<Organization>> getOrganizations({String query}) {
-    return Future<List<Organization>>.value([
-      Organization(name: 'Org1'),
-      Organization(name: 'Org2'),
-    ]);
+
+    var organizations = List<Organization>();
+    List<dynamic> orgs= mockDataOrganizations["organizations"];
+
+    for (var org in orgs) {
+      organizations.add(Organization.fromJson(org));
+    }
+    return Future<List<Organization>>.value(organizations);
   }
 
+
+
+
   Future<Organization> getOrganization({String organizationID}) async {
-    return Organization(name: "Organization 12", organizationId: '1234');
+    return Organization.fromJson(mockDataOrganizations["organizations"][0]); // return first element of the mock list
   }
 
   Future<void> createOrganization(Organization organization) async {}

@@ -1,16 +1,20 @@
-import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class BaseModel extends ChangeNotifier {
   ViewState _state = ViewState.Idle;
+  Error _error;
 
   ViewState get state => _state;
 
-  void setViewModelState(ViewState value, {String calledFrom}) {
-    _state = value;
-    notifyListeners();
+  void setError(Error err) {
+    _error = err;
   }
 
+  void setViewModelState(ViewState value, {Error error, String calledFrom}) {
+    _state = value;
+    _error = error;
+    notifyListeners();
+  }
 }
 
 enum ViewState { Idle, Busy, Err }

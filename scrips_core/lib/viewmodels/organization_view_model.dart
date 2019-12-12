@@ -1,6 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:scrips_core/general/property_info.dart';
-
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/viewmodels/base_model.dart';
 import 'package:scrips_core/locator.dart';
@@ -15,11 +12,12 @@ class OrganizationViewModel extends BaseModel {
   Future fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
     try {
-      organizations =
-          await _api.getOrganizations(query: ""); // TODO: this should be optional parameter with default null
+      organizations = await _api.getOrganizations(
+          query: ""); // This should be optional parameter with default null
+      // } on Exception catch (e) {
+      //   print('Unknown exception $e');
     } catch (e) {
-      organizations.clear();
-      setViewModelState(ViewState.Err);
+      setViewModelState(ViewState.Err, error: e);
     }
     setViewModelState(ViewState.Idle);
   }
@@ -37,6 +35,5 @@ class OrganizationViewModel extends BaseModel {
       setViewModelState(ViewState.Err);
     }
     setViewModelState(ViewState.Idle);
-
   }
 }
