@@ -32,6 +32,7 @@ class RoutePaths {
   static const String LoginView = 'login_view';
   static const String OrganizationList = 'organization_list';
   static const String CreateOrganization = 'create_organization';
+  static const String EnterSignUpAccessCode = 'enter_sign_up_access_code';
 
   //   temp test paths
   static const String PracticeOnBoardingWizard = '/practice-onboard-wizard';
