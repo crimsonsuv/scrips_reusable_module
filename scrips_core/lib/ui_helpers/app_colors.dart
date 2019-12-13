@@ -5,17 +5,23 @@ const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
 final Color bgColor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
-final Color enabledBtnTextColor = Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
+final Color enabledBtnTextColor =
+    Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
 final Color enabledBtnBGColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
 
-final Color disabledBtnTextColor = Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
-final Color disabledBtnBGColor = Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
+final Color disabledBtnTextColor =
+    Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
+final Color disabledBtnBGColor =
+    Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
 
-final Color normalBtnTextColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
+final Color normalBtnTextColor =
+    Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
+final Color disabledTabTextColor = Color(0xFFB7B7B7);
 final Color textInputColor = Color(0xFF233D93); //getColorFromHex('#233D93');
 final Color textFieldBGcolor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
 
-final Color labelTextStyleTextColor = Color(0xFFAAAFC0); //getColorFromHex('#AAAFC0');
+final Color labelTextStyleTextColor =
+    Color(0xFFAAAFC0); //getColorFromHex('#AAAFC0');
 
 final Color regularTextColor = Color(0xFF485685);
 final Color searchBGColour = Color(0xFF8E8E93).withOpacity(0.12); //
@@ -24,7 +30,8 @@ final Color searchBGColour = Color(0xFF8E8E93).withOpacity(0.12); //
 const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888);
 const Color defaultMainSubMenuBackgroundColor = defaultMainMenuBackgroundColor;
 const Color defaultMainAppBarBackgroundColor = defaultMainMenuBackgroundColor;
-const Color defaultMainStatusBarBackgroundColor = defaultMainMenuBackgroundColor;
+const Color defaultMainStatusBarBackgroundColor =
+    defaultMainMenuBackgroundColor;
 const Color mainContainedAreaBackgroundColor = Color(0xFFF4F7F8);
 final Color defaultPanelBackgroundColor = Colors.white;
 final Color defaultMainBackgroundColor = mainContainedAreaBackgroundColor;

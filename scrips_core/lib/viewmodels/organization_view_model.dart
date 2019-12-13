@@ -16,8 +16,8 @@ class OrganizationViewModel extends BaseModel {
           query: ""); // This should be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
-    } catch (e) {
-      setViewModelState(ViewState.Err, error: e);
+    } on Exception catch (e) {
+      setViewModelState(ViewState.Err, exception: e);
     }
     setViewModelState(ViewState.Idle);
   }
