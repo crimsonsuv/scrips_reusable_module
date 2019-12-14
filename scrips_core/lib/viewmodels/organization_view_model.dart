@@ -12,13 +12,15 @@ class OrganizationViewModel extends BaseModel {
   Future fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
     try {
-      organizations = await _api.getOrganizations(
-          query: ""); // This should be optional parameter with default null
+      organizations = await _api.getOrganizations(query: "");
+
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
       setViewModelState(ViewState.Err, exception: e);
     }
+    //ensure we do not ever return a null so front end can always work!
+    organizations = organizations ?? [];
     setViewModelState(ViewState.Idle);
   }
 
