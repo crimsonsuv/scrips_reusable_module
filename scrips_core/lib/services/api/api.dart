@@ -17,8 +17,11 @@ abstract class Api {
   Future<List<Practice>> getPractice(/*TODO*/);
   Future<Practice> addPractice(/*TODO*/);
 
-//  Organization API
+  //  Organization API
   Future<List<Organization>> getOrganizations({String query});
   Future<Organization> getOrganization({String organizationID});
   Future<void> createOrganization(Organization organization);
+
+  // Value Sets
+  Future<List<String>> getOrganizationTypes();
 }

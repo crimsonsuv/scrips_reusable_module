@@ -13,7 +13,6 @@ import 'package:scrips_core/services/storage/storage_service.dart';
 import 'package:scrips_core/viewmodels/organization_view_model.dart';
 import 'package:scrips_core/viewmodels/practice_view_model.dart';
 
-
 GetIt locator = GetIt.instance;
 
 const bool USE_FAKE_IMPLEMENTATION = false;
@@ -21,14 +20,13 @@ const bool USE_FAKE_IMPLEMENTATION = false;
 Future<bool> setupLocator() async {
   locator.registerLazySingleton(() => BackgroundFetchService());
   locator.registerLazySingleton(() => DialogService());
-  locator.registerLazySingleton<Api>(
-      () => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
+  locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
   // instantiate now itself so localStorage is available early
   LocalStorageService localStorageService = LocalStorageService();
   locator.registerSingleton<StorageService>(localStorageService);
 
   locator.registerFactory(() => OrganizationViewModel());
-  locator.registerFactory(()=>PracticeViewModel());
+  locator.registerFactory(() => PracticeViewModel());
   //
   WidgetsFlutterBinding.ensureInitialized();
   //scrips: sumeet: note dart:io not supported on Web!
