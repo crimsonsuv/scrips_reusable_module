@@ -41,6 +41,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String validationMessage;
   final TextCapitalization labelTextCapitalization;
   final Function onChanged;
+  final Widget icon;
 
   final List<ListItemType> listItems;
   FieldAndLabelState _myState;
@@ -57,6 +58,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.onChanged,
       this.fieldType = FieldType.TextField,
       this.listItems,
+        this.icon = null,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -230,7 +232,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     return Container(
       padding: UIHelper.defaultFieldInternalPadding,
       decoration: new BoxDecoration(
-        borderRadius: BorderRadius.circular(5.0),
+        borderRadius: BorderRadius.circular(7.0),
         border: Border.all(color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
@@ -246,33 +248,63 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   Widget buildDropDownList(BuildContext context) {
     return Container(
       height: 36.0,
-      child: DropdownButton(
-        underline: Container(),
-        isExpanded: true,
-        value: currentFieldValue ?? widget.fieldValue,
-        items: widget.listItems ?? [],
-        icon: Images.instance.dropDownIcon(width: 13, height: 13),
-        iconSize: 12.0,
-        onChanged: onChangedInternal,
-        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-        hint: PlatformText(widget.placeholder ?? '', style: defaultHintStyle(null, null)),
-        disabledHint: PlatformText(widget.validationMessage ?? '', style: defaultHintStyle(null, null)),
+      child: Row(
+        children: <Widget>[
+          (widget.icon == null) ? Container() : SizedBox(height:24, width: 24,child: widget.icon),
+          Padding(padding: EdgeInsets.only(left: 8),),
+          Expanded(
+            child: DropdownButton(
+              underline: Container(),
+              isExpanded: true,
+              value: currentFieldValue ?? widget.fieldValue,
+              items: widget.listItems ?? [],
+              icon: Images.instance.dropDownIcon(width: 13, height: 13),
+              iconSize: 12.0,
+              onChanged: onChangedInternal,
+              style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+              hint: PlatformText(widget.placeholder ?? '', style: defaultHintStyle(null, null)),
+              disabledHint: PlatformText(widget.validationMessage ?? '', style: defaultHintStyle(null, null)),
+            ),
+          ),
+        ],
       ),
     );
   }
 
+//  Widget buildTextField(BuildContext context) {
+//    return Container(
+//      height: 36.0,
+//      child: PlatformTextField(
+//        obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
+//        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+//        textAlign: TextAlign.start,
+//        enabled: widget.enabled ?? true,
+//        controller: _textEditController,
+//        onChanged: onChangedInternal,
+//        placeholder: currentPlaceholder ?? widget.placeholder ?? null,
+//        placeholderStyle: defaultHintStyle(null, null),
+//      ),
+//    );
+//  }
+
   Widget buildTextField(BuildContext context) {
     return Container(
       height: 36.0,
-      child: PlatformTextField(
-        obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
-        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-        textAlign: TextAlign.start,
-        enabled: widget.enabled ?? true,
-        controller: _textEditController,
-        onChanged: onChangedInternal,
-        placeholder: currentPlaceholder ?? widget.placeholder ?? null,
-        placeholderStyle: defaultHintStyle(null, null),
+      child: Center(
+        child: TextField(
+          obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
+          style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+          textAlign: TextAlign.start,
+          enabled: widget.enabled ?? true,
+          controller: _textEditController,
+          onChanged: onChangedInternal,
+          decoration: InputDecoration(
+              counterText: "",
+              hintText: widget.placeholder,
+              hintStyle: defaultHintStyle(null, null),
+              border: InputBorder.none
+          ),
+        ),
       ),
     );
   }

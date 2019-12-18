@@ -5,6 +5,7 @@ const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
 
 final Color bgColor = Color(0xFFF4F7F8); //getColorFromHex('#F4F7F8');
+final Color separatorColor = Color(0xFFEFEEEE); //getColorFromHex('#EFEEEE');
 final Color enabledBtnTextColor =
     Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
 final Color enabledBtnBGColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
@@ -13,6 +14,9 @@ final Color disabledBtnTextColor =
     Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
 final Color disabledBtnBGColor =
     Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
+
+final Color gradientColor1 = Color(0xFFEEEEEE);
+final Color gradientColor2 = Color(0xFFF7F7F7);
 
 final Color normalBtnTextColor =
     Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
@@ -52,7 +56,7 @@ const Color defaultLabelTextColor = Colors.black;
 const Color defaultFieldTextColor = Color(0xFF233D93);
 const Color defaultReversedLabelTextColor = Colors.white;
 const Color defaultReversedFieldTextColor = Colors.white;
-const Color defaultFieldHintColor = Colors.grey;
+const Color defaultFieldHintColor = Color(0xFFB7B7B7);
 const Color defaultValidationTextColor = Colors.red;
 const Color defaultReversedValidationTextColor = Colors.white;
 

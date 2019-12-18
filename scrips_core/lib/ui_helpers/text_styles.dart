@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'app_sizes.dart';
 
-String defaultFontFamily = "Roboto";
+//String defaultFontFamily = "Roboto";
 //Color defaultBackgroundColor = mainContainedAreaBackgroundColor;
 
 TextStyle defaultHeaderStyle(color, backgroundColor) => TextStyle(
@@ -23,6 +23,12 @@ TextStyle boldLabelTextStyle(size, color) => TextStyle(
       fontWeight: FontWeight.bold,
       color: color ?? textInputColor,
     );
+
+TextStyle semiBoldLabelTextStyle(size, color) => TextStyle(
+  fontSize: size,
+  fontWeight: FontWeight.w600,
+  color: color ?? textInputColor,
+);
 
 TextStyle normalLabelTextStyle(size, color) => TextStyle(
       fontSize: size,
