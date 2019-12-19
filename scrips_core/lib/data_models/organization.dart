@@ -18,13 +18,13 @@ class Organization {
   OrganizationStatus status;
 
   //
-//  Country country;
-//  String licenseNumber;
-//  String licenseIssuingAuthority;
-//  DateTime licenseExpirationDate;
-//  String billingTaxID;
-//  String practiceDescription;
-//  bool isPrimary;
+  Country country;
+  String licenseNumber;
+  String licenseIssuingAuthority;
+  DateTime licenseExpirationDate;
+  String billingTaxID;
+  String practiceDescription;
+  bool isPrimary;
 
   Organization({
     this.organizationId,
@@ -49,7 +49,9 @@ class Organization {
         this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
         this.numberOfUsers = json['numberOfUsers'] ?? "",
         this.mobileNumber = json['mobileNumber'] ?? "",
-        this.status = json['isActive'] == true ? OrganizationStatus.Active : OrganizationStatus.None;
+        this.status = json['isActive'] == true
+            ? OrganizationStatus.Active
+            : OrganizationStatus.None;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

@@ -35,7 +35,8 @@ class GlobalModel extends BaseModel {
     bool ready = await _storageService.ready();
     if (ready) {
       User savedUser = await _storageService.getLoggedInUser();
-      debugLog('-- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
+      debugLog(
+          '-- globalmodel.dart::init found savedUserId: ${savedUser?.userId?.value}');
       this.setUser(savedUser);
       ready = true;
       return true;
@@ -57,7 +58,7 @@ class GlobalModel extends BaseModel {
   // scrips: sumeet: we keep all menu items for the user here and clone them in pmMainViewModel for each view based on it  so they are loaded only once on user login
   Future<bool> loadMainMenuItems({String userId}) async {
     debugLog('globalmodel.dart::loading menu items for $userId');
-    setViewModelState(ViewState.Busy, calledFrom: 'loadMainMenuItems');
+//    setViewModelState(ViewState.Busy, calledFrom: 'loadMainMenuItems');
     if (userId == null || userId == '') {
       this.data.mainMenu = MainMenu();
     } else {
@@ -69,13 +70,17 @@ class GlobalModel extends BaseModel {
 //        }
 //      }
     }
-    setViewModelState(ViewState.Idle, calledFrom: 'loadMainMenuItems');
-    debugLog('globalmodel.dart::loaded ${this.data?.mainMenu?.topItems?.length} menu items for $userId');
+//    setViewModelState(ViewState.Idle, calledFrom: 'loadMainMenuItems');
+    debugLog(
+        'globalmodel.dart::loaded ${this.data?.mainMenu?.topItems?.length} menu items for $userId');
     return true;
   }
 
   // ensure we don't call setBusy during build of child!!! setState() or markNeedsBuild() called during build.
-  void setVars({bool showOverlappedSubMenu, bool animateSubMenu, bool callSetBusy = false}) {
+  void setVars(
+      {bool showOverlappedSubMenu,
+      bool animateSubMenu,
+      bool callSetBusy = false}) {
     debugLog('globalmodel.dart::setVars Called');
     this.data.showOverlappedSubMenu = PropertyInfo(showOverlappedSubMenu);
     this.data.animateSubMenu = PropertyInfo(animateSubMenu);
@@ -92,10 +97,11 @@ class GlobalModel extends BaseModel {
 
   Future<bool> login(String userName, String password) async {
     debugLog('globalmodel.dart::login Called');
-    setViewModelState(ViewState.Busy, calledFrom: 'login');
+//    setViewModelState(ViewState.Busy, calledFrom: 'login');
     try {
       // whether to show or not
-      LoginResponse loginResponse = await _authService.login(this.context, userName: userName, password: password);
+      LoginResponse loginResponse = await _authService.login(this.context,
+          userName: userName, password: password);
       if (loginResponse.success) {
         this.data.loginMessage = PropertyInfo(loginResponse.message);
         await this.setUser(loginResponse.user);
@@ -106,7 +112,7 @@ class GlobalModel extends BaseModel {
         return false;
       }
     } finally {
-      setViewModelState(ViewState.Idle, calledFrom: 'login');
+//      setViewModelState(ViewState.Idle, calledFrom: 'login');
       debugLog('globalmodel.dart::login Finished');
     }
   }
@@ -158,8 +164,9 @@ class GlobalModel extends BaseModel {
     setViewModelState(ViewState.Busy, calledFrom: 'setLastException');
     // whether to show or not
     this.data.lastException = PropertyInfo(exception);
-    this.data.statusText =
-        this.data?.lastException?.value != null ? PropertyInfo(this.data.lastException.toString()) : PropertyInfo('');
+    this.data.statusText = this.data?.lastException?.value != null
+        ? PropertyInfo(this.data.lastException.toString())
+        : PropertyInfo('');
 
     setViewModelState(ViewState.Idle, calledFrom: 'setLastException');
   }

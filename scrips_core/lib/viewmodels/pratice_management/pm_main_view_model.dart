@@ -41,7 +41,7 @@ class PmMainViewModel extends BaseModel {
   }
 
   void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
-    debugLog('globalmodel.dart::selectMenuItem Called');
+    debugLog('PmMainViewModel.dart::selectMenuItem Called');
     this.data.mainMenu.currentItem = this.getMenuItemForId(
         items: this.data?.mainMenu?.topItems, id: mainMenuPath);
     this.data.mainMenu.currentItem?.subMenu?.currentItem = this
