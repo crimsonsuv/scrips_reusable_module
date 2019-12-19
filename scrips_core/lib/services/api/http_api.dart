@@ -14,18 +14,21 @@ import 'api.dart';
 
 /// The service responsible for networking requests
 class HttpApi implements Api {
-  static const endpoint = 'https://scripsorganizationapi20191204032750.azurewebsites.net';
+  static final endpoint =
+      'http://scripsorganizationapi20191204032750.azurewebsites.net';
 
   var client = http.Client();
 
   @override
-  Future<User> getUser(BuildContext context, {String userName, String password}) async {
+  Future<User> getUser(BuildContext context,
+      {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
     return User(
       userId: PropertyInfo(userName),
       userName: PropertyInfo(userName),
       fullName: PropertyInfo('user $userName'),
-      phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+      phoneNumber:
+          PropertyInfo('$userName-$userName$userName-$userName-$userName'),
       gender: PropertyInfo('M'),
       lastLoggedIn: PropertyInfo(null),
       accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -45,7 +48,8 @@ class HttpApi implements Api {
   }
 
   @override
-  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
+  Future<LoginResponse> login(BuildContext context,
+      {String userName, String password}) async {
     // TODO: implement login
     await Future.delayed(Duration(seconds: 1));
 
@@ -54,7 +58,8 @@ class HttpApi implements Api {
         userId: PropertyInfo(userName),
         userName: PropertyInfo(userName),
         fullName: PropertyInfo('user $userName'),
-        phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+        phoneNumber:
+            PropertyInfo('$userName-$userName$userName-$userName-$userName'),
         gender: PropertyInfo('M'),
         lastLoggedIn: PropertyInfo(null),
         accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -88,8 +93,10 @@ class HttpApi implements Api {
   Future<List<Organization>> getOrganizations({String query}) async {
     var organizations = List<Organization>();
 
-    var response = await client.get('$endpoint/Organization?Query=$query', headers: {'accept': 'text/json'}).timeout(
-        Duration(seconds: 10), onTimeout: () {
+    var response = await client.get('$endpoint/Organization?Query=$query',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: 10), onTimeout: () {
       throw Exception('Something happened! Please retry in a few seconds.');
     });
 
@@ -111,8 +118,11 @@ class HttpApi implements Api {
   }
 
   Future<List<String>> getOrganizationTypes() async {
-    var response = await client.get('$endpoint/api/ValueSets?valueSetNames=OrganizationType',
-        headers: {'accept': 'text/json'}).timeout(Duration(seconds: 10), onTimeout: () {
+    var response = await client.get(
+        '$endpoint/api/ValueSets?valueSetNames=OrganizationType',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: 10), onTimeout: () {
       throw Exception('Cannot fetch Organization Types');
     });
 
@@ -129,8 +139,10 @@ class HttpApi implements Api {
   }
 
   Future<Organization> getOrganization({String organizationID}) async {
-    var response = await client.get('$endpoint/Organization/$organizationID', headers: {'accept': 'text/json'}).timeout(
-        Duration(seconds: 10), onTimeout: () {
+    var response = await client.get('$endpoint/Organization/$organizationID',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: 10), onTimeout: () {
       throw Exception('Cannot fetch Organization $organizationID');
     });
 
@@ -142,7 +154,12 @@ class HttpApi implements Api {
   Future<void> createOrganization(Organization organization) async {
     var body = json.encode(organization.toJson());
     var response = await client
-        .post('$endpoint/Organization', headers: {'accept': 'text/plain', 'Content-Type': 'application/json'}, body: body)
+        .post('$endpoint/Organization',
+            headers: {
+              'accept': 'text/plain',
+              'Content-Type': 'application/json'
+            },
+            body: body)
         .timeout(Duration(seconds: 10), onTimeout: () {
       throw Exception('Cannot create Organization');
     });

@@ -6,11 +6,13 @@ import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
 
 abstract class Api {
-  static const endpoint = 'https://scripsorganizationapi20191204032750.azurewebsites.net';
+  static const endpoint = '';
 
-  Future<User> getUser(BuildContext context, {String userName, String password});
+  Future<User> getUser(BuildContext context,
+      {String userName, String password});
   Future<MainMenu> getMenuItems(String userId);
-  Future<LoginResponse> login(BuildContext context, {String userName, String password});
+  Future<LoginResponse> login(BuildContext context,
+      {String userName, String password});
 
   // Practice API
   Future<List<Practice>> getPractices(/*TODO*/);

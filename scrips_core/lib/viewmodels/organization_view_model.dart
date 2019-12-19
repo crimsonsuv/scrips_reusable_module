@@ -1,4 +1,5 @@
 import 'package:scrips_core/services/api/api.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/viewmodels/base_model.dart';
 import 'package:scrips_core/locator.dart';
 import 'package:scrips_core/data_models/organization.dart';
@@ -19,7 +20,9 @@ class OrganizationViewModel extends BaseModel {
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
+      debugLog('ERROR: fetchOrganizations: ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
+      this.organizations?.clear();
     }
     setViewModelState(ViewState.Idle);
   }
@@ -36,6 +39,7 @@ class OrganizationViewModel extends BaseModel {
       this.fetchOrganizations();
       return true;
     } catch (e) {
+      debugLog('ERROR: createOrganization: ${e.toString()}');
       this.fetchOrganizations();
       setViewModelState(ViewState.Err);
       return false;
@@ -47,7 +51,8 @@ class OrganizationViewModel extends BaseModel {
     try {
       organizationTypes = await _api.getOrganizationTypes();
     } on Exception catch (e) {
-      organizationTypes.clear();
+      debugLog('ERROR: fetchOrganizationTypes: ${e.toString()}');
+      this.organizationTypes?.clear();
     }
     setViewModelState(ViewState.Idle);
   }

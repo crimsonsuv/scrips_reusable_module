@@ -57,12 +57,14 @@ class GlobalModel extends BaseModel {
 
   // scrips: sumeet: we keep all menu items for the user here and clone them in pmMainViewModel for each view based on it  so they are loaded only once on user login
   Future<bool> loadMainMenuItems({String userId}) async {
-    debugLog('globalmodel.dart::loading menu items for $userId');
-//    setViewModelState(ViewState.Busy, calledFrom: 'loadMainMenuItems');
+    //    setViewModelState(ViewState.Busy, calledFrom: 'loadMainMenuItems');
     if (userId == null || userId == '') {
       this.data.mainMenu = MainMenu();
     } else {
+      debugLog('globalmodel.dart::loading menu items for $userId');
       this.data.mainMenu = await _api.getMenuItems(userId);
+      debugLog(
+          'Loaded Top Items: ${this.data?.mainMenu?.topItems?.length}, Bottom Items: ${this.data?.mainMenu?.bottomItems?.length}');
 //      this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: null);
 //      for (MainMenuItem item in data.mainMenu.items) {
 //        if (item.subMenu != null) {
