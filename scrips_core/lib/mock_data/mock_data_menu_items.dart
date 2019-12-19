@@ -87,17 +87,17 @@ Map<String, dynamic> mockDataMenuItems = {
     {
       'id': RoutePaths.Messages,
       'label': 'Messages',
-      'enabled': false,
+      'enabled': true,
       'semanticLabel': '',
-      'iconName': 'email_icon',
+      'iconName': 'messages',
       'navigationRoute': RoutePaths.Messages,
       'subMenu': {
         'bottomItems': [
           {
             'id': RoutePaths.MessagesSubMenu,
             'label': 'Messages',
-            'iconName': 'email_icon',
-            'enabled': false,
+            'iconName': 'messages',
+            'enabled': true,
             'semanticLabel': '',
             'navigationRoute': '',
           },
@@ -108,17 +108,17 @@ Map<String, dynamic> mockDataMenuItems = {
     {
       'id': RoutePaths.Notifications,
       'label': 'Notifications',
-      'enabled': false,
+      'enabled': true,
       'semanticLabel': '',
-      'iconName': 'email_icon',
+      'iconName': 'notification',
       'navigationRoute': RoutePaths.Notifications,
       'subMenu': {
         'bottomItems': [
           {
             'id': RoutePaths.NotificationsSubMenu,
             'label': 'Notifications',
-            'iconName': 'email_icon',
-            'enabled': false,
+            'iconName': 'notification',
+            'enabled': true,
             'semanticLabel': '',
             'navigationRoute': '',
           },
@@ -131,14 +131,14 @@ Map<String, dynamic> mockDataMenuItems = {
       'label': 'Rebecca Schmitt',
       'enabled': true,
       'semanticLabel': 'profile',
-      'iconName': 'user_icon',
+      'iconName': 'profile',
       'navigationRoute': RoutePaths.Profile,
       'subMenu': {
         'bottomItems': [
           {
             'id': RoutePaths.ProfileSubMenu,
             'label': 'Rebecca Schmitt',
-            'iconName': 'dashboard',
+            'iconName': 'profile',
             'enabled': true,
             'semanticLabel': '',
             'navigationRoute': '',

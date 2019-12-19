@@ -66,4 +66,46 @@ class Images {
         color: color,
         colorBlendMode: colorBlendMode,
       );
+
+  Image messages(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/messages.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image notification(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/notification.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image profile(
+      {double width,
+        double height,
+        Color color,
+        BlendMode colorBlendMode,
+        BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/user_icon.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
 }

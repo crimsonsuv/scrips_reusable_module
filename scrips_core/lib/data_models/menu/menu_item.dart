@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:scrips_core/constants/app_assets.dart';
+import 'package:scrips_core/ui_helpers/app_colors.dart';
 
 part 'menu_item.g.dart';
 
@@ -40,6 +41,12 @@ class MenuItem {
         return Images.instance.dashboard();
       case 'clinic':
         return Images.instance.clinic();
+      case 'messages':
+        return Images.instance.messages();
+      case 'notification':
+        return Images.instance.notification();
+      case 'profile':
+        return Images.instance.profile();
       default:
         return Image.asset('assets/dashboard.png');
     }
