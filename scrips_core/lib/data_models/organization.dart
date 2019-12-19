@@ -11,60 +11,77 @@ import 'dart:math';
 class Organization {
   // should be all finals, but not until we get all from service
   String organizationId;
-  String name;
+  String organizationName;
   DateTime dateOfSignUp;
   int numberOfUsers;
   String mobileNumber;
-  OrganizationStatus status;
-
-  //
-  Country country;
+  Status organizationStatus;
+  String country;
   String licenseNumber;
-  String licenseIssuingAuthority;
+  String licenceType;
   DateTime licenseExpirationDate;
-  String billingTaxID;
-  String practiceDescription;
-  bool isPrimary;
+//  String billingTaxID;
+  String typeOfPractice;
+  String firstName;
+  String lastName;
+  String email;
+//  bool isPrimary;
 
   Organization({
     this.organizationId,
     this.dateOfSignUp,
     this.numberOfUsers = 0,
     this.mobileNumber = "",
-    this.status = OrganizationStatus.None,
-    this.name = "",
-//    this.country,
-//    this.licenseNumber,
-//    this.licenseIssuingAuthority,
-//    this.licenseExpirationDate,
-//    this.billingTaxID,
-//    this.practiceDescription,
-//    this.isPrimary,
+    this.organizationStatus = Status.None,
+    this.organizationName = "",
+    this.country,
+    this.licenseNumber,
+    this.licenceType,
+    this.licenseExpirationDate,
+    this.typeOfPractice,
+    this.firstName,
+    this.lastName,
+    this.email
   });
 
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
   Organization.fromJson(Map<String, dynamic> json)
-      : this.name = json['name'] ?? "",
+      : this.organizationName = json['name'] ?? "",
         this.organizationId = json['organizationId'] ?? 'N/A',
         this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
         this.numberOfUsers = json['numberOfUsers'] ?? "",
         this.mobileNumber = json['mobileNumber'] ?? "",
-        this.status = json['isActive'] == true
-            ? OrganizationStatus.Active
-            : OrganizationStatus.None;
+        this.organizationStatus = json['isActive'] == true ? Status.Active : Status.None,
+        this.country = json['country'] ?? "",
+        this.typeOfPractice = json['typeOfPractice'] ?? "",
+        this.licenceType = json['licenseType'] ?? "",
+        this.licenseNumber = json['licenseNumber'] ?? "",
+        this.licenseExpirationDate = DataModel.parseDate(json['dateOfSignUp']),
+        this.firstName = json['adminNameGiven'] ?? "",
+        this.lastName = json['adminNameFamily'] ?? "",
+        this.email = json['adminEmail'] ?? "";
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['organizationId'] = this.organizationId;
-    data['name'] = this.name;
+    data['name'] = this.organizationName;
     data['dateOfSignUp'] = this.dateOfSignUp?.toIso8601String();
     data['mobileNumber'] = this.mobileNumber;
-    data['isActive'] = this.status == OrganizationStatus.Active;
+    data['isActive'] = this.organizationStatus == Status.Active;
+    data['country'] = this.country;
+    data['typeOfPractice'] = this.typeOfPractice;
+    data['licenseType'] = this.licenceType;
+    data['licenseNumber'] = this.licenseNumber;
+    data['liceneseExpirationDate'] = this.licenseExpirationDate?.toIso8601String();
+    data['adminNameGiven'] = this.firstName;
+    data['adminNameFamily'] = this.lastName;
+    data['adminEmail'] = this.email;
     return data;
   }
 }
 
-enum OrganizationStatus { None, Active }
+enum Status { None, Active }
 
 class Country {
   String code;

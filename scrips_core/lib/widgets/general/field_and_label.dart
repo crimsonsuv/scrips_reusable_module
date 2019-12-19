@@ -8,6 +8,8 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 
+
+
 enum FieldType {
   TextField,
   DropDownList,
@@ -41,6 +43,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String validationMessage;
   final TextCapitalization labelTextCapitalization;
   final Function onChanged;
+  final Function onTap;
   final Widget icon;
 
   final List<ListItemType> listItems;
@@ -56,9 +59,10 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldValue,
       this.fieldProperty,
       this.onChanged,
+        this.onTap,
       this.fieldType = FieldType.TextField,
       this.listItems,
-      this.icon = null,
+        this.icon = null,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -103,9 +107,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   void initState() {
     super.initState();
-    currentFieldValue = widget.fieldProperty != null
-        ? widget.fieldProperty?.value
-        : (widget.fieldValue ?? null);
+    currentFieldValue = widget.fieldProperty != null ? widget.fieldProperty?.value : (widget.fieldValue ?? null);
     if (widget.fieldType == FieldType.TextField) {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
@@ -121,7 +123,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   onChangedInternal(value) {
-//    debugLog('onChangedInternal $value');
+    debugLog('onChangedInternal $value');
     setState(() {
       currentFieldValue = value;
       if (widget.fieldProperty != null) {
@@ -131,6 +133,18 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage
       widget.onChanged(value, this);
+    }
+  }
+
+  onTapInternal() {
+    setState(() {
+      if (widget.fieldProperty != null) {
+        widget.fieldProperty.value = currentFieldValue;
+      }
+    });
+    if (widget.onTap != null) {
+      // also pass this so UI can call methods such as setValidationMessage
+      widget.onTap(this._textEditController);
     }
   }
 
@@ -178,17 +192,13 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            decoration:
-                UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
+            decoration: UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
             child: Row(children: <Widget>[
               PlatformText(
                 widget.labelValue,
-                style: this.widget.labelTextStyle ??
-                    defaultLabelStyle(
-                        widget.labelTextColor, widget.labelBackgroundColor),
+                style: this.widget.labelTextStyle ?? defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor),
                 textAlign: TextAlign.start,
-                textCapitalization: this.widget.labelTextCapitalization ??
-                    TextCapitalization.characters,
+                textCapitalization: this.widget.labelTextCapitalization ?? TextCapitalization.characters,
               ),
               this.widget.isMandatory
                   ? SizedBox(
@@ -198,12 +208,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               this.widget.isMandatory
                   ? PlatformText(
                       '*',
-                      style: this
-                              .widget
-                              .labelTextStyle
-                              .copyWith(color: defaultValidationTextColor) ??
-                          defaultLabelStyle(widget.labelTextColor,
-                                  widget.labelBackgroundColor)
+                      style: this.widget.labelTextStyle.copyWith(color: defaultValidationTextColor) ??
+                          defaultLabelStyle(widget.labelTextColor, widget.labelBackgroundColor)
                               .copyWith(color: defaultValidationTextColor),
                       textAlign: TextAlign.start,
                     )
@@ -243,8 +249,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       padding: UIHelper.defaultFieldInternalPadding,
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
-        border: Border.all(
-            color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
+        border: Border.all(color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
       child: field,
@@ -253,39 +258,23 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildValidationMessage(BuildContext context) {
     return UIHelper.buildValidationMessage(context,
-        validationMessage:
-            currentValidationMessage ?? widget.validationMessage ?? null);
+        validationMessage: currentValidationMessage ?? widget.validationMessage ?? null);
   }
 
   Widget buildDropDownList(BuildContext context) {
     return Container(
       height: 36.0,
-      child: Row(
-        children: <Widget>[
-          (widget.icon == null)
-              ? Container()
-              : SizedBox(height: 24, width: 24, child: widget.icon),
-          Padding(
-            padding: EdgeInsets.only(left: 8),
-          ),
-          Expanded(
-            child: DropdownButton(
-              underline: Container(),
-              isExpanded: true,
-              value: currentFieldValue ?? widget.fieldValue,
-              items: widget.listItems ?? [],
-              icon: Images.instance.dropDownIcon(width: 13, height: 13),
-              iconSize: 12.0,
-              onChanged: onChangedInternal,
-              style: defaultFieldStyle(
-                  widget.fieldTextColor, widget.fieldBackgroundColor),
-              hint: PlatformText(widget.placeholder ?? '',
-                  style: defaultHintStyle(null, null)),
-              disabledHint: PlatformText(widget.validationMessage ?? '',
-                  style: defaultHintStyle(null, null)),
-            ),
-          ),
-        ],
+      child: DropdownButton(
+        underline: Container(),
+        isExpanded: true,
+        value: currentFieldValue ?? widget.fieldValue,
+        items: widget.listItems ?? [],
+        icon: Images.instance.dropDownIcon(width: 13, height: 13),
+        iconSize: 12.0,
+        onChanged: onChangedInternal,
+        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+        hint: PlatformText(widget.placeholder ?? '', style: defaultHintStyle(null, null)),
+        disabledHint: PlatformText(widget.validationMessage ?? '', style: defaultHintStyle(null, null)),
       ),
     );
   }
@@ -309,23 +298,28 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   Widget buildTextField(BuildContext context) {
     return Container(
       height: 36.0,
-      child: Center(
-        child: TextField(
-          obscureText: widget.isPassword == false || widget.isPassword == null
-              ? false
-              : true,
-          style: defaultFieldStyle(
-              widget.fieldTextColor, widget.fieldBackgroundColor),
-          textAlign: TextAlign.start,
-          enabled: widget.enabled ?? true,
-          controller: _textEditController,
-          onChanged: onChangedInternal,
-          decoration: InputDecoration(
-              counterText: "",
-              hintText: widget.placeholder,
-              hintStyle: defaultHintStyle(null, null),
-              border: InputBorder.none),
-        ),
+      child: Row(
+        children: <Widget>[
+          (widget.icon == null) ? Container() : SizedBox(height:24, width: 24,child: widget.icon),
+          Padding(padding: EdgeInsets.only(left: 8),),
+          Expanded(
+            child: TextField(
+              obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
+              style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
+              textAlign: TextAlign.start,
+              enabled: widget.enabled ?? true,
+              controller: _textEditController,
+              onChanged: onChangedInternal,
+              onTap: (){onTapInternal();},
+              decoration: InputDecoration(
+                  counterText: "",
+                  hintText: widget.placeholder,
+                  hintStyle: defaultHintStyle(null, null),
+                  border: InputBorder.none
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
