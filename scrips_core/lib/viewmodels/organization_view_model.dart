@@ -14,7 +14,8 @@ class OrganizationViewModel extends BaseModel {
   Future fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
     try {
-      organizations = await _api.getOrganizations(query: ""); // This should be optional parameter with default null
+      organizations = await _api.getOrganizations(
+          query: ""); // This should be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
@@ -27,15 +28,18 @@ class OrganizationViewModel extends BaseModel {
     assert(orgID != null);
   }
 
-  Future<void> createOrganization(Organization organization) async {
+  Future<bool> createOrganization(Organization organization) async {
     setViewModelState(ViewState.Busy);
     try {
       await _api.createOrganization(organization);
+      setViewModelState(ViewState.Idle);
+      this.fetchOrganizations();
+      return true;
     } catch (e) {
-      organizations.clear();
+      this.fetchOrganizations();
       setViewModelState(ViewState.Err);
+      return false;
     }
-    setViewModelState(ViewState.Idle);
   }
 
   Future<void> fetchOrganizationTypes() async {
