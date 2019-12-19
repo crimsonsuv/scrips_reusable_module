@@ -50,4 +50,20 @@ class Images {
           fit: fit,
           color: color,
           colorBlendMode: colorBlendMode);
+
+  Image clinic({
+    double width,
+    double height,
+    Color color,
+    BlendMode colorBlendMode,
+    BoxFit fit,
+  }) =>
+      Image(
+        image: AssetImage('assets/clinic.png'),
+        height: height,
+        width: width,
+        fit: fit,
+        color: color,
+        colorBlendMode: colorBlendMode,
+      );
 }

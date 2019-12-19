@@ -8,9 +8,13 @@ part of 'main_menu.dart';
 
 MainMenu _$MainMenuFromJson(Map<String, dynamic> json) {
   return MainMenu(
-    items: (json['items'] as List)
+    topItems: (json['topItems'] as List)
         ?.map((e) =>
             e == null ? null : MainMenuItem.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    bottomItems: (json['bottomItems'] as List)
+        ?.map((e) =>
+    e == null ? null : MainMenuItem.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     currentItem: json['currentItem'] == null
         ? null
@@ -19,6 +23,7 @@ MainMenu _$MainMenuFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$MainMenuToJson(MainMenu instance) => <String, dynamic>{
-      'items': instance.items?.map((e) => e?.toJson())?.toList(),
+      'topItems': instance.topItems?.map((e) => e?.toJson())?.toList(),
+      'bottomItems': instance.bottomItems?.map((e) => e?.toJson())?.toList(),
       'currentItem': instance.currentItem?.toJson(),
     };

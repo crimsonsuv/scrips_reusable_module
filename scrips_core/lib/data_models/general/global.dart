@@ -6,6 +6,7 @@ import 'package:scrips_core/general/property_info.dart';
 
 class Global {
   PropertyInfo<bool> showOverlappedSubMenu = PropertyInfo(false);
+  PropertyInfo<bool> profilePanelOpened = PropertyInfo(false);
   PropertyInfo<bool> animateSubMenu = PropertyInfo(false);
   PropertyInfo<bool> showBottomTabBar = PropertyInfo(false);
   PropertyInfo<bool> showDevicePreview = PropertyInfo(false);

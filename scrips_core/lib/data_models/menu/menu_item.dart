@@ -1,4 +1,3 @@
-import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -9,8 +8,10 @@ part 'menu_item.g.dart';
 @JsonSerializable(explicitToJson: true)
 class MenuItem {
   String id;
+
   //
   String iconName;
+
   //
   @JsonKey(ignore: true)
   Widget icon;
@@ -19,14 +20,14 @@ class MenuItem {
   bool enabled;
   String navigationRoute;
 
-  MenuItem(
-      {this.id,
-      this.iconName,
-      this.label,
-      this.enabled,
-      this.semanticLabel,
-      this.navigationRoute})
-      : this.icon = _iconFromName(iconName);
+  MenuItem({
+    this.id,
+    this.iconName,
+    this.label,
+    this.enabled,
+    this.semanticLabel,
+    this.navigationRoute,
+  }) : this.icon = _iconFromName(iconName);
 
   factory MenuItem.fromJson(Map<String, dynamic> json) =>
       _$MenuItemFromJson(json);
@@ -36,11 +37,11 @@ class MenuItem {
   static Widget _iconFromName(String iconName) {
     switch (iconName) {
       case 'home':
-        Widget i = Images.instance.dashboard();
-        return i;
+        return Images.instance.dashboard();
+      case 'clinic':
+        return Images.instance.clinic();
       default:
-        Widget i = Image.asset('assets/dashboard.png');
-        return i;
+        return Image.asset('assets/dashboard.png');
     }
   }
 }

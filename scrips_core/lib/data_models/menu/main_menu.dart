@@ -6,10 +6,15 @@ part 'main_menu.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MainMenu {
-  List<MainMenuItem> items = [];
+  List<MainMenuItem> topItems = [];
+  List<MainMenuItem> bottomItems = [];
   MainMenuItem currentItem;
 
-  MainMenu({this.items, this.currentItem});
+  MainMenu({
+    this.topItems,
+    this.bottomItems,
+    this.currentItem,
+  });
 
   factory MainMenu.fromJson(Map<String, dynamic> json) {
     return _$MainMenuFromJson(json);

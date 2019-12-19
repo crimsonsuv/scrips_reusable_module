@@ -70,7 +70,7 @@ class GlobalModel extends BaseModel {
 //      }
     }
     setViewModelState(ViewState.Idle, calledFrom: 'loadMainMenuItems');
-    debugLog('globalmodel.dart::loaded ${this.data?.mainMenu?.items?.length} menu items for $userId');
+    debugLog('globalmodel.dart::loaded ${this.data?.mainMenu?.topItems?.length} menu items for $userId');
     return true;
   }
 

@@ -2,7 +2,7 @@ import 'package:scrips_core/constants/app_routes.dart';
 
 //
 Map<String, dynamic> mockDataMenuItems = {
-  'items': [
+  'topItems': [
     {
       'id': RoutePaths.Home,
       'label': 'Home',
@@ -11,7 +11,7 @@ Map<String, dynamic> mockDataMenuItems = {
       'iconName': 'dashboard',
       'navigationRoute': RoutePaths.Home,
       'subMenu': {
-        'items': [
+        'topItems': [
           {
             'id': RoutePaths.HomeSubMenu1,
             'label': 'Home - Home',
@@ -28,11 +28,11 @@ Map<String, dynamic> mockDataMenuItems = {
       'id': RoutePaths.PracticeOnBoardingWizard,
       'label': 'OnBoarding',
       'iconName': 'directions_railway',
-      'enabled': true,
+      'enabled': false,
       'semanticLabel': '',
       'navigationRoute': RoutePaths.PracticeOnBoardingWizard,
       'subMenu': {
-        'items': [
+        'topItems': [
           {
             'id': RoutePaths.PracticeOnBoardingWizardSubMenu1,
             'label': 'OnBoarding - 1',
@@ -57,11 +57,11 @@ Map<String, dynamic> mockDataMenuItems = {
       'id': RoutePaths.Settings,
       'label': 'Settings',
       'iconName': 'settings',
-      'enabled': true,
+      'enabled': false,
       'semanticLabel': '',
       'navigationRoute': RoutePaths.Settings,
       'subMenu': {
-        'items': [
+        'topItems': [
           {
             'id': RoutePaths.SettingsSubMenu1,
             'label': 'Settings - 1',
@@ -77,6 +77,71 @@ Map<String, dynamic> mockDataMenuItems = {
             'enabled': true,
             'semanticLabel': '',
             'navigationRoute': RoutePaths.SettingsSubMenu2,
+          },
+        ],
+        'currentItem': null,
+      }
+    },
+  ],
+  'bottomItems': [
+    {
+      'id': RoutePaths.Messages,
+      'label': 'Messages',
+      'enabled': false,
+      'semanticLabel': '',
+      'iconName': 'email_icon',
+      'navigationRoute': RoutePaths.Messages,
+      'subMenu': {
+        'bottomItems': [
+          {
+            'id': RoutePaths.MessagesSubMenu,
+            'label': 'Messages',
+            'iconName': 'email_icon',
+            'enabled': false,
+            'semanticLabel': '',
+            'navigationRoute': '',
+          },
+        ],
+        'currentItem': null,
+      }
+    },
+    {
+      'id': RoutePaths.Notifications,
+      'label': 'Notifications',
+      'enabled': false,
+      'semanticLabel': '',
+      'iconName': 'email_icon',
+      'navigationRoute': RoutePaths.Notifications,
+      'subMenu': {
+        'bottomItems': [
+          {
+            'id': RoutePaths.NotificationsSubMenu,
+            'label': 'Notifications',
+            'iconName': 'email_icon',
+            'enabled': false,
+            'semanticLabel': '',
+            'navigationRoute': '',
+          },
+        ],
+        'currentItem': null,
+      }
+    },
+    {
+      'id': RoutePaths.Profile,
+      'label': 'Rebecca Schmitt',
+      'enabled': true,
+      'semanticLabel': 'profile',
+      'iconName': 'user_icon',
+      'navigationRoute': RoutePaths.Profile,
+      'subMenu': {
+        'bottomItems': [
+          {
+            'id': RoutePaths.ProfileSubMenu,
+            'label': 'Rebecca Schmitt',
+            'iconName': 'dashboard',
+            'enabled': true,
+            'semanticLabel': '',
+            'navigationRoute': '',
           },
         ],
         'currentItem': null,

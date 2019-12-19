@@ -13,6 +13,9 @@ class RoutePaths {
   static const String SettingsLocale = 'settings-locale';
   static const String Empty = '';
   static const String HomeSubMenu1 = '/1';
+  static const String Messages = '';
+  static const String Notifications = '';
+  static const String Profile = '';
 
   // test temp paths - delete when not needed
   static const String PmSettings = '/pm-settings';
@@ -42,4 +45,7 @@ class RoutePaths {
   static const String SettingsSubMenu2 = '/settings-2';
   static const String LocationView = 'location-view';
   static const String DialogTest = 'dialog-test';
+  static const String MessagesSubMenu = '';
+  static const String NotificationsSubMenu = '';
+  static const String ProfileSubMenu = '';
 }

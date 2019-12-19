@@ -14,11 +14,16 @@ class PmMainViewModel extends BaseModel {
   final BuildContext context;
   GlobalModel globalModel;
   bool isSideMenuOpen = true;
+
 //  Api _api;
 
-  PmMainViewModel(this.context, {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
-      : data =
-            PmMainView(mainMenuPath: mainMenuPath, mainSubMenuPath: mainSubMenuPath, mainSubMenuVisible: mainSubMenuVisible),
+  PmMainViewModel(this.context,
+      {String mainMenuPath, String mainSubMenuPath, bool mainSubMenuVisible})
+      : data = PmMainView(
+            mainMenuPath: mainMenuPath,
+            mainSubMenuPath: mainSubMenuPath,
+            mainSubMenuVisible: mainSubMenuVisible,
+            mainProfileMenuOpened: false),
 //        this._api = Provider.of(context),
         this.globalModel = Provider.of<GlobalModel>(context, listen: false),
         super();
@@ -27,16 +32,29 @@ class PmMainViewModel extends BaseModel {
   bool init() {
     debugLog('pmMainModel.dart::init Called');
     // clone main me u from global
-    this.data.mainMenu = MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
-    this.selectMenuItem(mainMenuPath: this.data.mainMenuPath, mainSubMenuPath: this.data.mainSubMenuPath);
+    this.data.mainMenu =
+        MainMenu.fromJson(this.globalModel.data.mainMenu.toJson());
+    this.selectMenuItem(
+        mainMenuPath: this.data.mainMenuPath,
+        mainSubMenuPath: this.data.mainSubMenuPath);
     return true;
   }
 
   void selectMenuItem({String mainMenuPath, String mainSubMenuPath}) {
     debugLog('globalmodel.dart::selectMenuItem Called');
-    this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data?.mainMenu?.items, id: mainMenuPath);
-    this.data.mainMenu.currentItem?.subMenu?.currentItem =
-        this.getMenuItemForId(items: data.mainMenu?.currentItem?.subMenu?.items, id: mainSubMenuPath);
+    this.data.mainMenu.currentItem = this.getMenuItemForId(
+        items: this.data?.mainMenu?.topItems, id: mainMenuPath);
+    this.data.mainMenu.currentItem?.subMenu?.currentItem = this
+        .getMenuItemForId(
+            items: data.mainMenu?.currentItem?.subMenu?.topItems,
+            id: mainSubMenuPath);
+
+    this.data.mainMenu.currentItem = this.getMenuItemForId(
+        items: this.data?.mainMenu?.bottomItems, id: mainMenuPath);
+    this.data.mainMenu.currentItem?.subMenu?.currentItem = this
+        .getMenuItemForId(
+            items: data.mainMenu?.currentItem?.subMenu?.bottomItems,
+            id: mainSubMenuPath);
   }
 
   MenuItem getMenuItemForId({List<MenuItem> items, String id}) {
@@ -61,7 +79,20 @@ class PmMainViewModel extends BaseModel {
     this.data.mainSubMenuVisible = !this.data.mainSubMenuVisible;
     // whether to animate on next show
     this.data.mainSubMenuStartShowing = this.data.mainSubMenuVisible;
-    this.data.statusText = this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
+    this.data.statusText =
+        this.data.mainSubMenuVisible ? 'Showing Menu' : 'Hiding Menu';
     setViewModelState(ViewState.Idle, calledFrom: 'toggleSubMenuVisible');
+  }
+
+  void profilePanelVisible(bool profilePanel) {
+    debugLog('pmMainModel::profilePanelVisible called $profilePanel');
+    setViewModelState(ViewState.Busy, calledFrom: 'profilePanelVisible');
+    this.data.mainProfileMenuOpened = profilePanel;
+  }
+
+  void profilePanelNotVisible(bool profilePanel) {
+    debugLog('pmMainModel::profilePanelNotVisible called $profilePanel');
+    setViewModelState(ViewState.Busy, calledFrom: 'profilePanelNotVisible');
+    this.data.mainProfileMenuOpened = profilePanel;
   }
 }

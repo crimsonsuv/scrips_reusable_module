@@ -8,7 +8,11 @@ part of 'main_sub_menu.dart';
 
 MainSubMenu _$MainSubMenuFromJson(Map<String, dynamic> json) {
   return MainSubMenu(
-    items: (json['items'] as List)
+    topItems: (json['topItems'] as List)
+        ?.map((e) =>
+            e == null ? null : MenuItem.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    bottomItems: (json['bottomItems'] as List)
         ?.map((e) =>
             e == null ? null : MenuItem.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -20,6 +24,7 @@ MainSubMenu _$MainSubMenuFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$MainSubMenuToJson(MainSubMenu instance) =>
     <String, dynamic>{
-      'items': instance.items?.map((e) => e?.toJson())?.toList(),
+      'topItems': instance.topItems?.map((e) => e?.toJson())?.toList(),
+      'bottomItems': instance.bottomItems?.map((e) => e?.toJson())?.toList(),
       'currentItem': instance.currentItem?.toJson(),
     };

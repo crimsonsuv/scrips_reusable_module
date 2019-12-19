@@ -6,9 +6,10 @@ class PmMainView {
   MainMenu mainMenu = MainMenu();
   bool mainSubMenuVisible = true;
   bool mainSubMenuStartShowing = true;
+  bool mainProfileMenuOpened = false;
   String statusText = '';
 
-  PmMainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible});
+  PmMainView({this.mainMenuPath, this.mainSubMenuPath, this.mainSubMenuVisible, this.mainProfileMenuOpened});
 
   PmMainView.fromJson(Map<String, dynamic> json) {
     //todo: fromJson
