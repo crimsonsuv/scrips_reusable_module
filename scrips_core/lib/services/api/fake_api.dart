@@ -91,4 +91,10 @@ class FakeApi implements Api {
   Future<List<String>> getOrganizationTypes() async {
     return null;
   }
+
+  @override
+  Future<void> updateOrganization(Organization organization) {
+    // TODO: implement updateOrganization
+    throw UnimplementedError();
+  }
 }

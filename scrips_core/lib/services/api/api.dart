@@ -26,4 +26,6 @@ abstract class Api {
 
   // Value Sets
   Future<List<String>> getOrganizationTypes();
+
+  Future<void> updateOrganization(Organization organization) {}
 }

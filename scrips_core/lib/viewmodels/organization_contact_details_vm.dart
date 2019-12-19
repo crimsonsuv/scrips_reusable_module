@@ -8,7 +8,7 @@ import 'package:scrips_core/viewmodels/general/global_model.dart';
 import 'base_model.dart';
 
 class OrganizationContactDetailsModel extends BaseModel {
-  OrganizationContactDetails user = OrganizationContactDetails.defaults();
+  OrganizationContactDetails contactDetails = OrganizationContactDetails.defaults();
   final BuildContext context;
   GlobalModel globalModel;
 //  Api _api;

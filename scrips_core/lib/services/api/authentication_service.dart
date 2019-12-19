@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/data_models/login/login.dart';
 import 'package:scrips_core/data_models/user/user.dart';
-
-import 'api.dart';
+import 'package:scrips_core/services/api/api.dart';
 
 class AuthenticationService {
   final Api _api;

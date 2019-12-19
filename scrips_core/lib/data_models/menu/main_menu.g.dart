@@ -14,7 +14,7 @@ MainMenu _$MainMenuFromJson(Map<String, dynamic> json) {
         ?.toList(),
     bottomItems: (json['bottomItems'] as List)
         ?.map((e) =>
-    e == null ? null : MainMenuItem.fromJson(e as Map<String, dynamic>))
+            e == null ? null : MainMenuItem.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     currentItem: json['currentItem'] == null
         ? null

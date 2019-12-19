@@ -25,8 +25,8 @@ Future<bool> setupLocator() async {
   LocalStorageService localStorageService = LocalStorageService();
   locator.registerSingleton<StorageService>(localStorageService);
 
-  locator.registerFactory(() => OrganizationViewModel());
-  locator.registerFactory(() => PracticeViewModel());
+//  locator.registerFactory(() => OrganizationViewModel());
+//  locator.registerFactory(() => PracticeViewModel());
   //
   WidgetsFlutterBinding.ensureInitialized();
   //scrips: sumeet: note dart:io not supported on Web!

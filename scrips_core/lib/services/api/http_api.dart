@@ -165,4 +165,15 @@ class HttpApi implements Api {
     });
     print(response);
   }
+
+  @override
+  Future<void> updateOrganization(Organization organization) async{
+    var body = json.encode(organization.toJson());
+    var response = await client
+        .post('$endpoint/Organization', headers: {'accept': 'text/plain', 'Content-Type': 'application/json'}, body: body)
+        .timeout(Duration(seconds: 10), onTimeout: () {
+      throw Exception('Cannot create Organization');
+    });
+    print(response);
+  }
 }
