@@ -37,11 +37,11 @@ class OrganizationContactDetails {
       office: PropertyInfo<String>(null),
       officePhone: PropertyInfo<String>(null),
       fax: PropertyInfo<String>(null),
-
     );
   }
 
-  factory OrganizationContactDetails.fromJson(Map<String, dynamic> json) => _$OrganizationContactDetailsFromJson(json);
+  factory OrganizationContactDetails.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationContactDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrganizationContactDetailsToJson(this);
 }

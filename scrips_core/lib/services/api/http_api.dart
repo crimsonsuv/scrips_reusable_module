@@ -111,6 +111,8 @@ class HttpApi implements Api {
 
     // Loop and convert each item to a Organization
     for (var org in parsed) {
+      //sumeet: note: ensure contactDetails element is present
+      org['contactDetails'] = org['contactDetails'] ?? Map<String, dynamic>();
       organizations.add(Organization.fromJson(org));
     }
 
@@ -167,10 +169,15 @@ class HttpApi implements Api {
   }
 
   @override
-  Future<void> updateOrganization(Organization organization) async{
+  Future<void> updateOrganization(Organization organization) async {
     var body = json.encode(organization.toJson());
     var response = await client
-        .post('$endpoint/Organization', headers: {'accept': 'text/plain', 'Content-Type': 'application/json'}, body: body)
+        .post('$endpoint/Organization',
+            headers: {
+              'accept': 'text/plain',
+              'Content-Type': 'application/json'
+            },
+            body: body)
         .timeout(Duration(seconds: 10), onTimeout: () {
       throw Exception('Cannot create Organization');
     });
