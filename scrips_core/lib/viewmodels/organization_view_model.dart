@@ -12,9 +12,7 @@ class OrganizationViewModel extends BaseModel {
   final BuildContext context;
   List<Organization> organizations;
   Organization organization;
-  List<ValueDisplayPair> organizationTypes = [
-    ValueDisplayPair('polyclinic', 'Polyclinic'),
-  ];
+  List<ValueDisplayPair> organizationTypes = [];
 
   OrganizationViewModel(this.context)
       : /*this._api = Provider.of(context),*/
@@ -70,6 +68,7 @@ class OrganizationViewModel extends BaseModel {
     setViewModelState(ViewState.Busy);
     try {
       // just used hardcoded types for now
+      return [];
 //      organizationTypes = await _api.getOrganizationTypes();
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganizationTypes ${e.toString()}');
