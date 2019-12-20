@@ -17,7 +17,7 @@ import 'api.dart';
 class HttpApi implements Api {
   static final endpoint =
       'http://scripsorganizationapi20191204032750.azurewebsites.net';
-
+  int _timeout = 30;
   var client = http.Client();
 
   @override
@@ -145,7 +145,7 @@ class HttpApi implements Api {
     var response = await client.get('$endpoint/Organization/$organizationID',
         headers: {
           'accept': 'text/json'
-        }).timeout(Duration(seconds: 10), onTimeout: () {
+        }).timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot fetch Organization $organizationID');
     });
 
@@ -163,7 +163,7 @@ class HttpApi implements Api {
               'Content-Type': 'application/json'
             },
             body: body)
-        .timeout(Duration(seconds: 10), onTimeout: () {
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Organization');
     });
     print(response);
@@ -173,13 +173,13 @@ class HttpApi implements Api {
   Future<void> updateOrganization(Organization organization) async {
     var body = json.encode(organization.toJson());
     var response = await client
-        .post('$endpoint/Organization',
+        .put('$endpoint/Organization/${organization?.organizationId}',
             headers: {
               'accept': 'text/plain',
               'Content-Type': 'application/json'
             },
             body: body)
-        .timeout(Duration(seconds: 10), onTimeout: () {
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Organization');
     });
     print(response);

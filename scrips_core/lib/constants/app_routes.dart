@@ -38,6 +38,7 @@ class RoutePaths {
   static const String OrganizationList = 'organization_list';
   static const String OrganizationList1 = 'organization_list_1';
   static const String CreateOrganization = 'create_organization';
+  static const String CreateOrganization1 = 'create_organization_1';
   static const String EnterSignUpAccessCode = 'enter_sign_up_access_code';
 
   //   temp test paths
