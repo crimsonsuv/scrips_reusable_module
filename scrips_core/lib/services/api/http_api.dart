@@ -93,7 +93,7 @@ class HttpApi implements Api {
   Future<List<Organization>> getOrganizations({String query}) async {
     var organizations = List<Organization>();
 
-    var response = await client.get('$endpoint/Organization?Query=$query',
+    var response = await client.get('$endpoint/Organization?query=$query',
         headers: {
           'accept': 'text/json'
         }).timeout(Duration(seconds: 10), onTimeout: () {

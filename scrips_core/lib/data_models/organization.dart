@@ -17,37 +17,37 @@ import 'organisation_contact_details.dart';
 
 part 'organization.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, checked: false)
 class Organization {
   // should be all finals, but not until we get all from service
-  @JsonKey(nullable: false)
-  PropertyInfo<String> organizationId;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> organizationName;
-  @JsonKey(fromJson: dateTimePiFromISOString, toJson: dateTimePiToISOString)
-  PropertyInfo<DateTime> dateOfSignUp;
-  @JsonKey(nullable: false)
-  PropertyInfo<int> numberOfUsers;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> mobileNumber;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> organizationStatus;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> country;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> licenseNumber;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> licenceType;
-  @JsonKey(fromJson: dateTimePiFromISOString, toJson: dateTimePiToISOString)
-  PropertyInfo<DateTime> licenseExpirationDate;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> typeOfPractice;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> firstName;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> lastName;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> email;
+  @JsonKey(nullable: false, defaultValue: '')
+  String organizationId;
+  @JsonKey(nullable: false, defaultValue: '')
+  String organizationName;
+  @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
+  DateTime dateOfSignUp;
+  @JsonKey(nullable: false, defaultValue: 0)
+  int numberOfUsers;
+  @JsonKey(nullable: false, defaultValue: '')
+  String mobileNumber;
+  @JsonKey(nullable: false, defaultValue: '')
+  String organizationStatus;
+  @JsonKey(nullable: false, defaultValue: '')
+  String country;
+  @JsonKey(nullable: false, defaultValue: '')
+  String licenseNumber;
+  @JsonKey(nullable: false, defaultValue: null)
+  String licenceType;
+  @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
+  DateTime licenseExpirationDate;
+  @JsonKey(nullable: false, defaultValue: '')
+  String typeOfPractice;
+  @JsonKey(nullable: false, defaultValue: '')
+  String firstName;
+  @JsonKey(nullable: false, defaultValue: '')
+  String lastName;
+  @JsonKey(nullable: false, defaultValue: '')
+  String email;
   @JsonKey(fromJson: _contactDetailsFromJson)
   OrganizationContactDetails contactDetails;
 //  bool isPrimary;

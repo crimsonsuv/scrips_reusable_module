@@ -8,29 +8,21 @@ part of 'organization.dart';
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) {
   return Organization(
-    organizationId:
-        PropertyInfo.fromJson(json['organizationId'] as Map<String, dynamic>),
-    dateOfSignUp: dateTimePiFromISOString(json['dateOfSignUp'] as String),
-    numberOfUsers:
-        PropertyInfo.fromJson(json['numberOfUsers'] as Map<String, dynamic>),
-    mobileNumber:
-        PropertyInfo.fromJson(json['mobileNumber'] as Map<String, dynamic>),
-    organizationStatus: PropertyInfo.fromJson(
-        json['organizationStatus'] as Map<String, dynamic>),
-    organizationName:
-        PropertyInfo.fromJson(json['organizationName'] as Map<String, dynamic>),
-    country: PropertyInfo.fromJson(json['country'] as Map<String, dynamic>),
-    licenseNumber:
-        PropertyInfo.fromJson(json['licenseNumber'] as Map<String, dynamic>),
-    licenceType:
-        PropertyInfo.fromJson(json['licenceType'] as Map<String, dynamic>),
+    organizationId: json['organizationId'] as String,
+    dateOfSignUp: dateTimeFromISOString(json['dateOfSignUp'] as String),
+    numberOfUsers: json['numberOfUsers'] as int,
+    mobileNumber: json['mobileNumber'] as String,
+    organizationStatus: json['organizationStatus'] as String,
+    organizationName: json['organizationName'] as String,
+    country: json['country'] as String,
+    licenseNumber: json['licenseNumber'] as String,
+    licenceType: json['licenceType'] as String,
     licenseExpirationDate:
-        dateTimePiFromISOString(json['licenseExpirationDate'] as String),
-    typeOfPractice:
-        PropertyInfo.fromJson(json['typeOfPractice'] as Map<String, dynamic>),
-    firstName: PropertyInfo.fromJson(json['firstName'] as Map<String, dynamic>),
-    lastName: PropertyInfo.fromJson(json['lastName'] as Map<String, dynamic>),
-    email: PropertyInfo.fromJson(json['email'] as Map<String, dynamic>),
+        dateTimeFromISOString(json['licenseExpirationDate'] as String),
+    typeOfPractice: json['typeOfPractice'] as String,
+    firstName: json['firstName'] as String,
+    lastName: json['lastName'] as String,
+    email: json['email'] as String,
     contactDetails: Organization._contactDetailsFromJson(
         json['contactDetails'] as Map<String, dynamic>),
   );
@@ -38,20 +30,20 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$OrganizationToJson(Organization instance) =>
     <String, dynamic>{
-      'organizationId': instance.organizationId.toJson(),
-      'organizationName': instance.organizationName.toJson(),
-      'dateOfSignUp': dateTimePiToISOString(instance.dateOfSignUp),
-      'numberOfUsers': instance.numberOfUsers.toJson(),
-      'mobileNumber': instance.mobileNumber.toJson(),
-      'organizationStatus': instance.organizationStatus.toJson(),
-      'country': instance.country.toJson(),
-      'licenseNumber': instance.licenseNumber.toJson(),
-      'licenceType': instance.licenceType.toJson(),
+      'organizationId': instance.organizationId,
+      'organizationName': instance.organizationName,
+      'dateOfSignUp': dateTimeToISOString(instance.dateOfSignUp),
+      'numberOfUsers': instance.numberOfUsers,
+      'mobileNumber': instance.mobileNumber,
+      'organizationStatus': instance.organizationStatus,
+      'country': instance.country,
+      'licenseNumber': instance.licenseNumber,
+      'licenceType': instance.licenceType,
       'licenseExpirationDate':
-          dateTimePiToISOString(instance.licenseExpirationDate),
-      'typeOfPractice': instance.typeOfPractice.toJson(),
-      'firstName': instance.firstName.toJson(),
-      'lastName': instance.lastName.toJson(),
-      'email': instance.email.toJson(),
+          dateTimeToISOString(instance.licenseExpirationDate),
+      'typeOfPractice': instance.typeOfPractice,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
       'contactDetails': instance.contactDetails?.toJson(),
     };

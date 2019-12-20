@@ -9,23 +9,22 @@ part of 'organisation_contact_details.dart';
 OrganizationContactDetails _$OrganizationContactDetailsFromJson(
     Map<String, dynamic> json) {
   return OrganizationContactDetails(
-    country: PropertyInfo.fromJson(json['country'] as Map<String, dynamic>),
-    city: PropertyInfo.fromJson(json['city'] as Map<String, dynamic>),
-    address: PropertyInfo.fromJson(json['address'] as Map<String, dynamic>),
-    office: PropertyInfo.fromJson(json['office'] as Map<String, dynamic>),
-    officePhone:
-        PropertyInfo.fromJson(json['officePhone'] as Map<String, dynamic>),
-    fax: PropertyInfo.fromJson(json['fax'] as Map<String, dynamic>),
+    country: json['country'] as String,
+    city: json['city'] as String,
+    address: json['address'] as String,
+    office: json['office'] as String,
+    officePhone: json['officePhone'] as String,
+    fax: json['fax'] as String,
   );
 }
 
 Map<String, dynamic> _$OrganizationContactDetailsToJson(
         OrganizationContactDetails instance) =>
     <String, dynamic>{
-      'country': instance.country.toJson(),
-      'city': instance.city.toJson(),
-      'address': instance.address.toJson(),
-      'office': instance.office.toJson(),
-      'officePhone': instance.officePhone.toJson(),
-      'fax': instance.fax.toJson(),
+      'country': instance.country,
+      'city': instance.city,
+      'address': instance.address,
+      'office': instance.office,
+      'officePhone': instance.officePhone,
+      'fax': instance.fax,
     };

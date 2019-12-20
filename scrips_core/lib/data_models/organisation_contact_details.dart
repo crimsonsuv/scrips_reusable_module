@@ -6,19 +6,19 @@ part 'organisation_contact_details.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class OrganizationContactDetails {
-  //   sumeet: essential to mark all fields with @JsonKey(nullable: false)to ensure all PropertyInfos are created properly in fromJson
-  @JsonKey(nullable: false)
-  PropertyInfo<String> country;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> city;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> address;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> office;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> officePhone;
-  @JsonKey(nullable: false)
-  PropertyInfo<String> fax;
+  //   sumeet: essential to mark all fields with @JsonKey(nullable: false, defaultValue: '')to ensure all PropertyInfos are created properly in fromJson
+  @JsonKey(nullable: false, defaultValue: '')
+  String country;
+  @JsonKey(nullable: false, defaultValue: '')
+  String city;
+  @JsonKey(nullable: false, defaultValue: '')
+  String address;
+  @JsonKey(nullable: false, defaultValue: '')
+  String office;
+  @JsonKey(nullable: false, defaultValue: '')
+  String officePhone;
+  @JsonKey(nullable: false, defaultValue: '')
+  String fax;
 
   OrganizationContactDetails({
     @required this.country,
@@ -31,12 +31,12 @@ class OrganizationContactDetails {
 
   factory OrganizationContactDetails.defaults() {
     return new OrganizationContactDetails(
-      country: PropertyInfo<String>(null),
-      city: PropertyInfo<String>(null),
-      address: PropertyInfo<String>(null),
-      office: PropertyInfo<String>(null),
-      officePhone: PropertyInfo<String>(null),
-      fax: PropertyInfo<String>(null),
+      country: null,
+      city: null,
+      address: null,
+      office: null,
+      officePhone: null,
+      fax: null,
     );
   }
 

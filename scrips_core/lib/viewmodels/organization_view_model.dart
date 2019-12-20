@@ -1,4 +1,5 @@
 import 'package:scrips_core/services/api/api.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/viewmodels/base_model.dart';
 import 'package:scrips_core/locator.dart';
 import 'package:scrips_core/data_models/organization.dart';
@@ -17,20 +18,37 @@ class OrganizationViewModel extends BaseModel {
       : /*this._api = Provider.of(context),*/
         super();
 
-  Future fetchOrganizations() async {
+  Future<bool> fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
     try {
-      organizations = await _api.getOrganizations(query: ""); // This should be optional parameter with default null
+      organizations = await _api.getOrganizations(
+          query: ""); // This should be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
+      debugLog('ERROR: fetchOrganizations ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
+      return false;
     }
     setViewModelState(ViewState.Idle);
+    return true;
   }
 
   Future<void> fetchOrganization(String orgID) async {
-    assert(orgID != null);
+    setViewModelState(ViewState.Busy);
+    try {
+      organization = await _api.getOrganization(
+          organizationID:
+              orgID); // This should be optional parameter with default null
+      // } on Exception catch (e) {
+      //   print('Unknown exception $e');
+    } on Exception catch (e) {
+      debugLog('ERROR: fetchOrganization ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
+    }
+    setViewModelState(ViewState.Idle);
+    return true;
   }
 
   Future<bool> createOrganization() async {
@@ -38,7 +56,8 @@ class OrganizationViewModel extends BaseModel {
     try {
       await _api.createOrganization(this.organization);
     } catch (e) {
-      setViewModelState(ViewState.Err);
+      debugLog('ERROR: createOrganization ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
       return false;
     }
     setViewModelState(ViewState.Idle);
@@ -50,23 +69,29 @@ class OrganizationViewModel extends BaseModel {
     try {
       organizationTypes = await _api.getOrganizationTypes();
     } on Exception catch (e) {
-      organizationTypes.clear();
+      debugLog('ERROR: fetchOrganizationTypes ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
     }
     setViewModelState(ViewState.Idle);
   }
 
-  Future<bool> updateOrganization() async{
+  Future<bool> updateOrganization() async {
     setViewModelState(ViewState.Busy);
     try {
       await _api.updateOrganization(this.organization);
     } catch (e) {
-      setViewModelState(ViewState.Err);
+      debugLog('ERROR: updateOrganization ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
       return false;
     }
     setViewModelState(ViewState.Idle);
     return true;
   }
 
-
-  init() {}
+  init() {
+    //sumeet: ensure org is created
+    organization = Organization();
+    organizations = [];
+  }
 }
