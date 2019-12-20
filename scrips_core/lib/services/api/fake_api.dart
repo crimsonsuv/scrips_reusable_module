@@ -6,18 +6,21 @@ import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
 import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 import 'api.dart';
 
 class FakeApi implements Api {
   @override
-  Future<User> getUser(BuildContext context, {String userName, String password}) async {
+  Future<User> getUser(BuildContext context,
+      {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
     return User(
       userId: PropertyInfo(userName),
       userName: PropertyInfo(userName),
       fullName: PropertyInfo('user $userName'),
-      phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+      phoneNumber:
+          PropertyInfo('$userName-$userName$userName-$userName-$userName'),
       gender: PropertyInfo('M'),
       lastLoggedIn: PropertyInfo(null),
       accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -27,7 +30,8 @@ class FakeApi implements Api {
   }
 
   @override
-  Future<LoginResponse> login(BuildContext context, {String userName, String password}) async {
+  Future<LoginResponse> login(BuildContext context,
+      {String userName, String password}) async {
     await Future.delayed(Duration(seconds: 1));
 
     return LoginResponse(
@@ -35,7 +39,8 @@ class FakeApi implements Api {
         userId: PropertyInfo(userName),
         userName: PropertyInfo(userName),
         fullName: PropertyInfo('user $userName'),
-        phoneNumber: PropertyInfo('$userName-$userName$userName-$userName-$userName'),
+        phoneNumber:
+            PropertyInfo('$userName-$userName$userName-$userName-$userName'),
         gender: PropertyInfo('M'),
         lastLoggedIn: PropertyInfo(null),
         accessToken: PropertyInfo('xyashgdcfbdb'),
@@ -83,12 +88,13 @@ class FakeApi implements Api {
   }
 
   Future<Organization> getOrganization({String organizationID}) async {
-    return Organization.fromJson(mockDataOrganizations["organizations"][0]); // return first element of the mock list
+    return Organization.fromJson(mockDataOrganizations["organizations"]
+        [0]); // return first element of the mock list
   }
 
   Future<void> createOrganization(Organization organization) async {}
 
-  Future<List<String>> getOrganizationTypes() async {
+  Future<List<ValueDisplayPair>> getOrganizationTypes() async {
     return null;
   }
 

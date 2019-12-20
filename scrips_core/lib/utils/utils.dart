@@ -63,3 +63,12 @@ PropertyInfo<DateTime> dateTimePiFromISOString(String stringDate) {
 String dateTimePiToISOString(PropertyInfo<DateTime> piDate) {
   return dateTimeToISOString(piDate?.value);
 }
+
+class ValueDisplayPair {
+  final String value;
+  final String label;
+  ValueDisplayPair(
+    this.value,
+    this.label,
+  );
+}

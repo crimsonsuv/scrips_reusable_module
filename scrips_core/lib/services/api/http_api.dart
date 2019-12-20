@@ -9,6 +9,7 @@ import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 import 'api.dart';
 
@@ -119,7 +120,7 @@ class HttpApi implements Api {
     return organizations;
   }
 
-  Future<List<String>> getOrganizationTypes() async {
+  Future<List<ValueDisplayPair>> getOrganizationTypes() async {
     var response = await client.get(
         '$endpoint/api/ValueSets?valueSetNames=OrganizationType',
         headers: {
@@ -133,9 +134,9 @@ class HttpApi implements Api {
     Map<String, dynamic> infoEntries = map["valueSets"][0];
     List<dynamic> entries = infoEntries['entries'];
 
-    List<String> types = List<String>();
+    List<ValueDisplayPair> types = List<ValueDisplayPair>();
     for (var entry in entries) {
-      types.add(entry['display']);
+      types.add(ValueDisplayPair(entry['display'], entry['display']));
     }
     return types;
   }

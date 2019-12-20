@@ -12,8 +12,9 @@ class OrganizationViewModel extends BaseModel {
   final BuildContext context;
   List<Organization> organizations;
   Organization organization;
-  // TODO: List<String> should become List<OrganizationTypes>
-  List<String> organizationTypes = List<String>();
+  List<ValueDisplayPair> organizationTypes = [
+    ValueDisplayPair('polyclinic', 'Polyclinic'),
+  ];
 
   OrganizationViewModel(this.context)
       : /*this._api = Provider.of(context),*/
@@ -68,7 +69,8 @@ class OrganizationViewModel extends BaseModel {
   Future<void> fetchOrganizationTypes() async {
     setViewModelState(ViewState.Busy);
     try {
-      organizationTypes = await _api.getOrganizationTypes();
+      // just used hardcoded types for now
+//      organizationTypes = await _api.getOrganizationTypes();
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganizationTypes ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);

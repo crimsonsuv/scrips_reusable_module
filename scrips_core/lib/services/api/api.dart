@@ -4,6 +4,7 @@ import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 abstract class Api {
   static const endpoint = '';
@@ -25,7 +26,7 @@ abstract class Api {
   Future<void> createOrganization(Organization organization);
 
   // Value Sets
-  Future<List<String>> getOrganizationTypes();
+  Future<List<ValueDisplayPair>> getOrganizationTypes();
 
   Future<void> updateOrganization(Organization organization) {}
 }
