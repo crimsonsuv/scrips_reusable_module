@@ -34,21 +34,23 @@ class OrganizationViewModel extends BaseModel {
     return true;
   }
 
-  Future<void> fetchOrganization(String orgID) async {
+  Future<Organization> fetchOrganization(String orgID) async {
     setViewModelState(ViewState.Busy);
     try {
       organization = await _api.getOrganization(
-          organizationID:
-              orgID); // This should be optional parameter with default null
+        organizationID: orgID,
+      ); // This sh
+      print("Organization : ${organization.organizationId}");
+      // ould be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganization ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
-      return false;
+      return null;
     }
     setViewModelState(ViewState.Idle);
-    return true;
+    return organization;
   }
 
   Future<bool> createOrganization() async {
