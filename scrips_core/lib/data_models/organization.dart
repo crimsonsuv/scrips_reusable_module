@@ -16,41 +16,52 @@ import 'organisation_contact_details.dart';
 
 part 'organization.g.dart';
 
+//https://github.com/dart-lang/json_serializable/blob/master/example/lib/example.dart
+
 @JsonSerializable(explicitToJson: true, checked: false)
 class Organization {
+
+
+
   // should be all finals, but not until we get all from service
-  @JsonKey(defaultValue: null)
+  @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
   File organizationLogo;
   @JsonKey(defaultValue: '')
   String organizationId;
   @JsonKey(defaultValue: '')
-  String organizationName;
+  String name;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime dateOfSignUp;
+  @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
+  DateTime lastSignIn;
   @JsonKey(defaultValue: 0)
   int numberOfUsers;
   @JsonKey(defaultValue: '')
   String mobileNumber;
-  @JsonKey(defaultValue: '')
-  String organizationStatus;
+  @JsonKey(defaultValue: false)
+  bool isActive;
   @JsonKey(defaultValue: '')
   String country;
   @JsonKey(defaultValue: '')
   String licenseNumber;
   @JsonKey(defaultValue: null)
-  String licenceType;
+  String licenseType;
+  @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
+  File licenceFrontSide;
+  @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
+  File licenseBackSide;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
-  DateTime licenseExpirationDate;
+  DateTime liceneseExpirationDate;
   @JsonKey(defaultValue: '')
   String typeOfPractice;
   @JsonKey(defaultValue: '')
-  String firstName;
+  String adminNameGiven;
   @JsonKey(defaultValue: '')
-  String lastName;
+  String adminNameFamily;
   @JsonKey(defaultValue: '')
-  String email;
+  String adminEmail;
   @JsonKey(fromJson: _contactDetailsFromJson)
-  OrganizationContactDetails contactDetails;
+  ContactDetails contactDetails;
 //  bool isPrimary;
 
   Organization(
@@ -60,16 +71,18 @@ class Organization {
       this.dateOfSignUp,
       this.numberOfUsers,
       this.mobileNumber,
-      this.organizationStatus,
-      this.organizationName,
+      this.isActive,
+      this.name,
       this.country,
       this.licenseNumber,
-      this.licenceType,
-      this.licenseExpirationDate,
+      this.licenseType,
+        this.licenceFrontSide,
+        this.licenseBackSide,
+      this.liceneseExpirationDate,
       this.typeOfPractice,
-      this.firstName,
-      this.lastName,
-      this.email,
+      this.adminNameGiven,
+      this.adminNameFamily,
+      this.adminEmail,
       this.contactDetails});
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
@@ -79,9 +92,9 @@ class Organization {
   //DataModel.parseDate(json['dateOfSignUp']),   this.dateOfSignUp?.toIso8601String();
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
 
-  static OrganizationContactDetails _contactDetailsFromJson(
+  static ContactDetails _contactDetailsFromJson(
       Map<String, dynamic> json) {
-    return OrganizationContactDetails.fromJson(
-        json['contactDetails'] ?? Map<String, dynamic>());
+    return ContactDetails.fromJson(
+        json['ContactDetails'] ?? Map<String, dynamic>());
   }
 }

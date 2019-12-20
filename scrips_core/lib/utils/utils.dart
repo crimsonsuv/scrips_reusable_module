@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,26 @@ bool isBlank(String value) {
   return value == null || value == '';
 }
 
+double internalMaxWidth(context, isExpanded){
+  bool useMobileLayout = MediaQuery.of(context).size.width < 600;
+  double mainMenuWidth = useMobileLayout
+      ? (MediaQuery.of(context).orientation == Orientation.portrait
+      ? (MediaQuery.of(context).size.width / 7)
+      : (MediaQuery.of(context).size.width / 4))
+      : MediaQuery.of(context).size.width / 2 / 7;
+  double mainSubMenuWidth = !useMobileLayout
+      ? MediaQuery.of(context).size.width / 4
+      : MediaQuery.of(context).size.width / 2;
+
+  return (useMobileLayout)
+      ? MediaQuery.of(context).size.width
+      : (
+          (MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth)) < 738
+              ? MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth + 8)
+              : (isExpanded) ? MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth + 8) : 738
+        );
+}
+
 String _debugLogPrefix = 'SCRIPS';
 void debugLog(String message) {
   debugPrint('$_debugLogPrefix - ${DateTime.now().toString()} - $message');
@@ -30,6 +51,15 @@ String scDateFormat(value) {
   } else {
     return DateFormat('dd-MM-yyyy')?.format(value);
   }
+}
+
+
+File fileFromJson(String fileData) {
+  return null;
+}
+
+String fileToJson(File fileData) {
+  return "";
 }
 
 DateTime dateTimeFromISOString(String stringDate) {

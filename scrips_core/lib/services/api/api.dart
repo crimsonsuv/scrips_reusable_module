@@ -6,6 +6,8 @@ import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
 import 'package:scrips_core/utils/utils.dart';
 
+import '../../data_models/organisation_contact_details.dart';
+
 abstract class Api {
   static const endpoint = '';
 
@@ -24,7 +26,7 @@ abstract class Api {
   Future<List<Organization>> getOrganizations({String query});
   Future<Organization> getOrganization({String organizationID});
   Future<void> createOrganization(Organization organization);
-
+  Future<void> createContactDetails(ContactDetails contactDetails,{String organizationID});
   // Value Sets
   Future<List<ValueDisplayPair>> getOrganizationTypes();
 

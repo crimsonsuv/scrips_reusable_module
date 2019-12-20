@@ -5,7 +5,7 @@ import 'package:scrips_core/general/property_info.dart';
 part 'organisation_contact_details.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class OrganizationContactDetails {
+class ContactDetails {
   //   sumeet: essential to mark all fields with @JsonKey(defaultValue: '')to ensure all PropertyInfos are created properly in fromJson
   @JsonKey(defaultValue: '')
   String country;
@@ -20,7 +20,7 @@ class OrganizationContactDetails {
   @JsonKey(defaultValue: '')
   String fax;
 
-  OrganizationContactDetails({
+  ContactDetails({
     @required this.country,
     @required this.city,
     @required this.address,
@@ -29,8 +29,8 @@ class OrganizationContactDetails {
     @required this.fax,
   });
 
-  factory OrganizationContactDetails.defaults() {
-    return new OrganizationContactDetails(
+  factory ContactDetails.defaults() {
+    return new ContactDetails(
       country: null,
       city: null,
       address: null,
@@ -40,8 +40,8 @@ class OrganizationContactDetails {
     );
   }
 
-  factory OrganizationContactDetails.fromJson(Map<String, dynamic> json) =>
-      _$OrganizationContactDetailsFromJson(json);
+  factory ContactDetails.fromJson(Map<String, dynamic> json) =>
+      _$ContactDetailsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$OrganizationContactDetailsToJson(this);
+  Map<String, dynamic> toJson() => _$ContactDetailsToJson(this);
 }

@@ -11,6 +11,7 @@ import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/mock_data/mock_data_menu_items.dart';
 import 'package:scrips_core/utils/utils.dart';
 
+import '../../data_models/organisation_contact_details.dart';
 import 'api.dart';
 
 /// The service responsible for networking requests
@@ -141,6 +142,7 @@ class HttpApi implements Api {
     return types;
   }
 
+  @override
   Future<Organization> getOrganization({String organizationID}) async {
     var response = await client.get('$endpoint/Organization/$organizationID',
         headers: {
@@ -148,13 +150,13 @@ class HttpApi implements Api {
         }).timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot fetch Organization $organizationID');
     });
-
     var parsed = json.decode(response.body);
     parsed['contactDetails'] = parsed['contactDetails'] ?? Map<String, dynamic>();
     Organization org = Organization.fromJson(parsed);
     return org;
   }
 
+  @override
   Future<void> createOrganization(Organization organization) async {
     var body = json.encode(organization.toJson());
     var response = await client
@@ -166,6 +168,22 @@ class HttpApi implements Api {
             body: body)
         .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Organization');
+    });
+    print(response);
+  }
+
+  @override
+  Future<void> createContactDetails(ContactDetails contactDetails, {String organizationID}) async {
+    var body = json.encode(contactDetails.toJson());
+    var response = await client
+        .post('$endpoint/Organization/ContactDetails/$organizationID',
+        headers: {
+          'accept': 'text/plain',
+          'Content-Type': 'application/json'
+        },
+        body: body)
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
+      throw Exception('Cannot create Contact Details');
     });
     print(response);
   }

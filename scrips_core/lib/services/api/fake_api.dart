@@ -8,6 +8,7 @@ import 'package:scrips_core/data_models/practice.dart';
 import 'package:scrips_core/data_models/organization.dart';
 import 'package:scrips_core/utils/utils.dart';
 
+import '../../data_models/organisation_contact_details.dart';
 import 'api.dart';
 
 class FakeApi implements Api {
@@ -93,6 +94,8 @@ class FakeApi implements Api {
   }
 
   Future<void> createOrganization(Organization organization) async {}
+
+  Future<void> createContactDetails(ContactDetails contactDetails, {String organizationID}) async {}
 
   Future<List<ValueDisplayPair>> getOrganizationTypes() async {
     return null;

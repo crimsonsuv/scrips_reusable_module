@@ -18,6 +18,7 @@ class OrganizationViewModel extends BaseModel {
       : /*this._api = Provider.of(context),*/
         super();
 
+
   Future<bool> fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
     try {
@@ -34,23 +35,35 @@ class OrganizationViewModel extends BaseModel {
     return true;
   }
 
-  Future<Organization> fetchOrganization(String orgID) async {
+  Future<bool> createContactDetails(String orgID) async {
+    setViewModelState(ViewState.Busy);
+    try {
+      await _api.createContactDetails(this.organization.contactDetails, organizationID: orgID);
+    } catch (e) {
+      debugLog('ERROR: create Contact Details ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
+    }
+    setViewModelState(ViewState.Idle);
+    return true;
+  }
+
+  Future<void> fetchOrganization(String orgID) async {
     setViewModelState(ViewState.Busy);
     try {
       organization = await _api.getOrganization(
-        organizationID: orgID,
-      ); // This sh
-      print("Organization : ${organization.organizationId}");
-      // ould be optional parameter with default null
+          organizationID:
+              orgID); // This should be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
+      print(organization.toJson());
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganization ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
-      return null;
+      return false;
     }
     setViewModelState(ViewState.Idle);
-    return organization;
+    return true;
   }
 
   Future<bool> createOrganization() async {
@@ -97,7 +110,7 @@ class OrganizationViewModel extends BaseModel {
 
   init() {
     //sumeet: ensure org is created
-    organization = Organization(contactDetails: OrganizationContactDetails());
+    organization = Organization(contactDetails: ContactDetails());
     organizations = [];
   }
 }

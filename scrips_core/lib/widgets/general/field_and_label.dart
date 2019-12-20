@@ -311,7 +311,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   Widget buildTextField(BuildContext context) {
     return Container(
       height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           (widget.icon == null)
               ? Container()

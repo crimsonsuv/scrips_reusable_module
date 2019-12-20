@@ -6,9 +6,8 @@ part of 'organisation_contact_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrganizationContactDetails _$OrganizationContactDetailsFromJson(
-    Map<String, dynamic> json) {
-  return OrganizationContactDetails(
+ContactDetails _$ContactDetailsFromJson(Map<String, dynamic> json) {
+  return ContactDetails(
     country: json['country'] as String ?? '',
     city: json['city'] as String ?? '',
     address: json['address'] as String ?? '',
@@ -18,8 +17,7 @@ OrganizationContactDetails _$OrganizationContactDetailsFromJson(
   );
 }
 
-Map<String, dynamic> _$OrganizationContactDetailsToJson(
-        OrganizationContactDetails instance) =>
+Map<String, dynamic> _$ContactDetailsToJson(ContactDetails instance) =>
     <String, dynamic>{
       'country': instance.country,
       'city': instance.city,
