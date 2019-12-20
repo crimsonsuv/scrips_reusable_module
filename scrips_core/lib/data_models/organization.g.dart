@@ -8,21 +8,21 @@ part of 'organization.dart';
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) {
   return Organization(
-    organizationId: json['organizationId'] as String,
+    organizationId: json['organizationId'] as String ?? '',
     dateOfSignUp: dateTimeFromISOString(json['dateOfSignUp'] as String),
-    numberOfUsers: json['numberOfUsers'] as int,
-    mobileNumber: json['mobileNumber'] as String,
-    organizationStatus: json['organizationStatus'] as String,
-    organizationName: json['organizationName'] as String,
-    country: json['country'] as String,
-    licenseNumber: json['licenseNumber'] as String,
+    numberOfUsers: json['numberOfUsers'] as int ?? 0,
+    mobileNumber: json['mobileNumber'] as String ?? '',
+    organizationStatus: json['organizationStatus'] as String ?? '',
+    organizationName: json['organizationName'] as String ?? '',
+    country: json['country'] as String ?? '',
+    licenseNumber: json['licenseNumber'] as String ?? '',
     licenceType: json['licenceType'] as String,
     licenseExpirationDate:
         dateTimeFromISOString(json['licenseExpirationDate'] as String),
-    typeOfPractice: json['typeOfPractice'] as String,
-    firstName: json['firstName'] as String,
-    lastName: json['lastName'] as String,
-    email: json['email'] as String,
+    typeOfPractice: json['typeOfPractice'] as String ?? '',
+    firstName: json['firstName'] as String ?? '',
+    lastName: json['lastName'] as String ?? '',
+    email: json['email'] as String ?? '',
     contactDetails: Organization._contactDetailsFromJson(
         json['contactDetails'] as Map<String, dynamic>),
   );

@@ -6,18 +6,18 @@ part 'organisation_contact_details.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class OrganizationContactDetails {
-  //   sumeet: essential to mark all fields with @JsonKey(nullable: false, defaultValue: '')to ensure all PropertyInfos are created properly in fromJson
-  @JsonKey(nullable: false, defaultValue: '')
+  //   sumeet: essential to mark all fields with @JsonKey(defaultValue: '')to ensure all PropertyInfos are created properly in fromJson
+  @JsonKey(defaultValue: '')
   String country;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String city;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String address;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String office;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String officePhone;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String fax;
 
   OrganizationContactDetails({

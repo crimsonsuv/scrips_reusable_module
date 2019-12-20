@@ -20,33 +20,33 @@ part 'organization.g.dart';
 @JsonSerializable(explicitToJson: true, checked: false)
 class Organization {
   // should be all finals, but not until we get all from service
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String organizationId;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String organizationName;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime dateOfSignUp;
-  @JsonKey(nullable: false, defaultValue: 0)
+  @JsonKey(defaultValue: 0)
   int numberOfUsers;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String mobileNumber;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String organizationStatus;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String country;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String licenseNumber;
-  @JsonKey(nullable: false, defaultValue: null)
+  @JsonKey(defaultValue: null)
   String licenceType;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime licenseExpirationDate;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String typeOfPractice;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String firstName;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String lastName;
-  @JsonKey(nullable: false, defaultValue: '')
+  @JsonKey(defaultValue: '')
   String email;
   @JsonKey(fromJson: _contactDetailsFromJson)
   OrganizationContactDetails contactDetails;

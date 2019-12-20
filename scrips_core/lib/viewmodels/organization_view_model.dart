@@ -1,3 +1,4 @@
+import 'package:scrips_core/data_models/organisation_contact_details.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/viewmodels/base_model.dart';
@@ -91,7 +92,7 @@ class OrganizationViewModel extends BaseModel {
 
   init() {
     //sumeet: ensure org is created
-    organization = Organization();
+    organization = Organization(contactDetails: OrganizationContactDetails());
     organizations = [];
   }
 }
