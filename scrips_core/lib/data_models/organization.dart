@@ -7,9 +7,8 @@
 // this.dateOfSignUp = DataModel.parseDate(json['dateOfSignUp']),
 //       data['dateOfSignUp'] = this.dateOfSignUp.toIso8601String();
 import 'dart:convert';
-
 import 'package:scrips_core/utils/utils.dart';
-
+import 'dart:io';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:scrips_core/general/property_info.dart';
 
@@ -20,6 +19,8 @@ part 'organization.g.dart';
 @JsonSerializable(explicitToJson: true, checked: false)
 class Organization {
   // should be all finals, but not until we get all from service
+  @JsonKey(defaultValue: null)
+  File organizationLogo;
   @JsonKey(defaultValue: '')
   String organizationId;
   @JsonKey(defaultValue: '')
@@ -53,7 +54,9 @@ class Organization {
 //  bool isPrimary;
 
   Organization(
-      {this.organizationId,
+      {
+        this.organizationLogo,
+        this.organizationId,
       this.dateOfSignUp,
       this.numberOfUsers,
       this.mobileNumber,

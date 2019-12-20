@@ -55,6 +55,7 @@ class OrganizationViewModel extends BaseModel {
     setViewModelState(ViewState.Busy);
     try {
       await _api.createOrganization(this.organization);
+      await this.fetchOrganizations();
     } catch (e) {
       debugLog('ERROR: createOrganization ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
@@ -82,6 +83,7 @@ class OrganizationViewModel extends BaseModel {
     setViewModelState(ViewState.Busy);
     try {
       await _api.updateOrganization(this.organization);
+      await this.fetchOrganizations();
     } catch (e) {
       debugLog('ERROR: updateOrganization ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);

@@ -150,6 +150,7 @@ class HttpApi implements Api {
     });
 
     var parsed = json.decode(response.body);
+    parsed['contactDetails'] = parsed['contactDetails'] ?? Map<String, dynamic>();
     Organization org = Organization.fromJson(parsed);
     return org;
   }
