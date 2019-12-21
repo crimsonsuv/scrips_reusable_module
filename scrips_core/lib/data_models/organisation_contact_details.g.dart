@@ -8,12 +8,12 @@ part of 'organisation_contact_details.dart';
 
 ContactDetails _$ContactDetailsFromJson(Map<String, dynamic> json) {
   return ContactDetails(
-    country: json['country'] as String ?? '',
-    city: json['city'] as String ?? '',
-    address: json['address'] as String ?? '',
-    office: json['office'] as String ?? '',
-    officePhone: json['officePhone'] as String ?? '',
-    fax: json['fax'] as String ?? '',
+    country: json['country'] as String,
+    city: json['city'] as String,
+    address: json['address'] as String,
+    office: json['office'] as String,
+    officePhone: json['officePhone'] as String,
+    fax: json['fax'] as String,
   );
 }
 

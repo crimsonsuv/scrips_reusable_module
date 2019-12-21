@@ -23,25 +23,25 @@ class Organization {
   // should be all finals, but not until we get all from service
   @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
   File organizationLogo;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String organizationId;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String name;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime dateOfSignUp;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime lastSignIn;
-  @JsonKey(defaultValue: 0)
+  @JsonKey()
   int numberOfUsers;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String mobileNumber;
-  @JsonKey(defaultValue: false)
+  @JsonKey()
   bool isActive;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String country;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String licenseNumber;
-  @JsonKey(defaultValue: null)
+  @JsonKey()
   String licenseType;
   @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
   File licenceFrontSide;
@@ -49,13 +49,13 @@ class Organization {
   File licenseBackSide;
   @JsonKey(fromJson: dateTimeFromISOString, toJson: dateTimeToISOString)
   DateTime liceneseExpirationDate;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String typeOfPractice;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String adminNameGiven;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String adminNameFamily;
-  @JsonKey(defaultValue: '')
+  @JsonKey()
   String adminEmail;
   @JsonKey(defaultValue: {})
   ContactDetails contactDetails;
