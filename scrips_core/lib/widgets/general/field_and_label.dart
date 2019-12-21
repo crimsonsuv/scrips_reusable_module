@@ -41,6 +41,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final String validationMessage;
   final TextCapitalization labelTextCapitalization;
   final Function onChanged;
+  final Function onEditingComplete;
+  final Function onSubmitted;
   final Function onTap;
   final Widget icon;
 
@@ -57,6 +59,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldValue,
       this.fieldProperty,
       this.onChanged,
+      this.onEditingComplete,
+      this.onSubmitted,
       this.onTap,
       this.fieldType = FieldType.TextField,
       this.listItems,
@@ -133,6 +137,20 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage
       widget.onChanged(value, this);
+    }
+  }
+
+  onSubmitted(value) {
+    if (widget.onSubmitted != null) {
+      // also pass this so UI can call methods such as setValidationMessage
+      widget.onSubmitted(value, this);
+    }
+  }
+
+  onEditingComplete() {
+    if (widget.onEditingComplete != null) {
+      // also pass this so UI can call methods such as setValidationMessage
+      widget.onEditingComplete(this.currentFieldValue, this);
     }
   }
 
@@ -334,6 +352,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               enabled: widget.enabled ?? true,
               controller: _textEditController,
               onChanged: onChangedInternal,
+              onSubmitted: onSubmitted,
+              onEditingComplete: onEditingComplete,
               onTap: () {
                 onTapInternal();
               },
