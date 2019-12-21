@@ -20,11 +20,11 @@ class OrganizationViewModel extends BaseModel {
       : /*this._api = Provider.of(context),*/
         super();
 
-  Future<bool> fetchOrganizations() async {
+  Future<bool> fetchOrganizations({query = ""}) async {
     setViewModelState(ViewState.Busy);
     try {
       organizations = await _api.getOrganizations(
-          query: ""); // This should be optional parameter with default null
+          query: query); // This should be optional parameter with default null
       // } on Exception catch (e) {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
