@@ -26,8 +26,11 @@ Organization _$OrganizationFromJson(Map<String, dynamic> json) {
     adminNameGiven: json['adminNameGiven'] as String ?? '',
     adminNameFamily: json['adminNameFamily'] as String ?? '',
     adminEmail: json['adminEmail'] as String ?? '',
-    contactDetails: Organization._contactDetailsFromJson(
-        json['contactDetails'] as Map<String, dynamic>),
+    contactDetails: json['contactDetails'] == null
+        ? null
+        : ContactDetails.fromJson(
+                json['contactDetails'] as Map<String, dynamic>) ??
+            {},
   )..lastSignIn = dateTimeFromISOString(json['lastSignIn'] as String);
 }
 

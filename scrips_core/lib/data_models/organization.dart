@@ -57,7 +57,7 @@ class Organization {
   String adminNameFamily;
   @JsonKey(defaultValue: '')
   String adminEmail;
-  @JsonKey(defaultValue: {}, nullable: false)
+  @JsonKey(defaultValue: {})
   ContactDetails contactDetails;
 //  bool isPrimary;
 
@@ -88,11 +88,4 @@ class Organization {
   //DataModel.parseDate(json['dateOfSignUp']),   this.dateOfSignUp?.toIso8601String();
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
 
-  static ContactDetails _contactDetailsFromJson(Map<String, dynamic> json) {
-    if (json['contactDetails'] == null || !(json['contactDetails'] is Map)) {
-      json['contactDetails'] = Map<String, dynamic>();
-    }
-
-    return ContactDetails.fromJson(json['contactDetails']);
-  }
 }
