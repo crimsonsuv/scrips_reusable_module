@@ -20,12 +20,12 @@ bool isBlank(String value) {
   return value == null || value == '';
 }
 
-double internalMaxWidth(context, isExpanded){
+double internalMaxWidth(context, isExpanded) {
   bool useMobileLayout = MediaQuery.of(context).size.width < 600;
   double mainMenuWidth = useMobileLayout
       ? (MediaQuery.of(context).orientation == Orientation.portrait
-      ? (MediaQuery.of(context).size.width / 7)
-      : (MediaQuery.of(context).size.width / 4))
+          ? (MediaQuery.of(context).size.width / 7)
+          : (MediaQuery.of(context).size.width / 4))
       : MediaQuery.of(context).size.width / 2 / 7;
   double mainSubMenuWidth = !useMobileLayout
       ? MediaQuery.of(context).size.width / 4
@@ -33,11 +33,15 @@ double internalMaxWidth(context, isExpanded){
 
   return (useMobileLayout)
       ? MediaQuery.of(context).size.width
-      : (
-          (MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth)) < 738
-              ? MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth + 8)
-              : (isExpanded) ? MediaQuery.of(context).size.width - (mainMenuWidth + mainSubMenuWidth + 8) : 738
-        );
+      : ((MediaQuery.of(context).size.width -
+                  (mainMenuWidth + mainSubMenuWidth)) <
+              738
+          ? MediaQuery.of(context).size.width -
+              (mainMenuWidth + mainSubMenuWidth + 8)
+          : (isExpanded)
+              ? MediaQuery.of(context).size.width -
+                  (mainMenuWidth + mainSubMenuWidth + 8)
+              : 738);
 }
 
 String _debugLogPrefix = 'SCRIPS';
@@ -52,7 +56,6 @@ String scDateFormat(value) {
     return DateFormat('dd-MM-yyyy')?.format(value);
   }
 }
-
 
 File fileFromJson(String fileData) {
   return null;
@@ -101,4 +104,16 @@ class ValueDisplayPair {
     this.value,
     this.label,
   );
+}
+
+bool isPlatformMobile(BuildContext context) {
+  switch (Theme.of(context)?.platform) {
+    case TargetPlatform.android:
+    case TargetPlatform.iOS:
+    case TargetPlatform.macOS:
+    case TargetPlatform.fuchsia:
+      return true;
+    default:
+      return false;
+  }
 }
