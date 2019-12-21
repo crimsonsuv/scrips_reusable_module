@@ -14,10 +14,11 @@ class OrganizationViewModel extends BaseModel {
   Organization organization;
   List<ValueDisplayPair> organizationTypes = [];
 
+  bool isEditMode;
+
   OrganizationViewModel(this.context)
       : /*this._api = Provider.of(context),*/
         super();
-
 
   Future<bool> fetchOrganizations() async {
     setViewModelState(ViewState.Busy);
@@ -38,7 +39,8 @@ class OrganizationViewModel extends BaseModel {
   Future<bool> createContactDetails(String orgID) async {
     setViewModelState(ViewState.Busy);
     try {
-      await _api.createContactDetails(this.organization.contactDetails, organizationID: orgID);
+      await _api.createContactDetails(this.organization.contactDetails,
+          organizationID: orgID);
     } catch (e) {
       debugLog('ERROR: create Contact Details ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);

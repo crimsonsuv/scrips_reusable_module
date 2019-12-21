@@ -169,7 +169,7 @@ class HttpApi implements Api {
         .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Organization');
     });
-    print(response);
+//    print(response);
   }
 
   @override
@@ -201,6 +201,6 @@ class HttpApi implements Api {
         .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Organization');
     });
-    print(response);
+//    print(response);
   }
 }
