@@ -16,6 +16,7 @@ import 'api.dart';
 
 /// The service responsible for networking requests
 class HttpApi implements Api {
+  int _defaultTimeout = 120;
   static final endpoint =
       'http://scripsorganizationapi20191204032750.azurewebsites.net';
   int _timeout = 30;
@@ -88,8 +89,8 @@ class HttpApi implements Api {
   // Organization
   //
 
-  Future myWait60secondsFuture() async {
-    await Future.delayed(Duration(seconds: 60));
+  Future myWait_defaultTimeoutsecondsFuture() async {
+    await Future.delayed(Duration(seconds: _defaultTimeout));
   }
 
   Future<List<Organization>> getOrganizations({String query}) async {
@@ -98,14 +99,9 @@ class HttpApi implements Api {
     var response = await client.get('$endpoint/Organization?query=$query',
         headers: {
           'accept': 'text/json'
-        }).timeout(Duration(seconds: 60), onTimeout: () {
+        }).timeout(Duration(seconds: _defaultTimeout), onTimeout: () {
       throw Exception('Something happened! Please retry in a few seconds.');
     });
-
-    //    var response = await myWait60secondsFuture().timeout(Duration(seconds: 3), onTimeout: () {
-    //      throw Exception('Timeout');
-    //    });
-    //    return Future<Null>(null);
 
     // Parse into List
     Map<String, dynamic> map = json.decode(response.body);
@@ -126,7 +122,7 @@ class HttpApi implements Api {
         '$endpoint/api/ValueSets?valueSetNames=OrganizationType',
         headers: {
           'accept': 'text/json'
-        }).timeout(Duration(seconds: 60), onTimeout: () {
+        }).timeout(Duration(seconds: _defaultTimeout), onTimeout: () {
       throw Exception('Cannot fetch Organization Types');
     });
 
@@ -151,7 +147,8 @@ class HttpApi implements Api {
       throw Exception('Cannot fetch Organization $organizationID');
     });
     var parsed = json.decode(response.body);
-    if(parsed['contactDetails'] == null || !(parsed['contactDetails'] is Map)){
+    if (parsed['contactDetails'] == null ||
+        !(parsed['contactDetails'] is Map)) {
       parsed['contactDetails'] = Map<String, dynamic>();
     }
 
@@ -177,15 +174,16 @@ class HttpApi implements Api {
   }
 
   @override
-  Future<void> createContactDetails(ContactDetails contactDetails, {String organizationID}) async {
+  Future<void> createContactDetails(ContactDetails contactDetails,
+      {String organizationID}) async {
     var body = json.encode(contactDetails.toJson());
     var response = await client
         .post('$endpoint/Organization/ContactDetails/$organizationID',
-        headers: {
-          'accept': 'text/plain',
-          'Content-Type': 'application/json'
-        },
-        body: body)
+            headers: {
+              'accept': 'text/plain',
+              'Content-Type': 'application/json'
+            },
+            body: body)
         .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot create Contact Details');
     });

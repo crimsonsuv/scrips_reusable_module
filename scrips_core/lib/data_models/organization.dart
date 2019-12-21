@@ -20,9 +20,6 @@ part 'organization.g.dart';
 
 @JsonSerializable(explicitToJson: true, checked: false)
 class Organization {
-
-
-
   // should be all finals, but not until we get all from service
   @JsonKey(fromJson: fileFromJson, toJson: fileToJson)
   File organizationLogo;
@@ -60,14 +57,13 @@ class Organization {
   String adminNameFamily;
   @JsonKey(defaultValue: '')
   String adminEmail;
-  @JsonKey(fromJson: _contactDetailsFromJson)
+  @JsonKey(defaultValue: {}, nullable: false)
   ContactDetails contactDetails;
 //  bool isPrimary;
 
   Organization(
-      {
-        this.organizationLogo,
-        this.organizationId,
+      {this.organizationLogo,
+      this.organizationId,
       this.dateOfSignUp,
       this.numberOfUsers,
       this.mobileNumber,
@@ -76,8 +72,8 @@ class Organization {
       this.country,
       this.licenseNumber,
       this.licenseType,
-        this.licenceFrontSide,
-        this.licenseBackSide,
+      this.licenceFrontSide,
+      this.licenseBackSide,
       this.liceneseExpirationDate,
       this.typeOfPractice,
       this.adminNameGiven,
@@ -92,9 +88,11 @@ class Organization {
   //DataModel.parseDate(json['dateOfSignUp']),   this.dateOfSignUp?.toIso8601String();
   // should take care of it with PropertyInfo class, this i quick-and-dirty solution
 
-  static ContactDetails _contactDetailsFromJson(
-      Map<String, dynamic> json) {
-    return ContactDetails.fromJson(
-        json['ContactDetails']);
+  static ContactDetails _contactDetailsFromJson(Map<String, dynamic> json) {
+    if (json['contactDetails'] == null || !(json['contactDetails'] is Map)) {
+      json['contactDetails'] = Map<String, dynamic>();
+    }
+
+    return ContactDetails.fromJson(json['contactDetails']);
   }
 }
