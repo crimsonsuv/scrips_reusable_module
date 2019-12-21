@@ -6,6 +6,12 @@ import 'package:scrips_core/locator.dart';
 import 'package:scrips_core/data_models/organization.dart';
 import 'package:flutter/material.dart';
 
+class CreateOrganizationArguments {
+  final Organization organization;
+  final OrganizationViewModel orgModel;
+  CreateOrganizationArguments({@required this.orgModel, this.organization});
+}
+
 class OrganizationViewModel extends BaseModel {
   // BaseModel is mostly ChangeNotifier
   final Api _api = locator<Api>();
