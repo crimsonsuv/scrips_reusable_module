@@ -27,7 +27,7 @@ class OrganizationViewModel extends BaseModel {
         super();
 
   Future<bool> fetchOrganizations({query = ""}) async {
-    setViewModelState(ViewState.Busy);
+    setViewModelState(ViewState.Busy, calledFrom: 'fetchOrganizations');
     try {
       organizations = await _api.getOrganizations(
           query: query); // This should be optional parameter with default null
@@ -35,10 +35,11 @@ class OrganizationViewModel extends BaseModel {
       //   print('Unknown exception $e');
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganizations ${e.toString()}');
-      setViewModelState(ViewState.Err, exception: e);
+      setViewModelState(ViewState.Err,
+          exception: e, calledFrom: 'fetchOrganizations');
       return false;
     }
-    setViewModelState(ViewState.Idle);
+    setViewModelState(ViewState.Idle, calledFrom: 'fetchOrganizations');
     return true;
   }
 
