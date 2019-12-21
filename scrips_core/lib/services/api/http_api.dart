@@ -151,9 +151,7 @@ class HttpApi implements Api {
         !(parsed['contactDetails'] is Map)) {
       parsed['contactDetails'] = Map<String, dynamic>();
     }
-
     Organization org = Organization.fromJson(parsed);
-
     return org;
   }
 
