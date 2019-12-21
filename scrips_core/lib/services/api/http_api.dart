@@ -88,8 +88,8 @@ class HttpApi implements Api {
   // Organization
   //
 
-  Future myWait10secondsFuture() async {
-    await Future.delayed(Duration(seconds: 10));
+  Future myWait60secondsFuture() async {
+    await Future.delayed(Duration(seconds: 60));
   }
 
   Future<List<Organization>> getOrganizations({String query}) async {
@@ -98,11 +98,11 @@ class HttpApi implements Api {
     var response = await client.get('$endpoint/Organization?query=$query',
         headers: {
           'accept': 'text/json'
-        }).timeout(Duration(seconds: 10), onTimeout: () {
+        }).timeout(Duration(seconds: 60), onTimeout: () {
       throw Exception('Something happened! Please retry in a few seconds.');
     });
 
-    //    var response = await myWait10secondsFuture().timeout(Duration(seconds: 3), onTimeout: () {
+    //    var response = await myWait60secondsFuture().timeout(Duration(seconds: 3), onTimeout: () {
     //      throw Exception('Timeout');
     //    });
     //    return Future<Null>(null);
@@ -126,7 +126,7 @@ class HttpApi implements Api {
         '$endpoint/api/ValueSets?valueSetNames=OrganizationType',
         headers: {
           'accept': 'text/json'
-        }).timeout(Duration(seconds: 10), onTimeout: () {
+        }).timeout(Duration(seconds: 60), onTimeout: () {
       throw Exception('Cannot fetch Organization Types');
     });
 
@@ -151,8 +151,12 @@ class HttpApi implements Api {
       throw Exception('Cannot fetch Organization $organizationID');
     });
     var parsed = json.decode(response.body);
-    parsed['contactDetails'] = parsed['contactDetails'] ?? Map<String, dynamic>();
+    if(parsed['contactDetails'] == null || !(parsed['contactDetails'] is Map)){
+      parsed['contactDetails'] = Map<String, dynamic>();
+    }
+
     Organization org = Organization.fromJson(parsed);
+
     return org;
   }
 

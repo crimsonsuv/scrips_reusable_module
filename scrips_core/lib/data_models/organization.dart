@@ -95,6 +95,6 @@ class Organization {
   static ContactDetails _contactDetailsFromJson(
       Map<String, dynamic> json) {
     return ContactDetails.fromJson(
-        json['ContactDetails'] ?? Map<String, dynamic>());
+        json['ContactDetails']);
   }
 }
