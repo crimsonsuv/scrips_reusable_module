@@ -79,7 +79,7 @@ TextStyle defaultValidationStyle(color, backgroundColor, {bool isReversed = fals
 //
 TextStyle defaultFieldStyle(color, backgroundColor, {bool isReversed = false}) => TextStyle(
       fontSize: fieldTextSize,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.normal,
       color: color ?? (!isReversed ? defaultFieldTextColor : defaultReversedFieldTextColor),
       backgroundColor: backgroundColor ?? (!isReversed ? defaultFieldBackgroundColor : defaultReversedFieldBackgroundColor),
     );

@@ -109,9 +109,11 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   void initState() {
     super.initState();
+
     currentFieldValue = widget.fieldProperty != null
         ? widget.fieldProperty?.value
         : (widget.fieldValue ?? null);
+
     if (widget.fieldType == FieldType.TextField) {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
@@ -235,7 +237,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                               .labelTextStyle
                               .copyWith(color: defaultValidationTextColor) ??
                           defaultLabelStyle(widget.labelTextColor,
-                                  widget.labelBackgroundColor)
+                                  Colors.transparent)
                               .copyWith(color: defaultValidationTextColor),
                       textAlign: TextAlign.start,
                     )
@@ -301,7 +303,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         iconSize: 12.0,
         onChanged: onChangedInternal,
         style: defaultFieldStyle(
-            widget.fieldTextColor, widget.fieldBackgroundColor),
+            widget.fieldTextColor, Colors.transparent),
         hint: PlatformText(widget.placeholder ?? '',
             style: defaultHintStyle(null, null)),
         disabledHint: PlatformText(widget.validationMessage ?? '',
@@ -338,7 +340,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               ? Container()
               : SizedBox(height: 24, width: 24, child: widget.icon),
           Padding(
-            padding: EdgeInsets.only(left: 8),
+            padding: EdgeInsets.only(left: 0),
           ),
           Expanded(
             child: TextField(
@@ -346,8 +348,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   widget.isPassword == false || widget.isPassword == null
                       ? false
                       : true,
-              style: defaultFieldStyle(
-                  widget.fieldTextColor, widget.fieldBackgroundColor),
+              style: widget?.textFieldTextStyle ?? defaultFieldStyle(regularTextColor, null),
               textAlign: TextAlign.start,
               enabled: widget.enabled ?? true,
               controller: _textEditController,

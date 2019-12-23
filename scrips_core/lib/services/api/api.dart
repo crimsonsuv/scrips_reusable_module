@@ -29,6 +29,8 @@ abstract class Api {
   Future<void> createContactDetails(ContactDetails contactDetails,{String organizationID});
   // Value Sets
   Future<List<ValueDisplayPair>> getOrganizationTypes();
+  Future<List<ValueDisplayPair>> getOrganizationCountries();
+  Future<List<ValueDisplayPair>> getOrganizationLicense();
 
   Future<void> updateOrganization(Organization organization) {}
 }

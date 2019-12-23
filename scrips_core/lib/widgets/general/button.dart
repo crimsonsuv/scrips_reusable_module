@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/ui_helpers/app_colors.dart';
 
 
 class Button extends StatelessWidget {
@@ -9,6 +10,7 @@ class Button extends StatelessWidget {
   final double height;
   final Function onPressed;
   final TextStyle style;
+  final bool isLoading;
   //
   Button({
     Key key,
@@ -18,6 +20,7 @@ class Button extends StatelessWidget {
     this.height,
     this.onPressed,
     this.style,
+    this.isLoading = false,
   }) : super(key: key);
   //
   @override
@@ -27,14 +30,14 @@ class Button extends StatelessWidget {
       child: Material(
           color: this.buttonBackgroundColor,
         child: InkWell(
-          onTap: (){
-            this.onPressed();
+          onTap: (this.isLoading) ? null : (){
+             this.onPressed();
           },
           child: Container(
             height: this.height,
             width: this.width,
             child: Center(
-              child: Text(this.text, style: this.style,),
+              child: this.isLoading ? SizedBox(height: 10, width: 10,child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(enabledBtnTextColor),)) : Text(this.text, style: this.style,),
             ),
           ),
         )

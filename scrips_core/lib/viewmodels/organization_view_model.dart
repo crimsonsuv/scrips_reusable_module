@@ -19,6 +19,8 @@ class OrganizationViewModel extends BaseModel {
   List<Organization> organizations;
   Organization organization;
   List<ValueDisplayPair> organizationTypes = [];
+  List<ValueDisplayPair> organizationCountries = [];
+  List<ValueDisplayPair> organizationLicenses = [];
 
   bool isEditMode;
 
@@ -88,10 +90,38 @@ class OrganizationViewModel extends BaseModel {
     setViewModelState(ViewState.Busy);
     try {
       // just used hardcoded types for now
-      return [];
-//      organizationTypes = await _api.getOrganizationTypes();
+      //return [];
+      organizationTypes = await _api.getOrganizationTypes();
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganizationTypes ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
+    }
+    setViewModelState(ViewState.Idle);
+  }
+
+  Future<void> fetchOrganizationCountries() async {
+    setViewModelState(ViewState.Busy);
+    try {
+      // just used hardcoded types for now
+      //return [];
+      organizationCountries = await _api.getOrganizationCountries();
+    } on Exception catch (e) {
+      debugLog('ERROR: fetchOrganizationCountries ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
+    }
+    setViewModelState(ViewState.Idle);
+  }
+
+  Future<void> fetchOrganizationLicenses() async {
+    setViewModelState(ViewState.Busy);
+    try {
+      // just used hardcoded types for now
+      //return [];
+      organizationLicenses = await _api.getOrganizationLicense();
+    } on Exception catch (e) {
+      debugLog('ERROR: fetchOrganizationLicenses ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
       return false;
     }

@@ -117,6 +117,7 @@ class HttpApi implements Api {
     return organizations;
   }
 
+  @override
   Future<List<ValueDisplayPair>> getOrganizationTypes() async {
     var response = await client.get(
         '$endpoint/api/ValueSets?valueSetNames=OrganizationType',
@@ -128,14 +129,68 @@ class HttpApi implements Api {
 
     // Parse into List (TODO: make it more generic - this is ugly)
     Map<String, dynamic> map = json.decode(response.body);
-    Map<String, dynamic> infoEntries = map["valueSets"][0];
-    List<dynamic> entries = infoEntries['entries'];
-
-    List<ValueDisplayPair> types = List<ValueDisplayPair>();
-    for (var entry in entries) {
-      types.add(ValueDisplayPair(entry['display'], entry['display']));
+    List<dynamic> valueSets = map["valueSets"] ?? [];
+    if(valueSets.length > 0){
+      Map<String, dynamic> infoEntries = valueSets.first;
+      List<dynamic> entries = infoEntries['entries'];
+      List<ValueDisplayPair> data = List<ValueDisplayPair>();
+      for (var entry in entries) {
+        data.add(ValueDisplayPair(entry['code'], entry['display']));
+      }
+      return data;
+    } else {
+      return [];
     }
-    return types;
+  }
+
+  @override
+  Future<List<ValueDisplayPair>> getOrganizationCountries() async {
+    var response = await client.get(
+        '$endpoint/api/ValueSets?valueSetNames=OrganizationCountries',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: _defaultTimeout), onTimeout: () {
+      throw Exception('Cannot fetch Organization Countries');
+    });
+    Map<String, dynamic> map = json.decode(response.body);
+    List<dynamic> valueSets = map["valueSets"] ?? [];
+    if(valueSets.length > 0){
+      Map<String, dynamic> infoEntries = valueSets.first;
+      List<dynamic> entries = infoEntries['entries'];
+      List<ValueDisplayPair> data = List<ValueDisplayPair>();
+      for (var entry in entries) {
+        data.add(ValueDisplayPair(entry['code'], entry['display']));
+      }
+      return data;
+    } else {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<ValueDisplayPair>> getOrganizationLicense() async {
+    var response = await client.get(
+        '$endpoint/api/ValueSets?valueSetNames=OrganizationLicense',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: _defaultTimeout), onTimeout: () {
+      throw Exception('Cannot fetch Organization Types');
+    });
+
+    // Parse into List (TODO: make it more generic - this is ugly)
+    Map<String, dynamic> map = json.decode(response.body);
+    List<dynamic> valueSets = map["valueSets"] ?? [];
+    if(valueSets.length > 0){
+      Map<String, dynamic> infoEntries = valueSets.first;
+      List<dynamic> entries = infoEntries['entries'];
+      List<ValueDisplayPair> data = List<ValueDisplayPair>();
+      for (var entry in entries) {
+        data.add(ValueDisplayPair(entry['code'], entry['display']));
+      }
+      return data;
+    } else {
+      return [];
+    }
   }
 
   @override

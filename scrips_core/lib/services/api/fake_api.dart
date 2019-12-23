@@ -101,6 +101,13 @@ class FakeApi implements Api {
     return null;
   }
 
+  Future<List<ValueDisplayPair>> getOrganizationCountries() async {
+    return null;
+  }
+  Future<List<ValueDisplayPair>> getOrganizationLicense() async {
+    return null;
+  }
+
   @override
   Future<void> updateOrganization(Organization organization) {
     // TODO: implement updateOrganization
