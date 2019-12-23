@@ -37,7 +37,7 @@ class Button extends StatelessWidget {
             height: this.height,
             width: this.width,
             child: Center(
-              child: this.isLoading ? SizedBox(height: 10, width: 10,child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(enabledBtnTextColor),)) : Text(this.text, style: this.style,),
+              child: this.isLoading ? SizedBox(height: height*0.7, width: height*0.7,child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(enabledBtnTextColor),)) : Text(this.text, style: this.style,),
             ),
           ),
         )
