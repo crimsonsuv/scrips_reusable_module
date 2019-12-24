@@ -112,7 +112,6 @@ bool isPlatformMobile(BuildContext context) {
   switch (Theme.of(context)?.platform) {
     case TargetPlatform.android:
     case TargetPlatform.iOS:
-    case TargetPlatform.macOS:
     case TargetPlatform.fuchsia:
       return true;
     default:
