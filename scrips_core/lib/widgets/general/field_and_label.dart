@@ -130,12 +130,12 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   onChangedInternal(value) {
 //    debugLog('onChangedInternal $value');
-    setState(() {
-      currentFieldValue = value;
-      if (widget.fieldProperty != null) {
-        widget.fieldProperty.value = currentFieldValue;
-      }
-    });
+//    setState(() {
+    currentFieldValue = value;
+    if (widget.fieldProperty != null) {
+      widget.fieldProperty.value = currentFieldValue;
+    }
+//    });
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage
       widget.onChanged(value, this);
@@ -157,11 +157,6 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   onTapInternal() {
-    setState(() {
-      if (widget.fieldProperty != null) {
-        widget.fieldProperty.value = currentFieldValue;
-      }
-    });
     if (widget.onTap != null) {
       // also pass this so UI can call methods such as setValidationMessage
       widget.onTap(this._textEditController);
@@ -236,8 +231,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                               .widget
                               .labelTextStyle
                               .copyWith(color: defaultValidationTextColor) ??
-                          defaultLabelStyle(widget.labelTextColor,
-                                  Colors.transparent)
+                          defaultLabelStyle(
+                                  widget.labelTextColor, Colors.transparent)
                               .copyWith(color: defaultValidationTextColor),
                       textAlign: TextAlign.start,
                     )
@@ -302,8 +297,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         icon: Images.instance.dropDownIcon(width: 13, height: 13),
         iconSize: 12.0,
         onChanged: onChangedInternal,
-        style: defaultFieldStyle(
-            widget.fieldTextColor, Colors.transparent),
+        style: defaultFieldStyle(widget.fieldTextColor, Colors.transparent),
         hint: PlatformText(widget.placeholder ?? '',
             style: defaultHintStyle(null, null)),
         disabledHint: PlatformText(widget.validationMessage ?? '',
@@ -348,7 +342,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   widget.isPassword == false || widget.isPassword == null
                       ? false
                       : true,
-              style: widget?.textFieldTextStyle ?? defaultFieldStyle(regularTextColor, null),
+              style: widget?.textFieldTextStyle ??
+                  defaultFieldStyle(regularTextColor, null),
               textAlign: TextAlign.start,
               enabled: widget.enabled ?? true,
               controller: _textEditController,
