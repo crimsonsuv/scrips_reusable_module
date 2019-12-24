@@ -22,14 +22,16 @@ bool isBlank(String value) {
 
 double internalMaxWidth(context, isExpanded) {
   bool useMobileLayout = MediaQuery.of(context).size.width < 600;
-  double mainMenuWidth = useMobileLayout
-      ? (MediaQuery.of(context).orientation == Orientation.portrait
-          ? (MediaQuery.of(context).size.width / 7)
-          : (MediaQuery.of(context).size.width / 4))
-      : MediaQuery.of(context).size.width / 2 / 7;
-  double mainSubMenuWidth = !useMobileLayout
-      ? MediaQuery.of(context).size.width / 4
-      : MediaQuery.of(context).size.width / 2;
+//  double mainMenuWidth = useMobileLayout
+//      ? (MediaQuery.of(context).orientation == Orientation.portrait
+//          ? (MediaQuery.of(context).size.width / 7)
+//          : (MediaQuery.of(context).size.width / 4))
+//      : MediaQuery.of(context).size.width / 2 / 7;
+//  double mainSubMenuWidth = !useMobileLayout
+//      ? MediaQuery.of(context).size.width / 4
+//      : MediaQuery.of(context).size.width / 2;
+  double mainMenuWidth = 56;
+  double mainSubMenuWidth = 220;
 
   return (useMobileLayout)
       ? MediaQuery.of(context).size.width
