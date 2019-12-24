@@ -21,6 +21,7 @@ class OrganizationViewModel extends BaseModel {
   List<ValueDisplayPair> organizationTypes = [];
   List<ValueDisplayPair> organizationCountries = [];
   List<ValueDisplayPair> organizationLicenses = [];
+  List<ValueDisplayPair> countryCities = [];
 
   bool isEditMode;
 
@@ -122,6 +123,20 @@ class OrganizationViewModel extends BaseModel {
       organizationLicenses = await _api.getOrganizationLicense();
     } on Exception catch (e) {
       debugLog('ERROR: fetchOrganizationLicenses ${e.toString()}');
+      setViewModelState(ViewState.Err, exception: e);
+      return false;
+    }
+    setViewModelState(ViewState.Idle);
+  }
+
+  Future<void> fetchCountryCities() async {
+    setViewModelState(ViewState.Busy);
+    try {
+      // just used hardcoded types for now
+      //return [];
+      countryCities = await _api.getCountryCities(organization.contactDetails.country);
+    } on Exception catch (e) {
+      debugLog('ERROR: fetchCountryCities ${e.toString()}');
       setViewModelState(ViewState.Err, exception: e);
       return false;
     }

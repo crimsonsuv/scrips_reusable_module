@@ -30,6 +30,7 @@ abstract class Api {
   // Value Sets
   Future<List<ValueDisplayPair>> getOrganizationTypes();
   Future<List<ValueDisplayPair>> getOrganizationCountries();
+  Future<List<ValueDisplayPair>> getCountryCities(String countryCode);
   Future<List<ValueDisplayPair>> getOrganizationLicense();
 
   Future<void> updateOrganization(Organization organization) {}

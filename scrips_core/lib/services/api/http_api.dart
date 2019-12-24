@@ -168,6 +168,28 @@ class HttpApi implements Api {
   }
 
   @override
+  Future<List<ValueDisplayPair>> getCountryCities(String countryCode) async {
+    var response = await client.get(
+        '$endpoint/api/ValueSets/CountryCities?countryCode=$countryCode',
+        headers: {
+          'accept': 'text/json'
+        }).timeout(Duration(seconds: _defaultTimeout), onTimeout: () {
+      throw Exception('Cannot fetch Country cities');
+    });
+    Map<String, dynamic> map = json.decode(response.body);
+    List<dynamic> cities = map["cities"] ?? [];
+    if(cities.length > 0){
+      List<ValueDisplayPair> data = List<ValueDisplayPair>();
+      for (var city in cities) {
+        data.add(ValueDisplayPair(city, city));
+      }
+      return data;
+    } else {
+      return [];
+    }
+  }
+
+  @override
   Future<List<ValueDisplayPair>> getOrganizationLicense() async {
     var response = await client.get(
         '$endpoint/api/ValueSets?valueSetNames=OrganizationLicense',

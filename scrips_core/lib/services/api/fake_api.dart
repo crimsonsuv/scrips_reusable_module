@@ -78,6 +78,7 @@ class FakeApi implements Api {
   //
   // Organizations
   //
+  @override
   Future<List<Organization>> getOrganizations({String query}) {
     var organizations = List<Organization>();
     List<dynamic> orgs = mockDataOrganizations["organizations"];
@@ -88,23 +89,34 @@ class FakeApi implements Api {
     return Future<List<Organization>>.value(organizations);
   }
 
+  @override
   Future<Organization> getOrganization({String organizationID}) async {
     return Organization.fromJson(mockDataOrganizations["organizations"]
         [0]); // return first element of the mock list
   }
 
+  @override
   Future<void> createOrganization(Organization organization) async {}
 
+  @override
   Future<void> createContactDetails(ContactDetails contactDetails, {String organizationID}) async {}
 
+  @override
   Future<List<ValueDisplayPair>> getOrganizationTypes() async {
     return null;
   }
 
+  @override
   Future<List<ValueDisplayPair>> getOrganizationCountries() async {
     return null;
   }
+  @override
   Future<List<ValueDisplayPair>> getOrganizationLicense() async {
+    return null;
+  }
+
+  @override
+  Future<List<ValueDisplayPair>> getCountryCities(String countryCode) async {
     return null;
   }
 
