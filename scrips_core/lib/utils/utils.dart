@@ -108,7 +108,7 @@ class ValueDisplayPair {
   );
 }
 
-bool isPlatformMobile(BuildContext context) {
+bool isPlatformStandard(BuildContext context) {
   switch (Theme.of(context)?.platform) {
     case TargetPlatform.android:
     case TargetPlatform.iOS:
@@ -117,4 +117,8 @@ bool isPlatformMobile(BuildContext context) {
     default:
       return false;
   }
+}
+
+bool isPlatformExperimental(BuildContext context) {
+  return !isPlatformStandard(context);
 }
