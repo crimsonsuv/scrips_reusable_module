@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'design.dart';
 
 const Color lightGrey = Color.fromARGB(255, 61, 63, 69);
 final Color red = Colors.red[400];
@@ -17,6 +16,8 @@ final Color disabledBtnBGColor =
 
 final Color gradientColor1 = Color(0xFFEEEEEE);
 final Color gradientColor2 = Color(0xFFF7F7F7);
+
+final Color blackColor = Color(0xFF000000);
 
 final Color normalBtnTextColor =
     Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
