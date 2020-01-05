@@ -13,6 +13,34 @@ class Images {
     return _instance;
   }
 
+  Image minus(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/ic_minus.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image plus(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/ic_plus.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
   Image back(double width, double height, Color color, BlendMode colorBlendMode,
           BoxFit fit) =>
       Image(
@@ -96,11 +124,11 @@ class Images {
           colorBlendMode: colorBlendMode);
 
   Image profile(
-      {double width,
-        double height,
-        Color color,
-        BlendMode colorBlendMode,
-        BoxFit fit}) =>
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
       Image(
           image: AssetImage("assets/user_icon.png"),
           height: height,

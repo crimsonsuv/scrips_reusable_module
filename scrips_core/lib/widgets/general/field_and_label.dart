@@ -1,4 +1,3 @@
-import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -45,6 +44,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Function onSubmitted;
   final Function onTap;
   final Widget icon;
+  final Widget rightIcon;
 
   final List<ListItemType> listItems;
   FieldAndLabelState _myState;
@@ -80,6 +80,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.labelBackgroundColor,
       this.fieldBackgroundColor,
       this.fieldTextColor,
+      this.rightIcon,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
 
@@ -294,7 +295,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         isExpanded: true,
         value: currentFieldValue ?? widget.fieldValue,
         items: widget.listItems ?? [],
-        icon: Images.instance.dropDownIcon(width: 13, height: 13),
+        icon: Images.instance.dropDownIcon(height: 7, width: 12),
         iconSize: 12.0,
         onChanged: onChangedInternal,
         style: defaultFieldStyle(widget.fieldTextColor, Colors.transparent),
@@ -332,10 +333,14 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         children: <Widget>[
           (widget.icon == null)
               ? Container()
-              : SizedBox(height: 24, width: 24, child: widget.icon),
-          Padding(
-            padding: EdgeInsets.only(left: 0),
-          ),
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
           Expanded(
             child: TextField(
               obscureText:
@@ -360,6 +365,16 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   border: InputBorder.none),
             ),
           ),
+          (widget.rightIcon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    SizedBox(height: 24, width: 24, child: widget.rightIcon),
+                  ],
+                ),
         ],
       ),
     );
@@ -373,7 +388,43 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildRichTextEdit(BuildContext context) {
-    return Container(child: PlatformText('RichTextEdit is not yet supprted'));
+    return Container(
+      height: 60.0,
+      constraints: BoxConstraints.expand(height: 60),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: TextField(
+              obscureText:
+                  widget.isPassword == false || widget.isPassword == null
+                      ? false
+                      : true,
+              style: widget?.textFieldTextStyle ??
+                  defaultFieldStyle(regularTextColor, null),
+              textAlign: TextAlign.start,
+              enabled: widget.enabled ?? true,
+              maxLines: null,
+              controller: _textEditController,
+              onChanged: onChangedInternal,
+              onSubmitted: onSubmitted,
+              onEditingComplete: onEditingComplete,
+              keyboardType: TextInputType.multiline,
+              minLines: 2,
+              onTap: () {
+                onTapInternal();
+              },
+              decoration: InputDecoration(
+                  counterText: "",
+                  hintText: widget.placeholder,
+                  hintStyle: defaultHintStyle(null, null),
+                  border: InputBorder.none),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
