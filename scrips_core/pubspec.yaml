@@ -18,7 +18,7 @@ dependencies:
   cupertino_icons:
   flare_splash_screen:
   http:
-  provider:
+  provider: ^3.2.0
   rflutter_alert:
   get_it:
   location:
