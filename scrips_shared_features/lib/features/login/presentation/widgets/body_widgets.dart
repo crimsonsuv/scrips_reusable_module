@@ -4,7 +4,6 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
-import 'package:scrips_shared_features/core/generated/i18n.dart';
 import 'package:validators/validators.dart';
 
 List<Widget> bodyWidgets(User loginUser, BuildContext context) => [
@@ -16,16 +15,16 @@ List<Widget> bodyWidgets(User loginUser, BuildContext context) => [
         fieldType: FieldType.TextField,
         fieldProperty: loginUser?.email,
         fieldBackgroundColor: textFieldBGcolor,
-        labelValue: S.of(context).email_address.toUpperCase(),
-        placeholder: S.of(context).email_address,
+        labelValue: 'Email Address'.toUpperCase(),
+        placeholder: 'Email Address',
         axis: Axis.vertical,
         enabled: true,
         onEditingComplete: (value, FieldAndLabelState state) {
           loginUser.email.value = value;
           if (!isEmail(value)) {
-            state.setValidationMessage(S.of(context).not_a_valid_email);
+            state.setValidationMessage("Not a valid Email");
           } else {
-            state.setValidationMessage(S.of(context).not_a_valid_email);
+            state.setValidationMessage("Not a valid Email");
           }
         },
 //                validationMessage: globalModel.data.loginError.value,
@@ -35,9 +34,9 @@ List<Widget> bodyWidgets(User loginUser, BuildContext context) => [
         fieldType: FieldType.TextField,
         fieldProperty: loginUser?.password,
         fieldBackgroundColor: textFieldBGcolor,
-        labelValue: S.of(context).password.toUpperCase(),
+        labelValue: "Password".toUpperCase(),
         isPassword: true,
-        placeholder: S.of(context).password,
+        placeholder: "Password",
         axis: Axis.vertical,
         enabled: true,
         onEditingComplete: (value, FieldAndLabelState state) {

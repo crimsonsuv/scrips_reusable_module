@@ -6,7 +6,6 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
-import 'package:scrips_shared_features/core/generated/i18n.dart';
 
 List<Widget> footerWidgets(User loginUser, BuildContext context,
         Function doNavigation, bool isLoading) =>
@@ -16,7 +15,7 @@ List<Widget> footerWidgets(User loginUser, BuildContext context,
         width: 200.0,
         height: 48,
 //                  isLoading: globalModel.state == ViewState.Busy,
-        text: S.of(context).login,
+        text: "Login",
         buttonBackgroundColor: (!isBlank(loginUser?.password?.value) &&
                 !isBlank(loginUser?.email?.value))
             ? normalBtnTextColor
@@ -33,7 +32,7 @@ List<Widget> footerWidgets(User loginUser, BuildContext context,
       Button(
         width: 222.0,
         height: 48,
-        text: S.of(context).forgot_password,
+        text: "Forgot Password?",
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         onPressed: () {
           Navigator.pushNamed(context, RoutePaths.PmForgotPassword);

@@ -8,16 +8,14 @@ List<Widget> headerWidgets(BuildContext context) => [
         vertical: 24,
       ),
       Text(
-        "Welcome to Scrips® Practice Management" ,
-        style: boldLabelTextStyle(17.0, null),
+        "Welcome to Scrips® Practice Management",
+        style: boldLabelTextStyle(17, textInputColor),
       ),
       Space(
         vertical: 10,
       ),
-      Text("Please enter your login details",
-          textAlign: TextAlign.center,
-          style: normalLabelTextStyle(15.0, regularTextColor)),
-      Space(
-        vertical: 24,
+      Text(
+        "Please, enter your login details",
+        style: normalLabelTextStyle(15, regularTextColor),
       ),
     ];

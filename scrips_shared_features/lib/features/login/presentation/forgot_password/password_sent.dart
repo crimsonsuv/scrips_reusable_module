@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
-import 'package:scrips_shared_features/core/generated/i18n.dart';
 
 class PasswordSent extends StatefulWidget {
   @override
@@ -45,7 +44,7 @@ class _PasswordSent extends State<PasswordSent> {
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Text(
-                      S.of(context).back,
+                      "Back",
                       style: boldLabelTextStyle(14.0, normalBtnTextColor),
                     ),
                   ),
@@ -70,12 +69,11 @@ class _PasswordSent extends State<PasswordSent> {
                       left: 8.0, top: 8.0, bottom: 16.0, right: 8.0),
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text(S.of(context).check_your_email,
+                    child: Text("Check Your Email",
                         style: boldLabelTextStyle(17.0, textInputColor)),
                   )),
               Container(
-                child: Text(
-                    S.of(context).we_sent_you_a_link_to_set_a_new_password,
+                child: Text("We sent you a link to set a new password",
                     style: normalLabelTextStyle(15.0, textInputColor)),
               ),
             ],

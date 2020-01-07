@@ -5,7 +5,6 @@ import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
-import 'package:scrips_shared_features/core/generated/i18n.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
@@ -40,7 +39,7 @@ class _LoginState extends State<Login> {
     String userPassword = loginUser.password.value;
     if (isBlank(userEmail) || isBlank(userPassword)) {
       bloc.dispatch(GetLoginError(
-          S.of(context).user_email_and_password_must_both_be_provided));
+          "User Email and Password must both be provided"));
       return;
     }
     bloc.dispatch(

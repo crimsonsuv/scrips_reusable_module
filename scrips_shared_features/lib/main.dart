@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'core/constants/app_config.dart';
+
+// setup All services, etc
+setUpAll() async {
+
+  // global config
+  await Configuration.loadConfig();
+}
+void main() async {
+ await setUpAll();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

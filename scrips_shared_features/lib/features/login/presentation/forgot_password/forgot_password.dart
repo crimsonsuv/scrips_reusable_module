@@ -6,7 +6,6 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
-import 'package:scrips_shared_features/core/generated/i18n.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   @override
@@ -28,7 +27,7 @@ class _ForgotPasswordView extends State<ForgotPasswordView> {
       showAppIcon: true,
       showNext: false,
       iconImage: Images.instance.pmAppIcon(),
-      nextBtnTitle: S.of(context).send_invite,
+      nextBtnTitle: "Send Invite",
       onBack: () {
         // Navigator.pop(context);
       },
@@ -39,14 +38,11 @@ class _ForgotPasswordView extends State<ForgotPasswordView> {
         Container(
           margin:
               EdgeInsets.only(left: 8.0, top: 20.0, bottom: 14.0, right: 8.0),
-          child: Text(S.of(context).reset_your_password,
+          child: Text("Reset Your Password",
               style: boldLabelTextStyle(17.0, textInputColor)),
         ),
         Container(
-          child: Text(
-              S
-                  .of(context)
-                  .enter_your_registration_email_to_receive_a_reset_link,
+          child: Text("Enter your registration email to receive a reset link",
               textAlign: TextAlign.center,
               style: normalLabelTextStyle(15.0, regularTextColor)),
         ),
@@ -61,8 +57,8 @@ class _ForgotPasswordView extends State<ForgotPasswordView> {
               labelTextStyle: defaultFieldLabelStyle(null, null),
               fieldType: FieldType.TextField,
               fieldBackgroundColor: textFieldBGcolor,
-              labelValue: S.of(context).email_address.toUpperCase(),
-              placeholder: S.of(context).email_address,
+              labelValue: "Email Address".toUpperCase(),
+              placeholder: "Email Address",
               axis: Axis.vertical,
               enabled: true,
             ),
@@ -85,7 +81,7 @@ class _ForgotPasswordView extends State<ForgotPasswordView> {
                 /*...*/
                 Navigator.pushNamed(context, RoutePaths.PmEnterNewPassword);
               },
-              child: Text(S.of(context).reset_your_password,
+              child: Text("Reset Your Password",
                   style: semiBoldLabelTextStyle(17.0, disabledBtnTextColor)),
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(24.0)),
@@ -103,7 +99,7 @@ class _ForgotPasswordView extends State<ForgotPasswordView> {
                 /*...*/
                 Navigator.pop(this.context);
               },
-              child: Text(S.of(context).login,
+              child: Text("Login",
                   style: semiBoldLabelTextStyle(17.0, normalBtnTextColor)),
             ),
           ),
