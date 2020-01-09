@@ -1,14 +1,14 @@
-import 'package:scrips_core/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrips_core/data_models/login/login.dart';
 import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
-import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/authentication_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
+import 'package:scrips_core/utils/utils.dart';
+
 import '../../data_models/general/global.dart';
 import '../base_model.dart';
 
@@ -84,16 +84,16 @@ class GlobalModel extends BaseModel {
       bool animateSubMenu,
       bool callSetBusy = false}) {
     debugLog('globalmodel.dart::setVars Called');
-    this.data.showOverlappedSubMenu = PropertyInfo(showOverlappedSubMenu);
-    this.data.animateSubMenu = PropertyInfo(animateSubMenu);
+    this.data.showOverlappedSubMenu = showOverlappedSubMenu;
+    this.data.animateSubMenu = animateSubMenu;
   }
 
   void setNewLocale(String localeCode, String localeCountry) {
     debugLog('globalmodel.dart::setNewLocale Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setNewLocale');
     // whether to show or not
-    this.data.localeCode = PropertyInfo(localeCode);
-    this.data.localeCountry = PropertyInfo(localeCountry);
+    this.data.localeCode = localeCode;
+    this.data.localeCountry = localeCountry;
     setViewModelState(ViewState.Idle, calledFrom: 'setNewLocale');
   }
 
@@ -105,11 +105,11 @@ class GlobalModel extends BaseModel {
       LoginResponse loginResponse = await _authService.login(this.context,
           userName: userName, password: password);
       if (loginResponse.success) {
-        this.data.loginMessage = PropertyInfo(loginResponse.message);
+        this.data.loginMessage = loginResponse.message;
         await this.setUser(loginResponse.user);
         return true;
       } else {
-        this.data.loginMessage = PropertyInfo(loginResponse.message);
+        this.data.loginMessage = loginResponse.message;
         await this.setUser(User.defaults());
         return false;
       }
@@ -124,7 +124,7 @@ class GlobalModel extends BaseModel {
     setViewModelState(ViewState.Busy, calledFrom: 'setLoginError');
     try {
       // whether to show or not
-      this.data.loginError.value = value;
+      this.data.loginError = value;
     } finally {
       setViewModelState(ViewState.Idle, calledFrom: 'setLoginError');
       debugLog('globalmodel.dart::setLoginError Finished');
@@ -141,10 +141,10 @@ class GlobalModel extends BaseModel {
     debugLog('globalmodel.dart::setShowOverlappedSubMenu Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setShowOverlappedSubMenu');
     // whether to show or not
-    this.data.showOverlappedSubMenu = PropertyInfo(value);
-    this.data.statusText = (this.data.showOverlappedSubMenu?.value ?? false)
-        ? PropertyInfo('Showing Overlapped Menu')
-        : PropertyInfo('Showing Fixed Menu');
+    this.data.showOverlappedSubMenu = value;
+    this.data.statusText = (this.data.showOverlappedSubMenu ?? false)
+        ? 'Showing Overlapped Menu'
+        : 'Showing Fixed Menu';
 
     setViewModelState(ViewState.Idle, calledFrom: 'setShowOverlappedSubMenu');
   }
@@ -153,10 +153,10 @@ class GlobalModel extends BaseModel {
     debugLog('globalmodel.dart::setShowDevicePreview Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setShowDevicePreview');
     // whether to show or not
-    this.data.showDevicePreview = PropertyInfo(value);
-    this.data.statusText = (this.data?.showDevicePreview?.value ?? false)
-        ? PropertyInfo('Showing Device Preview')
-        : PropertyInfo('Not Showing Device Preview');
+    this.data.showDevicePreview = value;
+    this.data.statusText = (this.data?.showDevicePreview ?? false)
+        ? 'Showing Device Preview'
+        : 'Not Showing Device Preview';
 
     setViewModelState(ViewState.Idle, calledFrom: 'setShowDevicePreview');
   }
@@ -165,10 +165,10 @@ class GlobalModel extends BaseModel {
     debugLog('globalmodel.dart::setLastException Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setLastException');
     // whether to show or not
-    this.data.lastException = PropertyInfo(exception);
-    this.data.statusText = this.data?.lastException?.value != null
-        ? PropertyInfo(this.data.lastException.toString())
-        : PropertyInfo('');
+    this.data.lastException = exception;
+    this.data.statusText = this.data?.lastException != null
+        ? this.data.lastException.toString()
+        : '';
 
     setViewModelState(ViewState.Idle, calledFrom: 'setLastException');
   }
@@ -177,10 +177,10 @@ class GlobalModel extends BaseModel {
     debugLog('globalmodel.dart::setAnimateSubMenu Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setAnimateSubMenu');
     // whether to show or not
-    this.data.animateSubMenu = PropertyInfo(value);
-    this.data.statusText = (this.data?.animateSubMenu?.value ?? false)
-        ? PropertyInfo('Showing Animated Menu')
-        : PropertyInfo('Showing Non Animated Menu');
+    this.data.animateSubMenu = value;
+    this.data.statusText = this.data?.animateSubMenu ?? false
+        ? 'Showing Animated Menu'
+        : 'Showing Non Animated Menu';
 
     setViewModelState(ViewState.Idle, calledFrom: 'setAnimateSubMenu');
   }
@@ -189,7 +189,7 @@ class GlobalModel extends BaseModel {
     debugLog('globalmodel.dart::setStatusText Called');
     setViewModelState(ViewState.Busy, calledFrom: 'setStatusText');
     // whether to show or not
-    this.data.statusText = PropertyInfo(value);
+    this.data.statusText = value;
     setViewModelState(ViewState.Idle, calledFrom: 'setStatusText');
   }
 
