@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_shared_features/core/usecase/no_params.dart';
-import 'package:scrips_shared_features/features/landing/domain/usecase/get_logged_user_use_case.dart';
+import 'package:scrips_shared_features/features/landing/domain/usecases/get_logged_user_use_case.dart';
 
 part 'landing_event.dart';
 part 'landing_state.dart';

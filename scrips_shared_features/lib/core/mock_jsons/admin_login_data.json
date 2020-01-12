@@ -1,0 +1,14 @@
+{
+  "user":{
+    "user_id":101,
+    "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFJUIRwtlzDGKLC4nau-0dOJcMGa-XwycfHVEmaQ1oI3u6eusq",
+    "user_name":"radi",
+    "full_name":"Radivoje Ostojic",
+    "phone_number":"+124234324334",
+    "gender":"M",
+    "last_logged_in":"",
+    "access_token":"123edsadx423rdwesdfsdf",
+    "email":"admin@scrips.com",
+    "password":"password"
+  }
+}

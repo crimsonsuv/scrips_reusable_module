@@ -21,7 +21,7 @@ List<Widget> footerWidgets(
       Button(
         height: 48,
         width: 222,
-        text: "Sign Up with access Code",
+        text: "Sign Up with Access Code",
         style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
         buttonBackgroundColor: textFieldBGcolor,
         onPressed: goToSignup,
