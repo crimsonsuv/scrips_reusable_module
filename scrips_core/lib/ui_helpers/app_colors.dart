@@ -32,6 +32,7 @@ final Color regularTextColor = Color(0xFF485685);
 final Color searchBGColour = Color(0xFF8E8E93).withOpacity(0.12); //
 
 // mainMenuBackground
+const Color selectedMenuBackgroundColor = Color(0xFF2F489A);
 const Color defaultMainMenuBackgroundColor = Color(0xFF1F3888);
 const Color defaultMainSubMenuBackgroundColor = defaultMainMenuBackgroundColor;
 const Color defaultMainAppBarBackgroundColor = defaultMainMenuBackgroundColor;
