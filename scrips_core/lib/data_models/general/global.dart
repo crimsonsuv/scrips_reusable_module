@@ -2,20 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
-import 'package:scrips_core/general/property_info.dart';
 
 class Global {
-  PropertyInfo<bool> showOverlappedSubMenu = PropertyInfo(false);
-  PropertyInfo<bool> profilePanelOpened = PropertyInfo(false);
-  PropertyInfo<bool> animateSubMenu = PropertyInfo(false);
-  PropertyInfo<bool> showBottomTabBar = PropertyInfo(false);
-  PropertyInfo<bool> showDevicePreview = PropertyInfo(false);
-  PropertyInfo<String> statusText = PropertyInfo('');
-  PropertyInfo<String> loginMessage = PropertyInfo('');
-  PropertyInfo<String> loginError = PropertyInfo('');
-  PropertyInfo<String> localeCode = PropertyInfo(PM_DEFAULT_LOCALE_CODE);
-  PropertyInfo<String> localeCountry = PropertyInfo(PM_DEFAULT_LOCALE_COUNTRY);
-  PropertyInfo<Exception> lastException = PropertyInfo(null);
+  bool showOverlappedSubMenu = false;
+  bool profilePanelOpened = false;
+  bool animateSubMenu = false;
+  bool showBottomTabBar = false;
+  bool showDevicePreview = false;
+  String statusText = '';
+  String loginMessage = '';
+  String loginError = '';
+  String localeCode = PM_DEFAULT_LOCALE_CODE;
+  String localeCountry = PM_DEFAULT_LOCALE_COUNTRY;
+  Exception lastException = null;
   User user = User.defaults();
   MainMenu mainMenu = MainMenu();
 

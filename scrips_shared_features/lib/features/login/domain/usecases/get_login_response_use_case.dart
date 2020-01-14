@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_core/data_models/login/login.dart';
 import 'package:scrips_shared_features/core/error/errors.dart';
 import 'package:scrips_shared_features/core/usecase/usecase.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/domain/repository/login_repository.dart';
 
 class GetLoginResponseUseCase implements UseCase<LoginResponse, Params> {

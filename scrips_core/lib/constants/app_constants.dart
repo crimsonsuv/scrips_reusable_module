@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/data_models/locale/supported_locale.dart';
-import 'package:scrips_core/general/property_info.dart';
 
 enum AppType {
   PM,
@@ -21,7 +20,7 @@ const PM_APP_NAME = 'Scrips Practice Management';
 const PM_APP_PRIMARY_SWATCH = Colors.blue;
 const PM_APP_INITIAL_ROUTE = Colors.blue;
 const PM_DEFAULT_LOCALE_CODE = 'en';
-const PM_DEFAULT_LOCALE_COUNTRY = '';
+const PM_DEFAULT_LOCALE_COUNTRY = 'US';
 
 const UK_APP_NAME = 'Scrips User Kisok';
 const UK_APP_PRIMARY_SWATCH = Colors.blue;
@@ -42,7 +41,7 @@ const PA_DEFAULT_LOCALE_CODE = 'en';
 const PA_DEFAULT_LOCALE_COUNTRY = '';
 
 final List<SupportedLocale> supportedLocales = [
-  SupportedLocale(label: 'English', localeCode: 'en', localeCountry: ''),
+  SupportedLocale(label: 'English', localeCode: 'en', localeCountry: 'US'),
   SupportedLocale(label: 'Arabic', localeCode: 'ar', localeCountry: ''),
 ];
 

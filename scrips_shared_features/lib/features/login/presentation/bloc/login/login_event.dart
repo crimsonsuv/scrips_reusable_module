@@ -5,16 +5,20 @@ abstract class LoginEvent {}
 
 class GetLoginResponseEvent extends LoginEvent {
   final BuildContext context;
-  final String email;
-  final String password;
-
-  GetLoginResponseEvent(this.context, this.email, this.password);
+  GetLoginResponseEvent(this.context);
 }
 
 class SetLoginDummyDataEvent extends LoginEvent {
   final BuildContext context;
 
   SetLoginDummyDataEvent(this.context);
+}
+
+class OnChangedValues extends LoginEvent {
+  final String email;
+  final String password;
+
+  OnChangedValues(this.email, this.password);
 }
 
 class GetLoginError extends LoginEvent {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrips_core/data_models/login/login.dart';
-import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:scrips_shared_features/features/login/presentation/widgets/body_widgets.dart';
 import 'package:scrips_shared_features/features/login/presentation/widgets/footer_widgets.dart';
@@ -21,7 +20,6 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final bloc = sl<LoginBloc>();
-  User _user;
   LoginResponse loginResponse;
   bool response = false;
   bool isLoading = false;
@@ -35,18 +33,16 @@ class _LoginState extends State<Login> {
   }
 
   void _doLogin(User loginUser) async {
-    String userEmail = loginUser.email.value;
-    String userPassword = loginUser.password.value;
+    String userEmail = loginUser.email;
+    String userPassword = loginUser.password;
     if (isBlank(userEmail) || isBlank(userPassword)) {
-      bloc.dispatch(GetLoginError(
-          "User Email and Password must both be provided"));
+      bloc.dispatch(
+          GetLoginError("User Email and Password must both be provided"));
       return;
     }
     bloc.dispatch(
       GetLoginResponseEvent(
         context,
-        userEmail,
-        userPassword,
       ),
     );
   }
@@ -54,7 +50,8 @@ class _LoginState extends State<Login> {
   void _goToHome(LoginResponse response) {
     if (response != null && response.success) {
       Future.delayed(Duration(milliseconds: 100), () {
-        Navigator.pushReplacementNamed(context, AppRoutePaths.Home);
+        Navigator.pushReplacementNamed(context, AppRoutePaths.Home,
+            arguments: response.user.userId);
       });
     }
   }
@@ -62,12 +59,12 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
-      builder: (_) => sl<LoginBloc>(),
+      builder: (_) => bloc,
       child: BlocBuilder<LoginBloc, LoginState>(
           bloc: bloc,
           builder: (context, state) {
             if (state is LoginDummyDataState) {
-              _user = state.user;
+              //TODO finding better approach
             } else if (state is LoginResponseState) {
               _goToHome(state.response);
             } else if (state is LoginLoading) {
@@ -85,9 +82,9 @@ class _LoginState extends State<Login> {
                 onBack: () {},
                 onNext: () {},
                 headerWidgets: headerWidgets(context),
-                bodyWidgets: bodyWidgets(_user, context),
+                bodyWidgets: bodyWidgets(context, bloc),
                 footerWidgets:
-                    footerWidgets(_user, context, _doLogin, isLoading),
+                    footerWidgets(bloc.user, context, _doLogin, isLoading),
               ),
             );
           }),
