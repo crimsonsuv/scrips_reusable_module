@@ -1,11 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/widgets/general/always_visble_scrollbar.dart';
-import 'package:scrips_pm/core/constants/app_assets.dart';
 
 class SimpleView extends StatelessWidget {
   final bool showBackButton;

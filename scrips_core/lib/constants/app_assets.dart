@@ -41,8 +41,8 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
-  Image back(double width, double height, Color color, BlendMode colorBlendMode,
-          BoxFit fit) =>
+  Image back({double width, double height, Color color, BlendMode colorBlendMode,
+          BoxFit fit}) =>
       Image(
           image: AssetImage("assets/back.png"),
           height: height,
