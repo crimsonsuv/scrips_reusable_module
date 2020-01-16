@@ -24,7 +24,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    String dummyUserName = "user@scrips.com";
+    String dummyUserName = "admin@scrips.com";
     String dummyUserPassword = "123456";
     if (event is SetLoginDummyDataEvent) {
       user = User(email: dummyUserName, password: dummyUserPassword);
