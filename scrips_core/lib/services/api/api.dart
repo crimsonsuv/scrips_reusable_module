@@ -11,27 +11,5 @@ import '../../data_models/organisation_contact_details.dart';
 abstract class Api {
   static const endpoint = '';
 
-  Future<User> getUser(BuildContext context,
-      {String userName, String password});
-  Future<MainMenu> getMenuItems(String userId);
-  Future<LoginResponse> login(BuildContext context,
-      {String userName, String password});
 
-  // Practice API
-  Future<List<Practice>> getPractices(/*TODO*/);
-  Future<List<Practice>> getPractice(/*TODO*/);
-  Future<Practice> addPractice(/*TODO*/);
-
-  //  Organization API
-  Future<List<Organization>> getOrganizations({String query});
-  Future<Organization> getOrganization({String organizationID});
-  Future<void> createOrganization(Organization organization);
-  Future<void> createContactDetails(ContactDetails contactDetails,{String organizationID});
-  // Value Sets
-  Future<List<ValueDisplayPair>> getOrganizationTypes();
-  Future<List<ValueDisplayPair>> getOrganizationCountries();
-  Future<List<ValueDisplayPair>> getCountryCities(String countryCode);
-  Future<List<ValueDisplayPair>> getOrganizationLicense();
-
-  Future<void> updateOrganization(Organization organization) {}
 }

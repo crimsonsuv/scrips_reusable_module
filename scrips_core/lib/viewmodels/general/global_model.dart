@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scrips_core/data_models/login/login.dart';
-import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/services/api/api.dart';
 import 'package:scrips_core/services/api/authentication_service.dart';
@@ -50,31 +48,7 @@ class GlobalModel extends BaseModel {
 
   Future<bool> setUser(User user) async {
     this.data.user = user;
-    await this.loadMainMenuItems(userId: user?.userId?.value);
     await _storageService.setLoggedInUser(this.data?.user);
-    return true;
-  }
-
-  // scrips: sumeet: we keep all menu items for the user here and clone them in pmMainViewModel for each view based on it  so they are loaded only once on user login
-  Future<bool> loadMainMenuItems({String userId}) async {
-    //    setViewModelState(ViewState.Busy, calledFrom: 'loadMainMenuItems');
-    if (userId == null || userId == '') {
-      this.data.mainMenu = MainMenu();
-    } else {
-      debugLog('globalmodel.dart::loading menu items for $userId');
-      this.data.mainMenu = await _api.getMenuItems(userId);
-      debugLog(
-          'Loaded Top Items: ${this.data?.mainMenu?.topItems?.length}, Bottom Items: ${this.data?.mainMenu?.bottomItems?.length}');
-//      this.data.mainMenu.currentItem = this.getMenuItemForId(items: this.data.mainMenu.items, id: null);
-//      for (MainMenuItem item in data.mainMenu.items) {
-//        if (item.subMenu != null) {
-//          item.subMenu.currentItem = this.getMenuItemForId(items: item.subMenu.items, id: null);
-//        }
-//      }
-    }
-//    setViewModelState(ViewState.Idle, calledFrom: 'loadMainMenuItems');
-    debugLog(
-        'globalmodel.dart::loaded ${this.data?.mainMenu?.topItems?.length} menu items for $userId');
     return true;
   }
 
@@ -95,40 +69,6 @@ class GlobalModel extends BaseModel {
     this.data.localeCode = localeCode;
     this.data.localeCountry = localeCountry;
     setViewModelState(ViewState.Idle, calledFrom: 'setNewLocale');
-  }
-
-  Future<bool> login(String userName, String password) async {
-    debugLog('globalmodel.dart::login Called');
-//    setViewModelState(ViewState.Busy, calledFrom: 'login');
-    try {
-      // whether to show or not
-      LoginResponse loginResponse = await _authService.login(this.context,
-          userName: userName, password: password);
-      if (loginResponse.success) {
-        this.data.loginMessage = loginResponse.message;
-        await this.setUser(loginResponse.user);
-        return true;
-      } else {
-        this.data.loginMessage = loginResponse.message;
-        await this.setUser(User.defaults());
-        return false;
-      }
-    } finally {
-//      setViewModelState(ViewState.Idle, calledFrom: 'login');
-      debugLog('globalmodel.dart::login Finished');
-    }
-  }
-
-  void setLoginError(String value) {
-    debugLog('globalmodel.dart::setLoginError Called');
-    setViewModelState(ViewState.Busy, calledFrom: 'setLoginError');
-    try {
-      // whether to show or not
-      this.data.loginError = value;
-    } finally {
-      setViewModelState(ViewState.Idle, calledFrom: 'setLoginError');
-      debugLog('globalmodel.dart::setLoginError Finished');
-    }
   }
 
   // utility function to get current platform from places without a buildContext
