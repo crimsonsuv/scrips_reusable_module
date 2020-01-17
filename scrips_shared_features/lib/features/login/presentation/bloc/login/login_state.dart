@@ -16,13 +16,18 @@ class LoginDummyDataState extends LoginState {
   LoginDummyDataState(this.user);
 }
 
-class LoginLoading extends LoginState {
-  final bool status;
-  LoginLoading(this.status);
-}
+class LoginBeginLoading extends LoginState {}
+
+class LoginEndLoading extends LoginState {}
 
 class ErrorState extends LoginState {
   final String message;
 
   ErrorState(this.message);
+}
+
+class EnableLoginButtonState extends LoginState {
+  final bool status;
+  final User user;
+  EnableLoginButtonState(this.user, this.status);
 }

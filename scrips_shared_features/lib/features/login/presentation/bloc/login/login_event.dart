@@ -3,22 +3,20 @@ part of 'login_bloc.dart';
 @immutable
 abstract class LoginEvent {}
 
-class GetLoginResponseEvent extends LoginEvent {
+class DoLoginEvent extends LoginEvent {
+  final User user;
   final BuildContext context;
-  GetLoginResponseEvent(this.context);
+  DoLoginEvent(this.context, this.user);
 }
 
 class SetLoginDummyDataEvent extends LoginEvent {
   final BuildContext context;
-
   SetLoginDummyDataEvent(this.context);
 }
 
-class OnChangedValues extends LoginEvent {
-  final String email;
-  final String password;
-
-  OnChangedValues(this.email, this.password);
+class OnChangedValuesEvent extends LoginEvent {
+  final User user;
+  OnChangedValuesEvent(this.user);
 }
 
 class GetLoginError extends LoginEvent {

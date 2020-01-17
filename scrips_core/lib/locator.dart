@@ -10,8 +10,6 @@ import 'package:scrips_core/services/api/http_api.dart';
 import 'package:scrips_core/services/dialog/dialog_service.dart';
 import 'package:scrips_core/services/storage/localstorage_service.dart';
 import 'package:scrips_core/services/storage/storage_service.dart';
-import 'package:scrips_core/viewmodels/organization_view_model.dart';
-import 'package:scrips_core/viewmodels/practice_view_model.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -20,7 +18,8 @@ const bool USE_FAKE_IMPLEMENTATION = false;
 Future<bool> setupLocator() async {
   locator.registerLazySingleton(() => BackgroundFetchService());
   locator.registerLazySingleton(() => DialogService());
-  locator.registerLazySingleton<Api>(() => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
+  locator.registerLazySingleton<Api>(
+      () => USE_FAKE_IMPLEMENTATION ? FakeApi() : HttpApi());
   // instantiate now itself so localStorage is available early
   LocalStorageService localStorageService = LocalStorageService();
   locator.registerSingleton<StorageService>(localStorageService);

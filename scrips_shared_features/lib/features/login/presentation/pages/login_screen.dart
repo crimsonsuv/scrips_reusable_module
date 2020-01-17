@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
@@ -23,28 +22,25 @@ class _LoginState extends State<Login> {
   LoginResponse loginResponse;
   bool response = false;
   bool isLoading = false;
+  User initialUser;
+  User editedUser;
+  bool isEnabled = false;
 
   @override
   void initState() {
     super.initState();
+    initialUser = User();
+    editedUser = User();
     bloc.dispatch(
       SetLoginDummyDataEvent(context),
     );
   }
 
-  void _doLogin(User loginUser) async {
-    String userEmail = loginUser.email;
-    String userPassword = loginUser.password;
-    if (isBlank(userEmail) || isBlank(userPassword)) {
-      bloc.dispatch(
-          GetLoginError("User Email and Password must both be provided"));
-      return;
-    }
-    bloc.dispatch(
-      GetLoginResponseEvent(
-        context,
-      ),
-    );
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    bloc.dispose();
   }
 
   void _goToHome(LoginResponse response) {
@@ -58,21 +54,34 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LoginBloc>(
-      builder: (_) => bloc,
-      child: BlocBuilder<LoginBloc, LoginState>(
+    return BlocListener(
+        bloc: bloc,
+        listener: (BuildContext context, state) {
+          if (state is LoginDummyDataState) {
+            initialUser = state.user;
+            editedUser = state.user;
+          } else if (state is LoginResponseState) {
+            _goToHome(state.response);
+          } else if (state is LoginBeginLoading) {
+            isLoading = true;
+          } else if (state is LoginEndLoading) {
+            isLoading = false;
+          } else if (state is ErrorState) {
+            print(state.message);
+            //TODO provide UI for error
+          } else if (state is EnableLoginButtonState) {
+            isEnabled = state.status;
+          }
+        },
+        child: BlocBuilder<LoginBloc, LoginState>(
           bloc: bloc,
-          builder: (context, state) {
-            if (state is LoginDummyDataState) {
-              //TODO finding better approach
-            } else if (state is LoginResponseState) {
-              _goToHome(state.response);
-            } else if (state is LoginLoading) {
-              isLoading = state.status;
-            } else if (state is ErrorState) {
-              print(state.message);
-              //TODO provide UI for error
+          condition: (preSate, currSate) {
+            if (currSate is EnableLoginButtonState) {
+              return false;
             }
+            return true;
+          },
+          builder: (context, state) {
             return Scaffold(
               body: SimpleView(
                 showBackButton: true,
@@ -82,12 +91,13 @@ class _LoginState extends State<Login> {
                 onBack: () {},
                 onNext: () {},
                 headerWidgets: headerWidgets(context),
-                bodyWidgets: bodyWidgets(context, bloc),
-                footerWidgets:
-                    footerWidgets(bloc.user, context, _doLogin, isLoading),
+                bodyWidgets:
+                    bodyWidgets(context, initialUser, editedUser, bloc),
+                footerWidgets: footerWidgets(
+                    editedUser, context, isLoading, bloc, isEnabled),
               ),
             );
-          }),
-    );
+          },
+        ));
   }
 }
