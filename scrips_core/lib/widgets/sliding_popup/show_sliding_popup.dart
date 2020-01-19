@@ -4,6 +4,7 @@ import 'package:scrips_core/widgets/sliding_popup/sliding_popup_view.dart';
 class SlidingPopup {
   static show(
       {BuildContext context,
+      Color backgroundColor,
       Widget child,
       String title,
       double width,
@@ -16,6 +17,7 @@ class SlidingPopup {
               title: title,
               child: child,
               onSave: onSave,
+              backgroundColor: backgroundColor,
             ));
   }
 }
