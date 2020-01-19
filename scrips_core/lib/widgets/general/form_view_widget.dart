@@ -6,12 +6,14 @@ import 'package:scrips_core/widgets/general/space.dart';
 
 class FormView extends StatelessWidget {
   final String header;
+  final String subtitle;
   final Widget child;
   final EdgeInsets margin;
   //
   FormView({
     Key key,
     this.header,
+    this.subtitle,
     @required this.margin,
     @required this.child,
   }) : super(key: key);
@@ -30,6 +32,21 @@ class FormView extends StatelessWidget {
                     "${this.header}",
                     style: boldLabelTextStyle(12, textInputColor),
                   ),
+                  (subtitle == null)
+                      ? Container()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            Space(
+                              vertical: 8,
+                            ),
+                            Text(
+                              "${this.subtitle}",
+                              style: semiBoldLabelTextStyle(
+                                  13, labelTextStyleTextColor),
+                            ),
+                          ],
+                        ),
                   Space(
                     vertical: 12,
                   ),
