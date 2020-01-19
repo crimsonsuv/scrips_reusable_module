@@ -7,9 +7,15 @@ class SlidingPopupWidget extends StatefulWidget {
   final Widget child;
   final double width;
   final Function onSave;
+  final Color background;
 
-  SlidingPopupWidget(
-      {this.title, this.child, @required this.width, this.onSave});
+  SlidingPopupWidget({
+    this.title,
+    this.child,
+    @required this.width,
+    this.onSave,
+    this.background,
+  });
 
   @override
   _SlidingPopupWidgetState createState() => _SlidingPopupWidgetState();
@@ -85,7 +91,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
               SlideTransition(
                 position: openAnimation,
                 child: Container(
-                  color: Colors.white,
+                  color:Colors.white,
                   width: widget.width,
                   height: MediaQuery.of(context).size.height,
                   child: Column(
@@ -141,8 +147,11 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                         color: separatorColor,
                       ),
                       Expanded(
-                        child: SingleChildScrollView(
-                            child: SizedBox.fromSize(child: this.widget.child)),
+                        child: Container(
+                          color: widget.background,
+                          child: SingleChildScrollView(
+                              child: SizedBox.fromSize(child: this.widget.child)),
+                        ),
                       ),
                     ],
                   ),
