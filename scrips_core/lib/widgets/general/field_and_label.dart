@@ -289,20 +289,40 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildDropDownList(BuildContext context) {
     return Container(
+      constraints: BoxConstraints.expand(height: 36),
       height: 36.0,
-      child: DropdownButton(
-        underline: Container(),
-        isExpanded: true,
-        value: currentFieldValue ?? widget.fieldValue,
-        items: widget.listItems ?? [],
-        icon: Images.instance.dropDownIcon(height: 7, width: 12),
-        iconSize: 12.0,
-        onChanged: onChangedInternal,
-        style: defaultFieldStyle(widget.fieldTextColor, Colors.transparent),
-        hint: PlatformText(widget.placeholder ?? '',
-            style: defaultHintStyle(null, null)),
-        disabledHint: PlatformText(widget.validationMessage ?? '',
-            style: defaultHintStyle(null, null)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: DropdownButton(
+              underline: Container(),
+              isExpanded: true,
+              value: currentFieldValue ?? widget.fieldValue,
+              items: widget.listItems ?? [],
+              icon: Images.instance.dropDownIcon(height: 7, width: 12),
+              iconSize: 12.0,
+              onChanged: onChangedInternal,
+              style:
+                  defaultFieldStyle(widget.fieldTextColor, Colors.transparent),
+              hint: PlatformText(widget.placeholder ?? '',
+                  style: defaultHintStyle(null, null)),
+              disabledHint: PlatformText(widget.validationMessage ?? '',
+                  style: defaultHintStyle(null, null)),
+            ),
+          )
+        ],
       ),
     );
   }
