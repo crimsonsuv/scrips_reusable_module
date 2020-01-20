@@ -41,10 +41,14 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
-  Image back({double width, double height, Color color, BlendMode colorBlendMode,
+  Image back(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/back.png"),
+          image: AssetImage("assets/ic_back.png"),
           height: height,
           width: width,
           fit: fit,
@@ -58,7 +62,7 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/drop_down_icon.png"),
+          image: AssetImage("assets/ic_drop_down.png"),
           height: height,
           width: width,
           fit: fit,
