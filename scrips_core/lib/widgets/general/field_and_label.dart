@@ -119,6 +119,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
+      _textEditController = TextEditingController(text: currentFieldValue);
       //      _richTextEditController = ZefyrController(widget.fieldValue);
       //      _richTextEditFocusNode = FocusNode();
       //
@@ -311,7 +312,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               isExpanded: true,
               value: currentFieldValue ?? widget.fieldValue,
               items: widget.listItems ?? [],
-              icon: Images.instance.dropDownIcon(height: 7, width: 12),
+              icon: Images.instance.dropDownIcon(height: 24, width: 24),
               iconSize: 12.0,
               onChanged: onChangedInternal,
               style:
@@ -402,7 +403,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildRichText(BuildContext context) {
     return RichText(
-      text: currentFieldValue ?? widget.fieldValue,
+      text: widget.fieldValue ?? "",
       textAlign: TextAlign.start,
     );
   }
