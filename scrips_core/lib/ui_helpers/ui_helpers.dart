@@ -12,9 +12,12 @@ class UIHelper {
   static Widget verticalSpaceMedium = SizedBox(height: verticalSpaceMediumSize);
   static Widget verticalSpaceLarge = SizedBox(height: verticalSpaceLargeSize);
 
-  static Widget horizontalSpaceSmall = SizedBox(width: horizontalSpaceSmallSize);
-  static Widget horizontalSpaceMedium = SizedBox(width: horizontalSpaceMediumSize);
-  static Widget horizontalSpaceLarge = SizedBox(width: horizontalSpaceLargeSize);
+  static Widget horizontalSpaceSmall =
+      SizedBox(width: horizontalSpaceSmallSize);
+  static Widget horizontalSpaceMedium =
+      SizedBox(width: horizontalSpaceMediumSize);
+  static Widget horizontalSpaceLarge =
+      SizedBox(width: horizontalSpaceLargeSize);
 
   /// Returns a vertical space equal to the [height] supplied
   static Widget verticalSpace(double height) {
@@ -27,29 +30,37 @@ class UIHelper {
   }
 
   static EdgeInsets defaultPadding = EdgeInsets.all(defaultPaddingSize);
-  static EdgeInsets defaultPaddingLarge = EdgeInsets.all(defaultPaddingLargeSize);
-  static EdgeInsets defaultPaddingVeryLarge = EdgeInsets.all(defaultPaddingVeryLargeSize);
+  static EdgeInsets defaultPaddingLarge =
+      EdgeInsets.all(defaultPaddingLargeSize);
+  static EdgeInsets defaultPaddingVeryLarge =
+      EdgeInsets.all(defaultPaddingVeryLargeSize);
   static EdgeInsets defaultMargin = EdgeInsets.all(defaultMarginSize);
-  static EdgeInsets defaultButtonPadding = EdgeInsets.all(defaultButtonPaddingSize);
+  static EdgeInsets defaultButtonPadding =
+      EdgeInsets.all(defaultButtonPaddingSize);
 
   // for FieldAndLabel
   static double defaultFieldAndLabelPaddingSize = 8.0;
-  static EdgeInsets defaultFieldAndLabelPadding =
-      EdgeInsets.symmetric(vertical: defaultFieldAndLabelPaddingSize, horizontal: defaultFieldAndLabelPaddingSize);
-  static EdgeInsets defaultFieldAndLabelMargin =
-      EdgeInsets.symmetric(vertical: defaultFieldAndLabelPaddingSize, horizontal: defaultFieldAndLabelPaddingSize);
+  static EdgeInsets defaultFieldAndLabelPadding = EdgeInsets.symmetric(
+      vertical: defaultFieldAndLabelPaddingSize,
+      horizontal: defaultFieldAndLabelPaddingSize);
+  static EdgeInsets defaultFieldAndLabelMargin = EdgeInsets.symmetric(
+      vertical: defaultFieldAndLabelPaddingSize,
+      horizontal: defaultFieldAndLabelPaddingSize);
   static BoxDecoration defaultFieldAndLabelBorder;
   static EdgeInsets defaultFieldInternalPadding =
-      EdgeInsets.symmetric(vertical: 0.0, horizontal: defaultFieldAndLabelPaddingSize);
+      EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0);
 
   //
-  static BoxDecoration defaultButtonBorder = BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
+  static BoxDecoration defaultButtonBorder =
+      BoxDecoration(borderRadius: BorderRadius.circular(5.0), color: lightGrey);
 
   static BoxDecoration defaultLabelBoxDecoration(color) => BoxDecoration(
-      border: Border.all(color: color ?? defaultLabelBackgroundColor), color: color ?? defaultLabelBackgroundColor);
+      border: Border.all(color: color ?? defaultLabelBackgroundColor),
+      color: color ?? defaultLabelBackgroundColor);
 
   static BoxDecoration defaultFieldBoxDecoration(color) => BoxDecoration(
-      border: Border.all(color: color ?? defaultFieldBackgroundColor), color: color ?? defaultFieldBackgroundColor);
+      border: Border.all(color: color ?? defaultFieldBackgroundColor),
+      color: color ?? defaultFieldBackgroundColor);
 
   static EdgeInsets defaultPanelPadding = EdgeInsets.all(defaultPaddingSize);
   static BoxDecoration defaultPanelBorder = BoxDecoration(
@@ -59,7 +70,8 @@ class UIHelper {
 
   static EdgeInsets defaultPanelMargin = EdgeInsets.all(defaultPanelMarginSize);
 
-  static Widget buildValidationMessage(BuildContext context, {String validationMessage}) {
+  static Widget buildValidationMessage(BuildContext context,
+      {String validationMessage}) {
     if (!isBlank(validationMessage))
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -69,7 +81,8 @@ class UIHelper {
             height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
           ),
           Container(
-              decoration: UIHelper.defaultLabelBoxDecoration(defaultValidationBackgroundColor),
+              decoration: UIHelper.defaultLabelBoxDecoration(
+                  defaultValidationBackgroundColor),
               child: PlatformText(
                 validationMessage,
                 style: defaultValidationStyle(null, null),

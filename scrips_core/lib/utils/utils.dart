@@ -55,7 +55,7 @@ String scDateFormat(value) {
   if (value == null) {
     return "";
   } else {
-    return DateFormat('dd-MM-yyyy')?.format(value);
+    return DateFormat('dd/MM/yyyy')?.format(value);
   }
 }
 
