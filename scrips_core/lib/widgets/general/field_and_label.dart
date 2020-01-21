@@ -19,7 +19,6 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final FieldType fieldType;
   final Color labelTextColor;
   final TextStyle labelTextStyle;
-  final TextStyle textFieldTextStyle;
   final Color labelBackgroundColor;
   final Color fieldBackgroundColor;
   final Color fieldTextColor;
@@ -55,7 +54,6 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.labelValue,
       this.labelTextCapitalization = TextCapitalization.characters,
       this.labelTextStyle,
-      this.textFieldTextStyle,
       this.fieldValue,
       this.fieldProperty,
       this.onChanged,
@@ -176,6 +174,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   Widget build(BuildContext context) {
     if (this.widget.wrapWithRow ?? true)
       return Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           buildContents(context),
         ],
@@ -191,7 +190,6 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         margin: widget.margin ?? UIHelper.defaultFieldAndLabelMargin,
         decoration: widget.boxDecoration ?? UIHelper.defaultFieldAndLabelBorder,
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               buildLabel(context),
@@ -271,14 +269,14 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         break;
     }
     return Container(
-      padding: UIHelper.defaultFieldInternalPadding,
+      padding: EdgeInsets.symmetric(horizontal: 8),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         border: Border.all(
             color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: widget.fieldBackgroundColor,
       ),
-      child: field,
+      child: Center(child: field),
     );
   }
 
@@ -315,8 +313,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               icon: Images.instance.dropDownIcon(height: 24, width: 24),
               iconSize: 12.0,
               onChanged: onChangedInternal,
-              style:
-                  defaultFieldStyle(widget.fieldTextColor, Colors.transparent),
+              style: normalLabelTextStyle(15, regularTextColor),
               hint: PlatformText(widget.placeholder ?? '',
                   style: defaultHintStyle(null, null)),
               disabledHint: PlatformText(widget.validationMessage ?? '',
@@ -345,12 +342,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 //  }
 
   Widget buildTextField(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 36.0,
-      constraints: BoxConstraints.expand(height: 36),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           (widget.icon == null)
               ? Container()
@@ -363,27 +358,32 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   ],
                 ),
           Expanded(
-            child: TextField(
-              obscureText:
-                  widget.isPassword == false || widget.isPassword == null
-                      ? false
-                      : true,
-              style: widget?.textFieldTextStyle ??
-                  defaultFieldStyle(regularTextColor, null),
-              textAlign: TextAlign.start,
-              enabled: widget.enabled ?? true,
-              controller: _textEditController,
-              onChanged: onChangedInternal,
-              onSubmitted: onSubmitted,
-              onEditingComplete: onEditingComplete,
-              onTap: () {
-                onTapInternal();
-              },
-              decoration: InputDecoration(
-                  counterText: "",
-                  hintText: widget.placeholder,
-                  hintStyle: defaultHintStyle(null, null),
-                  border: InputBorder.none),
+            child: SizedBox.fromSize(
+              child: Center(
+                child: TextField(
+                  obscureText:
+                      widget.isPassword == false || widget.isPassword == null
+                          ? false
+                          : true,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  textAlign: TextAlign.justify,
+                  enabled: widget.enabled ?? true,
+                  controller: _textEditController,
+                  onChanged: onChangedInternal,
+                  onSubmitted: onSubmitted,
+                  onEditingComplete: onEditingComplete,
+                  maxLines: 1,
+                  onTap: () {
+                    onTapInternal();
+                  },
+                  decoration: InputDecoration(
+                      counterText: "",
+                      hintText: widget.placeholder,
+                      hintStyle: defaultHintStyle(null, null),
+                      contentPadding: EdgeInsets.only(bottom: 12),
+                      border: InputBorder.none),
+                ),
+              ),
             ),
           ),
           (widget.rightIcon == null)
@@ -413,8 +413,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       height: 60.0,
       constraints: BoxConstraints.expand(height: 60),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: TextField(
@@ -422,8 +421,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   widget.isPassword == false || widget.isPassword == null
                       ? false
                       : true,
-              style: widget?.textFieldTextStyle ??
-                  defaultFieldStyle(regularTextColor, null),
+              style: normalLabelTextStyle(15, regularTextColor),
               textAlign: TextAlign.start,
               enabled: widget.enabled ?? true,
               maxLines: null,
