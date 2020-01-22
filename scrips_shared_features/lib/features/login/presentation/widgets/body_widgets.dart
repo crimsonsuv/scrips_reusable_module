@@ -24,15 +24,19 @@ List<Widget> bodyWidgets(BuildContext context, User initialUser,
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
-          editedUser.email = value;
           if (!isEmail(value)) {
+            editedUser.email = "";
             state.setValidationMessage("Not a valid Email");
+            bloc.dispatch(
+              OnChangedValuesEvent(editedUser),
+            );
           } else {
+            editedUser.email = value;
+            bloc.dispatch(
+              OnChangedValuesEvent(editedUser),
+            );
             state.setValidationMessage('');
           }
-          bloc.dispatch(
-            OnChangedValuesEvent(editedUser),
-          );
         },
       ),
       FieldAndLabel(

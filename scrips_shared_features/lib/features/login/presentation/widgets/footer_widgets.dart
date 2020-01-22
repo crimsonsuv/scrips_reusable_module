@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
@@ -27,9 +28,37 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
                 ? () {
-                    bloc.dispatch(
-                      DoLoginEvent(context, editedUser),
-                    );
+                    if ((editedUser.email == "user@scrips.com" ||
+                            editedUser.email == "admin@scrips.com") &&
+                        editedUser.password == "123456") {
+                      bloc.dispatch(
+                        DoLoginEvent(context, editedUser),
+                      );
+                    } else {
+                      showToastWidget(
+                        Container(
+                          height: 40,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            color: red,
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Center(
+                              child: Text(
+                                "Email or Password is not correct",
+                                style: normalLabelTextStyle(
+                                    16, enabledBtnTextColor),
+                              ),
+                            ),
+                          ),
+                        ),
+                        position: ToastPosition.top,
+                        context: context,
+                        duration: Duration(seconds: 2),
+                      );
+                    }
                   }
                 : null,
             isLoading: isLoading,

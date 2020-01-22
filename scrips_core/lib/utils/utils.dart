@@ -51,11 +51,11 @@ void debugLog(String message) {
   debugPrint('$_debugLogPrefix - ${DateTime.now().toString()} - $message');
 }
 
-String scDateFormat(value) {
+String scDateFormat(value, {String format = 'MMM dd, yyyy'}) {
   if (value == null) {
     return "";
   } else {
-    return DateFormat('dd/MM/yyyy')?.format(value);
+    return DateFormat(format)?.format(value);
   }
 }
 
