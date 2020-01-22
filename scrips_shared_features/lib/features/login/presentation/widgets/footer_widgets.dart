@@ -9,7 +9,8 @@ import 'package:scrips_shared_features/features/login/data/datamodels/login_repo
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 
 List<Widget> footerWidgets(User editedUser, BuildContext context,
-        bool isLoading, LoginBloc bloc, bool isEnabled) =>
+        bool isLoading, LoginBloc bloc, bool isEnabled,
+        [bool shouldShowSignUpWithAccessCode]) =>
     <Widget>[
       Space(vertical: 62),
       BlocBuilder<LoginBloc, LoginState>(
@@ -49,4 +50,17 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
         },
         buttonBackgroundColor: bgColor,
       ),
+      shouldShowSignUpWithAccessCode != null && shouldShowSignUpWithAccessCode
+          ? Button(
+              width: 222.0,
+              height: 48,
+              text: "Sign Up with access Code",
+              style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, RoutePaths.PmSignUpStepWithAccessCode);
+              },
+              buttonBackgroundColor: bgColor,
+            )
+          : Container(),
     ];

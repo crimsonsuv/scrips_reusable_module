@@ -90,11 +90,11 @@ class _LoginState extends State<Login> {
                 iconImage: Images.instance.banner(),
                 onBack: () {},
                 onNext: () {},
-                headerWidgets: headerWidgets(context),
+                headerWidgets: headerWidgets(context, 'Welcome to Scrips® Provider App', 'Please, enter your login details' ),
                 bodyWidgets:
                     bodyWidgets(context, initialUser, editedUser, bloc),
                 footerWidgets: footerWidgets(
-                    editedUser, context, isLoading, bloc, isEnabled),
+                    editedUser, context, isLoading, bloc, isEnabled, true),
               ),
             );
           },
