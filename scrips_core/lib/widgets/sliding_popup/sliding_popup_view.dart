@@ -11,10 +11,10 @@ class SlidingPopupWidget extends StatefulWidget {
 
   SlidingPopupWidget(
       {this.title,
-        this.child,
-        @required this.width,
-        this.onSave,
-        this.backgroundColor = Colors.white});
+      this.child,
+      @required this.width,
+      this.onSave,
+      this.backgroundColor = Colors.white});
 
   @override
   _SlidingPopupWidgetState createState() => _SlidingPopupWidgetState();
@@ -150,7 +150,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                           color: widget.backgroundColor,
                           child: SingleChildScrollView(
                               child:
-                              SizedBox.fromSize(child: this.widget.child)),
+                                  SizedBox.fromSize(child: this.widget.child)),
                         ),
                       ),
                     ],
