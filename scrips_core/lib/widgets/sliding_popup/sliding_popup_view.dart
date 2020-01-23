@@ -72,6 +72,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
 
   @override
   Widget build(BuildContext context) {
+    var mediaQuery = MediaQuery.of(context);
     return Material(
       color: Colors.transparent,
       child: FadeTransition(
@@ -146,13 +147,13 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                         color: separatorColor,
                       ),
                       Expanded(
-                        child: Container(
-                          color: widget.backgroundColor,
                           child: SingleChildScrollView(
-                              child:
-                                  SizedBox.fromSize(child: this.widget.child)),
-                        ),
-                      ),
+                              child: AnimatedContainer(
+                                  color: bgColor,
+                                  padding: mediaQuery.viewInsets,
+                                  duration: const Duration(milliseconds: 300),
+                                  child: SizedBox.fromSize(
+                                      child: this.widget.child))))
                     ],
                   ),
                 ),
