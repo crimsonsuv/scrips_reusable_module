@@ -38,7 +38,7 @@ Future<void> initServiceLocator() async {
   /// Login
   // bloc
   sl.registerFactory(
-    () => LoginBloc(loginResponseUseCase: sl()),
+    () => LoginBloc(loginResponseUseCase: sl(), loginRepository: sl()),
   );
 
   // use cases
@@ -46,9 +46,7 @@ Future<void> initServiceLocator() async {
       () => GetLoginResponseUseCase(loginRepository: sl()));
 
   // Data sources
-  sl.registerLazySingleton<LoginDataSource>(() => USE_FAKE_IMPLEMENTATION
-      ? LoginDummyDataSourceImpl()
-      : LoginDataSourceImpl());
+  sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl());
 
   // repository
   sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(

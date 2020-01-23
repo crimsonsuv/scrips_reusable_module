@@ -13,6 +13,7 @@ class LoginResponseState extends LoginState {
 
 class LoginDummyDataState extends LoginState {
   final User user;
+
   LoginDummyDataState(this.user);
 }
 
@@ -29,5 +30,18 @@ class ErrorState extends LoginState {
 class EnableLoginButtonState extends LoginState {
   final bool status;
   final User user;
+
   EnableLoginButtonState(this.user, this.status);
+}
+
+class ResponseFromResetPasswordAPICall extends LoginState {
+  final int response;
+
+  ResponseFromResetPasswordAPICall(this.response);
+}
+
+class ResponseFromSetPasswordAPICall extends LoginState {
+  final int response;
+
+  ResponseFromSetPasswordAPICall(this.response);
 }
