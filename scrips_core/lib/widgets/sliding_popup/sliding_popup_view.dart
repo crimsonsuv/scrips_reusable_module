@@ -149,7 +149,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                       Expanded(
                           child: SingleChildScrollView(
                               child: AnimatedContainer(
-                                  color: bgColor,
+                                  color: widget?.backgroundColor ?? bgColor,
                                   padding: mediaQuery.viewInsets,
                                   duration: const Duration(milliseconds: 300),
                                   child: SizedBox.fromSize(
