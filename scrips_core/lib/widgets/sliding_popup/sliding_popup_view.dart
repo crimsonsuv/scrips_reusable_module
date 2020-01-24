@@ -91,13 +91,14 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
               SlideTransition(
                 position: openAnimation,
                 child: Container(
-                  color: Colors.white,
+                  color: widget.backgroundColor,
                   width: widget.width,
                   height: MediaQuery.of(context).size.height,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Container(
+                        color: Colors.white,
                         height: 44,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),

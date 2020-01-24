@@ -6,6 +6,7 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 
@@ -36,23 +37,9 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
                       );
                     } else {
                       showToastWidget(
-                        Container(
-                          height: 40,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            color: red,
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Center(
-                              child: Text(
-                                "Email or Password is not correct",
-                                style: normalLabelTextStyle(
-                                    16, enabledBtnTextColor),
-                              ),
-                            ),
-                          ),
+                        ToastWidget(
+                          message: "Email or Password is not correct",
+                          backgroundColor: red,
                         ),
                         position: ToastPosition.top,
                         context: context,
