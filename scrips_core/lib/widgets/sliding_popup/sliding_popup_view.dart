@@ -27,13 +27,14 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
   AnimationController animationController;
   AnimationController opacityController;
 
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 200),
     );
     opacityController = AnimationController(
       vsync: this,
@@ -44,7 +45,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
       end: Offset(0.0, 0.0),
     ).animate(CurvedAnimation(
       parent: animationController,
-      curve: Curves.fastLinearToSlowEaseIn,
+      curve: Curves.easeInOut,
     ));
 
     opacityAnimation = Tween<double>(
@@ -52,15 +53,13 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: opacityController,
-      curve: Curves.easeIn,
+      curve: Curves.easeInOut,
     ));
 
-    Future<void>.delayed(Duration(microseconds: 100), () {
-      animationController.forward();
-    });
     Future<void>.delayed(Duration(milliseconds: 100), () {
       opacityController.forward();
     });
+    animationController.forward();
   }
 
   @override
@@ -74,12 +73,12 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     return Material(
-      color: Colors.transparent,
+      color: Colors.black26,
       child: FadeTransition(
         opacity: opacityAnimation,
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          constraints: BoxConstraints.expand(),
+          width: mediaQuery.size.width,
+          height: mediaQuery.size.height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
@@ -93,54 +92,70 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                 child: Container(
                   color: widget.backgroundColor,
                   width: widget.width,
-                  height: MediaQuery.of(context).size.height,
+                  height: mediaQuery.size.height,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Container(
                         color: Colors.white,
                         height: 44,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              InkWell(
-                                  onTap: () {
-                                    animationController.reverse();
-                                    opacityController.reverse();
-                                    Future<void>.delayed(
-                                        Duration(milliseconds: 300), () {
-                                      Navigator.pop(context);
-                                    });
-                                  },
-                                  child: Text(
-                                    "Cancel",
-                                    style: semiBoldLabelTextStyle(
-                                        15, enabledBtnBGColor),
-                                  )),
-                              Text(
-                                widget.title,
-                                style: boldLabelTextStyle(
-                                    17, defaultFieldTextColor),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    animationController.reverse();
-                                    opacityController.reverse();
-                                    widget.onSave();
-                                    Future<void>.delayed(
-                                        Duration(milliseconds: 300), () {
-                                      Navigator.pop(context);
-                                    });
-                                  },
-                                  child: Text(
-                                    "Save",
-                                    style: semiBoldLabelTextStyle(
-                                        15, enabledBtnBGColor),
-                                  )),
-                            ],
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            GestureDetector(
+                                onTap: () {
+                                  animationController.reverse();
+                                  opacityController.reverse();
+                                  Future<void>.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: Container(
+                                  color: Colors.white,
+                                  height: 44,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        "Cancel",
+                                        style: semiBoldLabelTextStyle(
+                                            15, enabledBtnBGColor),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            Text(
+                              widget.title,
+                              style: boldLabelTextStyle(
+                                  17, defaultFieldTextColor),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  animationController.reverse();
+                                  opacityController.reverse();
+                                  widget.onSave();
+                                  Future<void>.delayed(
+                                      Duration(milliseconds: 200), () {
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                child: Container(
+                                  color: Colors.white,
+                                  height: 44,
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Text(
+                                        "Save",
+                                        style: semiBoldLabelTextStyle(
+                                            15, enabledBtnBGColor),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                          ],
                         ),
                       ),
                       Container(
