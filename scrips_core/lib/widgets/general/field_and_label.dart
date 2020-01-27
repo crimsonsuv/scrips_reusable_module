@@ -437,10 +437,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 final List<DateTime> picked = await DateRagePicker.showDatePicker(
                     context: context,
                     initialFirstDate: dates?.elementAt(0) ?? DateTime.now(),
-                    initialLastDate: (dates?.elementAt(1) == null ? (!(widget.isDateRange) ? DateTime.now().add(Duration(seconds: 10)) : null) : null),
+                    initialLastDate: (dates?.elementAt(1) == null ? ((widget.isDateRange) ? DateTime.now().add(Duration(seconds: 10)) : null) : null),
                     firstDate: new DateTime.now().subtract(Duration(days: 365*20)),
                     lastDate: new DateTime.now().add(Duration(days: 365*20)),
-                    range: !(widget.isDateRange) ? DateRagePicker.DatePickerRange.multi : DateRagePicker.DatePickerRange.single
+                    range: (widget.isDateRange) ? DateRagePicker.DatePickerRange.multi : DateRagePicker.DatePickerRange.single
                 );
                 if (picked != null) {
                   print(picked);
