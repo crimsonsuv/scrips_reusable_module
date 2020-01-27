@@ -32,9 +32,10 @@ dependencies:
   scoped_model:
   flutter_platform_widgets:
     path: ../third-party/flutter_platform_widgets
+  date_range_picker:
+    path: ../third-party/date_range_picker-master
   google_maps_flutter: ^0.5.21+12
   flutter_svg:
-
 
 
 dev_dependencies:
