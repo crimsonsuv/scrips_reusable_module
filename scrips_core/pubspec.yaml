@@ -36,7 +36,8 @@ dependencies:
     path: ../third-party/date_range_picker-master
   google_maps_flutter: ^0.5.21+12
   flutter_svg:
-  flutter_typeahead: ^1.8.0
+  flutter_typeahead:
+    path: ../third-party/flutter_typeahead-master
   dartz: ^0.8.6
   equatable: ^0.4.0
 
