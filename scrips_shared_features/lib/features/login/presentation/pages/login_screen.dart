@@ -92,7 +92,10 @@ class _LoginState extends State<Login> {
                   iconImage: Images.instance.banner(),
                   onBack: () {},
                   onNext: () {},
-                  headerWidgets: headerWidgets(context, 'Welcome to Scrips® Provider App', 'Please, enter your login details' ),
+                  headerWidgets: headerWidgets(
+                      context,
+                      'Welcome to Scrips® Practice Management App',
+                      'Please, enter your login details'),
                   bodyWidgets:
                       bodyWidgets(context, initialUser, editedUser, bloc),
                   footerWidgets: footerWidgets(
