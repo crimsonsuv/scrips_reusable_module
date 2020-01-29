@@ -526,8 +526,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   widget.isPassword == false || widget.isPassword == null
                       ? false
                       : true,
-                  style: widget?.textFieldTextStyle ??
-                      defaultFieldStyle(regularTextColor, null),
+                  style: defaultFieldStyle(regularTextColor, null),
                   textAlign: TextAlign.start,
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
