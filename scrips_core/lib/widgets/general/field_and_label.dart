@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/di/dependency_injection.dart';
