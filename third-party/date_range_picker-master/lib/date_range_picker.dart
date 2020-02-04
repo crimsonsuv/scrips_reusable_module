@@ -11,10 +11,10 @@ library date_range_picker;
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
@@ -56,8 +56,7 @@ const double _kMaxDayPickerHeight =
 
 const double _kMonthPickerPortraitWidth = 330.0;
 
-const double _kDatePickerLandscapeHeight =
-    _kMaxDayPickerHeight;
+const double _kDatePickerLandscapeHeight = _kMaxDayPickerHeight;
 
 DatePickerRange selectedRange = DatePickerRange.single;
 
@@ -448,7 +447,8 @@ class DayPicker extends StatelessWidget {
     final int firstDayOffset =
         _computeFirstDayOffset(year, month, localizations);
     final List<Widget> labels = <Widget>[];
-    labels.addAll(_getDayHeaders(boldLabelTextStyle(12, labelTextStyleTextColor), localizations));
+    labels.addAll(_getDayHeaders(
+        boldLabelTextStyle(12, labelTextStyleTextColor), localizations));
     for (int i = 0; true; i += 1) {
       // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
       // a leap year.
@@ -501,16 +501,14 @@ class DayPicker extends StatelessWidget {
         } else if (isInRange != null && isInRange) {
           itemStyle = boldLabelTextStyle(13, enabledBtnTextColor);
           decoration = new BoxDecoration(
-              color: normalBtnTextColor,
-              shape: BoxShape.rectangle);
+              color: normalBtnTextColor, shape: BoxShape.rectangle);
         } else if (disabled) {
           itemStyle = boldLabelTextStyle(13, enabledBtnTextColor);
         } else if (currentDate.year == year &&
             currentDate.month == month &&
             currentDate.day == day) {
           // The current day gets a different text color.
-          itemStyle =
-              boldLabelTextStyle(13, enabledBtnBGColor);
+          itemStyle = boldLabelTextStyle(13, enabledBtnBGColor);
         }
 
         Widget dayWidget = new Container(
@@ -541,8 +539,8 @@ class DayPicker extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: () {
               DateTime first, last;
-              if(selectedRange == DatePickerRange.single){
-                first= dayToBuild;
+              if (selectedRange == DatePickerRange.single) {
+                first = dayToBuild;
                 last = null;
               } else {
                 if (selectedLastDate != null) {
@@ -837,7 +835,10 @@ class _MonthPickerState extends State<MonthPicker>
               child: new FadeTransition(
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
-                  icon: Icon(Icons.chevron_left, color: enabledBtnBGColor,),
+                  icon: Icon(
+                    Icons.chevron_left,
+                    color: enabledBtnBGColor,
+                  ),
                   tooltip: _isDisplayingFirstMonth
                       ? null
                       : '${localizations.previousMonthTooltip} ${localizations.formatMonthYear(_previousMonthDate)}',
@@ -855,7 +856,10 @@ class _MonthPickerState extends State<MonthPicker>
               child: new FadeTransition(
                 opacity: _chevronOpacityAnimation,
                 child: new IconButton(
-                  icon: Icon(Icons.chevron_right, color: enabledBtnBGColor,),
+                  icon: Icon(
+                    Icons.chevron_right,
+                    color: enabledBtnBGColor,
+                  ),
                   tooltip: _isDisplayingLastMonth
                       ? null
                       : '${localizations.nextMonthTooltip} ${localizations.formatMonthYear(_nextMonthDate)}',
@@ -1072,8 +1076,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         break;
       case TargetPlatform.iOS:
         break;
-      case TargetPlatform.macOS:
-        break;
+//      case TargetPlatform.macOS:
+//        break;
     }
   }
 
@@ -1171,7 +1175,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     final Widget actions = Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        Expanded(child: Container(),),
+        Expanded(
+          child: Container(),
+        ),
         Button(
           text: localizations.cancelButtonLabel,
           style: semiBoldLabelTextStyle(15, enabledBtnBGColor),
@@ -1180,7 +1186,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           height: 32,
           width: 88,
         ),
-        Space(horizontal: 10,),
+        Space(
+          horizontal: 10,
+        ),
         Button(
           text: localizations.okButtonLabel,
           style: semiBoldLabelTextStyle(15, enabledBtnTextColor),
@@ -1255,10 +1263,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(
-                height: 60,
-                  child: header
-              ),
+              SizedBox(height: 60, child: header),
               new Container(
                 color: theme.dialogBackgroundColor,
                 child: new Column(
@@ -1270,7 +1275,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: actions,
                     ),
-                    Space(vertical: 20,)
+                    Space(
+                      vertical: 20,
+                    )
                   ],
                 ),
               ),
@@ -1334,22 +1341,19 @@ Future<List<DateTime>> showDatePicker({
   Locale locale,
   TextDirection textDirection,
 }) async {
+  assert(range != null, 'range must not be null');
 
-  assert(
-  range != null, 'range must not be null');
-
-  if(range == DatePickerRange.single){
-
+  if (range == DatePickerRange.single) {
   } else {
     assert(!initialLastDate.isAfter(lastDate),
-    'initialDate must be on or before lastDate');
+        'initialDate must be on or before lastDate');
     assert(!initialFirstDate.isAfter(initialLastDate),
-    'initialFirstDate must be on or before initialLastDate');
+        'initialFirstDate must be on or before initialLastDate');
     assert(
-    selectableDayPredicate == null ||
-        selectableDayPredicate(initialFirstDate) ||
-        selectableDayPredicate(initialLastDate),
-    'Provided initialDate must satisfy provided selectableDayPredicate');
+        selectableDayPredicate == null ||
+            selectableDayPredicate(initialFirstDate) ||
+            selectableDayPredicate(initialLastDate),
+        'Provided initialDate must satisfy provided selectableDayPredicate');
   }
 
   assert(!initialFirstDate.isBefore(firstDate),
