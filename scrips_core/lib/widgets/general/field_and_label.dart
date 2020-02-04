@@ -1,11 +1,17 @@
+import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_typeahead_web/flutter_typeahead.dart';
+import 'package:scrips_core/common/data/datamodels/locations_model.dart';
+import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
+import 'package:scrips_core/di/dependency_injection.dart';
 import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 enum FieldType {
   TextField,
@@ -13,6 +19,9 @@ enum FieldType {
   List,
   RichText,
   RichTextEdit,
+  DatePicker,
+  DateRangePicker,
+  LocationPicker,
 }
 
 class FieldAndLabel<ListItemType> extends StatefulWidget {
@@ -62,7 +71,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.onTap,
       this.fieldType = FieldType.TextField,
       this.listItems,
-      this.icon = null,
+      this.icon,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -102,29 +111,46 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   String currentPlaceholder;
   String currentValidationMessage;
   TextEditingController _textEditController;
+  FetchLocationsByQueryUseCase fetchLocationsByQueryUseCase;
 
   //  ZefyrController _richTextEditController;
   //  FocusNode _richTextEditFocusNode;
 
   void initState() {
     super.initState();
+    fetchLocationsByQueryUseCase =
+        FetchLocationsByQueryUseCase(repository: coreSl());
 
     currentFieldValue = widget.fieldProperty != null
         ? widget.fieldProperty?.value
         : (widget.fieldValue ?? null);
 
-    if (widget.fieldType == FieldType.TextField) {
+    if (widget.fieldType == FieldType.TextField ||
+        widget.fieldType == FieldType.LocationPicker) {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
       _textEditController = TextEditingController(text: currentFieldValue);
-      //      _richTextEditController = ZefyrController(widget.fieldValue);
-      //      _richTextEditFocusNode = FocusNode();
-      //
-      //      _richTextEditController.addListener(() {
-      //        dynamic value = _richTextEditController.document;
-      //        onChangedInternal(value);
-      //      });
+    } else if (widget.fieldType == FieldType.DateRangePicker) {
+      List<DateTime> dates;
+      if ((currentFieldValue ?? widget.fieldValue) is List<DateTime>) {
+        dates = currentFieldValue;
+      } else {
+        dates = [];
+      }
+      if (dates.length > 1) {
+        _textEditController = TextEditingController(
+            text:
+                "${scDateFormat(dates.elementAt(0))} - ${scDateFormat(dates.elementAt(1))}");
+      } else if (dates.length == 1) {
+        _textEditController =
+            TextEditingController(text: scDateFormat(dates.elementAt(0)));
+      } else {
+        _textEditController = TextEditingController(text: "");
+      }
+    } else if (widget.fieldType == FieldType.DatePicker) {
+      _textEditController =
+          TextEditingController(text: scDateFormat(currentFieldValue));
     }
   }
 
@@ -264,6 +290,15 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.DropDownList:
         field = buildDropDownList(context);
         break;
+      case FieldType.DatePicker:
+        field = buildDatePickerField(context);
+        break;
+      case FieldType.DateRangePicker:
+        field = buildDateRangePickerField(context);
+        break;
+      case FieldType.LocationPicker:
+        field = buildLocationPicker(context);
+        break;
       default:
         field = Container();
         break;
@@ -325,22 +360,6 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     );
   }
 
-//  Widget buildTextField(BuildContext context) {
-//    return Container(
-//      height: 36.0,
-//      child: PlatformTextField(
-//        obscureText: widget.isPassword == false || widget.isPassword == null ? false : true,
-//        style: defaultFieldStyle(widget.fieldTextColor, widget.fieldBackgroundColor),
-//        textAlign: TextAlign.start,
-//        enabled: widget.enabled ?? true,
-//        controller: _textEditController,
-//        onChanged: onChangedInternal,
-//        placeholder: currentPlaceholder ?? widget.placeholder ?? null,
-//        placeholderStyle: defaultHintStyle(null, null),
-//      ),
-//    );
-//  }
-
   Widget buildTextField(BuildContext context) {
     return SizedBox(
       height: 36.0,
@@ -381,6 +400,251 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       hintText: widget.placeholder,
                       hintStyle: defaultHintStyle(null, null),
                       contentPadding: EdgeInsets.only(bottom: 12),
+                      border: InputBorder.none),
+                ),
+              ),
+            ),
+          ),
+          (widget.rightIcon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    SizedBox(height: 24, width: 24, child: widget.rightIcon),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLocationPicker(BuildContext context) {
+    return Container(
+      height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: TypeAheadField(
+              hideOnEmpty: true,
+              debounceDuration: Duration(milliseconds: 200),
+              hideOnError: true,
+              textFieldConfiguration: TextFieldConfiguration(
+                autofocus: false,
+                style: normalLabelTextStyle(15, regularTextColor),
+                controller: _textEditController,
+                decoration: InputDecoration(
+                  counterText: "",
+                  contentPadding: EdgeInsets.only(bottom: 12),
+                  hintText: widget.placeholder,
+                  hintStyle: defaultHintStyle(null, null),
+                  border: InputBorder.none,
+                ),
+              ),
+              suggestionsCallback: (pattern) async {
+                final result = await fetchLocationsByQueryUseCase(
+                    FetchLocationsByQueryParams(query: pattern));
+                return result.fold(
+                  (error) => [],
+                  (success) => success.predictions,
+                );
+              },
+              itemBuilder: (context, prediction) {
+                return ListTile(
+                  title: Text(
+                    prediction.description,
+                    style: normalLabelTextStyle(15, regularTextColor),
+                  ),
+                  subtitle: Text(
+                    "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
+                    style: normalLabelTextStyle(13, labelTextStyleTextColor),
+                  ),
+                );
+              },
+              onSuggestionSelected: (suggestion) {
+                onChangedInternal(suggestion);
+              },
+            ),
+          ),
+          (widget.rightIcon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          if (currentFieldValue != "") {
+                            _textEditController.clear();
+                            onChangedInternal(Prediction());
+                          }
+                        },
+                        child: SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: (currentFieldValue != "")
+                                ? Images.instance.cross()
+                                : widget.rightIcon)),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDateRangePickerField(BuildContext context) {
+    return Container(
+      height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: InkWell(
+              onTap: () async {
+                List<DateTime> dates = [];
+                if ((currentFieldValue ?? widget.fieldValue)
+                    is List<DateTime>) {
+                  dates = currentFieldValue;
+                }
+                final List<DateTime> picked =
+                    await DateRagePicker.showDatePicker(
+                        context: context,
+                        initialFirstDate: ((dates?.length ?? 0) == 0)
+                            ? DateTime.now()
+                            : (dates?.elementAt(0) ?? DateTime.now()),
+                        initialLastDate: (dates?.length ?? 0) > 1
+                            ? (dates?.elementAt(1) ??
+                                DateTime.now().add(Duration(seconds: 10)))
+                            : DateTime.now().add(Duration(seconds: 10)),
+                        firstDate: new DateTime.now()
+                            .subtract(Duration(days: 365 * 20)),
+                        lastDate:
+                            new DateTime.now().add(Duration(days: 365 * 20)),
+                        range: DateRagePicker.DatePickerRange.multi);
+                if (picked != null) {
+                  print(picked);
+                  onChangedInternal(picked);
+                }
+              },
+              child: IgnorePointer(
+                child: TextField(
+                  obscureText:
+                      widget.isPassword == false || widget.isPassword == null
+                          ? false
+                          : true,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  textAlign: TextAlign.start,
+                  enabled: widget.enabled ?? true,
+                  controller: _textEditController,
+                  onChanged: onChangedInternal,
+                  onSubmitted: onSubmitted,
+                  onEditingComplete: onEditingComplete,
+                  decoration: InputDecoration(
+                      counterText: "",
+                      hintText: widget.placeholder,
+                      contentPadding: EdgeInsets.only(bottom: 12),
+                      hintStyle: defaultHintStyle(null, null),
+                      border: InputBorder.none),
+                ),
+              ),
+            ),
+          ),
+          (widget.rightIcon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    SizedBox(height: 24, width: 24, child: widget.rightIcon),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDatePickerField(BuildContext context) {
+    return Container(
+      height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: InkWell(
+              onTap: () async {
+                final List<DateTime> picked =
+                    await DateRagePicker.showDatePicker(
+                        context: context,
+                        initialFirstDate: currentFieldValue ?? DateTime.now(),
+                        initialLastDate: null,
+                        firstDate: new DateTime.now()
+                            .subtract(Duration(days: 365 * 20)),
+                        lastDate:
+                            new DateTime.now().add(Duration(days: 365 * 20)),
+                        range: DateRagePicker.DatePickerRange.single);
+                if (picked != null) {
+                  print(picked);
+                  onChangedInternal(picked.first);
+                }
+              },
+              child: IgnorePointer(
+                child: TextField(
+                  obscureText:
+                      widget.isPassword == false || widget.isPassword == null
+                          ? false
+                          : true,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  textAlign: TextAlign.start,
+                  enabled: widget.enabled ?? true,
+                  controller: _textEditController,
+                  onChanged: onChangedInternal,
+                  onSubmitted: onSubmitted,
+                  onEditingComplete: onEditingComplete,
+                  decoration: InputDecoration(
+                      counterText: "",
+                      hintText: widget.placeholder,
+                      contentPadding: EdgeInsets.only(bottom: 12),
+                      hintStyle: defaultHintStyle(null, null),
                       border: InputBorder.none),
                 ),
               ),

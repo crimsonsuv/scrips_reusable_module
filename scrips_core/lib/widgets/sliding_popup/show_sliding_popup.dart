@@ -9,15 +9,19 @@ class SlidingPopup {
       String title,
       double width,
       Function onSave}) {
-    showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (BuildContext context) => SlidingPopupWidget(
-              width: width,
-              title: title,
-              child: child,
-              onSave: onSave,
-              backgroundColor: backgroundColor,
-            ));
+    Navigator.of(context).push(PageRouteBuilder(
+        opaque: false,
+        fullscreenDialog: true,
+        pageBuilder: (BuildContext context, _, __) {
+          return SlidingPopupWidget(
+            width: width,
+            title: title,
+            child: child,
+            onSave: onSave,
+            backgroundColor: backgroundColor,
+          );
+        }
+    ));
+
   }
 }

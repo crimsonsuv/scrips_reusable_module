@@ -27,6 +27,20 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
+  Image cross(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/ic_cross.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
   Image plus(
           {double width,
           double height,

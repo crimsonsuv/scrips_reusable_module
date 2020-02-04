@@ -10,19 +10,23 @@ class ToastWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(13),
-      ),
-      child: IntrinsicHeight(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Center(
-            child: Text(
-              "$message",
-              style: normalLabelTextStyle(16, enabledBtnTextColor),
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        width: 400,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(13),
+        ),
+        child: IntrinsicHeight(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child: Text(
+                "$message",
+                style: normalLabelTextStyle(16, enabledBtnTextColor),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),

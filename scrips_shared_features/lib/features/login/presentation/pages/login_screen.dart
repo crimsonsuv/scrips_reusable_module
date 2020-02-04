@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
@@ -54,50 +55,55 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
-        bloc: bloc,
-        listener: (BuildContext context, state) {
-          if (state is LoginDummyDataState) {
-            initialUser = state.user;
-            editedUser = state.user;
-          } else if (state is LoginResponseState) {
-            _goToHome(state.response);
-          } else if (state is LoginBeginLoading) {
-            isLoading = true;
-          } else if (state is LoginEndLoading) {
-            isLoading = false;
-          } else if (state is ErrorState) {
-            print(state.message);
-            //TODO provide UI for error
-          } else if (state is EnableLoginButtonState) {
-            isEnabled = state.status;
-          }
-        },
-        child: BlocBuilder<LoginBloc, LoginState>(
+    return OKToast(
+      child: BlocListener(
           bloc: bloc,
-          condition: (preSate, currSate) {
-            if (currSate is EnableLoginButtonState) {
-              return false;
+          listener: (BuildContext context, state) {
+            if (state is LoginDummyDataState) {
+              initialUser = state.user;
+              editedUser = state.user;
+            } else if (state is LoginResponseState) {
+              _goToHome(state.response);
+            } else if (state is LoginBeginLoading) {
+              isLoading = true;
+            } else if (state is LoginEndLoading) {
+              isLoading = false;
+            } else if (state is ErrorState) {
+              print(state.message);
+              //TODO provide UI for error
+            } else if (state is EnableLoginButtonState) {
+              isEnabled = state.status;
             }
-            return true;
           },
-          builder: (context, state) {
-            return Scaffold(
-              body: SimpleView(
-                showBackButton: true,
-                showAppIcon: true,
-                showNext: false,
-                iconImage: Images.instance.banner(),
-                onBack: () {},
-                onNext: () {},
-                headerWidgets: headerWidgets(context, 'Welcome to Scrips® Provider App', 'Please, enter your login details' ),
-                bodyWidgets:
-                    bodyWidgets(context, initialUser, editedUser, bloc),
-                footerWidgets: footerWidgets(
-                    editedUser, context, isLoading, bloc, isEnabled, true),
-              ),
-            );
-          },
-        ));
+          child: BlocBuilder<LoginBloc, LoginState>(
+            bloc: bloc,
+            condition: (preSate, currSate) {
+              if (currSate is EnableLoginButtonState) {
+                return false;
+              }
+              return true;
+            },
+            builder: (context, state) {
+              return Scaffold(
+                body: SimpleView(
+                  showBackButton: true,
+                  showAppIcon: true,
+                  showNext: false,
+                  iconImage: Images.instance.banner(),
+                  onBack: () {},
+                  onNext: () {},
+                  headerWidgets: headerWidgets(
+                      context,
+                      'Welcome to Scrips® Practice Management App',
+                      'Please, enter your login details'),
+                  bodyWidgets:
+                      bodyWidgets(context, initialUser, editedUser, bloc),
+                  footerWidgets: footerWidgets(
+                      editedUser, context, isLoading, bloc, isEnabled, true),
+                ),
+              );
+            },
+          )),
+    );
   }
 }
