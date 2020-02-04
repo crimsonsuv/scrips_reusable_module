@@ -27,7 +27,6 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
   AnimationController animationController;
   AnimationController opacityController;
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -117,7 +116,8 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                                   height: 44,
                                   child: Center(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
                                       child: Text(
                                         "Cancel",
                                         style: semiBoldLabelTextStyle(
@@ -128,25 +128,26 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                                 )),
                             Text(
                               widget.title,
-                              style: boldLabelTextStyle(
-                                  17, defaultFieldTextColor),
+                              style:
+                                  boldLabelTextStyle(17, defaultFieldTextColor),
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  animationController.reverse();
-                                  opacityController.reverse();
+//                                  animationController.reverse();
+//                                  opacityController.reverse();
                                   widget.onSave();
-                                  Future<void>.delayed(
-                                      Duration(milliseconds: 200), () {
-                                    Navigator.pop(context);
-                                  });
+//                                  Future<void>.delayed(
+//                                      Duration(milliseconds: 200), () {
+//                                    //Navigator.pop(context);
+//                                  });
                                 },
                                 child: Container(
                                   color: Colors.white,
                                   height: 44,
                                   child: Center(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
                                       child: Text(
                                         "Save",
                                         style: semiBoldLabelTextStyle(
