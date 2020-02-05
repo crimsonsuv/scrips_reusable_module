@@ -141,7 +141,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       if (dates.length > 1) {
         _textEditController = TextEditingController(
             text:
-                "${scDateFormat(dates.elementAt(0))} - ${scDateFormat(dates.elementAt(1))}");
+                "${scDateFormat(dates.elementAt(0))} - ${scDateFormat(dates.elementAt(1)) ?? "NA"}");
       } else if (dates.length == 1) {
         _textEditController =
             TextEditingController(text: scDateFormat(dates.elementAt(0)));
@@ -541,12 +541,12 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                             : (dates?.elementAt(0) ?? DateTime.now()),
                         initialLastDate: (dates?.length ?? 0) > 1
                             ? (dates?.elementAt(1) ??
-                                DateTime.now().add(Duration(seconds: 10)))
+                                dates?.elementAt(0)?.add(Duration(seconds: 10)))
                             : DateTime.now().add(Duration(seconds: 10)),
-                        firstDate: new DateTime.now()
+                        firstDate: new DateTime(DateTime.now().year, 1, 1)
                             .subtract(Duration(days: 365 * 20)),
-                        lastDate:
-                            new DateTime.now().add(Duration(days: 365 * 20)),
+                        lastDate: new DateTime(DateTime.now().year, 12, 31)
+                            .add(Duration(days: 365 * 20)),
                         range: DateRagePicker.DatePickerRange.multi);
                 if (picked != null) {
                   print(picked);
