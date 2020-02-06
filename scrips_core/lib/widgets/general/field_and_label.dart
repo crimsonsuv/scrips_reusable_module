@@ -340,19 +340,26 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   ],
                 ),
           Expanded(
-            child: DropdownButton(
-              underline: Container(),
-              isExpanded: true,
-              value: currentFieldValue ?? widget.fieldValue,
-              items: widget.listItems ?? [],
-              icon: Images.instance.dropDownIcon(height: 24, width: 24),
-              iconSize: 12.0,
-              onChanged: onChangedInternal,
-              style: normalLabelTextStyle(15, regularTextColor),
-              hint: PlatformText(widget.placeholder ?? '',
-                  style: defaultHintStyle(null, null)),
-              disabledHint: PlatformText(widget.validationMessage ?? '',
-                  style: defaultHintStyle(null, null)),
+            child: IgnorePointer(
+              ignoring: !(widget?.enabled ?? true),
+              child: DropdownButton(
+                underline: Container(),
+                isExpanded: true,
+                value: currentFieldValue ?? widget.fieldValue,
+                items: widget.listItems ?? [],
+                icon: Images.instance.dropDownIcon(height: 24, width: 24),
+                iconSize: 12.0,
+                onChanged: onChangedInternal,
+                style: normalLabelTextStyle(
+                    15,
+                    (widget?.enabled ?? true)
+                        ? regularTextColor
+                        : Colors.black45),
+                hint: PlatformText(widget.placeholder ?? '',
+                    style: defaultHintStyle(null, null)),
+                disabledHint: PlatformText(widget.validationMessage ?? '',
+                    style: defaultHintStyle(null, null)),
+              ),
             ),
           )
         ],
@@ -384,7 +391,11 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       widget.isPassword == false || widget.isPassword == null
                           ? false
                           : true,
-                  style: normalLabelTextStyle(15, regularTextColor),
+                  style: normalLabelTextStyle(
+                      15,
+                      (widget?.enabled ?? true)
+                          ? regularTextColor
+                          : Colors.black45),
                   textAlign: TextAlign.justify,
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
@@ -674,8 +685,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildRichTextEdit(BuildContext context) {
     return Container(
-      height: 60.0,
-      constraints: BoxConstraints.expand(height: 60),
+      height: 80.0,
+      constraints: BoxConstraints.expand(height: 80),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -694,14 +705,17 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               onSubmitted: onSubmitted,
               onEditingComplete: onEditingComplete,
               keyboardType: TextInputType.multiline,
-              minLines: 2,
+              maxLength: 500,
+              minLines: 3,
               onTap: () {
                 onTapInternal();
               },
               decoration: InputDecoration(
-                  counterText: "",
+                  //counterText: "",
+                  counterStyle: normalLabelTextStyle(8, regularTextColor),
                   hintText: widget.placeholder,
                   hintStyle: defaultHintStyle(null, null),
+                  contentPadding: EdgeInsets.only(bottom: -10, top: 4),
                   border: InputBorder.none),
             ),
           ),
