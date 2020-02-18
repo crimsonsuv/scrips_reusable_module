@@ -53,6 +53,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Function onTap;
   final Widget icon;
   final Widget rightIcon;
+  final int maxLength;
 
   final List<ListItemType> listItems;
   FieldAndLabelState _myState;
@@ -88,6 +89,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldBackgroundColor,
       this.fieldTextColor,
       this.rightIcon,
+        this.maxLength = 300,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
 
@@ -403,6 +405,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   onSubmitted: onSubmitted,
                   onEditingComplete: onEditingComplete,
                   maxLines: 1,
+                  maxLength: widget.maxLength,
                   onTap: () {
                     onTapInternal();
                   },

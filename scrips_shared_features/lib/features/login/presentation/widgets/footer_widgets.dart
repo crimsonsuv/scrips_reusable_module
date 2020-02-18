@@ -9,6 +9,27 @@ import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
+
+//Future<oauth2.Client> getClient() async {
+//  final authorizationEndpoint = Uri.parse(
+//      "https://scripsidentityapi20191030115107.azurewebsites.net/Account/Login");
+//  final tokenEndpoint = Uri.parse(
+//      "https://scripsidentityapi20191030115107.azurewebsites.net/connect/token");
+//  final redirectUrl = Uri.parse("com.scrips.pa://");
+//
+//  var client = await oauth2.clientCredentialsGrant(
+//      authorizationEndpoint, 'Scrips.Provider', "");
+//
+////  var grant = new oauth2.cl(
+////    'Scrips.Provider',
+////    authorizationEndpoint,
+////    tokenEndpoint,
+////  );
+//  print(client.credentials);
+//
+//  //return await grant.handleAuthorizationResponse(request.queryParameters);
+//}
 
 List<Widget> footerWidgets(User editedUser, BuildContext context,
         bool isLoading, LoginBloc bloc, bool isEnabled,
@@ -28,7 +49,7 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
             buttonBackgroundColor:
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
-                ? () {
+                ? () async {
                     if ((editedUser.email == "user@scrips.com" ||
                             editedUser.email == "admin@scrips.com") &&
                         editedUser.password == "123456") {
@@ -46,6 +67,9 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
                         duration: Duration(seconds: 2),
                       );
                     }
+
+//                    var client = await getClient();
+//                    print(client.credentials);
                   }
                 : null,
             isLoading: isLoading,

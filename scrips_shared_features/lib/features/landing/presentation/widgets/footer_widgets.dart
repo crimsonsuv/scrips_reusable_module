@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
@@ -17,6 +18,16 @@ List<Widget> footerWidgets(
       ),
       Space(
         vertical: 24,
+      ),
+      Button(
+        width: 222.0,
+        height: 48,
+        text: "Forgot Password?",
+        style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
+        onPressed: () {
+          Navigator.pushNamed(context, RoutePaths.PmForgotPassword);
+        },
+        buttonBackgroundColor: bgColor,
       ),
       Button(
         height: 48,

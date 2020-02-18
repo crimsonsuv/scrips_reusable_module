@@ -41,6 +41,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   oktoast: ^2.3.0
+  oauth2: ^1.5.0
 
 
 dev_dependencies:

@@ -13,6 +13,34 @@ class Images {
     return _instance;
   }
 
+  Image banner(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/ic_branding.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image organization(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage("assets/ic_organization.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
   Image minus(
           {double width,
           double height,

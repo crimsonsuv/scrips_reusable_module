@@ -122,3 +122,7 @@ bool isPlatformStandard(BuildContext context) {
 bool isPlatformExperimental(BuildContext context) {
   return !isPlatformStandard(context);
 }
+
+bool isBetween(int x, int lower, int upper) {
+  return lower <= x && x <= upper;
+}
