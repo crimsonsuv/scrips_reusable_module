@@ -65,6 +65,12 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
     });
   }
 
+  void _goToForgotPassword() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      Navigator.pushNamed(context, AppRoutePaths.ForgotPassword);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LandingBloc>(
@@ -89,8 +95,8 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
                     onNext: () {},
                     headerWidgets: headerWidgets(context),
                     bodyWidgets: bodyWidgets(context),
-                    footerWidgets:
-                        footerWidgets(context, _goToLogin, _goToSignup),
+                    footerWidgets: footerWidgets(
+                        context, _goToLogin, _goToSignup, _goToForgotPassword),
                   ),
                 ),
               );

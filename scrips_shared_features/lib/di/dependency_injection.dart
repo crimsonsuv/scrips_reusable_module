@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/create_password_bloc.dart';
+import 'package:scrips_shared_features/features/forgot_password/presentation/bloc/forgot_password_bloc.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source_impl.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_dummy_data_source_impl.dart';
@@ -82,6 +83,16 @@ Future<void> initServiceLocator() async {
   /// Create Password
   //bloc
   sl.registerFactory(() => CreatePasswordBloc());
+
+  // use cases
+
+  // Data sources
+
+  // repository
+
+  /// Forgot Password
+  //bloc
+  sl.registerFactory(() => ForgotPasswordBloc());
 
   // use cases
 

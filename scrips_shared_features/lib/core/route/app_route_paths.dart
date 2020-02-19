@@ -10,4 +10,5 @@ class AppRoutePaths {
   static const String SignUp = '/signup';
   static const String CreatePassword = '/create-password';
   static const String PracticeSetup = '/practice-setup';
+  static const String ForgotPassword = '/forgot-password';
 }

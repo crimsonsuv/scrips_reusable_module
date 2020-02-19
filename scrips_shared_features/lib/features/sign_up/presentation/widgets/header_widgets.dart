@@ -15,7 +15,7 @@ List<Widget> headerWidgets(BuildContext context) => [
         vertical: 10,
       ),
       Text(
-        "Enter access code from the invite sent by scrips",
+        "Enter access code from the invite sent by your organization",
         style: normalLabelTextStyle(14.0, regularTextColor),
       ),
       Space(

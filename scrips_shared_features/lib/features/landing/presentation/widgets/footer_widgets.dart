@@ -5,8 +5,8 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 
-List<Widget> footerWidgets(
-        BuildContext context, Function goToLogin, Function goToSignup) =>
+List<Widget> footerWidgets(BuildContext context, Function goToLogin,
+        Function goToSignup, Function goToForgotPassword) =>
     <Widget>[
       Button(
         height: 48,
@@ -24,15 +24,13 @@ List<Widget> footerWidgets(
         height: 48,
         text: "Forgot Password?",
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
-        onPressed: () {
-          Navigator.pushNamed(context, RoutePaths.PmForgotPassword);
-        },
+        onPressed: goToForgotPassword,
         buttonBackgroundColor: bgColor,
       ),
       Button(
         height: 48,
         width: 222,
-        text: "Sign Up with Access Code",
+        text: "Sign Up With Access Code",
         style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
         buttonBackgroundColor: textFieldBGcolor,
         onPressed: goToSignup,

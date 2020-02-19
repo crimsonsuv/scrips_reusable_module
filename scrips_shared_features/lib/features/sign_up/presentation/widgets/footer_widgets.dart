@@ -22,12 +22,12 @@ List<Widget> footerWidgets(BuildContext context, Function goNext,
       Space(
         vertical: 24,
       ),
-//      Button(
-//        width: 222.0,
-//        height: 48,
-//        text: "Log In",
-//        style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
-//        onPressed: goToLogin,
-//        buttonBackgroundColor: bgColor,
-//      ),
+      Button(
+        width: 222.0,
+        height: 48,
+        text: "Log In",
+        style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
+        onPressed: goToLogin,
+        buttonBackgroundColor: bgColor,
+      ),
     ];
