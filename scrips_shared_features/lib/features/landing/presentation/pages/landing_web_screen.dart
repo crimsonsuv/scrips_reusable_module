@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
+import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/constants/app_config.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
@@ -23,7 +25,7 @@ class LandingWebScreen extends StatefulWidget {
 
 class _LandingWebScreenState extends State<LandingWebScreen> {
   final bloc = sl<LandingBloc>();
-  User user;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -38,25 +40,22 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
     bloc.dispose();
   }
 
-  void _goToHomeIfLoggedIn(User user) {
-    final bool isLoggedIn =
-        user?.userId?.value != null && user?.userId?.value != '';
-    if (isLoggedIn && Configuration.goToHomeIfLoggedIn) {
-      // we need to call this to ensure menu items are loaded, etc
-      Future.delayed(Duration(milliseconds: 100), () {
-        Navigator.pushReplacementNamed(context, AppRoutePaths.Home);
-      });
-    }
-  }
+//  void _goToHomeIfLoggedIn(User user) {
+//    final bool isLoggedIn =
+//        user?.userId?.value != null && user?.userId?.value != '';
+//    if (isLoggedIn && Configuration.goToHomeIfLoggedIn) {
+//      // we need to call this to ensure menu items are loaded, etc
+//      Future.delayed(Duration(milliseconds: 100), () {
+//        Navigator.pushReplacementNamed(context, AppRoutePaths.Home);
+//      });
+//    }
+//  }
 
-  void _fetchUser(User loggedUser) {
-    user = loggedUser;
-  }
-
-  void _goToLogin() {
+  void _goToHome() {
     Future.delayed(Duration(milliseconds: 100), () {
-      Navigator.pushNamed(context, AppRoutePaths.Login);
+      Navigator.pushNamed(context, AppRoutePaths.Home, arguments: 101);
     });
+
   }
 
   void _goToSignup() {
@@ -73,33 +72,48 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LandingBloc>(
-        builder: (_) => bloc,
-        child: BlocBuilder<LandingBloc, LandingState>(
-            bloc: bloc,
-            builder: (context, state) {
-              if (state is GetLoggedUserState) {
-                _fetchUser(state.user);
-              }
-              _goToHomeIfLoggedIn(user);
-              return Scaffold(
-                backgroundColor: bgColor,
-                body: Padding(
-                  padding: const EdgeInsets.only(top: 200),
-                  child: SimpleView(
-                    showBackButton: false,
-                    showAppIcon: true,
-                    showNext: false,
-                    iconImage: Images.instance.banner(),
-                    onBack: () {},
-                    onNext: () {},
-                    headerWidgets: headerWidgets(context),
-                    bodyWidgets: bodyWidgets(context),
-                    footerWidgets: footerWidgets(
-                        context, _goToLogin, _goToSignup, _goToForgotPassword),
+    return OKToast(
+      child: BlocListener(
+        bloc: bloc,
+        listener: (BuildContext context, state) {
+          if(state is OAuthLoginState){
+    print("ACCESS CODE IS : ${state.accessToken.accessToken}");
+    _goToHome();
+    } else if (state is ErrorState) {
+      showToastWidget(
+        ToastWidget(
+          message: state.message,
+          backgroundColor: red,
+        ),
+        position: ToastPosition.top,
+        context: context,
+        duration: Duration(seconds: 4),
+      );
+    } else if(state is LoadingBeginState){
+            isLoading = true;
+          } else if(state is LoadingEndState){
+            isLoading = false;
+          }
+        },
+          child: BlocBuilder<LandingBloc, LandingState>(
+              bloc: bloc,
+              builder: (context, state) {
+                return Scaffold(
+                  backgroundColor: bgColor,
+                  body: Padding(
+                    padding: const EdgeInsets.only(top: 200),
+                    child: SimpleView(
+                      showBackButton: false,
+                      showAppIcon: true,
+                      showNext: false,
+                      iconImage: Images.instance.banner(),
+                      headerWidgets: headerWidgets(context),
+                      bodyWidgets: bodyWidgets(context),
+                      footerWidgets: footerWidgets(context: context, goToForgotPassword: _goToForgotPassword, goToSignup: _goToSignup, bloc: bloc, isLoading: isLoading),
+                    ),
                   ),
-                ),
-              );
-            }));
+                );
+              })),
+    );
   }
 }

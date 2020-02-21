@@ -11,8 +11,18 @@ class GetLoggedUserState extends LandingState {
   GetLoggedUserState(this.user);
 }
 
+class OAuthLoginState extends LandingState {
+  final LoginTokens accessToken;
+
+  OAuthLoginState(this.accessToken);
+}
+
 class ErrorState extends LandingState {
   final String message;
 
   ErrorState(this.message);
 }
+
+class LoadingBeginState extends LandingState {}
+
+class LoadingEndState extends LandingState {}

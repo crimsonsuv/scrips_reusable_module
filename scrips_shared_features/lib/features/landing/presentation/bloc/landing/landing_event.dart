@@ -4,3 +4,5 @@ part of 'landing_bloc.dart';
 abstract class LandingEvent {}
 
 class GetLoggedUser extends LandingEvent {}
+
+class OAuthLoginEvent extends LandingEvent {}

@@ -29,16 +29,11 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   String confirmPassword = "";
   bool isLoading = false;
 
+
   @override
   void initState() {
     super.initState();
   }
-
-//  void _goToHome() {
-//    Future.delayed(Duration(milliseconds: 100), () {
-//      Navigator.pushReplacementNamed(context, AppRoutePaths.Home);
-//    });
-//  }
 
   void _goNext() {
     Future.delayed(Duration(milliseconds: 100), () {

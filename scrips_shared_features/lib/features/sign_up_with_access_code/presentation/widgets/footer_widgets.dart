@@ -13,6 +13,7 @@ List<Widget> footerWidgets(
         Function goToLogin,
         String accessCode,
         String email,
+          bool isLoginLoading,
         SignupWithAccessCodeBloc bloc,
         bool isLoading}) =>
     <Widget>[
@@ -51,7 +52,10 @@ List<Widget> footerWidgets(
         height: 48,
         text: "Log In",
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
-        onPressed: goToLogin,
+        isLoading: isLoginLoading,
+        onPressed: (){
+          bloc.dispatch(OAuthLoginEvent());
+        },
         buttonBackgroundColor: bgColor,
       ),
     ];

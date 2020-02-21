@@ -14,3 +14,5 @@ class EnabledButtonEvent extends SignupWithAccessCodeEvent {
   final String code;
   EnabledButtonEvent({this.email, this.code});
 }
+
+class OAuthLoginEvent extends SignupWithAccessCodeEvent {}

@@ -29,17 +29,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String email = "";
   String accessCode = "";
   bool isLoading = false;
+  bool isLoginLoading = false;
 
   @override
   void initState() {
     super.initState();
-  }
-
-  void _goToLogin() {
-    Navigator.pop(context);
-    Future.delayed(Duration(milliseconds: 100), () {
-      Navigator.pushNamed(context, AppRoutePaths.Login);
-    });
   }
 
   void _goNext({String email, String passwordResetToken}) {
@@ -48,6 +42,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         "email": email,
         "passwordResetToken": passwordResetToken
       });
+    });
+  }
+
+  void _goToHome() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      Navigator.pushNamed(context, AppRoutePaths.Home, arguments: 101);
     });
   }
 
@@ -79,6 +79,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 context: context,
                 duration: Duration(seconds: 4),
               );
+            } else if (state is LoginLoadingBeginState) {
+              isLoginLoading = true;
+            } else if (state is LoginLoadingEndState) {
+              isLoginLoading = false;
+            } else if(state is OAuthLoginState){
+              print("ACCESS CODE IS : ${state.accessToken.accessToken}");
+              _goToHome();
             }
           },
           child:
@@ -109,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       accessCode: accessCode,
                       bloc: bloc,
                       isLoading: isLoading,
-                      goToLogin: _goToLogin),
+                      isLoginLoading: isLoginLoading),
                 ),
               );
             },

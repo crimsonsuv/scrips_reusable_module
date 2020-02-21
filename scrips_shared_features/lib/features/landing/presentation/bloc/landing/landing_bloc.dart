@@ -5,14 +5,17 @@ import 'package:meta/meta.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_shared_features/core/usecase/no_params.dart';
 import 'package:scrips_shared_features/features/landing/domain/usecases/get_logged_user_use_case.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
+import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
 
 part 'landing_event.dart';
 part 'landing_state.dart';
 
 class LandingBloc extends Bloc<LandingEvent, LandingState> {
   GetLoggedUserUseCase getLoggedUserUseCase;
+  OAuthLoginUseCase oAuthLoginUseCase;
 
-  LandingBloc({@required this.getLoggedUserUseCase});
+  LandingBloc({@required this.getLoggedUserUseCase, this.oAuthLoginUseCase});
 
   @override
   LandingState get initialState => InitialLandingState();
@@ -29,6 +32,15 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
         (user) => user != null
             ? GetLoggedUserState(user)
             : ErrorState("User is null"),
+      );
+    } else if(event is OAuthLoginEvent){
+      yield LoadingBeginState();
+      final result = await oAuthLoginUseCase(
+          NoParams());
+      yield LoadingEndState();
+      yield result.fold(
+            (error) => ErrorState(error.message),
+            (success) => OAuthLoginState(success),
       );
     }
   }

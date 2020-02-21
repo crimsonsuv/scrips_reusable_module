@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
 
-List<Widget> footerWidgets(BuildContext context, Function goToLogin,
-        Function goToSignup, Function goToForgotPassword) =>
+List<Widget> footerWidgets({BuildContext context,
+        Function goToSignup, Function goToForgotPassword, LandingBloc bloc, bool isLoading}) =>
     <Widget>[
       Button(
         height: 48,
         width: 176,
         text: "Login",
+        isLoading: isLoading,
         style: normalLabelTextStyle(17, enabledBtnTextColor),
         buttonBackgroundColor: enabledBtnBGColor,
-        onPressed: goToLogin,
+        onPressed: (){
+          bloc.dispatch(OAuthLoginEvent());
+        },
       ),
       Space(
         vertical: 24,

@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 
 @immutable
 abstract class CreatePasswordState {}
@@ -25,3 +26,4 @@ class ErrorState extends CreatePasswordState {
 
   ErrorState(this.message);
 }
+

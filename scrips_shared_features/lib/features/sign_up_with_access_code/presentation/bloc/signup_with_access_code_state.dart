@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datamodels/signup_by_code_response_model.dart';
 
 @immutable
@@ -27,3 +28,13 @@ class IsButtonEnabledState extends SignupWithAccessCodeState {
   final String code;
   IsButtonEnabledState({this.status, this.email, this.code});
 }
+
+class OAuthLoginState extends SignupWithAccessCodeState {
+  final LoginTokens accessToken;
+
+  OAuthLoginState(this.accessToken);
+}
+
+class LoginLoadingBeginState extends SignupWithAccessCodeState {}
+
+class LoginLoadingEndState extends SignupWithAccessCodeState {}

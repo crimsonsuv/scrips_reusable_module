@@ -13,6 +13,7 @@ List<Widget> footerWidgets(
         String password,
         String confirmPassword,
         bool isLoading,
+          bool isLoginLoading,
         Map<String, String> arguments,
         CreatePasswordBloc bloc}) =>
     <Widget>[

@@ -4,21 +4,22 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_shared_features/features/password_changed_success/presentation/bloc/bloc.dart';
 
 List<Widget> footerWidgets(
-        {BuildContext context,
-        Function goToHome,
-        String email = "",
-        Function goNext}) =>
+        {BuildContext context, PasswordChangedSuccessBloc bloc, bool isLoading}) =>
     <Widget>[
       Space(vertical: 30),
       Button(
         width: 176.0,
         height: 48,
         text: "Login",
+        isLoading: isLoading,
         buttonBackgroundColor:
-            (!isBlank(email)) ? normalBtnTextColor : disabledBtnBGColor,
-        onPressed: goNext,
+            normalBtnTextColor,
+        onPressed: (){
+          bloc.dispatch(OAuthLoginEvent());
+        },
         style: semiBoldLabelTextStyle(17.0, disabledBtnTextColor),
       ),
     ];
