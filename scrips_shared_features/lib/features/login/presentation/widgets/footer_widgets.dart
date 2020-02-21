@@ -1,54 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
-import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 
-//Future<oauth2.Client> getClient() async {
-//  final authorizationEndpoint = Uri.parse(
-//      "https://scripsidentityapi20191030115107.azurewebsites.net/Account/Login");
-//  final tokenEndpoint = Uri.parse(
-//      "https://scripsidentityapi20191030115107.azurewebsites.net/connect/token");
-//  final redirectUrl = Uri.parse("com.scrips.pa://");
-//
-//  var client = await oauth2.clientCredentialsGrant(
-//      authorizationEndpoint, 'Scrips.Provider', "");
-//
-//  var grant = new oauth2.AuthorizationCodeGrant(
-//    'Scrips.Provider',
-//    authorizationEndpoint,
-//    tokenEndpoint,
-//  );
-//
-//  Uri authUrl = grant
-//      .getAuthorizationUrl(Uri.parse("pm.scrips.com://"), scopes: ["openid"]);
-//  print(authUrl);
-//
-//  return await grant.handleAuthorizationResponse(request.queryParameters);
-//}
 
 void getAccessCode() async {
+
   final url = Uri.https(
       'scripsidentityapi20191030115107.azurewebsites.net', '/Account/Login', {
+    'response_type':'code',
     'grant_type': 'authorization_code',
     'client_id': 'Scrips.Provider',
     'redirect_uri': 'com.scrips.pa://',
     'scope': 'openid',
   });
 
-  // Present the dialog to the user
   final result = await FlutterWebAuth.authenticate(
-      url: url.toString(), callbackUrlScheme: "com.scrips.pa");
+    url: url.toString(),
+    callbackUrlScheme: "com.scrips.pa",
+  );
 
-// Extract code from resulting url
   final code = Uri.parse(result).queryParameters['code'];
 
   print(code);

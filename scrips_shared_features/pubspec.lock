@@ -258,6 +258,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_appauth:
+    dependency: "direct main"
+    description:
+      name: flutter_appauth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.1"
+  flutter_appauth_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_appauth_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -534,6 +548,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   pool:
     dependency: transitive
     description:
@@ -611,6 +632,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
+  simple_auth:
+    dependency: transitive
+    description:
+      name: simple_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
+  simple_auth_flutter:
+    dependency: "direct main"
+    description:
+      name: simple_auth_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
