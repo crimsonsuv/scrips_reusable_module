@@ -5,37 +5,18 @@ import 'package:scrips_core/widgets/general/space.dart';
 
 List<Widget> headerWidgets(BuildContext context) => [
       Space(
-        vertical: 12,
+        vertical: 24,
       ),
       Text(
-        "Hey Dr Jack,",
+        "Reset Your Password",
         style: boldLabelTextStyle(17, textInputColor),
       ),
       Space(
-        vertical: 16,
+        vertical: 8,
       ),
       Text(
-        "Welcome to Dubai Primary Clinic on Scrips.",
+        "Enter your registration email to receive a reset link",
         style: normalLabelTextStyle(15, regularTextColor),
-      ),
-      Space(
-        vertical: 16,
-      ),
-      RichText(
-        textAlign: TextAlign.center,
-        text: TextSpan(
-          style: normalLabelTextStyle(15, regularTextColor),
-          text: "Please, complete your registration for your",
-          children: <TextSpan>[
-            TextSpan(
-                text: ' jacksmith@dubaiprimary.ae\n',
-                style: boldLabelTextStyle(15, regularTextColor)),
-            TextSpan(
-              text: 'account by creating a password.',
-              style: normalLabelTextStyle(15, regularTextColor),
-            )
-          ],
-        ),
       ),
       Space(
         vertical: 24,

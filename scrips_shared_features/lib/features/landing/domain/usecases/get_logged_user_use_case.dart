@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_core/data_models/user/user.dart';
+import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/error/errors.dart';
 import 'package:scrips_shared_features/core/usecase/no_params.dart';
 import 'package:scrips_shared_features/core/usecase/usecase.dart';
@@ -12,7 +13,7 @@ class GetLoggedUserUseCase extends UseCase<User, NoParams> {
   GetLoggedUserUseCase({@required this.landingRepository});
 
   @override
-  Future<Either<ErrorClass, User>> call(NoParams params) async {
+  Future<Either<Failure, User>> call(NoParams params) async {
     return await landingRepository.getLoggedUser();
   }
 }

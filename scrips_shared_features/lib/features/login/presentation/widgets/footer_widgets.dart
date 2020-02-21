@@ -10,6 +10,7 @@ import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:flutter_web_auth/flutter_web_auth.dart';
 
 //Future<oauth2.Client> getClient() async {
 //  final authorizationEndpoint = Uri.parse(
@@ -21,15 +22,37 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 //  var client = await oauth2.clientCredentialsGrant(
 //      authorizationEndpoint, 'Scrips.Provider', "");
 //
-////  var grant = new oauth2.cl(
-////    'Scrips.Provider',
-////    authorizationEndpoint,
-////    tokenEndpoint,
-////  );
-//  print(client.credentials);
+//  var grant = new oauth2.AuthorizationCodeGrant(
+//    'Scrips.Provider',
+//    authorizationEndpoint,
+//    tokenEndpoint,
+//  );
 //
-//  //return await grant.handleAuthorizationResponse(request.queryParameters);
+//  Uri authUrl = grant
+//      .getAuthorizationUrl(Uri.parse("pm.scrips.com://"), scopes: ["openid"]);
+//  print(authUrl);
+//
+//  return await grant.handleAuthorizationResponse(request.queryParameters);
 //}
+
+void getAccessCode() async {
+  final url = Uri.https(
+      'scripsidentityapi20191030115107.azurewebsites.net', '/Account/Login', {
+    'grant_type': 'authorization_code',
+    'client_id': 'Scrips.Provider',
+    'redirect_uri': 'com.scrips.pa://',
+    'scope': 'openid',
+  });
+
+  // Present the dialog to the user
+  final result = await FlutterWebAuth.authenticate(
+      url: url.toString(), callbackUrlScheme: "com.scrips.pa");
+
+// Extract code from resulting url
+  final code = Uri.parse(result).queryParameters['code'];
+
+  print(code);
+}
 
 List<Widget> footerWidgets(User editedUser, BuildContext context,
         bool isLoading, LoginBloc bloc, bool isEnabled,
@@ -50,26 +73,27 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
                 ? () async {
-                    if ((editedUser.email == "user@scrips.com" ||
-                            editedUser.email == "admin@scrips.com") &&
-                        editedUser.password == "123456") {
-                      bloc.dispatch(
-                        DoLoginEvent(context, editedUser),
-                      );
-                    } else {
-                      showToastWidget(
-                        ToastWidget(
-                          message: "Email or Password is not correct",
-                          backgroundColor: red,
-                        ),
-                        position: ToastPosition.top,
-                        context: context,
-                        duration: Duration(seconds: 2),
-                      );
-                    }
+//                    if ((editedUser.email == "user@scrips.com" ||
+//                            editedUser.email == "admin@scrips.com") &&
+//                        editedUser.password == "123456") {
+//                      bloc.dispatch(
+//                        DoLoginEvent(context, editedUser),
+//                      );
+//                    } else {
+//                      showToastWidget(
+//                        ToastWidget(
+//                          message: "Email or Password is not correct",
+//                          backgroundColor: red,
+//                        ),
+//                        position: ToastPosition.top,
+//                        context: context,
+//                        duration: Duration(seconds: 2),
+//                      );
+//                    }
 
 //                    var client = await getClient();
 //                    print(client.credentials);
+                    getAccessCode();
                   }
                 : null,
             isLoading: isLoading,

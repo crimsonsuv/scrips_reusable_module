@@ -4,6 +4,11 @@ class Fonts {
   static String roboto = "Roboto";
 }
 
+class FilePaths {
+  static String globalConfigFilePath =
+      'assets/configuration/global_configuration.json';
+}
+
 class Images {
   Images._privateConstructor();
 
@@ -111,72 +116,28 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
-  Image dashboard(
+  Image bigSuccess(
           {double width,
           double height,
           Color color,
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/dashboard.png"),
+          image: AssetImage("assets/ic_big_success.png"),
           height: height,
           width: width,
           fit: fit,
           color: color,
           colorBlendMode: colorBlendMode);
 
-  Image clinic({
-    double width,
-    double height,
-    Color color,
-    BlendMode colorBlendMode,
-    BoxFit fit,
-  }) =>
-      Image(
-        image: AssetImage('assets/clinic.png'),
-        height: height,
-        width: width,
-        fit: fit,
-        color: color,
-        colorBlendMode: colorBlendMode,
-      );
-
-  Image messages(
+  Image smallSuccess(
           {double width,
           double height,
           Color color,
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/messages.png"),
-          height: height,
-          width: width,
-          fit: fit,
-          color: color,
-          colorBlendMode: colorBlendMode);
-
-  Image notification(
-          {double width,
-          double height,
-          Color color,
-          BlendMode colorBlendMode,
-          BoxFit fit}) =>
-      Image(
-          image: AssetImage("assets/notification.png"),
-          height: height,
-          width: width,
-          fit: fit,
-          color: color,
-          colorBlendMode: colorBlendMode);
-
-  Image profile(
-          {double width,
-          double height,
-          Color color,
-          BlendMode colorBlendMode,
-          BoxFit fit}) =>
-      Image(
-          image: AssetImage("assets/user_icon.png"),
+          image: AssetImage("assets/ic_small_success.png"),
           height: height,
           width: width,
           fit: fit,

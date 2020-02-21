@@ -32,6 +32,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     });
   }
 
+  void _goNext() {
+    Future.delayed(Duration(milliseconds: 100), () {
+      Navigator.pushReplacementNamed(
+          context, AppRoutePaths.RestPasswordAccessCode);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ForgotPasswordBloc>(
@@ -49,7 +56,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 onNext: () {},
                 headerWidgets: headerWidgets(context),
                 bodyWidgets: bodyWidgets(context),
-                footerWidgets: footerWidgets(context, _goToHome),
+                footerWidgets: footerWidgets(
+                    context: context,
+                    goToHome: _goToHome,
+                    goNext: _goNext,
+                    email: "suv.das19@gmail.com"),
               ),
             );
           }),

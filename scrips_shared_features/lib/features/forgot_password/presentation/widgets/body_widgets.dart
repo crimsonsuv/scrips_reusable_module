@@ -6,80 +6,32 @@ import 'package:scrips_core/widgets/general/space.dart';
 
 List<Widget> bodyWidgets(BuildContext context) => [
       FieldAndLabel(
-        labelTextStyle: defaultFieldLabelStyle(null, null),
-        fieldType: FieldType.TextField,
+        isMandatory: false,
         fieldBackgroundColor: textFieldBGcolor,
-        labelValue: 'Create password'.toUpperCase(),
-        placeholder: 'Create password',
+        fieldType: FieldType.TextField,
+        labelTextStyle: defaultFieldLabelStyle(null, null),
+        labelValue: 'Email Address'.toUpperCase(),
+        fieldValue: "suv.das19@gmail.com",
+        placeholder: 'Email Address',
         axis: Axis.vertical,
         enabled: true,
-        isPassword: true,
-        onEditingComplete: (value, FieldAndLabelState state) {},
-//                validationMessage: globalModel.data.loginError.value,
+        onChanged: (value, FieldAndLabelState state) {
+//      if (!isEmail(value)) {
+//        editedUser.email = "";
+//        state.setValidationMessage("Not a valid Email");
+//        bloc.dispatch(
+//          OnChangedValuesEvent(editedUser),
+//        );
+//      } else {
+//        editedUser.email = value;
+//        bloc.dispatch(
+//          OnChangedValuesEvent(editedUser),
+//        );
+//        state.setValidationMessage('');
+//      }
+        },
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "• At least 8 characters",
-                    style: semiBoldLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "• 1 number",
-                    style: semiBoldLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "• 1 lowercase",
-                    style: semiBoldLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "• 1 special character (@, _, !, \$ or %)",
-                    style: semiBoldLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    "• 1 uppercase character",
-                    style: semiBoldLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-      Space(vertical: 10),
-      FieldAndLabel(
-        labelTextStyle: defaultFieldLabelStyle(null, null),
-        fieldType: FieldType.TextField,
-        fieldBackgroundColor: textFieldBGcolor,
-        labelValue: 'Confirm password'.toUpperCase(),
-        isPassword: true,
-        placeholder: 'Confirm password',
-        axis: Axis.vertical,
-        enabled: true,
-        onEditingComplete: (value, FieldAndLabelState state) {},
-//                validationMessage: globalModel.data.loginError.value,
-      ),
+      Space(
+        vertical: 10,
+      )
     ];

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
-import 'package:scrips_shared_features/core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/constants/app_config.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';

@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
+
+import 'reset_password_new_password_screen.dart';
+
+class ResetPasswordNewPasswordBaseScreen extends StatefulWidget {
+  const ResetPasswordNewPasswordBaseScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _ResetPasswordNewPasswordBaseScreenState createState() =>
+      _ResetPasswordNewPasswordBaseScreenState();
+}
+
+class _ResetPasswordNewPasswordBaseScreenState
+    extends State<ResetPasswordNewPasswordBaseScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return BaseScreenView(
+      desktopBodyLandscape: ResetPasswordNewPasswordScreen(),
+    );
+  }
+}

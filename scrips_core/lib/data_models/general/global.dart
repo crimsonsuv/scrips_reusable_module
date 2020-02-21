@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/app_constants.dart';
-import 'package:scrips_core/data_models/menu/main_menu.dart';
 import 'package:scrips_core/data_models/user/user.dart';
 
 class Global {
@@ -16,7 +15,6 @@ class Global {
   String localeCountry = PM_DEFAULT_LOCALE_COUNTRY;
   Exception lastException = null;
   User user = User.defaults();
-  MainMenu mainMenu = MainMenu();
 
   Global(
       {@required this.user,

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:scrips_core/utils/utils.dart';
-import 'package:scrips_shared_features/core/constants/app_assets.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 
 class Configuration {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
-import 'package:scrips_shared_features/core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
@@ -90,8 +90,6 @@ class _LoginState extends State<Login> {
                   showAppIcon: true,
                   showNext: false,
                   iconImage: Images.instance.banner(),
-                  onBack: () {},
-                  onNext: () {},
                   headerWidgets: headerWidgets(
                       context,
                       'Welcome to Scrips® Practice Management App',
