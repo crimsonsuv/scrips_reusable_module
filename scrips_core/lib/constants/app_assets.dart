@@ -25,7 +25,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_branding.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_branding.png"),
           height: height,
           width: width,
           fit: fit,
@@ -39,7 +40,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_organization.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_organization.png"),
           height: height,
           width: width,
           fit: fit,
@@ -53,7 +55,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_minus.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_minus.png"),
           height: height,
           width: width,
           fit: fit,
@@ -67,7 +70,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_cross.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_cross.png"),
           height: height,
           width: width,
           fit: fit,
@@ -81,7 +85,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_plus.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_plus.png"),
           height: height,
           width: width,
           fit: fit,
@@ -95,7 +100,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_back.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_back.png"),
           height: height,
           width: width,
           fit: fit,
@@ -109,7 +115,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_drop_down.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_drop_down.png"),
           height: height,
           width: width,
           fit: fit,
@@ -123,7 +130,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_big_success.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_big_success.png"),
           height: height,
           width: width,
           fit: fit,
@@ -137,7 +145,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_small_success.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_success.png"),
           height: height,
           width: width,
           fit: fit,

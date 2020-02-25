@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/app_constants.dart';
-import 'package:scrips_core/data_models/user/user.dart';
 
 class Global {
   bool showOverlappedSubMenu = false;
@@ -14,11 +13,9 @@ class Global {
   String localeCode = PM_DEFAULT_LOCALE_CODE;
   String localeCountry = PM_DEFAULT_LOCALE_COUNTRY;
   Exception lastException = null;
-  User user = User.defaults();
 
   Global(
-      {@required this.user,
-      this.showOverlappedSubMenu,
+      {this.showOverlappedSubMenu,
       this.showDevicePreview,
       this.animateSubMenu});
 

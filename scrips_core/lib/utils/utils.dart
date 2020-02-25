@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scrips_core/general/property_info.dart';
 
 Color getColorFromHex(String hexColor) {
   hexColor = hexColor.toUpperCase().replaceAll('#', '');
@@ -89,14 +88,6 @@ String dateTimeToISOString(DateTime aDate) {
   } else {
     return aDate?.toIso8601String();
   }
-}
-
-PropertyInfo<DateTime> dateTimePiFromISOString(String stringDate) {
-  return PropertyInfo<DateTime>(dateTimeFromISOString(stringDate));
-}
-
-String dateTimePiToISOString(PropertyInfo<DateTime> piDate) {
-  return dateTimeToISOString(piDate?.value);
 }
 
 class ValueDisplayPair {

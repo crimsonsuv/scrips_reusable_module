@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
-import 'package:scrips_shared_features/core/error/errors.dart';
 import 'package:scrips_shared_features/core/usecase/no_params.dart';
 import 'package:scrips_shared_features/core/usecase/usecase.dart';
 import 'package:scrips_shared_features/features/landing/domain/repository/landing_repository.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
 
 class GetLoggedUserUseCase extends UseCase<User, NoParams> {
   LandingRepository landingRepository;

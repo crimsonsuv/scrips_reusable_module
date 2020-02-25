@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/locator.dart';
 import 'package:scrips_core/services/api/background_fetch_service.dart';
-import 'package:scrips_core/services/api/location_service.dart';
 import 'package:scrips_core/services/api/stoppable_service.dart';
 
 /// Stop and start long running services
@@ -12,7 +11,8 @@ class LifeCycleManager extends StatefulWidget {
   _LifeCycleManagerState createState() => _LifeCycleManagerState();
 }
 
-class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBindingObserver {
+class _LifeCycleManagerState extends State<LifeCycleManager>
+    with WidgetsBindingObserver {
   // STEPS: Add stoppable services here from Locator
 
   List<StoppableService> servicesToManage = [];
@@ -28,12 +28,6 @@ class _LifeCycleManagerState extends State<LifeCycleManager> with WidgetsBinding
     WidgetsBinding.instance.addObserver(this);
     StoppableService locationService;
     StoppableService backgroundFetchService;
-    //
-    try {
-      locationService = locator<LocationService>();
-    } catch (e) {
-      print(e);
-    }
     //
     try {
       backgroundFetchService = locator<BackgroundFetchService>();

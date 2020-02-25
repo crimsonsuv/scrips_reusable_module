@@ -7,7 +7,6 @@ import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/di/dependency_injection.dart';
-import 'package:scrips_core/general/property_info.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
@@ -33,7 +32,6 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Color fieldTextColor;
   final String labelValue;
   final dynamic fieldValue;
-  final PropertyInfo fieldProperty;
   final bool enabled;
   final double width;
   final Axis axis;
@@ -65,7 +63,6 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.labelTextCapitalization = TextCapitalization.characters,
       this.labelTextStyle,
       this.fieldValue,
-      this.fieldProperty,
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
@@ -89,7 +86,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldBackgroundColor,
       this.fieldTextColor,
       this.rightIcon,
-        this.maxLength = 300,
+      this.maxLength = 300,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
 
@@ -123,9 +120,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     fetchLocationsByQueryUseCase =
         FetchLocationsByQueryUseCase(repository: coreSl());
 
-    currentFieldValue = widget.fieldProperty != null
-        ? widget.fieldProperty?.value
-        : (widget.fieldValue ?? null);
+    currentFieldValue = widget.fieldValue ?? null;
 
     if (widget.fieldType == FieldType.TextField ||
         widget.fieldType == FieldType.LocationPicker) {
@@ -160,9 +155,6 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 //    debugLog('onChangedInternal $value');
 //    setState(() {
     currentFieldValue = value;
-    if (widget.fieldProperty != null) {
-      widget.fieldProperty.value = currentFieldValue;
-    }
 //    });
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage

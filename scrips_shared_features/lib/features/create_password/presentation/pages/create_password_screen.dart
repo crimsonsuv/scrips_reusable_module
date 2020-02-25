@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
-import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/widgets/general/simple_view.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
@@ -28,7 +27,6 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   String password = "";
   String confirmPassword = "";
   bool isLoading = false;
-
 
   @override
   void initState() {
