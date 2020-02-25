@@ -18,7 +18,9 @@ import 'package:scrips_shared_features/features/login/data/datasources/login_dat
 import 'package:scrips_shared_features/features/login/data/datasources/login_dummy_data_source_impl.dart';
 import 'package:scrips_shared_features/features/login/data/repository/login_repository_impl.dart';
 import 'package:scrips_shared_features/features/login/domain/repository/login_repository.dart';
+import 'package:scrips_shared_features/features/login/domain/usecases/get_login_response_use_case.dart';
 import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
+import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:scrips_shared_features/features/password_changed_success/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/reset_password_access_code/presentation/bloc/reset_password_access_code_bloc.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source.dart';
@@ -36,7 +38,8 @@ Future<void> initServiceLocator() async {
   /// Features
   /// Landing
   //bloc
-  sl.registerFactory(() => LandingBloc(getLoggedUserUseCase: sl(), oAuthLoginUseCase: sl()));
+  sl.registerFactory(
+      () => LandingBloc(getLoggedUserUseCase: sl(), oAuthLoginUseCase: sl()));
 
   // use cases
   sl.registerLazySingleton(() => GetLoggedUserUseCase(landingRepository: sl()));
@@ -52,10 +55,11 @@ Future<void> initServiceLocator() async {
 
   /// Login
   // bloc
-
+  sl.registerFactory(() => LoginBloc(loginResponseUseCase: sl()));
   // use cases
+  sl.registerLazySingleton(() => OAuthLoginUseCase(loginRepository: sl()));
   sl.registerLazySingleton(
-      () => OAuthLoginUseCase(loginRepository: sl()));
+      () => GetLoginResponseUseCase(loginRepository: sl()));
 
   // Data sources
   sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl());
@@ -67,7 +71,8 @@ Future<void> initServiceLocator() async {
 
   /// Sign Up
   // bloc
-  sl.registerFactory(() => SignupWithAccessCodeBloc(signupByCodeUseCase: sl(), oAuthLoginUseCase: sl()));
+  sl.registerFactory(() => SignupWithAccessCodeBloc(
+      signupByCodeUseCase: sl(), oAuthLoginUseCase: sl()));
 
   // use cases
   sl.registerLazySingleton(() => SignupByCodeUseCase(repository: sl()));

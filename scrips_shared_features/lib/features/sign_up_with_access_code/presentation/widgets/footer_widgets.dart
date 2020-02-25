@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
@@ -5,6 +6,7 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/bloc/bloc.dart';
 
 bool isEnabled = false;
@@ -13,7 +15,7 @@ List<Widget> footerWidgets(
         Function goToLogin,
         String accessCode,
         String email,
-          bool isLoginLoading,
+        bool isLoginLoading,
         SignupWithAccessCodeBloc bloc,
         bool isLoading}) =>
     <Widget>[
@@ -53,8 +55,14 @@ List<Widget> footerWidgets(
         text: "Log In",
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         isLoading: isLoginLoading,
-        onPressed: (){
-          bloc.dispatch(OAuthLoginEvent());
+        onPressed: () {
+          if (kIsWeb) {
+            Future.delayed(Duration(milliseconds: 100), () {
+              Navigator.pushNamed(context, AppRoutePaths.Login);
+            });
+          } else {
+            bloc.dispatch(OAuthLoginEvent());
+          }
         },
         buttonBackgroundColor: bgColor,
       ),

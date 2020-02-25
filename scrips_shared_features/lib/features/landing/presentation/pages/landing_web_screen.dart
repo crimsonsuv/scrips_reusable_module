@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
-import 'package:scrips_core/data_models/user/user.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
-import 'package:scrips_shared_features/core/constants/app_config.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
@@ -55,7 +53,6 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
     Future.delayed(Duration(milliseconds: 100), () {
       Navigator.pushNamed(context, AppRoutePaths.Home, arguments: 101);
     });
-
   }
 
   void _goToSignup() {
@@ -74,27 +71,27 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
   Widget build(BuildContext context) {
     return OKToast(
       child: BlocListener(
-        bloc: bloc,
-        listener: (BuildContext context, state) {
-          if(state is OAuthLoginState){
-    print("ACCESS CODE IS : ${state.accessToken.accessToken}");
-    _goToHome();
-    } else if (state is ErrorState) {
-      showToastWidget(
-        ToastWidget(
-          message: state.message,
-          backgroundColor: red,
-        ),
-        position: ToastPosition.top,
-        context: context,
-        duration: Duration(seconds: 4),
-      );
-    } else if(state is LoadingBeginState){
-            isLoading = true;
-          } else if(state is LoadingEndState){
-            isLoading = false;
-          }
-        },
+          bloc: bloc,
+          listener: (BuildContext context, state) {
+            if (state is OAuthLoginState) {
+              print("ACCESS CODE IS : ${state.accessToken.accessToken}");
+              _goToHome();
+            } else if (state is ErrorState) {
+              showToastWidget(
+                ToastWidget(
+                  message: state.message,
+                  backgroundColor: red,
+                ),
+                position: ToastPosition.top,
+                context: context,
+                duration: Duration(seconds: 4),
+              );
+            } else if (state is LoadingBeginState) {
+              isLoading = true;
+            } else if (state is LoadingEndState) {
+              isLoading = false;
+            }
+          },
           child: BlocBuilder<LandingBloc, LandingState>(
               bloc: bloc,
               builder: (context, state) {
@@ -109,7 +106,12 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
                       iconImage: Images.instance.banner(),
                       headerWidgets: headerWidgets(context),
                       bodyWidgets: bodyWidgets(context),
-                      footerWidgets: footerWidgets(context: context, goToForgotPassword: _goToForgotPassword, goToSignup: _goToSignup, bloc: bloc, isLoading: isLoading),
+                      footerWidgets: footerWidgets(
+                          context: context,
+                          goToForgotPassword: _goToForgotPassword,
+                          goToSignup: _goToSignup,
+                          bloc: bloc,
+                          isLoading: isLoading),
                     ),
                   ),
                 );
