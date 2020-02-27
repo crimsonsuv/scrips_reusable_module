@@ -1076,8 +1076,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         break;
       case TargetPlatform.iOS:
         break;
-//      case TargetPlatform.macOS:
-//        break;
+      case TargetPlatform.macOS:
+        break;
     }
   }
 

@@ -470,15 +470,18 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 );
               },
               itemBuilder: (context, prediction) {
-                return ListTile(
-                  title: Text(
-                    prediction.description,
-                    style: normalLabelTextStyle(15, regularTextColor),
+                return Listener(
+                  child: ListTile(
+                    title: Text(
+                      prediction.description,
+                      style: normalLabelTextStyle(15, regularTextColor),
+                    ),
+                    subtitle: Text(
+                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
+                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
+                    ),
                   ),
-                  subtitle: Text(
-                    "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
-                    style: normalLabelTextStyle(13, labelTextStyleTextColor),
-                  ),
+                  onPointerDown: (_) => onChangedInternal(prediction),
                 );
               },
               onSuggestionSelected: (suggestion) {
