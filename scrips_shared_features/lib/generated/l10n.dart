@@ -152,7 +152,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale('en', ''), Locale('ar', ''),
+      Locale('ar', ''), Locale('en', ''),
     ];
   }
 
