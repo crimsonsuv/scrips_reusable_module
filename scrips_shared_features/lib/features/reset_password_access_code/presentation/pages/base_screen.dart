@@ -3,7 +3,9 @@ import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
 import 'package:scrips_shared_features/features/reset_password_access_code/presentation/pages/reset_password_access_code_screen.dart';
 
 class ResetPasswordAccessCodeBaseScreen extends StatefulWidget {
+  final Map<String, String> arguments;
   const ResetPasswordAccessCodeBaseScreen({
+    this.arguments,
     Key key,
   }) : super(key: key);
 
@@ -17,7 +19,9 @@ class _ResetPasswordAccessCodeBaseScreenState
   @override
   Widget build(BuildContext context) {
     return BaseScreenView(
-      desktopBodyLandscape: ResetPasswordAccessCodeScreen(),
+      desktopBodyLandscape: ResetPasswordAccessCodeScreen(
+        arguments: widget.arguments,
+      ),
     );
   }
 }

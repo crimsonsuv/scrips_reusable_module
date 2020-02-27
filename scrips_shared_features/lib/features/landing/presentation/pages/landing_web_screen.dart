@@ -6,6 +6,7 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
+import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
 import 'package:scrips_shared_features/features/landing/presentation/widgets/body_widgets.dart';
@@ -49,12 +50,6 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
 //    }
 //  }
 
-  void _goToHome() {
-    Future.delayed(Duration(milliseconds: 100), () {
-      Navigator.pushNamed(context, AppRoutePaths.Home, arguments: 101);
-    });
-  }
-
   void _goToSignup() {
     Future.delayed(Duration(milliseconds: 100), () {
       Navigator.pushNamed(context, AppRoutePaths.SignUp);
@@ -75,7 +70,7 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
           listener: (BuildContext context, state) {
             if (state is OAuthLoginState) {
               print("ACCESS CODE IS : ${state.accessToken.accessToken}");
-              _goToHome();
+              goToHome(context: context, role: 101);
             } else if (state is ErrorState) {
               showToastWidget(
                 ToastWidget(
@@ -104,7 +99,7 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
                       showAppIcon: true,
                       showNext: false,
                       iconImage: Images.instance.banner(),
-                      headerWidgets: headerWidgets(context),
+                      headerWidgets: headerWidgets(context: context),
                       bodyWidgets: bodyWidgets(context),
                       footerWidgets: footerWidgets(
                           context: context,

@@ -5,15 +5,14 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/bloc.dart';
-
-bool isEnabled = false;
+import 'package:scrips_shared_features/generated/l10n.dart';
 
 List<Widget> footerWidgets(
         {BuildContext context,
         String password,
         String confirmPassword,
         bool isLoading,
-          bool isLoginLoading,
+        bool isEnabled,
         Map<String, String> arguments,
         CreatePasswordBloc bloc}) =>
     <Widget>[
@@ -28,7 +27,7 @@ List<Widget> footerWidgets(
           return Button(
             height: 48,
             width: 194,
-            text: "Complete Sign Up",
+            text: S.of(context).completeSignUp,
             isLoading: isLoading,
             style: normalLabelTextStyle(17, enabledBtnTextColor),
             buttonBackgroundColor:
@@ -52,7 +51,7 @@ List<Widget> footerWidgets(
         textAlign: TextAlign.center,
         text: TextSpan(
           style: normalLabelTextStyle(15, regularTextColor),
-          text: "By completing Signing Up you accept the ",
+          text: S.of(context).byCompletingSigningUpYouAcceptThe,
           children: <TextSpan>[
             TextSpan(
                 text: 'Terms and\n Conditions',

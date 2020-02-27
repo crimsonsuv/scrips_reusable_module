@@ -10,8 +10,8 @@ import './bloc.dart';
 
 class CreatePasswordBloc
     extends Bloc<CreatePasswordEvent, CreatePasswordState> {
-  final CreatePasswordUseCase createPasswordUseCase;
   final SignUpUserDataUseCase signUpUserDataUseCase;
+  final CreatePasswordUseCase createPasswordUseCase;
 
   CreatePasswordBloc({
     @required this.createPasswordUseCase,

@@ -15,7 +15,7 @@ List<Widget> headerWidgets(BuildContext context) => [
         vertical: 8,
       ),
       Text(
-        "Enter your registration email to receive a reset link",
+        "Enter your registration email to receive a reset code",
         style: normalLabelTextStyle(15, regularTextColor),
       ),
       Space(

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
-import 'package:scrips_shared_features/core/route/app_route_paths.dart';
+import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
@@ -44,15 +44,6 @@ class _LoginState extends State<Login> {
     bloc.dispose();
   }
 
-  void _goToHome(UserData response) {
-    if (response != null && response.success) {
-      Future.delayed(Duration(milliseconds: 100), () {
-        Navigator.pushReplacementNamed(context, AppRoutePaths.Home,
-            arguments: response.user.userId);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return OKToast(
@@ -63,7 +54,7 @@ class _LoginState extends State<Login> {
               initialUser = state.user;
               editedUser = state.user;
             } else if (state is LoginResponseState) {
-              _goToHome(state.response);
+              goToHome(context: context, role: state.response.user.userId);
             } else if (state is LoginBeginLoading) {
               isLoading = true;
             } else if (state is LoginEndLoading) {
@@ -92,10 +83,7 @@ class _LoginState extends State<Login> {
                   iconImage: Images.instance.banner(),
                   onBack: () {},
                   onNext: () {},
-                  headerWidgets: headerWidgets(
-                      context,
-                      'Welcome to Scrips® Practice Management App',
-                      'Please, enter your login details'),
+                  headerWidgets: headerWidgets(context),
                   bodyWidgets:
                       bodyWidgets(context, initialUser, editedUser, bloc),
                   footerWidgets: footerWidgets(

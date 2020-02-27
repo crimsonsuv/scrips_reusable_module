@@ -6,6 +6,11 @@ import 'package:scrips_shared_features/features/create_password/domain/repositor
 import 'package:scrips_shared_features/features/create_password/domain/usecase/create_password_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/domain/usecase/signup_user_data_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/create_password_bloc.dart';
+import 'package:scrips_shared_features/features/forgot_password/data/datasource/forgot_password_data_source.dart';
+import 'package:scrips_shared_features/features/forgot_password/data/datasource/forgot_password_data_source_impl.dart';
+import 'package:scrips_shared_features/features/forgot_password/data/repository/forgot_password_repository_impl.dart';
+import 'package:scrips_shared_features/features/forgot_password/domain/repository/forgot_password_repository.dart';
+import 'package:scrips_shared_features/features/forgot_password/domain/usecase/forgot_password_use_case.dart';
 import 'package:scrips_shared_features/features/forgot_password/presentation/bloc/forgot_password_bloc.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source_impl.dart';
@@ -103,17 +108,26 @@ Future<void> initServiceLocator() async {
 
   /// Forgot Password
   //bloc
-  sl.registerFactory(() => ForgotPasswordBloc());
+  sl.registerFactory(() =>
+      ForgotPasswordBloc(forgotPasswordUseCase: sl(), oAuthLoginUseCase: sl()));
 
   // use cases
+  sl.registerLazySingleton(() => ForgotPasswordUseCase(repository: sl()));
 
   // Data sources
+  sl.registerLazySingleton<ForgotPasswordDataSource>(
+      () => ForgotPasswordDataSourceImpl());
 
   // repository
+  sl.registerLazySingleton<ForgotPasswordRepository>(
+      () => ForgotPasswordRepositoryImpl(forgotPasswordDataSource: sl()));
 
   /// Reset Password Access code
   //bloc
-  sl.registerFactory(() => ResetPasswordAccessCodeBloc());
+  sl.registerFactory(() => ResetPasswordAccessCodeBloc(
+      forgotPasswordUseCase: sl(),
+      signupByCodeUseCase: sl(),
+      oAuthLoginUseCase: sl()));
 
   // use cases
 
@@ -123,7 +137,8 @@ Future<void> initServiceLocator() async {
 
   /// Reset Password New Password
   //bloc
-  sl.registerFactory(() => ResetPasswordNewPasswordBloc());
+  sl.registerFactory(() => ResetPasswordNewPasswordBloc(
+      oAuthLoginUseCase: sl(), createPasswordUseCase: sl()));
 
   // use cases
 

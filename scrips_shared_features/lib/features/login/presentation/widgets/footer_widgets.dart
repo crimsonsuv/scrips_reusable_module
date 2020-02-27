@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:scrips_core/constants/app_routes.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
+import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 
@@ -62,7 +62,9 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
         text: "Forgot Password?",
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         onPressed: () {
-          Navigator.pushNamed(context, RoutePaths.PmForgotPassword);
+          Future.delayed(Duration(milliseconds: 100), () {
+            Navigator.pushNamed(context, AppRoutePaths.ForgotPassword);
+          });
         },
         buttonBackgroundColor: bgColor,
       ),
@@ -73,8 +75,7 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
               text: "Sign Up with access Code",
               style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
               onPressed: () {
-                Navigator.pushNamed(
-                    context, RoutePaths.PmSignUpStepWithAccessCode);
+                Navigator.pushNamed(context, AppRoutePaths.SignUp);
               },
               buttonBackgroundColor: bgColor,
             )

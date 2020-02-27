@@ -31,6 +31,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   bool isLoading = false;
   bool isScreenLoading = false;
   SignUpUserData useData;
+  bool isEnabled = false;
 
   @override
   void initState() {
@@ -54,6 +55,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           if (state is IsButtonEnabledState) {
             password = state.password;
             confirmPassword = state.confirmPassword;
+            isEnabled = state.status;
           } else if (state is LoadingBeginState) {
             isLoading = true;
           } else if (state is LoadingEndState) {
@@ -101,12 +103,14 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       confirmPassword: confirmPassword,
                       bloc: bloc),
                   footerWidgets: footerWidgets(
-                      context: context,
-                      password: password,
-                      confirmPassword: confirmPassword,
-                      isLoading: isLoading,
-                      arguments: widget.arguments,
-                      bloc: bloc),
+                    context: context,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                    isLoading: isLoading,
+                    arguments: widget.arguments,
+                    bloc: bloc,
+                    isEnabled: isEnabled,
+                  ),
                 ),
               );
             }),

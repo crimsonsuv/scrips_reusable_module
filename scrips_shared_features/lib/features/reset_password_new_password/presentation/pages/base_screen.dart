@@ -4,7 +4,9 @@ import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
 import 'reset_password_new_password_screen.dart';
 
 class ResetPasswordNewPasswordBaseScreen extends StatefulWidget {
+  final Map<String, String> arguments;
   const ResetPasswordNewPasswordBaseScreen({
+    this.arguments,
     Key key,
   }) : super(key: key);
 
@@ -18,7 +20,9 @@ class _ResetPasswordNewPasswordBaseScreenState
   @override
   Widget build(BuildContext context) {
     return BaseScreenView(
-      desktopBodyLandscape: ResetPasswordNewPasswordScreen(),
+      desktopBodyLandscape: ResetPasswordNewPasswordScreen(
+        arguments: widget.arguments,
+      ),
     );
   }
 }

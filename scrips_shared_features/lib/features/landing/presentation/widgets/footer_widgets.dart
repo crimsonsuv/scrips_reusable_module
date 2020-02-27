@@ -6,6 +6,7 @@ import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
+import 'package:scrips_shared_features/generated/l10n.dart';
 
 List<Widget> footerWidgets(
         {BuildContext context,
@@ -17,7 +18,7 @@ List<Widget> footerWidgets(
       Button(
         height: 48,
         width: 176,
-        text: "Login",
+        text: S.of(context).login,
         isLoading: isLoading,
         style: normalLabelTextStyle(17, enabledBtnTextColor),
         buttonBackgroundColor: enabledBtnBGColor,
@@ -37,7 +38,7 @@ List<Widget> footerWidgets(
       Button(
         width: 222.0,
         height: 48,
-        text: "Forgot Password?",
+        text: S.of(context).forgotPassword,
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         onPressed: goToForgotPassword,
         buttonBackgroundColor: bgColor,
@@ -45,7 +46,7 @@ List<Widget> footerWidgets(
       Button(
         height: 48,
         width: 222,
-        text: "Sign Up With Access Code",
+        text: S.of(context).signUpWithAccessCode,
         style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
         buttonBackgroundColor: textFieldBGcolor,
         onPressed: goToSignup,

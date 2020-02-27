@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 
 Failure handleFailure(DioError e) {
   int responseCode = e.response.statusCode;
@@ -12,4 +14,10 @@ Failure handleFailure(DioError e) {
   } else {
     return Failure(e?.message ?? "");
   }
+}
+
+void goToHome({BuildContext context, int role}) {
+  Future.delayed(Duration(milliseconds: 100), () {
+    Navigator.pushNamed(context, AppRoutePaths.Home, arguments: role);
+  });
 }

@@ -1,0 +1,15 @@
+{
+  "pm_app_name": "Practice Management",
+  "pa_app_name": "Provider",
+  "welcomeTo": "Welcome to",
+  "pleaseEnterYourLoginDetails": "Please, enter your login details",
+  "login": "Login",
+  "forgotPassword": "Forgot Password?",
+  "signUpWithAccessCode": "Sign Up With Access Code",
+  "pleaseCompleteYourRegistrationForYour": "Please, complete your registration for your",
+  "OnScrips": "on Scrips.",
+  "accountByCreatingAPassword": "account by creating a password.",
+  "completeSignUp": "Complete Sign Up",
+  "byCompletingSigningUpYouAcceptThe": "By completing Signing Up you accept the",
+  "confirmPassword": "Confirm password"
+}

@@ -9,15 +9,16 @@ import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/bloc/bloc.dart';
 
-bool isEnabled = false;
-List<Widget> footerWidgets(
-        {BuildContext context,
-        Function goToLogin,
-        String accessCode,
-        String email,
-        bool isLoginLoading,
-        SignupWithAccessCodeBloc bloc,
-        bool isLoading}) =>
+List<Widget> footerWidgets({
+  BuildContext context,
+  Function goToLogin,
+  String accessCode,
+  String email,
+  bool isLoginLoading,
+  SignupWithAccessCodeBloc bloc,
+  bool isLoading,
+  bool isEnabled,
+}) =>
     <Widget>[
       Space(vertical: 62),
       BlocBuilder<SignupWithAccessCodeBloc, SignupWithAccessCodeState>(

@@ -7,6 +7,7 @@ import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/simple_view.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
+import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/widgets/body_widgets.dart';
@@ -30,6 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String accessCode = "";
   bool isLoading = false;
   bool isLoginLoading = false;
+  bool isEnabled = false;
 
   @override
   void initState() {
@@ -45,12 +47,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
-  void _goToHome() {
-    Future.delayed(Duration(milliseconds: 100), () {
-      Navigator.pushNamed(context, AppRoutePaths.Home, arguments: 101);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return OKToast(
@@ -60,6 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (state is IsButtonEnabledState) {
               email = state.email;
               accessCode = state.code;
+              isEnabled = state.status;
             } else if (state is LoadingBeginState) {
               isLoading = true;
             } else if (state is LoadingEndState) {
@@ -83,9 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               isLoginLoading = true;
             } else if (state is LoginLoadingEndState) {
               isLoginLoading = false;
-            } else if(state is OAuthLoginState){
+            } else if (state is OAuthLoginState) {
               print("ACCESS CODE IS : ${state.accessToken.accessToken}");
-              _goToHome();
+              goToHome(context: context, role: 101);
             }
           },
           child:
@@ -116,7 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       accessCode: accessCode,
                       bloc: bloc,
                       isLoading: isLoading,
-                      isLoginLoading: isLoginLoading),
+                      isLoginLoading: isLoginLoading,
+                      isEnabled: isEnabled),
                 ),
               );
             },

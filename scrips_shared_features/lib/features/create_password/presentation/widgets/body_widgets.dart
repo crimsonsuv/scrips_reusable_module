@@ -6,6 +6,7 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/bloc.dart';
+import 'package:scrips_shared_features/generated/l10n.dart';
 import 'package:validators/validators.dart';
 
 bool isValid = false;
@@ -131,10 +132,10 @@ List<Widget> bodyWidgets(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         fieldType: FieldType.TextField,
         fieldBackgroundColor: textFieldBGcolor,
-        labelValue: 'Confirm password'.toUpperCase(),
+        labelValue: S.of(context).confirmPassword.toUpperCase(),
         isPassword: true,
         fieldValue: confirmPassword,
-        placeholder: 'Confirm password',
+        placeholder: S.of(context).confirmPassword,
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
