@@ -20,3 +20,8 @@ class CreatePassEvent extends CreatePasswordEvent {
       this.email,
       this.passwordResetToken});
 }
+
+class GetUserData extends CreatePasswordEvent {
+  final String email;
+  GetUserData({this.email});
+}

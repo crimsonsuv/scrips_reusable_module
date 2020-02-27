@@ -1,8 +1,10 @@
 import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/features/create_password/data/datamodels/create_password_request_model.dart';
+import 'package:scrips_shared_features/features/create_password/data/datamodels/signup_user_data_model.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
-import 'package:dio/dio.dart';
 
 class CreatePasswordDataSourceImpl extends CreatePasswordDataSource {
   static final endPoint =
@@ -27,5 +29,20 @@ class CreatePasswordDataSourceImpl extends CreatePasswordDataSource {
       throw Failure('Failed to create password');
     });
     return Success('');
+  }
+
+  @override
+  Future<SignUpUserData> signupUserData({String email}) async {
+    client.options.responseType = ResponseType.bytes;
+    client.options.headers = {
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    };
+    var response = await client
+        .get('$endPoint/UserDataLoginWithCode/$email')
+        .timeout(Duration(seconds: timeout), onTimeout: () {
+      throw Failure('Failed to fetch User Details');
+    });
+    return signUpUserDataFromJson(utf8.decode(response.data));
   }
 }

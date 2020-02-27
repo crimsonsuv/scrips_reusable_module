@@ -7,6 +7,8 @@ import 'package:scrips_core/widgets/general/simple_view.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
+import 'package:scrips_shared_features/features/create_password/data/datamodels/signup_user_data_model.dart';
+import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/bloc.dart';
 
 import '../bloc/create_password/create_password_bloc.dart';
 import '../bloc/create_password/create_password_state.dart';
@@ -27,10 +29,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   String password = "";
   String confirmPassword = "";
   bool isLoading = false;
+  bool isScreenLoading = false;
+  SignUpUserData useData;
 
   @override
   void initState() {
     super.initState();
+    bloc.dispatch(GetUserData(email: widget.arguments["email"]));
   }
 
   void _goNext() {
@@ -65,6 +70,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               context: context,
               duration: Duration(seconds: 4),
             );
+          } else if (state is UserDataSuccessState) {
+            useData = state.userData;
+          } else if (state is LoadingScreenBeginState) {
+            isScreenLoading = true;
+          } else if (state is LoadingScreenEndState) {
+            isScreenLoading = false;
           }
         },
         child: BlocBuilder<CreatePasswordBloc, CreatePasswordState>(
@@ -82,7 +93,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   showAppIcon: true,
                   showNext: false,
                   iconImage: Images.instance.organization(),
-                  headerWidgets: headerWidgets(context),
+                  headerWidgets:
+                      headerWidgets(context, isScreenLoading, useData),
                   bodyWidgets: bodyWidgets(
                       context: context,
                       password: password,

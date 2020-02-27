@@ -1,16 +1,21 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_shared_features/features/create_password/domain/usecase/create_password_use_case.dart';
+import 'package:scrips_shared_features/features/create_password/domain/usecase/signup_user_data_use_case.dart';
 import 'package:validators/validators.dart';
+
 import './bloc.dart';
 
 class CreatePasswordBloc
     extends Bloc<CreatePasswordEvent, CreatePasswordState> {
   final CreatePasswordUseCase createPasswordUseCase;
+  final SignUpUserDataUseCase signUpUserDataUseCase;
 
   CreatePasswordBloc({
     @required this.createPasswordUseCase,
+    @required this.signUpUserDataUseCase,
   });
 
   @override
@@ -42,6 +47,16 @@ class CreatePasswordBloc
       yield result.fold(
         (error) => ErrorState(error.message),
         (success) => CreatePasswordSuccessState(),
+      );
+    } else if (event is GetUserData) {
+      yield LoadingScreenBeginState();
+      final result = await signUpUserDataUseCase(SignUpUserDataParams(
+        email: event.email,
+      ));
+      yield LoadingScreenEndState();
+      yield result.fold(
+        (error) => ErrorState(error.message),
+        (success) => UserDataSuccessState(userData: success),
       );
     }
   }

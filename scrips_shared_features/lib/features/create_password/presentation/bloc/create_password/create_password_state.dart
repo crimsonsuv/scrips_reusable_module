@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
+import 'package:scrips_shared_features/features/create_password/data/datamodels/signup_user_data_model.dart';
 
 @immutable
 abstract class CreatePasswordState {}
@@ -17,6 +17,11 @@ class IsButtonEnabledState extends CreatePasswordState {
 
 class CreatePasswordSuccessState extends CreatePasswordState {}
 
+class UserDataSuccessState extends CreatePasswordState {
+  final SignUpUserData userData;
+  UserDataSuccessState({this.userData});
+}
+
 class LoadingBeginState extends CreatePasswordState {}
 
 class LoadingEndState extends CreatePasswordState {}
@@ -27,3 +32,6 @@ class ErrorState extends CreatePasswordState {
   ErrorState(this.message);
 }
 
+class LoadingScreenBeginState extends CreatePasswordState {}
+
+class LoadingScreenEndState extends CreatePasswordState {}

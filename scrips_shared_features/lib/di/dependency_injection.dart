@@ -4,6 +4,7 @@ import 'package:scrips_shared_features/features/create_password/data/datasource/
 import 'package:scrips_shared_features/features/create_password/data/repository/create_password_repository_impl.dart';
 import 'package:scrips_shared_features/features/create_password/domain/repository/create_password_repository.dart';
 import 'package:scrips_shared_features/features/create_password/domain/usecase/create_password_use_case.dart';
+import 'package:scrips_shared_features/features/create_password/domain/usecase/signup_user_data_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/presentation/bloc/create_password/create_password_bloc.dart';
 import 'package:scrips_shared_features/features/forgot_password/presentation/bloc/forgot_password_bloc.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source.dart';
@@ -15,7 +16,6 @@ import 'package:scrips_shared_features/features/landing/domain/usecases/get_logg
 import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source.dart';
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source_impl.dart';
-import 'package:scrips_shared_features/features/login/data/datasources/login_dummy_data_source_impl.dart';
 import 'package:scrips_shared_features/features/login/data/repository/login_repository_impl.dart';
 import 'package:scrips_shared_features/features/login/domain/repository/login_repository.dart';
 import 'package:scrips_shared_features/features/login/domain/usecases/get_login_response_use_case.dart';
@@ -23,13 +23,13 @@ import 'package:scrips_shared_features/features/login/domain/usecases/oauth_logi
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:scrips_shared_features/features/password_changed_success/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/reset_password_access_code/presentation/bloc/reset_password_access_code_bloc.dart';
+import 'package:scrips_shared_features/features/reset_password_new_password/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source_impl.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/repository/sign_up_repository_impl.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/domain/repository/sign_up_repository.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/domain/usecases/signup_by_code_use_case.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/bloc/bloc.dart';
-import 'package:scrips_shared_features/features/reset_password_new_password/presentation/bloc/bloc.dart';
 
 final sl = GetIt.instance;
 const bool USE_FAKE_IMPLEMENTATION = true;
@@ -86,10 +86,12 @@ Future<void> initServiceLocator() async {
 
   /// Create Password
   //bloc
-  sl.registerFactory(() => CreatePasswordBloc(createPasswordUseCase: sl()));
+  sl.registerFactory(() => CreatePasswordBloc(
+      createPasswordUseCase: sl(), signUpUserDataUseCase: sl()));
 
   // use cases
   sl.registerLazySingleton(() => CreatePasswordUseCase(repository: sl()));
+  sl.registerLazySingleton(() => SignUpUserDataUseCase(repository: sl()));
 
   // Data sources
   sl.registerLazySingleton<CreatePasswordDataSource>(
