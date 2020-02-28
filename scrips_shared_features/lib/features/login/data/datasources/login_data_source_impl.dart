@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
@@ -13,6 +14,8 @@ class LoginDataSourceImpl extends LoginDataSource {
   static final dummyEndpoint = 'lib/core/mock_jsons/';
   int timeout = 20;
   Dio client = Dio();
+  String redirectURL = currentAppType == AppType.PM ? 'com.scrips.pm://' : 'com.scrips.pa://';
+  String redirectScheme = currentAppType == AppType.PM ? 'com.scrips.pm' : 'com.scrips.pa';
 
   @override
   Future<LoginUserData> oauth2Login() async {
@@ -21,12 +24,12 @@ class LoginDataSourceImpl extends LoginDataSource {
       'response_type': 'code',
       'grant_type': 'authorization_code',
       'client_id': 'Scrips.Consumer',
-      'redirect_uri': 'com.scrips.pa://',
+      'redirect_uri': redirectURL,
       'scope': 'openid',
     });
     final result = await FlutterWebAuth.authenticate(
       url: url.toString(),
-      callbackUrlScheme: "com.scrips.pa",
+      callbackUrlScheme: redirectScheme,
     );
     final code = Uri.parse(result).queryParameters['code'];
 
@@ -38,7 +41,7 @@ class LoginDataSourceImpl extends LoginDataSource {
     client.options.headers = {'content-type': 'application/json'};
     var response = await client
         .get(
-            '$endPoint/Account/AccessToken?accessCode=$code&redirectUrl=com.scrips.pa://')
+            '$endPoint/Account/AccessToken?accessCode=$code&redirectUrl=$redirectURL')
         .timeout(Duration(seconds: timeout), onTimeout: () {
       throw Failure('Failed to signup');
     });
