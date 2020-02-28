@@ -25,7 +25,7 @@ class LoginDataSourceImpl extends LoginDataSource {
       'grant_type': 'authorization_code',
       'client_id': 'Scrips.Consumer',
       'redirect_uri': redirectURL,
-      'scope': 'openid',
+      'scope': 'openid', 'max_age':"10",
     });
     final result = await FlutterWebAuth.authenticate(
       url: url.toString(),
