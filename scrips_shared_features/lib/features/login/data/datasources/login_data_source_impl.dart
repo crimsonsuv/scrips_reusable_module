@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source.dart';
 import 'package:dio/dio.dart';
 
@@ -17,7 +15,7 @@ class LoginDataSourceImpl extends LoginDataSource {
   Dio client = Dio();
 
   @override
-  Future<LoginTokens> oauth2Login() async {
+  Future<LoginUserData> oauth2Login() async {
     final url = Uri.https('scripsidentityapi20191030115107.azurewebsites.net',
         '/connect/authorize', {
       'response_type': 'code',
@@ -44,27 +42,49 @@ class LoginDataSourceImpl extends LoginDataSource {
         .timeout(Duration(seconds: timeout), onTimeout: () {
       throw Failure('Failed to signup');
     });
-    return loginTokensFromJson(utf8.decode(response.data));
+    final tokenData =  loginTokensFromJson(utf8.decode(response.data));
+
+    client.options.headers = {'content-type': 'application/json', 'Authorization':'Bearer ${tokenData.accessToken}'};
+    var userDataResponse = await client
+        .get(
+        '$endPoint/GetUserDataToken')
+        .timeout(Duration(seconds: timeout), onTimeout: () {
+      throw Failure('Failed to signup');
+    });
+
+    return loginUserDataFromJson(utf8.decode(userDataResponse.data));
   }
 
   @override
-  Future<UserData> login(BuildContext context,
+  Future<LoginUserData> login(
       {String userName, String password}) async {
-    await Future.delayed(Duration(seconds: 2));
-    var response;
-    if (userName == "admin@scrips.com") {
-      response =
-          await rootBundle.loadString(dummyEndpoint + "admin_login_data.json");
-    } else {
-      response =
-          await rootBundle.loadString(dummyEndpoint + "user_login_data.json");
-      print(response);
-    }
+    client.options.responseType = ResponseType.bytes;
+    client.options.headers = {
+      'accept': 'application/json',
+      'content-type': 'application/x-www-form-urlencoded'
+    };
+    Map<String, dynamic> data = {
+    "client_id":"Scrips.Consumer",
+    "grant_type":"password",
+    "username":userName,
+    "password":password,
+    "client_secret":"secret"
+    };
+    var response = await client
+        .post('$endPoint/connect/token', data: data, options: Options(contentType: "application/x-www-form-urlencoded"))
+        .timeout(Duration(seconds: timeout), onTimeout: () {
+      throw Failure('Failed to fetch User Details');
+    });
+    final tokenData =  loginTokensFromJson(utf8.decode(response.data));
 
-    if (response != null) {
-      return userDataFromJson(response);
-    } else {
-      return null;
-    }
+    client.options.headers = {'content-type': 'application/json', 'Authorization':'Bearer ${tokenData.accessToken}'};
+    var userDataResponse = await client
+        .get(
+        '$endPoint/GetUserDataToken')
+        .timeout(Duration(seconds: timeout), onTimeout: () {
+      throw Failure('Failed to signup');
+    });
+
+    return loginUserDataFromJson(utf8.decode(userDataResponse.data));
   }
 }

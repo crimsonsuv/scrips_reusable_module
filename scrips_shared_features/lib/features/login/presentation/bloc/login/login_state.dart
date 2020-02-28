@@ -6,14 +6,9 @@ abstract class LoginState {}
 class InitialLoginState extends LoginState {}
 
 class LoginResponseState extends LoginState {
-  final UserData response;
+  final LoginUserData response;
 
   LoginResponseState(this.response);
-}
-
-class LoginDummyDataState extends LoginState {
-  final User user;
-  LoginDummyDataState(this.user);
 }
 
 class LoginBeginLoading extends LoginState {}
@@ -28,6 +23,7 @@ class ErrorState extends LoginState {
 
 class EnableLoginButtonState extends LoginState {
   final bool status;
-  final User user;
-  EnableLoginButtonState(this.user, this.status);
+  final String email;
+  final String password;
+  EnableLoginButtonState({this.email, this.password, this.status});
 }

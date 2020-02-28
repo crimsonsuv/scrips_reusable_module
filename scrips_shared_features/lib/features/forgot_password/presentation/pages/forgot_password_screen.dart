@@ -74,8 +74,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           } else if (state is LoginLoadingEndState) {
             isLoginLoading = false;
           } else if (state is OAuthLoginState) {
-            print("ACCESS CODE IS : ${state.accessToken.accessToken}");
-            goToHome(context: context, role: 101);
+            print("ACCESS CODE IS : ${state.userData.emailAddress}");
+            goToHome(context: context, userData: state.userData);
           }
         },
         child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(

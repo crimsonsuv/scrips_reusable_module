@@ -3,12 +3,11 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:validators/validators.dart';
 
-List<Widget> bodyWidgets(BuildContext context, User initialUser,
-        User editedUser, LoginBloc bloc) =>
+List<Widget> bodyWidgets({BuildContext context, String email,
+        String password, LoginBloc bloc}) =>
     [
       Space(
         vertical: 8,
@@ -19,21 +18,21 @@ List<Widget> bodyWidgets(BuildContext context, User initialUser,
         fieldType: FieldType.TextField,
         labelTextStyle: defaultFieldLabelStyle(null, null),
         labelValue: 'Email Address'.toUpperCase(),
-        fieldValue: initialUser?.email,
+        fieldValue: email,
         placeholder: 'Email Address',
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
           if (!isEmail(value)) {
-            editedUser.email = "";
+            email = "";
             state.setValidationMessage("Not a valid Email");
             bloc.dispatch(
-              OnChangedValuesEvent(editedUser),
+              OnChangedValuesEvent(email: email, password: password),
             );
           } else {
-            editedUser.email = value;
+            email = value;
             bloc.dispatch(
-              OnChangedValuesEvent(editedUser),
+              OnChangedValuesEvent(email: email, password: password),
             );
             state.setValidationMessage('');
           }
@@ -42,7 +41,7 @@ List<Widget> bodyWidgets(BuildContext context, User initialUser,
       FieldAndLabel(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         fieldType: FieldType.TextField,
-        fieldValue: initialUser?.password,
+        fieldValue: password,
         fieldBackgroundColor: textFieldBGcolor,
         labelValue: "Password".toUpperCase(),
         isPassword: true,
@@ -50,9 +49,9 @@ List<Widget> bodyWidgets(BuildContext context, User initialUser,
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
-          editedUser.password = value;
+          password = value;
           bloc.dispatch(
-            OnChangedValuesEvent(editedUser),
+            OnChangedValuesEvent(email: email, password: password),
           );
         },
 //                validationMessage: globalModel.data.loginError.value,

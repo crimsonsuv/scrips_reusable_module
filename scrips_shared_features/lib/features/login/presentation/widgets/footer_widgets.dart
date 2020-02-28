@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
-import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 
-List<Widget> footerWidgets(User editedUser, BuildContext context,
+List<Widget> footerWidgets({String email, String password, BuildContext context,
         bool isLoading, LoginBloc bloc, bool isEnabled,
-        [bool shouldShowSignUpWithAccessCode]) =>
+        bool shouldShowSignUpWithAccessCode}) =>
     <Widget>[
       Space(vertical: 62),
       BlocBuilder<LoginBloc, LoginState>(
@@ -28,24 +25,8 @@ List<Widget> footerWidgets(User editedUser, BuildContext context,
             buttonBackgroundColor:
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
-                ? () async {
-                    if ((editedUser.email == "user@scrips.com" ||
-                            editedUser.email == "admin@scrips.com") &&
-                        editedUser.password == "123456") {
-                      bloc.dispatch(
-                        DoLoginEvent(context, editedUser),
-                      );
-                    } else {
-                      showToastWidget(
-                        ToastWidget(
-                          message: "Email or Password is not correct",
-                          backgroundColor: red,
-                        ),
-                        position: ToastPosition.top,
-                        context: context,
-                        duration: Duration(seconds: 2),
-                      );
-                    }
+                ? (){
+                    bloc.dispatch(DoLoginEvent(email: email, password: password));
                   }
                 : null,
             isLoading: isLoading,

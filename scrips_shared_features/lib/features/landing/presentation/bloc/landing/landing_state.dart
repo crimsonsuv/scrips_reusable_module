@@ -6,15 +6,15 @@ abstract class LandingState {}
 class InitialLandingState extends LandingState {}
 
 class GetLoggedUserState extends LandingState {
-  final User user;
+  final LoginUserData user;
 
   GetLoggedUserState(this.user);
 }
 
 class OAuthLoginState extends LandingState {
-  final LoginTokens accessToken;
+  final LoginUserData userData;
 
-  OAuthLoginState(this.accessToken);
+  OAuthLoginState(this.userData);
 }
 
 class ErrorState extends LandingState {

@@ -4,7 +4,7 @@ import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/error/errors.dart';
 import 'package:scrips_shared_features/features/landing/data/datasources/landing_data_source.dart';
 import 'package:scrips_shared_features/features/landing/domain/repository/landing_repository.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 
 class LandingRepositoryImpl extends LandingRepository {
   LandingDataSource landingDataSource;
@@ -12,7 +12,7 @@ class LandingRepositoryImpl extends LandingRepository {
   LandingRepositoryImpl({@required this.landingDataSource});
 
   @override
-  Future<Either<Failure, User>> getLoggedUser() async {
+  Future<Either<Failure, LoginUserData>> getLoggedUser() async {
     final result = await landingDataSource.getLoggedUser();
 
     try {

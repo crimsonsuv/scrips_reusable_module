@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
+import 'package:scrips_core/ui_helpers/app_colors.dart';
+import 'package:scrips_core/widgets/general/toast_widget.dart';
 import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/user_data_model.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:scrips_shared_features/features/login/presentation/widgets/body_widgets.dart';
 import 'package:scrips_shared_features/features/login/presentation/widgets/footer_widgets.dart';
@@ -20,18 +22,16 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final bloc = sl<LoginBloc>();
-  UserData loginResponse;
+  LoginUserData loginResponse;
   bool response = false;
   bool isLoading = false;
-  User initialUser;
-  User editedUser;
+  String email = "";
+  String password = "";
   bool isEnabled = false;
 
   @override
   void initState() {
     super.initState();
-    initialUser = User();
-    editedUser = User();
     bloc.dispatch(
       SetLoginDummyDataEvent(context),
     );
@@ -50,19 +50,26 @@ class _LoginState extends State<Login> {
       child: BlocListener(
           bloc: bloc,
           listener: (BuildContext context, state) {
-            if (state is LoginDummyDataState) {
-              initialUser = state.user;
-              editedUser = state.user;
-            } else if (state is LoginResponseState) {
-              goToHome(context: context, role: state.response.user.userId);
+            if (state is LoginResponseState) {
+              goToHome(context: context, userData: state.response);
+              print(state.response.emailAddress);
             } else if (state is LoginBeginLoading) {
               isLoading = true;
             } else if (state is LoginEndLoading) {
               isLoading = false;
             } else if (state is ErrorState) {
-              print(state.message);
-              //TODO provide UI for error
+              showToastWidget(
+                ToastWidget(
+                  message: state.message,
+                  backgroundColor: red,
+                ),
+                position: ToastPosition.top,
+                context: context,
+                duration: Duration(seconds: 4),
+              );
             } else if (state is EnableLoginButtonState) {
+              email = state.email;
+              password = state.password;
               isEnabled = state.status;
             }
           },
@@ -81,13 +88,10 @@ class _LoginState extends State<Login> {
                   showAppIcon: true,
                   showNext: false,
                   iconImage: Images.instance.banner(),
-                  onBack: () {},
-                  onNext: () {},
                   headerWidgets: headerWidgets(context),
                   bodyWidgets:
-                      bodyWidgets(context, initialUser, editedUser, bloc),
-                  footerWidgets: footerWidgets(
-                      editedUser, context, isLoading, bloc, isEnabled, false),
+                      bodyWidgets(context: context, email: email, password: password, bloc: bloc),
+                  footerWidgets: footerWidgets(email: email, password: password, context: context, bloc: bloc, isLoading: isLoading, isEnabled: isEnabled, shouldShowSignUpWithAccessCode: false),
                 ),
               );
             },

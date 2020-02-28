@@ -4,9 +4,9 @@ part of 'login_bloc.dart';
 abstract class LoginEvent {}
 
 class DoLoginEvent extends LoginEvent {
-  final User user;
-  final BuildContext context;
-  DoLoginEvent(this.context, this.user);
+  final String email;
+  final String password;
+  DoLoginEvent({this.email, this.password});
 }
 
 class SetLoginDummyDataEvent extends LoginEvent {
@@ -15,8 +15,9 @@ class SetLoginDummyDataEvent extends LoginEvent {
 }
 
 class OnChangedValuesEvent extends LoginEvent {
-  final User user;
-  OnChangedValuesEvent(this.user);
+  final String email;
+  final String password;
+  OnChangedValuesEvent({this.email, this.password});
 }
 
 class GetLoginError extends LoginEvent {

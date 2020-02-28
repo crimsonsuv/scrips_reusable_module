@@ -22,10 +22,10 @@ class LoginTokens {
   });
 
   factory LoginTokens.fromJson(Map<String, dynamic> json) => LoginTokens(
-    accessToken: json["accessToken"] == null ? null : json["accessToken"],
-    refreshToken: json["refreshToken"] == null ? null : json["refreshToken"],
-    expiresIn: json["expiresIn"] == null ? null : json["expiresIn"],
-    identityToken: json["identityToken"] == null ? null : json["identityToken"],
+    accessToken: json["accessToken"] == null ? (json["access_token"] == null ? null : json["access_token"]) : json["accessToken"],
+    refreshToken: json["refreshToken"] == null ? (json["refresh_token"] == null ? null : json["refresh_token"]) : json["refreshToken"],
+    expiresIn: json["expiresIn"] == null ? (json["expires_in"] == null ? null : json["expires_in"]) : json["expiresIn"],
+    identityToken: json["identityToken"] == null ? (json["identityToken"] == null ? null : json["identityToken"]) : json["identityToken"],
   );
 
   Map<String, dynamic> toJson() => {

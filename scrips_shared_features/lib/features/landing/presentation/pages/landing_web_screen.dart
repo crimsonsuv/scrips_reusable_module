@@ -69,8 +69,8 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
           bloc: bloc,
           listener: (BuildContext context, state) {
             if (state is OAuthLoginState) {
-              print("ACCESS CODE IS : ${state.accessToken.accessToken}");
-              goToHome(context: context, role: 101);
+              print("ACCESS CODE IS : ${state.userData.emailAddress}");
+              goToHome(context: context, userData: state.userData);
             } else if (state is ErrorState) {
               showToastWidget(
                 ToastWidget(

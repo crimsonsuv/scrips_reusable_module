@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
+import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 
 Failure handleFailure(DioError e) {
   int responseCode = e.response.statusCode;
@@ -16,8 +17,8 @@ Failure handleFailure(DioError e) {
   }
 }
 
-void goToHome({BuildContext context, int role}) {
+void goToHome({BuildContext context, LoginUserData userData}) {
   Future.delayed(Duration(milliseconds: 100), () {
-    Navigator.pushNamed(context, AppRoutePaths.Home, arguments: role);
+    Navigator.pushNamed(context, AppRoutePaths.Home, arguments: userData);
   });
 }
