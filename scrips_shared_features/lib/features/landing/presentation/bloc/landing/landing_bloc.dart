@@ -29,7 +29,8 @@ class LandingBloc extends Bloc<LandingEvent, LandingState> {
         (error) => ErrorState(
           error.runtimeType.toString(),
         ),
-        (user) => user != null ? GetLoggedUserState(user) : null,
+        (user) =>
+            user != null ? GetLoggedUserState(user) : GetLoggedUserState(null),
       );
     } else if (event is OAuthLoginEvent) {
       yield LoadingBeginState();

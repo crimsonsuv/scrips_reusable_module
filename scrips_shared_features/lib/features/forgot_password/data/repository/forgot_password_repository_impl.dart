@@ -24,6 +24,9 @@ class ForgotPasswordRepositoryImpl extends ForgotPasswordRepository {
         return (Left(
             Failure("Code generated recently, please try after some time")));
       }
+      if (e.response.statusCode == 404) {
+        return (Left(Failure("The Email is not registered yet")));
+      }
       return (Left(handleFailure(e)));
     } on Failure {
       return Left(Failure("Request time out.."));
