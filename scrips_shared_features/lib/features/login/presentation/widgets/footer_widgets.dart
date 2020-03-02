@@ -7,8 +7,13 @@ import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 
-List<Widget> footerWidgets({String email, String password, BuildContext context,
-        bool isLoading, LoginBloc bloc, bool isEnabled,
+List<Widget> footerWidgets(
+        {String email,
+        String password,
+        BuildContext context,
+        bool isLoading,
+        LoginBloc bloc,
+        bool isEnabled,
         bool shouldShowSignUpWithAccessCode}) =>
     <Widget>[
       Space(vertical: 62),
@@ -16,6 +21,8 @@ List<Widget> footerWidgets({String email, String password, BuildContext context,
         bloc: bloc,
         builder: (context, state) {
           if (state is EnableLoginButtonState) {
+            email = state.email;
+            password = state.password;
             isEnabled = state.status;
           }
           return Button(
@@ -25,8 +32,9 @@ List<Widget> footerWidgets({String email, String password, BuildContext context,
             buttonBackgroundColor:
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
-                ? (){
-                    bloc.dispatch(DoLoginEvent(email: email, password: password));
+                ? () {
+                    bloc.dispatch(
+                        DoLoginEvent(email: email, password: password));
                   }
                 : null,
             isLoading: isLoading,
