@@ -9,11 +9,11 @@ import 'package:scrips_shared_features/features/create_password/presentation/blo
 import 'package:scrips_shared_features/generated/l10n.dart';
 import 'package:validators/validators.dart';
 
-bool isValid = false;
 List<Widget> bodyWidgets(
         {BuildContext context,
         String password,
         String confirmPassword,
+          bool isValid,
         CreatePasswordBloc bloc}) =>
     [
       FieldAndLabel(
