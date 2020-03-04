@@ -36,14 +36,14 @@ class LoginRepositoryImpl extends LoginRepository {
       final result =
           await loginDataSource.login(userName: email, password: password);
       if (currentAppType == AppType.PM) {
-        if (result.role == "2") {
+        if (result.role == "3") {
           return Left(Failure(
               "You are not authorized to use Practice Management App, try using other Scrips Apps"));
         } else {
           return Right(result);
         }
       } else if (currentAppType == AppType.PA) {
-        if (result.role == "0" || result.role == "1") {
+        if (result.role == "0" || result.role == "1" || result.role == "2") {
           return Left(Failure(
               "You are not authorized to use Provider App, try using other Scrips Apps"));
         } else {
