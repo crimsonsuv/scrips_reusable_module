@@ -30,7 +30,7 @@ class SimpleView extends StatelessWidget {
       this.showNext = true,
       this.iconImage,
       this.nextBtnTitle = 'Next',
-      @required this.onNext,
+      this.onNext,
       @required this.headerWidgets,
       @required this.bodyWidgets,
       @required this.footerWidgets,
