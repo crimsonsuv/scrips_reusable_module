@@ -54,6 +54,9 @@ class LoginRepositoryImpl extends LoginRepository {
       if (e.response.statusCode == 400) {
         return Left(Failure("Invalid Email Id or Password is incorrect"));
       }
+      if (e.response.statusCode == 404) {
+        return Left(Failure("Authorization failed from server"));
+      }
       return (Left(handleFailure(e)));
     } on Failure catch (f) {
       return Left(f);

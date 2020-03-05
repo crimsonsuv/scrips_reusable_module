@@ -79,7 +79,7 @@ class LoginDataSourceImpl extends LoginDataSource {
       throw Failure('Failed to fetch User Details');
     });
     final tokenData =  loginTokensFromJson(utf8.decode(response.data));
-
+    print("Token : ${tokenData.accessToken}");
     client.options.headers = {'content-type': 'application/json', 'Authorization':'Bearer ${tokenData.accessToken}'};
     var userDataResponse = await client
         .get(

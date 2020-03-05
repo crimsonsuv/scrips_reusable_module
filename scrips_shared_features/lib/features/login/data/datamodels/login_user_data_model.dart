@@ -15,6 +15,7 @@ class LoginUserData {
   String userName;
   String role;
   String id;
+  String country;
 
   LoginUserData({
     this.firstName,
@@ -23,6 +24,7 @@ class LoginUserData {
     this.userName,
     this.role,
     this.id,
+    this.country,
   });
 
   factory LoginUserData.fromJson(Map<String, dynamic> json) => LoginUserData(
@@ -32,6 +34,7 @@ class LoginUserData {
     userName: json["userName"] == null ? null : json["userName"],
     role: json["role"] == null ? null : json["role"],
     id: json["id"] == null ? null : json["id"],
+    country: json["country"] == null ? null : json["country"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class LoginUserData {
     "userName": userName == null ? null : userName,
     "role": role == null ? null : role,
     "id": id == null ? null : id,
+    "country": country == null ? null : country,
   };
 }
