@@ -28,7 +28,7 @@ List<Widget> footerWidgets(
           return Button(
             width: 200.0,
             height: 48,
-            text: "Login",
+            text: "Log In",
             buttonBackgroundColor:
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)

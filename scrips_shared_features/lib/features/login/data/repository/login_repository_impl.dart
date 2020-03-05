@@ -52,7 +52,7 @@ class LoginRepositoryImpl extends LoginRepository {
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 400) {
-        return Left(Failure("Invalid Email Id or Password is incorrect"));
+        return Left(Failure("Invalid Email Address or Incorrect Password"));
       }
       if (e.response.statusCode == 404) {
         return Left(Failure("Authorization failed from server"));

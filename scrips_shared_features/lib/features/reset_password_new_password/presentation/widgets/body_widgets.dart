@@ -16,6 +16,7 @@ List<Widget> bodyWidgets(
         String confirmPassword,
         ResetPasswordNewPasswordBloc bloc}) =>
     [
+      Space(vertical: 8,),
       FieldAndLabel(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         fieldType: FieldType.TextField,
@@ -152,4 +153,5 @@ List<Widget> bodyWidgets(
           }
         },
       ),
+      Space(vertical: 8,)
     ];

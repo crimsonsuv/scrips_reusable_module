@@ -1179,7 +1179,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           child: Container(),
         ),
         Button(
-          text: localizations.cancelButtonLabel,
+          text: "Cancel",
           style: semiBoldLabelTextStyle(15, enabledBtnBGColor),
           onPressed: _handleCancel,
           buttonBackgroundColor: bgColor,
@@ -1190,7 +1190,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           horizontal: 10,
         ),
         Button(
-          text: localizations.okButtonLabel,
+          text: "Ok",
           style: semiBoldLabelTextStyle(15, enabledBtnTextColor),
           onPressed: _handleOk,
           buttonBackgroundColor: enabledBtnBGColor,

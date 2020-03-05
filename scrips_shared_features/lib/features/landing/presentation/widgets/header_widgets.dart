@@ -18,7 +18,7 @@ List<Widget> headerWidgets({BuildContext context}) => [
         vertical: 10,
       ),
       Text(
-        S.of(context).pleaseEnterYourLoginDetails,
+        "Log in or sign up to get started",
         style: normalLabelTextStyle(15, regularTextColor),
       ),
     ];

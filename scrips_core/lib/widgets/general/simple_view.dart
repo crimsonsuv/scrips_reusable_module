@@ -6,6 +6,7 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/widgets/general/always_visble_scrollbar.dart';
+import 'package:scrips_core/widgets/general/button.dart';
 
 class SimpleView extends StatelessWidget {
   final bool showBackButton;
@@ -58,32 +59,20 @@ class SimpleView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   showBackButton
-                      ? FlatButton(
-                          padding: EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Images.instance.back(),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: Text(
-                                  "Back",
-                                  style: boldLabelTextStyle(
-                                      14.0, enabledBtnBGColor),
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            if (this.onBack != null) {
-                              this.onBack();
-                            }
-                          },
-                        )
+                      ? Button(
+                    height: 40,
+                    width: 85,
+                    text: "Back",
+                    buttonBackgroundColor: bgColor,
+                    style: boldLabelTextStyle(
+                        16.0, enabledBtnBGColor),
+                    onPressed: (){
+                      Navigator.pop(context);
+                      if (this.onBack != null) {
+                        this.onBack();
+                      }
+                    },
+                  )
                       : Container(),
                 ],
               ),

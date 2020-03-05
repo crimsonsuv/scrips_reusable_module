@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
+import 'package:scrips_core/widgets/general/simple_view.dart';
 import 'package:scrips_core/widgets/general/toast_widget.dart';
-import 'package:scrips_shared_features/core/base/screens/simple_view.dart';
 import 'package:scrips_shared_features/core/route/app_route_paths.dart';
 import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/landing/presentation/bloc/landing/landing_bloc.dart';
-import 'package:scrips_shared_features/features/landing/presentation/widgets/body_widgets.dart';
 import 'package:scrips_shared_features/features/landing/presentation/widgets/footer_widgets.dart';
 import 'package:scrips_shared_features/features/landing/presentation/widgets/header_widgets.dart';
 
@@ -100,7 +99,7 @@ class _LandingWebScreenState extends State<LandingWebScreen> {
                       showNext: false,
                       iconImage: Images.instance.banner(),
                       headerWidgets: headerWidgets(context: context),
-                      bodyWidgets: bodyWidgets(context),
+                      bodyWidgets: [Container()],
                       footerWidgets: footerWidgets(
                           context: context,
                           goToForgotPassword: _goToForgotPassword,

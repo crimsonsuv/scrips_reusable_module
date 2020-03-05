@@ -15,10 +15,13 @@ List<Widget> footerWidgets(
         LandingBloc bloc,
         bool isLoading}) =>
     <Widget>[
+      Space(
+        vertical: 97,
+      ),
       Button(
         height: 48,
         width: 176,
-        text: S.of(context).login,
+        text: "Log In",
         isLoading: isLoading,
         style: normalLabelTextStyle(17, enabledBtnTextColor),
         buttonBackgroundColor: enabledBtnBGColor,
@@ -33,7 +36,7 @@ List<Widget> footerWidgets(
         },
       ),
       Space(
-        vertical: 24,
+        vertical: 32,
       ),
       Button(
         width: 222.0,
@@ -42,6 +45,9 @@ List<Widget> footerWidgets(
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         onPressed: goToForgotPassword,
         buttonBackgroundColor: bgColor,
+      ),
+      Space(
+        vertical: 10,
       ),
       Button(
         height: 48,
