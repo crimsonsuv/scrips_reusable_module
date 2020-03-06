@@ -489,7 +489,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               },
             ),
           ),
-          (widget.rightIcon == null)
+          (currentFieldValue == "")
               ? Container()
               : Row(
                   children: <Widget>[
@@ -508,7 +508,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                             width: 24,
                             child: (currentFieldValue != "")
                                 ? Images.instance.cross()
-                                : widget.rightIcon)),
+                                : Container())),
                   ],
                 ),
         ],

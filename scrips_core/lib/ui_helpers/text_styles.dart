@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scrips_core/constants/app_assets.dart';
 
 import 'app_colors.dart';
 import 'app_sizes.dart';
@@ -30,10 +31,11 @@ TextStyle semiBoldLabelTextStyle(double size, color) => TextStyle(
       color: color ?? textInputColor,
     );
 
-TextStyle normalLabelTextStyle(double size, color) => TextStyle(
+TextStyle normalLabelTextStyle(double size, color,{double height = 1.2} ) => TextStyle(
       fontSize: size,
       fontWeight: FontWeight.normal,
       color: color ?? textInputColor,
+  height: height
     );
 
 // TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: labelTextStyleTextColor)
@@ -131,6 +133,7 @@ TextStyle defaultFieldStyle(color, backgroundColor,
 
 TextStyle defaultHintStyle(color, backgroundColor, {bool isReversed = false}) =>
     TextStyle(
+      fontFamily: Fonts.roboto,
       fontSize: hintTextSize,
       fontWeight: FontWeight.normal,
       color: defaultFieldHintColor,

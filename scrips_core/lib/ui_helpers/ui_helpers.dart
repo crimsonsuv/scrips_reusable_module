@@ -3,6 +3,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
+import 'package:scrips_core/widgets/general/space.dart';
 
 import 'app_sizes.dart';
 
@@ -77,19 +78,15 @@ class UIHelper {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
-          ),
+          Space(vertical: 8,),
           Container(
               decoration: UIHelper.defaultLabelBoxDecoration(
                   defaultValidationBackgroundColor),
               child: PlatformText(
                 validationMessage,
-                style: defaultValidationStyle(null, null),
+                style: normalLabelTextStyle(13, red),
               )),
-          SizedBox(
-            height: UIHelper.defaultFieldAndLabelPaddingSize / 2,
-          )
+          //Space(vertical: 4,),
         ],
       );
     else {

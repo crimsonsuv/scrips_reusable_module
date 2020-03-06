@@ -15,7 +15,7 @@ List<Widget> headerWidgets(BuildContext context) => [
         vertical: 8,
       ),
       Text(
-        "Enter the access code we just emailed you",
+        "Enter the reset code we just emailed you",
         style: normalLabelTextStyle(15, regularTextColor),
       ),
       Space(

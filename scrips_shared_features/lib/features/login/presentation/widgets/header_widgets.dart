@@ -17,7 +17,7 @@ List<Widget> headerWidgets(BuildContext context) => [
       Space(
         vertical: 10,
       ),
-      Text("Please enter your login details",
+      Text("Please, enter your login details",
           textAlign: TextAlign.center,
           style: normalLabelTextStyle(15.0, regularTextColor)),
       Space(

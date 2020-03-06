@@ -17,13 +17,13 @@ List<Widget> bodyWidgets(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         labelValue: 'Email Address'.toUpperCase(),
         fieldValue: email,
-        placeholder: 'Email Address',
+        placeholder: 'Enter email address',
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
           if (!isEmail(value) && !isBlank(value.toString())) {
             email = "";
-            state.setValidationMessage("Not a valid Email");
+            state.setValidationMessage("Email is not valid");
             bloc.dispatch(
               EnabledButtonEvent(email: email),
             );

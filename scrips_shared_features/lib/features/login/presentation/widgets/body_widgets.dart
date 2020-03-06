@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
@@ -23,9 +24,9 @@ List<Widget> bodyWidgets({BuildContext context, String email,
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
-          if (!isEmail(value)) {
+          if (!isEmail(value) && !isBlank(value.toString())) {
             email = "";
-            state.setValidationMessage("Not a valid Email");
+            state.setValidationMessage("Email is not valid");
             bloc.dispatch(
               OnChangedValuesEvent(email: email, password: password),
             );
@@ -45,7 +46,7 @@ List<Widget> bodyWidgets({BuildContext context, String email,
         fieldBackgroundColor: textFieldBGcolor,
         labelValue: "Password".toUpperCase(),
         isPassword: true,
-        placeholder: "Password",
+        placeholder: "Enter password",
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
