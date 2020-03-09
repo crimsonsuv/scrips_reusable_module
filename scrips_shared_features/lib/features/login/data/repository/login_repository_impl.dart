@@ -18,8 +18,21 @@ class LoginRepositoryImpl extends LoginRepository {
   Future<Either<Failure, LoginUserData>> oauth2Login() async {
     try {
       final result = await loginDataSource.oauth2Login();
-
-      return Right(result);
+      if (currentAppType == AppType.PM) {
+        if (result.role == "3") {
+          return Left(Failure(
+              "You are not authorized to use Practice Management App, try using other Scrips Apps"));
+        } else {
+          return Right(result);
+        }
+      } else if (currentAppType == AppType.PA) {
+        if (result.role == "0" || result.role == "1" || result.role == "2") {
+          return Left(Failure(
+              "You are not authorized to use Provider App, try using other Scrips Apps"));
+        } else {
+          return Right(result);
+        }
+      }
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
     } on Failure catch (f) {
