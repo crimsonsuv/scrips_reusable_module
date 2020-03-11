@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
+import 'package:scrips_core/common/domain/usecases/verify_phone_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/di/dependency_injection.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
@@ -21,6 +24,7 @@ enum FieldType {
   DatePicker,
   DateRangePicker,
   LocationPicker,
+  PhoneField
 }
 
 class FieldAndLabel<ListItemType> extends StatefulWidget {
@@ -32,6 +36,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Color fieldTextColor;
   final String labelValue;
   final dynamic fieldValue;
+  final String country;
   final bool enabled;
   final double width;
   final Axis axis;
@@ -62,6 +67,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.labelValue,
       this.labelTextCapitalization = TextCapitalization.characters,
       this.labelTextStyle,
+      this.country,
       this.fieldValue,
       this.onChanged,
       this.onEditingComplete,
@@ -111,6 +117,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   String currentValidationMessage;
   TextEditingController _textEditController;
   FetchLocationsByQueryUseCase fetchLocationsByQueryUseCase;
+  VerifyPhoneUseCase verifyPhoneUseCase;
+  Timer _debounce;
 
   //  ZefyrController _richTextEditController;
   //  FocusNode _richTextEditFocusNode;
@@ -119,6 +127,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     super.initState();
     fetchLocationsByQueryUseCase =
         FetchLocationsByQueryUseCase(repository: coreSl());
+
+    verifyPhoneUseCase = VerifyPhoneUseCase(repository: coreSl());
 
     currentFieldValue = widget.fieldValue ?? null;
 
@@ -148,17 +158,39 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     } else if (widget.fieldType == FieldType.DatePicker) {
       _textEditController =
           TextEditingController(text: scDateFormat(currentFieldValue));
+    } else if (widget.fieldType == FieldType.PhoneField) {
+      _textEditController = TextEditingController(text: currentFieldValue);
     }
   }
 
-  onChangedInternal(value) {
+  onChangedInternal(value) async {
 //    debugLog('onChangedInternal $value');
 //    setState(() {
     currentFieldValue = value;
 //    });
     if (widget.onChanged != null) {
       // also pass this so UI can call methods such as setValidationMessage
-      widget.onChanged(value, this);
+      if (widget.fieldType == FieldType.PhoneField) {
+        if (value.toString().length == 0) {
+          setValidationMessage("");
+        } else {
+          setValidationMessage("validating phone..");
+          if (_debounce?.isActive ?? false) _debounce.cancel();
+          _debounce = Timer(const Duration(milliseconds: 500), () async {
+            final result = await verifyPhoneUseCase(
+                VerifyPhoneParams(phone: value, country: widget.country));
+            result.fold((error) {
+              setValidationMessage(error.message);
+              widget.onChanged(value, this);
+            }, (success) {
+              setValidationMessage("");
+              widget.onChanged(value, this);
+            });
+          });
+        }
+      } else {
+        widget.onChanged(value, this);
+      }
     }
   }
 
@@ -293,6 +325,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.LocationPicker:
         field = buildLocationPicker(context);
         break;
+      case FieldType.PhoneField:
+        field = buildPhoneField(context);
+        break;
       default:
         field = Container();
         break;
@@ -385,6 +420,67 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       widget.isPassword == false || widget.isPassword == null
                           ? false
                           : true,
+                  style: normalLabelTextStyle(
+                      15,
+                      (widget?.enabled ?? true)
+                          ? regularTextColor
+                          : Colors.black45),
+                  textAlign: TextAlign.justify,
+                  enabled: widget.enabled ?? true,
+                  controller: _textEditController,
+                  onChanged: onChangedInternal,
+                  onSubmitted: onSubmitted,
+                  onEditingComplete: onEditingComplete,
+                  maxLines: 1,
+                  maxLength: widget.maxLength,
+                  onTap: () {
+                    onTapInternal();
+                  },
+                  decoration: InputDecoration(
+                      counterText: "",
+                      hintText: widget.placeholder,
+                      hintStyle: defaultHintStyle(null, null),
+                      contentPadding: EdgeInsets.only(bottom: 12),
+                      border: InputBorder.none),
+                ),
+              ),
+            ),
+          ),
+          (widget.rightIcon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    SizedBox(height: 24, width: 24, child: widget.rightIcon),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPhoneField(BuildContext context) {
+    return SizedBox(
+      height: 36.0,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: SizedBox.fromSize(
+              child: Center(
+                child: TextField(
                   style: normalLabelTextStyle(
                       15,
                       (widget?.enabled ?? true)
