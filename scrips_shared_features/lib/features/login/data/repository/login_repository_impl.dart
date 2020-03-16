@@ -35,8 +35,8 @@ class LoginRepositoryImpl extends LoginRepository {
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 401) {
-        return Left(
-            Failure("Organization is inactive, please contact Scrips."));
+        return Left(Failure(
+            "Your account is archived or inactive, please contact Scrips."));
       }
       if (e.response.statusCode == 400) {
         return Left(Failure("Invalid Email Address or Incorrect Password"));
@@ -75,8 +75,8 @@ class LoginRepositoryImpl extends LoginRepository {
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 401) {
-        return Left(
-            Failure("Organization is inactive, please contact Scrips."));
+        return Left(Failure(
+            "Your account is archived or inactive, please contact Scrips."));
       }
       if (e.response.statusCode == 400) {
         return Left(Failure("Invalid Email Address or Incorrect Password"));
