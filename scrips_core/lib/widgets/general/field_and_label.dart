@@ -57,6 +57,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Widget icon;
   final Widget rightIcon;
   final int maxLength;
+  final FocusNode focusNode;
 
   final List<ListItemType> listItems;
   FieldAndLabelState _myState;
@@ -76,6 +77,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldType = FieldType.TextField,
       this.listItems,
       this.icon,
+        this.focusNode,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -426,6 +428,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                           ? regularTextColor
                           : Colors.black45),
                   textAlign: TextAlign.justify,
+                  focusNode: widget.focusNode,
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
