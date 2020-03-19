@@ -7,6 +7,7 @@ class SlidingPopupWidget extends StatefulWidget {
   final Widget child;
   final double width;
   final Function onSave;
+  final Function onCancel;
   final Color backgroundColor;
 
   SlidingPopupWidget(
@@ -14,6 +15,7 @@ class SlidingPopupWidget extends StatefulWidget {
       this.child,
       @required this.width,
       this.onSave,
+      this.onCancel,
       this.backgroundColor = Colors.white});
 
   @override
@@ -104,12 +106,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  animationController.reverse();
-                                  opacityController.reverse();
-                                  Future<void>.delayed(
-                                      Duration(milliseconds: 200), () {
-                                    Navigator.pop(context);
-                                  });
+                                  widget.onCancel();
                                 },
                                 child: Container(
                                   color: Colors.white,

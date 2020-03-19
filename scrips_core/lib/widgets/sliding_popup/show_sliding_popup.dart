@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:scrips_core/widgets/sliding_popup/sliding_popup_view.dart';
 
 class SlidingPopup {
-  static show(
-      {BuildContext context,
-      Color backgroundColor,
-      Widget child,
-      String title,
-      double width,
-      Function onSave}) {
+  static show({
+    BuildContext context,
+    Color backgroundColor,
+    Widget child,
+    String title,
+    double width,
+    Function onSave,
+    Function onCancel,
+  }) {
     Navigator.of(context).push(PageRouteBuilder(
         opaque: false,
         fullscreenDialog: true,
@@ -18,10 +20,9 @@ class SlidingPopup {
             title: title,
             child: child,
             onSave: onSave,
+            onCancel: onCancel,
             backgroundColor: backgroundColor,
           );
-        }
-    ));
-
+        }));
   }
 }
