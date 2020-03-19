@@ -77,7 +77,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldType = FieldType.TextField,
       this.listItems,
       this.icon,
-        this.focusNode,
+      this.focusNode,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -432,7 +432,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
-                  onSubmitted: onSubmitted,
+                  onSubmitted: (val) {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    onSubmitted(val);
+                  },
                   onEditingComplete: onEditingComplete,
                   maxLines: 1,
                   maxLength: widget.maxLength,
