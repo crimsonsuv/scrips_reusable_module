@@ -39,6 +39,7 @@ dependencies:
   flutter_typeahead_web: ^1.0.0+1
   dartz: ^0.8.6
   equatable: ^0.4.0
+  flutter_tags: ^0.4.8
 
 
 dev_dependencies:

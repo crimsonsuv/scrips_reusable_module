@@ -4,6 +4,7 @@ import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_tags/flutter_tags.dart';
 import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
@@ -24,7 +25,9 @@ enum FieldType {
   DatePicker,
   DateRangePicker,
   LocationPicker,
-  PhoneField
+  PhoneField,
+  SingleTagPicker,
+  MultiTagPicker
 }
 
 class FieldAndLabel<ListItemType> extends StatefulWidget {
@@ -60,6 +63,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final FocusNode focusNode;
 
   final List<ListItemType> listItems;
+  final List<ValueDisplayPair> tagsItems;
   FieldAndLabelState _myState;
 
   //
@@ -76,6 +80,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.onTap,
       this.fieldType = FieldType.TextField,
       this.listItems,
+      this.tagsItems,
       this.icon,
       this.focusNode,
       this.axis,
@@ -330,6 +335,12 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.PhoneField:
         field = buildPhoneField(context);
         break;
+      case FieldType.SingleTagPicker:
+        field = buildSingleTagPicker(context);
+        break;
+      case FieldType.MultiTagPicker:
+        field = buildMultiTagPicker(context);
+        break;
       default:
         field = Container();
         break;
@@ -338,9 +349,16 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       padding: EdgeInsets.symmetric(horizontal: 8),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
-        border: Border.all(
-            color: widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
-        color: widget.fieldBackgroundColor,
+        border: (widget.fieldType == FieldType.SingleTagPicker ||
+                widget.fieldType == FieldType.MultiTagPicker)
+            ? null
+            : Border.all(
+                color:
+                    widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
+        color: (widget.fieldType == FieldType.SingleTagPicker ||
+                widget.fieldType == FieldType.MultiTagPicker)
+            ? Colors.transparent
+            : widget.fieldBackgroundColor,
       ),
       child: Center(child: field),
     );
@@ -353,6 +371,103 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildDropDownList(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints.expand(height: 36),
+      height: 36.0,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: IgnorePointer(
+              ignoring: !(widget?.enabled ?? true),
+              child: DropdownButton(
+                underline: Container(),
+                isExpanded: true,
+                value: currentFieldValue ?? widget.fieldValue,
+                items: widget.listItems ?? [],
+                icon: Images.instance.dropDownIcon(height: 24, width: 24),
+                iconSize: 12.0,
+                onChanged: onChangedInternal,
+                style: normalLabelTextStyle(
+                    15,
+                    (widget?.enabled ?? true)
+                        ? regularTextColor
+                        : Colors.black45),
+                hint: PlatformText(widget.placeholder ?? '',
+                    style: defaultHintStyle(null, null)),
+                disabledHint: PlatformText(widget.validationMessage ?? '',
+                    style: defaultHintStyle(null, null)),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildSingleTagPicker(BuildContext context) {
+    int selected = 0;
+    return Container(
+//      constraints: BoxConstraints.expand(height: 100),
+//      height: 100.0,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 4),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: IgnorePointer(
+                ignoring: !(widget?.enabled ?? true),
+                child: Tags(
+                  spacing: 8,
+                  columns: 4,
+                  runSpacing: 8,
+                  symmetry: false,
+                  itemCount: (widget.tagsItems ?? []).length,
+                  itemBuilder: (int index) {
+                    return ItemTags(
+                      index: index, // required
+                      elevation: 0,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                      title: widget.tagsItems[index].label,
+                      textColor: regularTextColor,
+                      textActiveColor: enabledBtnTextColor,
+                      color: bgColor,
+                      activeColor: enabledBtnBGColor,
+                      border: Border.all(width: 0, color: Colors.transparent),
+                      active: widget.tagsItems[index].value ==
+                          widget.fieldValue.toString(),
+                      textStyle: normalLabelTextStyle(15, regularTextColor),
+                      combine: ItemTagsCombine.withTextBefore, // OR null,
+                      onPressed: (item) {
+                        onChangedInternal(widget.tagsItems[index].value);
+                      },
+                      onLongPressed: (item) => print(item),
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMultiTagPicker(BuildContext context) {
     return Container(
       constraints: BoxConstraints.expand(height: 36),
       height: 36.0,
