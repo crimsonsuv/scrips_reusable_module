@@ -24,7 +24,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_platform_widgets:
-    path: ../third-party/flutter_platform_widgets
   scrips_core:
     path: ../scrips_core
   equatable: ^0.4.0

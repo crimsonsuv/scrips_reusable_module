@@ -275,8 +275,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     defaultLabelStyle(
                         widget.labelTextColor, widget.labelBackgroundColor),
                 textAlign: TextAlign.start,
-                textCapitalization: this.widget.labelTextCapitalization ??
-                    TextCapitalization.characters,
+//                textCapitalization: this.widget.labelTextCapitalization ??
+//                    TextCapitalization.characters,
               ),
               this.widget.isMandatory
                   ? SizedBox(
