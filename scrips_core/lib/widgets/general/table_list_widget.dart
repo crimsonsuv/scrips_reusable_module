@@ -17,14 +17,20 @@ class TableListWidget extends StatefulWidget {
   final int currentPage;
   final int lastPage;
   final int totalItems;
+  final List<int> selectedItems;
+  final Function onItemSelection;
+  final Function onAllSelection;
 
   TableListWidget(
       {@required this.headerList,
       @required this.rowDataList,
       @required this.menuOptions,
+      @required this.selectedItems,
+      this.onAllSelection,
       this.showPagingOptions = false,
       this.showThreeDotItemOption = false,
       this.pageItemCount = ListCount.TEN,
+      this.onItemSelection,
       this.currentPage = 1,
       this.lastPage = 1,
       this.totalItems = 0});
@@ -62,9 +68,16 @@ class _TableListWidgetState extends State<TableListWidget>
         height: 16.0,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey)),
+            color: (widget?.selectedItems?.length == widget.rowDataList.length)
+                ? enabledBtnBGColor
+                : Colors.transparent,
+            border: Border.all(
+                color:
+                    (widget?.selectedItems?.length == widget.rowDataList.length)
+                        ? enabledBtnBGColor
+                        : Colors.grey)),
         child: FlatButton(
-          onPressed: () => {},
+          onPressed: () => {widget.onAllSelection()},
         ),
       ),
     );
@@ -102,9 +115,23 @@ class _TableListWidgetState extends State<TableListWidget>
         height: 16.0,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey)),
+            color: (widget.selectedItems
+                        .where((data) => data == index)
+                        .toList()
+                        .length >
+                    0)
+                ? enabledBtnBGColor
+                : Colors.transparent,
+            border: Border.all(
+                color: (widget.selectedItems
+                            .where((data) => data == index)
+                            .toList()
+                            .length >
+                        0)
+                    ? enabledBtnBGColor
+                    : Colors.grey)),
         child: FlatButton(
-          onPressed: () => {},
+          onPressed: () => {widget.onItemSelection(index)},
         ),
       ),
     );
