@@ -20,12 +20,14 @@ class TableListWidget extends StatefulWidget {
   final List<int> selectedItems;
   final Function onItemSelection;
   final Function onAllSelection;
+  final Function onItemClick;
 
   TableListWidget(
       {@required this.headerList,
       @required this.rowDataList,
       @required this.menuOptions,
       @required this.selectedItems,
+      this.onItemClick,
       this.onAllSelection,
       this.showPagingOptions = false,
       this.showThreeDotItemOption = false,
@@ -190,8 +192,6 @@ class _TableListWidgetState extends State<TableListWidget>
           }
         },
         child: Container(
-          width: 24.0,
-          height: 24.0,
           child: Images.instance.moreGreyIcon(),
         ),
         itemBuilder: (BuildContext context) => menuOptionsList(),
@@ -233,9 +233,14 @@ class _TableListWidgetState extends State<TableListWidget>
                   (index % 2 == 0) ? enabledBtnTextColor : Colors.transparent),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: itemRowWidget(index),
+            child: InkWell(
+              onTap: () {
+                widget.onItemClick(index);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: itemRowWidget(index),
+              ),
             ),
           ),
         ),
