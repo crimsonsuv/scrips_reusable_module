@@ -49,7 +49,8 @@ class MenuOptions {
   String title;
   Image icon;
   Function onClick;
-  MenuOptions({this.title, this.icon, this.onClick});
+  Color color;
+  MenuOptions({this.title, this.icon, this.onClick, this.color = Colors.black});
 }
 
 class _TableListWidgetState extends State<TableListWidget>
@@ -210,9 +211,9 @@ class _TableListWidgetState extends State<TableListWidget>
           children: <Widget>[
             Text(
               data.title,
-              style: normalLabelTextStyle(16.0, Colors.black),
+              style: normalLabelTextStyle(16.0, data.color),
             ),
-            data.icon,
+            data.icon
           ],
         ),
       ));
