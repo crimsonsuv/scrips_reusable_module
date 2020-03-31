@@ -7,8 +7,11 @@ import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:validators/validators.dart';
 
-List<Widget> bodyWidgets({BuildContext context, String email,
-        String password, LoginBloc bloc}) =>
+List<Widget> bodyWidgets(
+        {BuildContext context,
+        String email,
+        String password,
+        LoginBloc bloc}) =>
     [
       Space(
         vertical: 8,
@@ -20,7 +23,7 @@ List<Widget> bodyWidgets({BuildContext context, String email,
         labelTextStyle: defaultFieldLabelStyle(null, null),
         labelValue: 'Email Address'.toUpperCase(),
         fieldValue: email,
-        placeholder: 'Email Address',
+        placeholder: 'Enter email address',
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {

@@ -346,7 +346,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         break;
     }
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: (widget.fieldType == FieldType.SingleTagPicker ||
+              widget.fieldType == FieldType.MultiTagPicker)
+          ? EdgeInsets.symmetric(horizontal: 0)
+          : EdgeInsets.symmetric(horizontal: 8),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         border: (widget.fieldType == FieldType.SingleTagPicker ||
@@ -432,8 +435,10 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 ignoring: !(widget?.enabled ?? true),
                 child: Tags(
                   spacing: 8,
-                  columns: 4,
+                  columns: 5,
                   runSpacing: 8,
+                  alignment: WrapAlignment.start,
+                  runAlignment: WrapAlignment.start,
                   symmetry: false,
                   itemCount: (widget.tagsItems ?? []).length,
                   itemBuilder: (int index) {
