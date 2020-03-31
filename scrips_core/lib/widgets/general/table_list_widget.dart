@@ -13,6 +13,7 @@ class TableListWidget extends StatefulWidget {
   final List<List<String>> rowDataList;
   final bool showPagingOptions;
   final bool showThreeDotItemOption;
+  final bool isSingleSelection;
   final ListCount pageItemCount;
   final int currentPage;
   final int lastPage;
@@ -31,6 +32,7 @@ class TableListWidget extends StatefulWidget {
       this.onAllSelection,
       this.showPagingOptions = false,
       this.showThreeDotItemOption = false,
+      this.isSingleSelection = false,
       this.pageItemCount = ListCount.TEN,
       this.onItemSelection,
       this.currentPage = 1,
@@ -66,23 +68,29 @@ class _TableListWidgetState extends State<TableListWidget>
   List<Widget> headerRowWidget() {
     List<Widget> dataList = [];
     dataList.add(
-      Container(
-        width: 16.0,
-        height: 16.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: (widget?.selectedItems?.length == widget.rowDataList.length)
-                ? enabledBtnBGColor
-                : Colors.transparent,
-            border: Border.all(
-                color:
-                    (widget?.selectedItems?.length == widget.rowDataList.length)
-                        ? enabledBtnBGColor
-                        : Colors.grey)),
-        child: FlatButton(
-          onPressed: () => {widget.onAllSelection()},
-        ),
-      ),
+      (widget.isSingleSelection)
+          ? Container(
+              height: 16,
+              width: 16,
+            )
+          : Container(
+              width: 16.0,
+              height: 16.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: (widget?.selectedItems?.length ==
+                          widget.rowDataList.length)
+                      ? enabledBtnBGColor
+                      : Colors.transparent,
+                  border: Border.all(
+                      color: (widget?.selectedItems?.length ==
+                              widget.rowDataList.length)
+                          ? enabledBtnBGColor
+                          : Colors.grey)),
+              child: FlatButton(
+                onPressed: () => {widget.onAllSelection()},
+              ),
+            ),
     );
     dataList.add(Space(
       horizontal: 24,
