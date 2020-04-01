@@ -9,11 +9,13 @@ class SlidingPopupWidget extends StatefulWidget {
   final Function onSave;
   final Function onCancel;
   final Color backgroundColor;
+  final String doneText;
 
   SlidingPopupWidget(
       {this.title,
       this.child,
       @required this.width,
+      this.doneText = "Save",
       this.onSave,
       this.onCancel,
       this.backgroundColor = Colors.white});
@@ -146,7 +148,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),
                                       child: Text(
-                                        "Save",
+                                        widget.doneText,
                                         style: semiBoldLabelTextStyle(
                                             15, enabledBtnBGColor),
                                       ),
@@ -165,8 +167,8 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                               color: widget?.backgroundColor ?? bgColor,
                               padding: mediaQuery.viewInsets,
                               duration: const Duration(milliseconds: 300),
-                              child: SizedBox.fromSize(
-                                  child: this.widget.child)))
+                              child:
+                                  SizedBox.fromSize(child: this.widget.child)))
                     ],
                   ),
                 ),

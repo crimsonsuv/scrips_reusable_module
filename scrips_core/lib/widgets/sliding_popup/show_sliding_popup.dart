@@ -8,6 +8,7 @@ class SlidingPopup {
     Widget child,
     String title,
     double width,
+    String doneText,
     Function onSave,
     Function onCancel,
   }) {
@@ -20,6 +21,7 @@ class SlidingPopup {
             title: title,
             child: child,
             onSave: onSave,
+            doneText: doneText,
             onCancel: onCancel,
             backgroundColor: backgroundColor,
           );
