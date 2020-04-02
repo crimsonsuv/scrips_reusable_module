@@ -8,7 +8,7 @@ class SlidingPopup {
     Widget child,
     String title,
     double width,
-    String doneText,
+    String doneText = "Save",
     Function onSave,
     Function onCancel,
   }) {
