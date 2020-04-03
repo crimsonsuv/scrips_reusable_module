@@ -212,4 +212,49 @@ class Images {
           fit: fit,
           color: color,
           colorBlendMode: colorBlendMode);
+
+  Image smallBackGrey(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_back_grey.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image smallForwardGrey(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_forward_grey.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image listSortEnabled(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_list_sort_enabled.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
 }

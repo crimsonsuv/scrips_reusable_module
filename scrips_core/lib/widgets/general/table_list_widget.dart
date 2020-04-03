@@ -149,7 +149,7 @@ class _TableListWidgetState extends State<TableListWidget>
                 horizontal: 4,
               ),
               (widget.selectedHeader == data)
-                  ? Images.instance.listSortIcon(color: textInputColor)
+                  ? Images.instance.listSortEnabled()
                   : Images.instance.listSortIcon()
             ],
           ),
@@ -341,137 +341,143 @@ class _TableListWidgetState extends State<TableListWidget>
               ),
             ),
             (widget.showPagingOptions)
-                ? Column(
-                    children: <Widget>[
-                      Space(
-                        vertical: 12,
-                      ),
-                      Container(
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                height: 32,
-                                width: 104,
-                                decoration: BoxDecoration(
-                                    color: enabledBtnTextColor,
-                                    borderRadius: BorderRadius.circular(13)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      InkWell(
-                                        onTap: () {
-                                          widget.onPageCountSelection(10);
-                                        },
-                                        child: Text(
-                                          "10",
-                                          style: (widget.pageItemCount ==
-                                                  ListCount.TEN)
-                                              ? boldLabelTextStyle(
-                                                  13, enabledBtnBGColor)
-                                              : normalLabelTextStyle(
-                                                  13, regularTextColor),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          widget.onPageCountSelection(20);
-                                        },
-                                        child: Text(
-                                          "20",
-                                          style: (widget.pageItemCount ==
-                                                  ListCount.TWENTY)
-                                              ? boldLabelTextStyle(
-                                                  13, enabledBtnBGColor)
-                                              : normalLabelTextStyle(
-                                                  13, regularTextColor),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          widget.onPageCountSelection(50);
-                                        },
-                                        child: Text(
-                                          "50",
-                                          style: (widget.pageItemCount ==
-                                                  ListCount.FIFTY)
-                                              ? boldLabelTextStyle(
-                                                  13, enabledBtnBGColor)
-                                              : normalLabelTextStyle(
-                                                  13, regularTextColor),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Space(
-                                horizontal: 24,
-                              ),
-                              Text(
-                                "${((widget.currentPage * countToInt(widget.pageItemCount)) - countToInt(widget.pageItemCount)) + 1}-${(widget.currentPage * countToInt(widget.pageItemCount)) > widget.totalItems ? widget.totalItems : (widget.currentPage * countToInt(widget.pageItemCount))} of ${widget.totalItems} records",
-                                style:
-                                    normalLabelTextStyle(13, regularTextColor),
-                              ),
-                              Expanded(
-                                child: Container(),
-                              ),
-                              Container(
-                                height: 32,
-                                decoration: BoxDecoration(
-                                    color: enabledBtnTextColor,
-                                    borderRadius: BorderRadius.circular(13)),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      InkWell(
-                                          onTap: () {
-                                            if (widget.currentPage > 1) {
-                                              widget.onPreviousPage();
-                                            }
-                                          },
-                                          child: Images.instance.smallBack(
-                                              color: (widget.currentPage > 1)
-                                                  ? enabledBtnBGColor
-                                                  : disabledBtnBGColor)),
-                                      Row(
-                                        children: pageWidgetList(),
-                                      ),
-                                      InkWell(
-                                          onTap: () {
-                                            if (widget.currentPage <
-                                                widget.lastPage) {
-                                              widget.onNextPage();
-                                            }
-                                          },
-                                          child: Images.instance.smallForward(
-                                              color: (widget.currentPage <
-                                                      widget.lastPage)
-                                                  ? enabledBtnBGColor
-                                                  : disabledBtnBGColor)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                ? (widget.totalItems == 0)
+                    ? Container()
+                    : Column(
+                        children: <Widget>[
+                          Space(
+                            vertical: 12,
                           ),
-                        ),
-                      ),
-                    ],
-                  )
+                          Container(
+                            height: 40,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 32,
+                                    width: 104,
+                                    decoration: BoxDecoration(
+                                        color: enabledBtnTextColor,
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          InkWell(
+                                            onTap: () {
+                                              widget.onPageCountSelection(10);
+                                            },
+                                            child: Text(
+                                              "10",
+                                              style: (widget.pageItemCount ==
+                                                      ListCount.TEN)
+                                                  ? boldLabelTextStyle(
+                                                      13, enabledBtnBGColor)
+                                                  : normalLabelTextStyle(
+                                                      13, regularTextColor),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              widget.onPageCountSelection(20);
+                                            },
+                                            child: Text(
+                                              "20",
+                                              style: (widget.pageItemCount ==
+                                                      ListCount.TWENTY)
+                                                  ? boldLabelTextStyle(
+                                                      13, enabledBtnBGColor)
+                                                  : normalLabelTextStyle(
+                                                      13, regularTextColor),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              widget.onPageCountSelection(50);
+                                            },
+                                            child: Text(
+                                              "50",
+                                              style: (widget.pageItemCount ==
+                                                      ListCount.FIFTY)
+                                                  ? boldLabelTextStyle(
+                                                      13, enabledBtnBGColor)
+                                                  : normalLabelTextStyle(
+                                                      13, regularTextColor),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Space(
+                                    horizontal: 24,
+                                  ),
+                                  Text(
+                                    "${((widget.currentPage * countToInt(widget.pageItemCount)) - countToInt(widget.pageItemCount)) + 1}-${(widget.currentPage * countToInt(widget.pageItemCount)) > widget.totalItems ? widget.totalItems : (widget.currentPage * countToInt(widget.pageItemCount))} of ${widget.totalItems} records",
+                                    style: normalLabelTextStyle(
+                                        13, regularTextColor),
+                                  ),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Container(
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                        color: enabledBtnTextColor,
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          InkWell(
+                                              onTap: () {
+                                                if (widget.currentPage > 1) {
+                                                  widget.onPreviousPage();
+                                                }
+                                              },
+                                              child: (widget.currentPage > 1)
+                                                  ? Images.instance.smallBack()
+                                                  : Images.instance
+                                                      .smallBackGrey()),
+                                          Row(
+                                            children: pageWidgetList(),
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                if (widget.currentPage <
+                                                    widget.lastPage) {
+                                                  widget.onNextPage();
+                                                }
+                                              },
+                                              child: (widget.currentPage <
+                                                      widget.lastPage)
+                                                  ? Images.instance
+                                                      .smallForward()
+                                                  : Images.instance
+                                                      .smallForwardGrey()),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                 : Container()
           ],
         ),
