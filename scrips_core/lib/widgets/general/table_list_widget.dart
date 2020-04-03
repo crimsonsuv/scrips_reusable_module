@@ -7,6 +7,28 @@ import 'package:scrips_core/widgets/general/space.dart';
 
 enum ListCount { TEN, TWENTY, FIFTY }
 
+ListCount intToCount(int count) {
+  if (count == 10) {
+    return ListCount.TEN;
+  } else if (count == 20) {
+    return ListCount.TWENTY;
+  } else if (count == 50) {
+    return ListCount.FIFTY;
+  }
+  return ListCount.TEN;
+}
+
+int countToInt(ListCount count) {
+  if (count == ListCount.TEN) {
+    return 10;
+  } else if (count == ListCount.TWENTY) {
+    return 20;
+  } else if (count == ListCount.FIFTY) {
+    return 50;
+  }
+  return 10;
+}
+
 class TableListWidget extends StatefulWidget {
   final List<TableListTitle> headerList;
   final List<MenuOptions> menuOptions;
@@ -18,10 +40,16 @@ class TableListWidget extends StatefulWidget {
   final int currentPage;
   final int lastPage;
   final int totalItems;
+  final TableListTitle selectedHeader;
   final List<int> selectedItems;
   final Function onItemSelection;
   final Function onAllSelection;
   final Function onItemClick;
+  final Function onPageCountSelection;
+  final Function onHeaderClick;
+  final Function onNextPage;
+  final Function onPreviousPage;
+  final Function onPageClick;
 
   TableListWidget(
       {@required this.headerList,
@@ -30,6 +58,8 @@ class TableListWidget extends StatefulWidget {
       @required this.selectedItems,
       this.onItemClick,
       this.onAllSelection,
+      this.selectedHeader,
+      this.onHeaderClick,
       this.showPagingOptions = false,
       this.showThreeDotItemOption = false,
       this.isSingleSelection = false,
@@ -37,6 +67,10 @@ class TableListWidget extends StatefulWidget {
       this.onItemSelection,
       this.currentPage = 1,
       this.lastPage = 1,
+      this.onPageCountSelection,
+      this.onNextPage,
+      this.onPreviousPage,
+      this.onPageClick,
       this.totalItems = 0});
 
   @override
@@ -46,6 +80,7 @@ class TableListWidget extends StatefulWidget {
 class TableListTitle {
   String title;
   double width;
+
   TableListTitle({this.title, this.width});
 }
 
@@ -54,6 +89,7 @@ class MenuOptions {
   Image icon;
   Function onClick;
   Color color;
+
   MenuOptions({this.title, this.icon, this.onClick, this.color = Colors.black});
 }
 
@@ -79,7 +115,8 @@ class _TableListWidgetState extends State<TableListWidget>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: (widget?.selectedItems?.length ==
-                          widget.rowDataList.length)
+                              widget.rowDataList.length &&
+                          widget.rowDataList.length > 0)
                       ? enabledBtnBGColor
                       : Colors.transparent,
                   border: Border.all(
@@ -98,17 +135,24 @@ class _TableListWidgetState extends State<TableListWidget>
     widget.headerList.forEach((data) {
       dataList.add(Container(
         width: data.width,
-        child: Row(
-          children: <Widget>[
-            Text(
-              "${data.title}".toUpperCase(),
-              style: boldLabelTextStyle(14, textInputColor),
-            ),
-            Space(
-              horizontal: 4,
-            ),
-            Images.instance.listSortIcon()
-          ],
+        child: InkWell(
+          onTap: () {
+            widget.onHeaderClick(data);
+          },
+          child: Row(
+            children: <Widget>[
+              Text(
+                "${data.title}".toUpperCase(),
+                style: boldLabelTextStyle(14, textInputColor),
+              ),
+              Space(
+                horizontal: 4,
+              ),
+              (widget.selectedHeader == data)
+                  ? Images.instance.listSortIcon(color: textInputColor)
+                  : Images.instance.listSortIcon()
+            ],
+          ),
         ),
       ));
       dataList.add(Space(
@@ -322,32 +366,47 @@ class _TableListWidgetState extends State<TableListWidget>
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Text(
-                                        "10",
-                                        style: (widget.pageItemCount ==
-                                                ListCount.TEN)
-                                            ? boldLabelTextStyle(
-                                                13, enabledBtnBGColor)
-                                            : normalLabelTextStyle(
-                                                13, regularTextColor),
+                                      InkWell(
+                                        onTap: () {
+                                          widget.onPageCountSelection(10);
+                                        },
+                                        child: Text(
+                                          "10",
+                                          style: (widget.pageItemCount ==
+                                                  ListCount.TEN)
+                                              ? boldLabelTextStyle(
+                                                  13, enabledBtnBGColor)
+                                              : normalLabelTextStyle(
+                                                  13, regularTextColor),
+                                        ),
                                       ),
-                                      Text(
-                                        "20",
-                                        style: (widget.pageItemCount ==
-                                                ListCount.TWENTY)
-                                            ? boldLabelTextStyle(
-                                                13, enabledBtnBGColor)
-                                            : normalLabelTextStyle(
-                                                13, regularTextColor),
+                                      InkWell(
+                                        onTap: () {
+                                          widget.onPageCountSelection(20);
+                                        },
+                                        child: Text(
+                                          "20",
+                                          style: (widget.pageItemCount ==
+                                                  ListCount.TWENTY)
+                                              ? boldLabelTextStyle(
+                                                  13, enabledBtnBGColor)
+                                              : normalLabelTextStyle(
+                                                  13, regularTextColor),
+                                        ),
                                       ),
-                                      Text(
-                                        "50",
-                                        style: (widget.pageItemCount ==
-                                                ListCount.FIFTY)
-                                            ? boldLabelTextStyle(
-                                                13, enabledBtnBGColor)
-                                            : normalLabelTextStyle(
-                                                13, regularTextColor),
+                                      InkWell(
+                                        onTap: () {
+                                          widget.onPageCountSelection(50);
+                                        },
+                                        child: Text(
+                                          "50",
+                                          style: (widget.pageItemCount ==
+                                                  ListCount.FIFTY)
+                                              ? boldLabelTextStyle(
+                                                  13, enabledBtnBGColor)
+                                              : normalLabelTextStyle(
+                                                  13, regularTextColor),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -357,7 +416,7 @@ class _TableListWidgetState extends State<TableListWidget>
                                 horizontal: 24,
                               ),
                               Text(
-                                "1-10 of ${widget.totalItems} records",
+                                "${((widget.currentPage * countToInt(widget.pageItemCount)) - countToInt(widget.pageItemCount)) + 1}-${(widget.currentPage * countToInt(widget.pageItemCount)) > widget.totalItems ? widget.totalItems : (widget.currentPage * countToInt(widget.pageItemCount))} of ${widget.totalItems} records",
                                 style:
                                     normalLabelTextStyle(13, regularTextColor),
                               ),
@@ -378,55 +437,31 @@ class _TableListWidgetState extends State<TableListWidget>
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      Images.instance.smallBack(),
-                                      Space(
-                                        horizontal: 16,
+                                      InkWell(
+                                          onTap: () {
+                                            if (widget.currentPage > 1) {
+                                              widget.onPreviousPage();
+                                            }
+                                          },
+                                          child: Images.instance.smallBack(
+                                              color: (widget.currentPage > 1)
+                                                  ? enabledBtnBGColor
+                                                  : disabledBtnBGColor)),
+                                      Row(
+                                        children: pageWidgetList(),
                                       ),
-                                      Container(
-                                        width: 24,
-                                        child: Text(
-                                          "${widget.currentPage.toString()}",
-                                          style: boldLabelTextStyle(
-                                              13, enabledBtnBGColor),
-                                        ),
-                                      ),
-                                      Space(
-                                        horizontal: 16,
-                                      ),
-                                      Container(
-                                        width: 24,
-                                        child: Text(
-                                          "${(widget.currentPage + 1).toString()}",
-                                          style: normalLabelTextStyle(
-                                              13, regularTextColor),
-                                        ),
-                                      ),
-                                      Space(
-                                        horizontal: 16,
-                                      ),
-                                      Container(
-                                        width: 24,
-                                        child: Text(
-                                          "...",
-                                          style: normalLabelTextStyle(
-                                              13, regularTextColor),
-                                        ),
-                                      ),
-                                      Space(
-                                        horizontal: 16,
-                                      ),
-                                      Container(
-                                        width: 24,
-                                        child: Text(
-                                          "${widget.lastPage.toString()}",
-                                          style: normalLabelTextStyle(
-                                              13, regularTextColor),
-                                        ),
-                                      ),
-                                      Space(
-                                        horizontal: 16,
-                                      ),
-                                      Images.instance.smallForward(),
+                                      InkWell(
+                                          onTap: () {
+                                            if (widget.currentPage <
+                                                widget.lastPage) {
+                                              widget.onNextPage();
+                                            }
+                                          },
+                                          child: Images.instance.smallForward(
+                                              color: (widget.currentPage <
+                                                      widget.lastPage)
+                                                  ? enabledBtnBGColor
+                                                  : disabledBtnBGColor)),
                                     ],
                                   ),
                                 ),
@@ -442,5 +477,215 @@ class _TableListWidgetState extends State<TableListWidget>
         ),
       ),
     );
+  }
+
+  List<Widget> pageWidgetList() {
+    List<Widget> pageListItem = [];
+    pageListItem.add(Space(
+      horizontal: 8,
+    ));
+    if (widget.lastPage <= 4) {
+      for (int i = 1; i <= widget.lastPage; i++) {
+        pageListItem.add(InkWell(
+          onTap: () {
+            widget.onPageClick(i);
+          },
+          child: Container(
+            width: 24,
+            child: Center(
+              child: Text(
+                "$i",
+                style: (widget.currentPage == i)
+                    ? boldLabelTextStyle(13, enabledBtnBGColor)
+                    : normalLabelTextStyle(13, regularTextColor),
+              ),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 8,
+        ));
+      }
+      return pageListItem;
+    } else {
+      if (widget.currentPage <= 2) {
+        for (int i = 1; i <= 2; i++) {
+          pageListItem.add(InkWell(
+            onTap: () {
+              widget.onPageClick(i);
+            },
+            child: Container(
+                width: 24,
+                child: Center(
+                  child: Text(
+                    "$i",
+                    style: (widget.currentPage == i)
+                        ? boldLabelTextStyle(13, enabledBtnBGColor)
+                        : normalLabelTextStyle(13, regularTextColor),
+                  ),
+                )),
+          ));
+          pageListItem.add(Space(
+            horizontal: 16,
+          ));
+        }
+        pageListItem.add(Container(
+          width: 24,
+          child: Text(
+            "...",
+            style: boldLabelTextStyle(13, regularTextColor),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 16,
+        ));
+        pageListItem.add(InkWell(
+          onTap: () {
+            widget.onPageClick(widget.lastPage);
+          },
+          child: Container(
+            width: 24,
+            child: Center(
+              child: Text(
+                "${widget.lastPage}",
+                style: boldLabelTextStyle(13, regularTextColor),
+              ),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 8,
+        ));
+        return pageListItem;
+      }
+      if (widget.currentPage >= widget.lastPage - 2) {
+        pageListItem.add(InkWell(
+          onTap: () {
+            widget.onPageClick(1);
+          },
+          child: Container(
+            width: 24,
+            child: Center(
+              child: Text(
+                "1",
+                style: boldLabelTextStyle(13, regularTextColor),
+              ),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 16,
+        ));
+        pageListItem.add(Container(
+          width: 24,
+          child: Center(
+            child: Text(
+              "...",
+              style: boldLabelTextStyle(13, regularTextColor),
+            ),
+          ),
+        ));
+        for (int i = widget.lastPage - 2; i <= widget.lastPage; i++) {
+          pageListItem.add(InkWell(
+            onTap: () {
+              widget.onPageClick(i);
+            },
+            child: Container(
+                width: 24,
+                child: Center(
+                  child: Text(
+                    "$i",
+                    style: (widget.currentPage == i)
+                        ? boldLabelTextStyle(13, enabledBtnBGColor)
+                        : normalLabelTextStyle(13, regularTextColor),
+                  ),
+                )),
+          ));
+          pageListItem.add(Space(
+            horizontal: 8,
+          ));
+        }
+        return pageListItem;
+      }
+      if (widget.currentPage > 2 && widget.currentPage < widget.lastPage - 2) {
+        pageListItem.add(InkWell(
+          onTap: () {
+            widget.onPageClick(1);
+          },
+          child: Container(
+            width: 24,
+            child: Center(
+              child: Text(
+                "1",
+                style: boldLabelTextStyle(13, regularTextColor),
+              ),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 16,
+        ));
+        pageListItem.add(Container(
+          width: 24,
+          child: Center(
+            child: Text(
+              "...",
+              style: boldLabelTextStyle(13, regularTextColor),
+            ),
+          ),
+        ));
+        for (int i = widget.currentPage - 1; i <= widget.currentPage + 2; i++) {
+          pageListItem.add(InkWell(
+            onTap: () {
+              widget.onPageClick(i);
+            },
+            child: Container(
+              width: 24,
+              child: Center(
+                child: Text(
+                  "$i",
+                  style: (widget.currentPage == i)
+                      ? boldLabelTextStyle(13, enabledBtnBGColor)
+                      : normalLabelTextStyle(13, regularTextColor),
+                ),
+              ),
+            ),
+          ));
+          pageListItem.add(Space(
+            horizontal: 16,
+          ));
+        }
+        pageListItem.add(Container(
+          width: 24,
+          child: Center(
+            child: Text(
+              "...",
+              style: boldLabelTextStyle(13, regularTextColor),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 16,
+        ));
+        pageListItem.add(InkWell(
+          onTap: () {
+            widget.onPageClick(widget.lastPage);
+          },
+          child: Container(
+            width: 24,
+            child: Center(
+              child: Text(
+                "${widget.lastPage}",
+                style: boldLabelTextStyle(13, regularTextColor),
+              ),
+            ),
+          ),
+        ));
+        pageListItem.add(Space(
+          horizontal: 8,
+        ));
+        return pageListItem;
+      }
+    }
   }
 }
