@@ -209,6 +209,13 @@ class _TableListWidgetState extends State<TableListWidget>
                               color: Colors.black12,
                               height: 24,
                               width: 24,
+                              child: Image.network(
+                                widget.rowDataList[index]
+                                        [widget.headerList.indexOf(data)]
+                                    .split(",")
+                                    .first,
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           Space(
@@ -219,7 +226,9 @@ class _TableListWidgetState extends State<TableListWidget>
                     : Container(),
                 Expanded(
                   child: Text(
-                    "${widget.rowDataList[index][widget.headerList.indexOf(data)]}",
+                    (data.title == "Name")
+                        ? "${widget.rowDataList[index][widget.headerList.indexOf(data)].split(",")[1]}"
+                        : "${widget.rowDataList[index][widget.headerList.indexOf(data)]}",
                     maxLines: 1,
                     style: normalLabelTextStyle(14, regularTextColor),
                     overflow: TextOverflow.ellipsis,

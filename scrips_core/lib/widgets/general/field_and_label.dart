@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
@@ -269,7 +268,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
             decoration:
                 UIHelper.defaultLabelBoxDecoration(widget.labelBackgroundColor),
             child: Row(children: <Widget>[
-              PlatformText(
+              Text(
                 widget.labelValue,
                 style: this.widget.labelTextStyle ??
                     defaultLabelStyle(
@@ -284,7 +283,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     )
                   : Container(),
               this.widget.isMandatory
-                  ? PlatformText(
+                  ? Text(
                       '*',
                       style: this
                               .widget
@@ -407,9 +406,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     (widget?.enabled ?? true)
                         ? regularTextColor
                         : Colors.black45),
-                hint: PlatformText(widget.placeholder ?? '',
+                hint: Text(widget.placeholder ?? '',
                     style: defaultHintStyle(null, null)),
-                disabledHint: PlatformText(widget.validationMessage ?? '',
+                disabledHint: Text(widget.validationMessage ?? '',
                     style: defaultHintStyle(null, null)),
               ),
             ),
@@ -506,9 +505,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     (widget?.enabled ?? true)
                         ? regularTextColor
                         : Colors.black45),
-                hint: PlatformText(widget.placeholder ?? '',
+                hint: Text(widget.placeholder ?? '',
                     style: defaultHintStyle(null, null)),
-                disabledHint: PlatformText(widget.validationMessage ?? '',
+                disabledHint: Text(widget.validationMessage ?? '',
                     style: defaultHintStyle(null, null)),
               ),
             ),
