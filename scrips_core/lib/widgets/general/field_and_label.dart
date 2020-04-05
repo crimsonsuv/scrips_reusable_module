@@ -29,6 +29,11 @@ enum FieldType {
   MultiTagPicker
 }
 
+enum LocationType {
+  Establishment,
+  Address,
+}
+
 class FieldAndLabel<ListItemType> extends StatefulWidget {
   final FieldType fieldType;
   final Color labelTextColor;
@@ -60,7 +65,9 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Widget rightIcon;
   final int maxLength;
   final FocusNode focusNode;
-
+  final LocationType locationType;
+  final DateTime firstDate;
+  final DateTime lastDate;
   final List<ListItemType> listItems;
   final List<ValueDisplayPair> tagsItems;
   FieldAndLabelState _myState;
@@ -76,6 +83,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.onChanged,
       this.onEditingComplete,
       this.onSubmitted,
+      this.firstDate,
+      this.lastDate,
       this.onTap,
       this.fieldType = FieldType.TextField,
       this.listItems,
@@ -98,6 +107,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldBackgroundColor,
       this.fieldTextColor,
       this.rightIcon,
+      this.locationType = LocationType.Establishment,
       this.maxLength = 300,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
@@ -179,6 +189,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       if (widget.fieldType == FieldType.PhoneField) {
         if (value.toString().length == 0) {
           setValidationMessage("");
+          widget.onChanged(value, this);
         } else {
           setValidationMessage("validating phone..");
           if (_debounce?.isActive ?? false) _debounce.cancel();
@@ -186,8 +197,13 @@ class FieldAndLabelState extends State<FieldAndLabel> {
             final result = await verifyPhoneUseCase(
                 VerifyPhoneParams(phone: value, country: widget.country));
             result.fold((error) {
-              setValidationMessage(error.message);
-              widget.onChanged(value, this);
+              if (currentFieldValue.toString().length > 0) {
+                setValidationMessage(error.message);
+                widget.onChanged(value, this);
+              } else {
+                setValidationMessage("");
+                widget.onChanged("", this);
+              }
             }, (success) {
               setValidationMessage("");
               widget.onChanged(value, this);
@@ -684,7 +700,11 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               ),
               suggestionsCallback: (pattern) async {
                 final result = await fetchLocationsByQueryUseCase(
-                    FetchLocationsByQueryParams(query: pattern));
+                    FetchLocationsByQueryParams(
+                        query: pattern,
+                        type: (widget.locationType == LocationType.Address)
+                            ? "address"
+                            : "establishment"));
                 return result.fold(
                   (error) => [],
                   (success) => success.predictions,
@@ -822,6 +842,12 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   }
 
   Widget buildDatePickerField(BuildContext context) {
+    DateTime firstDate = widget.firstDate == null
+        ? new DateTime.now().subtract(Duration(days: 365 * 100))
+        : widget.firstDate;
+    DateTime lastDate = widget.lastDate == null
+        ? new DateTime.now().add(Duration(days: 365 * 100))
+        : widget.lastDate;
     return Container(
       height: 36.0,
       constraints: BoxConstraints.expand(height: 36),
@@ -845,12 +871,19 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 final List<DateTime> picked =
                     await DateRagePicker.showDatePicker(
                         context: context,
-                        initialFirstDate: currentFieldValue ?? DateTime.now(),
+                        initialFirstDate: currentFieldValue != null
+                            ? ((firstDate.isBefore(currentFieldValue) ||
+                                    lastDate.isAfter(currentFieldValue))
+                                ? (lastDate.isBefore(currentFieldValue)
+                                    ? lastDate
+                                    : (firstDate.isAfter(currentFieldValue)
+                                        ? firstDate
+                                        : currentFieldValue))
+                                : DateTime.now())
+                            : DateTime.now(),
                         initialLastDate: null,
-                        firstDate: new DateTime.now()
-                            .subtract(Duration(days: 365 * 20)),
-                        lastDate:
-                            new DateTime.now().add(Duration(days: 365 * 20)),
+                        firstDate: firstDate,
+                        lastDate: lastDate,
                         range: DateRagePicker.DatePickerRange.single);
                 if (picked != null) {
                   print(picked);

@@ -15,7 +15,7 @@ class CommonDataSourceImpl extends CommonDataSource {
   Dio client = Dio();
 
   @override
-  Future<Locations> fetchLocationsByQuery({String query}) async {
+  Future<Locations> fetchLocationsByQuery({String query, String type}) async {
     client.options.responseType = ResponseType.bytes;
     client.options.headers = {
       'accept': 'text/plain',
@@ -23,10 +23,7 @@ class CommonDataSourceImpl extends CommonDataSource {
     };
 
     LocationRequest requestData = LocationRequest(
-        input: query,
-        types: "establishment",
-        language: "en",
-        key: googleAPIKey);
+        input: query, types: "$type", language: "en", key: googleAPIKey);
     var jsonRequest = requestData.toJson();
     var body = jsonEncode(jsonRequest);
     var response = await client

@@ -1141,6 +1141,18 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     assert(_mode != null);
     switch (_mode) {
       case DatePickerMode.day:
+        _selectedFirstDate = _selectedFirstDate.isAfter(widget.lastDate)
+            ? widget.lastDate
+            : (_selectedFirstDate.isBefore(widget.firstDate)
+                ? widget.firstDate
+                : _selectedFirstDate);
+        _selectedLastDate = (_selectedLastDate == null)
+            ? null
+            : _selectedLastDate.isAfter(widget.lastDate)
+                ? widget.lastDate
+                : (_selectedLastDate.isBefore(widget.firstDate)
+                    ? widget.firstDate
+                    : _selectedLastDate);
         return new MonthPicker(
           key: _pickerKey,
           selectedFirstDate: _selectedFirstDate,

@@ -4,7 +4,7 @@ import 'package:scrips_core/common/data/datasources/common_data_source.dart';
 
 class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
-  Future<Locations> fetchLocationsByQuery({String query}) {
+  Future<Locations> fetchLocationsByQuery({String query, String type}) {
     // TODO: implement fetchLocationsByQuery
     throw UnimplementedError();
   }

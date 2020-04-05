@@ -14,14 +14,17 @@ class FetchLocationsByQueryUseCase
 
   @override
   Future<Either<Failure, Locations>> call(FetchLocationsByQueryParams params) {
-    return repository.fetchLocationsByQuery(query: params.query);
+    return repository.fetchLocationsByQuery(
+        query: params.query, type: params.type);
   }
 }
 
 class FetchLocationsByQueryParams extends Equatable {
   final String query;
+  final String type;
 
   FetchLocationsByQueryParams({
     @required this.query,
-  }) : super([query]);
+    @required this.type,
+  }) : super([query, type]);
 }

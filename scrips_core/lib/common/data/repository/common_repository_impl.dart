@@ -19,9 +19,10 @@ class CommonRepositoryImpl extends CommonRepository {
 
   @override
   Future<Either<Failure, Locations>> fetchLocationsByQuery(
-      {String query}) async {
+      {String query, String type}) async {
     try {
-      final result = await commonDataSource.fetchLocationsByQuery(query: query);
+      final result = await commonDataSource.fetchLocationsByQuery(
+          query: query, type: type);
       return Right(result);
     } on DioError {
       return Left(Failure("Failed to get data"));
