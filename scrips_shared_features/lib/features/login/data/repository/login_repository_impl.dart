@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:scrips_core/constants/app_constants.dart';
-import 'package:scrips_shared_features/core/constants/status_objects.dart';
+import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source.dart';

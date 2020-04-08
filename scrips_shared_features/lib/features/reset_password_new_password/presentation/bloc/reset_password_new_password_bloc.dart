@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:scrips_shared_features/core/usecase/no_params.dart';
+import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_shared_features/features/create_password/domain/usecase/create_password_use_case.dart';
 import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
 import 'package:validators/validators.dart';
