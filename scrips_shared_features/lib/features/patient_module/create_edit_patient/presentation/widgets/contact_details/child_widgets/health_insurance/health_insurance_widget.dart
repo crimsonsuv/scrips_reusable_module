@@ -96,6 +96,8 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                   return (selectedIndex == index)
                       ? EditHealthInsuranceWidget(
                           isEdit: isEdit,
+                          insuranceItemList:
+                              widget.patient.healthInsuranceResponse,
                           insuranceItem:
                               widget.patient.healthInsuranceResponse[index],
                           insuranceList: widget.insuranceList,

@@ -14,6 +14,7 @@ import 'package:scrips_shared_features/features/patient_module/create_edit_patie
 class EditHealthInsuranceWidget extends StatefulWidget {
   final CreateEditPatientBloc bloc;
   final InsuranceList insuranceItem;
+  final List<InsuranceList> insuranceItemList;
   final Function onSave;
   final Function onCancel;
   final Function onRemove;
@@ -25,6 +26,7 @@ class EditHealthInsuranceWidget extends StatefulWidget {
       _EditHealthInsuranceWidgetState();
   EditHealthInsuranceWidget(
       {this.bloc,
+      this.insuranceItemList,
       this.insuranceItem,
       this.onCancel,
       this.onRemove,
@@ -137,7 +139,19 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                         labelTextStyle: defaultFieldLabelStyle(null, null),
                         labelValue: "Policy Number".toUpperCase(),
                         onChanged: (value, FieldAndLabelState state) {
-                          widget.insuranceItem.policyNumber = value;
+                          if ((widget.insuranceItemList
+                                      ?.where((hlIns) =>
+                                          (hlIns.policyNumber == value))
+                                      ?.toList()
+                                      ?.length ??
+                                  0) >
+                              0) {
+                            widget.bloc.dispatch(ShowErrorMessageEvent(
+                                message: "Health Insurance already added"));
+                            widget.insuranceItem.policyNumber = "";
+                          } else {
+                            widget.insuranceItem.policyNumber = value;
+                          }
                           widget.bloc.dispatch(EnableSaveInsuranceEvent(
                               insurance: widget.insuranceItem));
                         },

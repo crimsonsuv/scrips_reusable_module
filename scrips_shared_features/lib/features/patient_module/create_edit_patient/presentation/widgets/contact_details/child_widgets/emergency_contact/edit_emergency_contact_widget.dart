@@ -18,6 +18,7 @@ class EditEmergencyContactWidget extends StatefulWidget {
   final Function onCancel;
   final Function onRemove;
   final List<Relationship> relationshipList;
+  final List<EmergencyContactList> emergencyContactItemList;
   final bool isEdit;
   @override
   _EditEmergencyContactWidgetState createState() =>
@@ -27,6 +28,7 @@ class EditEmergencyContactWidget extends StatefulWidget {
       this.onSave,
       this.onCancel,
       this.onRemove,
+      this.emergencyContactItemList,
       this.isEdit,
       this.relationshipList,
       this.emergencyContactItem});
@@ -189,7 +191,19 @@ class _EditEmergencyContactWidgetState
                         value.toString().length > 0) {
                       widget?.emergencyContactItem?.contactNumber = "";
                     } else {
-                      widget?.emergencyContactItem?.contactNumber = value;
+                      if ((widget.emergencyContactItemList
+                                  ?.where((emgCon) =>
+                                      emgCon.contactNumber.contains(value))
+                                  ?.toList()
+                                  ?.length ??
+                              0) >
+                          0) {
+                        widget.bloc.dispatch(ShowErrorMessageEvent(
+                            message: "Emergency Contact Number already added"));
+                        widget?.emergencyContactItem?.contactNumber = "";
+                      } else {
+                        widget?.emergencyContactItem?.contactNumber = value;
+                      }
                     }
                     widget.bloc.dispatch(EnableSaveEmergencyContactEvent(
                         emergencyContact: widget.emergencyContactItem));

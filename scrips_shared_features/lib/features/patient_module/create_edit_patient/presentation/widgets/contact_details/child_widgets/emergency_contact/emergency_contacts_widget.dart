@@ -95,6 +95,8 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                 itemBuilder: (BuildContext context, int index) {
                   return (selectedIndex == index)
                       ? EditEmergencyContactWidget(
+                          emergencyContactItemList:
+                              widget.patient.emergencyContactResponse,
                           isEdit: isEdit,
                           emergencyContactItem:
                               widget.patient.emergencyContactResponse[index],
