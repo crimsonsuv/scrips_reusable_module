@@ -249,7 +249,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_more_grey.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_more_grey.png"),
           height: height,
           width: width,
           fit: fit,
@@ -263,7 +264,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_edit.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_edit.png"),
           height: height,
           width: width,
           fit: fit,
@@ -277,7 +279,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_search.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_search.png"),
           height: height,
           width: width,
           fit: fit,
@@ -291,7 +294,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_work_time.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_work_time.png"),
           height: height,
           width: width,
           fit: fit,
@@ -305,7 +309,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_holiday_time.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_holiday_time.png"),
           height: height,
           width: width,
           fit: fit,
@@ -319,7 +324,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_success_small.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_success_small.png"),
           height: height,
           width: width,
           fit: fit,
@@ -333,7 +339,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_menu_notifications.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_menu_notifications.png"),
           height: height,
           width: width,
           fit: fit,
@@ -347,7 +354,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_menu_get_help.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_menu_get_help.png"),
           height: height,
           width: width,
           fit: fit,
@@ -361,7 +369,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_calendar.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_calendar.png"),
           height: height,
           width: width,
           fit: fit,
@@ -375,7 +384,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_archive.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_archive.png"),
           height: height,
           width: width,
           fit: fit,
@@ -389,7 +399,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_breadcrumb_next.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_breadcrumb_next.png"),
           height: height,
           width: width,
           fit: fit,
@@ -403,7 +414,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_minor.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_minor.png"),
           height: height,
           width: width,
           fit: fit,
@@ -417,7 +429,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_star.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_star.png"),
           height: height,
           width: width,
           fit: fit,
@@ -431,7 +444,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_star_filled.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_star_filled.png"),
           height: height,
           width: width,
           fit: fit,
@@ -445,7 +459,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_small_phone.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_phone.png"),
           height: height,
           width: width,
           fit: fit,
@@ -459,7 +474,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_small_user.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_user.png"),
           height: height,
           width: width,
           fit: fit,
@@ -473,7 +489,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_small_hash.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_hash.png"),
           height: height,
           width: width,
           fit: fit,
@@ -487,7 +504,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_userpic.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_userpic.png"),
           height: height,
           width: width,
           fit: fit,
@@ -501,7 +519,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_calendar.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_calendar.png"),
           height: height,
           width: width,
           fit: fit,
@@ -515,7 +534,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_camera.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_camera.png"),
           height: height,
           width: width,
           fit: fit,
@@ -529,7 +549,8 @@ class Images {
           BlendMode colorBlendMode,
           BoxFit fit}) =>
       Image(
-          image: AssetImage("assets/ic_location.png"),
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_location.png"),
           height: height,
           width: width,
           fit: fit,

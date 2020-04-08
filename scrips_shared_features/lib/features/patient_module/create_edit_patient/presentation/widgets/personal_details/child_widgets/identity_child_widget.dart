@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrips_core/constants/app_assets.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
@@ -211,7 +212,9 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
               validationMessage: ((widget?.matchingPatientRecords?.length ??
                           0) >
                       0)
-                  ? "There ${(widget?.matchingPatientRecords?.length ?? 0) == 1 ? "is" : "are"} ${(widget?.matchingPatientRecords?.length ?? 0)} similar record in the database. Please, click on the record found to explore and make sure you’re not creating a duplicate."
+                  ? ((currentAppType == AppType.UK)
+                      ? "There ${(widget?.matchingPatientRecords?.length ?? 0) == 1 ? "is" : "are"} ${(widget?.matchingPatientRecords?.length ?? 0)} similar record in the database. Please, proceed to the reception"
+                      : "There ${(widget?.matchingPatientRecords?.length ?? 0) == 1 ? "is" : "are"} ${(widget?.matchingPatientRecords?.length ?? 0)} similar record in the database. Please, click on the record found to explore and make sure you’re not creating a duplicate.")
                   : "",
               placeholder: "Select expiration date",
               axis: Axis.vertical,
@@ -260,7 +263,8 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                           )),
                         ),
                       )
-                    : ((widget?.matchingPatientRecords?.length ?? 0) > 0)
+                    : ((widget?.matchingPatientRecords?.length ?? 0) > 0 &&
+                            (currentAppType != AppType.UK))
                         ? PatientSelectionWidget(
                             patientRecords: widget.matchingPatientRecords,
                             bloc: widget.bloc,

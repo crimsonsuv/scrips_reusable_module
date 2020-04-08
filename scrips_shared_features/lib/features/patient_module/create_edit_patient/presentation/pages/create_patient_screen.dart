@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:after_init/after_init.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
@@ -517,7 +518,11 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                   children: <Widget>[
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                          maxWidth: internalMaxWidth(context, false)),
+                          maxWidth: (MediaQuery.of(context).orientation ==
+                                      Orientation.portrait &&
+                                  !kIsWeb)
+                              ? MediaQuery.of(context).size.width
+                              : internalMaxWidth(context, false)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
