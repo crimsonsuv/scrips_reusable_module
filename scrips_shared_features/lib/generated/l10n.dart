@@ -9,7 +9,7 @@ import 'intl/messages_all.dart';
 // **************************************************************************
 
 class S {
-  S(this.localeName);
+  S();
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
@@ -19,15 +19,13 @@ class S {
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S(localeName);
+      return S();
     });
   } 
 
   static S of(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
-
-  final String localeName;
 
   String get pm_app_name {
     return Intl.message(
@@ -42,6 +40,15 @@ class S {
     return Intl.message(
       'Provider',
       name: 'pa_app_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get uk_app_name {
+    return Intl.message(
+      'Check-In',
+      name: 'uk_app_name',
       desc: '',
       args: [],
     );
@@ -152,7 +159,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'ar'), Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'en'), Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 

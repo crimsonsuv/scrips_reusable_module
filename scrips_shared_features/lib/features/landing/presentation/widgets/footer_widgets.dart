@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
@@ -49,12 +50,14 @@ List<Widget> footerWidgets(
       Space(
         vertical: 10,
       ),
-      Button(
-        height: 48,
-        width: 222,
-        text: S.of(context).signUpWithAccessCode,
-        style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
-        buttonBackgroundColor: textFieldBGcolor,
-        onPressed: goToSignup,
-      ),
+      (currentAppType == AppType.UK)
+          ? Container()
+          : Button(
+              height: 48,
+              width: 222,
+              text: S.of(context).signUpWithAccessCode,
+              style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
+              buttonBackgroundColor: textFieldBGcolor,
+              onPressed: goToSignup,
+            ),
     ];

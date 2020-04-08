@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pleaseEnterYourLoginDetails" : MessageLookupByLibrary.simpleMessage("Please, enter your login details"),
     "pm_app_name" : MessageLookupByLibrary.simpleMessage("Practice Management"),
     "signUpWithAccessCode" : MessageLookupByLibrary.simpleMessage("Sign Up With Access Code"),
+    "uk_app_name" : MessageLookupByLibrary.simpleMessage("Check-In"),
     "welcomeTo" : MessageLookupByLibrary.simpleMessage("Welcome to")
   };
 }
