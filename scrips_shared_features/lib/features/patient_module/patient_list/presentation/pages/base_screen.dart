@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_pm/core/base/screens/base_screen_view.dart';
+import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
 import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/pages/patient_list_screen.dart';
 
 class PatientListBaseScreen extends StatefulWidget {
