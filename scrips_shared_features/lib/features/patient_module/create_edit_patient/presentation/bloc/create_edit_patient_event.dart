@@ -88,8 +88,8 @@ class CreatePatientEvent extends CreateEditPatientEvent {
 }
 
 class CreateContactDetailsEvent extends CreateEditPatientEvent {
-  final UpdatePatientContactRequest contactDetails;
-  CreateContactDetailsEvent({this.contactDetails});
+  final Patient patient;
+  CreateContactDetailsEvent({this.patient});
 }
 
 class FetchEmergencyContactsEvent extends CreateEditPatientEvent {

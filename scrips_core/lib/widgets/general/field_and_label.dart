@@ -191,24 +191,28 @@ class FieldAndLabelState extends State<FieldAndLabel> {
           setValidationMessage("");
           widget.onChanged(value, this);
         } else {
-          setValidationMessage("validating phone..");
-          if (_debounce?.isActive ?? false) _debounce.cancel();
-          _debounce = Timer(const Duration(milliseconds: 500), () async {
-            final result = await verifyPhoneUseCase(
-                VerifyPhoneParams(phone: value, country: widget.country));
-            result.fold((error) {
-              if (currentFieldValue.toString().length > 0) {
-                setValidationMessage(error.message);
-                widget.onChanged(value, this);
-              } else {
+          if (value.toString().length < 8) {
+            setValidationMessage("Please, provide a valid number");
+          } else {
+            setValidationMessage("validating phone..");
+            if (_debounce?.isActive ?? false) _debounce.cancel();
+            _debounce = Timer(const Duration(milliseconds: 500), () async {
+              final result = await verifyPhoneUseCase(
+                  VerifyPhoneParams(phone: value, country: widget.country));
+              result.fold((error) {
+                if (currentFieldValue.toString().length > 0) {
+                  setValidationMessage(error.message);
+                  widget.onChanged(value, this);
+                } else {
+                  setValidationMessage("");
+                  widget.onChanged("", this);
+                }
+              }, (success) {
                 setValidationMessage("");
-                widget.onChanged("", this);
-              }
-            }, (success) {
-              setValidationMessage("");
-              widget.onChanged(value, this);
+                widget.onChanged(value, this);
+              });
             });
-          });
+          }
         }
       } else {
         widget.onChanged(value, this);

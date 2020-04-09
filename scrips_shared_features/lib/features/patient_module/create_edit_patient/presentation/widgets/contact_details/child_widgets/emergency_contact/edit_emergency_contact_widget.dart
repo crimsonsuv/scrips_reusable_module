@@ -191,16 +191,21 @@ class _EditEmergencyContactWidgetState
                         value.toString().length > 0) {
                       widget?.emergencyContactItem?.contactNumber = "";
                     } else {
-                      if ((widget.emergencyContactItemList
-                                  ?.where((emgCon) =>
-                                      emgCon.contactNumber.contains(value))
-                                  ?.toList()
-                                  ?.length ??
-                              0) >
-                          0) {
-                        widget.bloc.dispatch(ShowErrorMessageEvent(
-                            message: "Emergency Contact Number already added"));
-                        widget?.emergencyContactItem?.contactNumber = "";
+                      if ((widget?.emergencyContactItemList?.length ?? 0) > 0) {
+                        if ((widget.emergencyContactItemList
+                                    ?.where((emgCon) =>
+                                        emgCon.contactNumber.contains(value))
+                                    ?.toList()
+                                    ?.length ??
+                                0) >
+                            0) {
+                          widget.bloc.dispatch(ShowErrorMessageEvent(
+                              message:
+                                  "Emergency Contact Number already added"));
+                          widget?.emergencyContactItem?.contactNumber = "";
+                        } else {
+                          widget?.emergencyContactItem?.contactNumber = value;
+                        }
                       } else {
                         widget?.emergencyContactItem?.contactNumber = value;
                       }

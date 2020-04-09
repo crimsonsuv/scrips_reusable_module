@@ -51,24 +51,21 @@ class PatientDataSourceImpl extends PatientDataSource {
               data.expirationDate == null);
     });
 
-    if ((patient?.healthInsuranceResponse?.length ?? 0) > 0) {
-      var idata = jsonEncode(patient.healthInsuranceResponse);
-      var resp1 = await client
-          .post('$endpoint/api/patients/HealthInsurance', data: idata)
-          .timeout(Duration(seconds: _timeout), onTimeout: () {
-        throw Exception('Cannot save health insurance');
-      });
-    }
+    var idata = jsonEncode(patient.healthInsuranceResponse);
+    var resp1 = await client
+        .post('$endpoint/api/patients/HealthInsurance?PatientId=$id',
+            data: idata)
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
+      throw Exception('Cannot save health insurance');
+    });
 
-    if ((patient?.emergencyContactResponse?.length ?? 0) > 0) {
-      var edata = jsonEncode(patient.emergencyContactResponse);
-
-      var resp2 = await client
-          .post('$endpoint/api/patients/EmergencyContact', data: edata)
-          .timeout(Duration(seconds: _timeout), onTimeout: () {
-        throw Exception('Cannot save emergency contacts');
-      });
-    }
+    var edata = jsonEncode(patient.emergencyContactResponse);
+    var resp2 = await client
+        .post('$endpoint/api/patients/EmergencyContact?PatientId=$id',
+            data: edata)
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
+      throw Exception('Cannot save emergency contacts');
+    });
 
     patientData.removeWhere((key, value) => key == "emergencyContactResponse");
     patientData.removeWhere((key, value) => key == "healthInsuranceResponse");
@@ -80,7 +77,7 @@ class PatientDataSourceImpl extends PatientDataSource {
       'accept': 'application/json',
       'content-type': 'application/json'
     };
-    var resp2 = await client
+    var resp3 = await client
         .put('$endpoint/api/Patients/$id', data: patientBody)
         .timeout(Duration(seconds: _timeout), onTimeout: () {
       throw Exception('Cannot update Patient $id');
@@ -222,15 +219,47 @@ class PatientDataSourceImpl extends PatientDataSource {
   }
 
   @override
-  Future<Success> createContactDetails(
-      {UpdatePatientContactRequest contactDetails}) async {
+  Future<Success> createContactDetails({Patient patient}) async {
     client.options.responseType = ResponseType.bytes;
     client.options.headers = {
       'accept': 'text/plain',
       'Content-Type': 'application/json'
     };
 
-    Map<String, dynamic> contactData = contactDetails.toJson();
+    patient.emergencyContactResponse.removeWhere((data) {
+      return data.emergencyContactId == null &&
+          (isBlank(data.firstName) ||
+              isBlank(data.lastName) ||
+              isBlank(data.contactNumber));
+    });
+
+    patient.healthInsuranceResponse.removeWhere((data) {
+      return data.healthInsuranceId == null &&
+          (isBlank(data.insuranceProvider) ||
+              isBlank(data.policyNumber) ||
+              data.expirationDate == null);
+    });
+
+    var idata = jsonEncode(patient.healthInsuranceResponse);
+    var resp1 = await client
+        .post(
+            '$endpoint/api/patients/HealthInsurance?PatientId=${patient.patientId}',
+            data: idata)
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
+      throw Exception('Cannot save health insurance');
+    });
+
+    var edata = jsonEncode(patient.emergencyContactResponse);
+    var resp2 = await client
+        .post(
+            '$endpoint/api/patients/EmergencyContact?PatientId=${patient.patientId}',
+            data: edata)
+        .timeout(Duration(seconds: _timeout), onTimeout: () {
+      throw Exception('Cannot save emergency contacts');
+    });
+
+    Map<String, dynamic> contactData =
+        patient.updatePatientContactRequest.toJson();
 
     contactData.removeWhere((key, value) => key == "contactId");
 

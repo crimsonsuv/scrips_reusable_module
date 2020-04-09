@@ -221,7 +221,7 @@ class CreateEditPatientBloc
     } else if (event is CreateContactDetailsEvent) {
       yield LoadingBeginState();
       final result = await createContactDeatilsUseCase(
-          CreatePContactDetailsParams(contactDetails: event.contactDetails));
+          CreatePContactDetailsParams(patient: event.patient));
       yield LoadingEndState();
       yield result.fold(
         (error) => ErrorState(error.message),

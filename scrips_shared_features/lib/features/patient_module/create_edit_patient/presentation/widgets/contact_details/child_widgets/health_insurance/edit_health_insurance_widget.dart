@@ -139,19 +139,24 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                         labelTextStyle: defaultFieldLabelStyle(null, null),
                         labelValue: "Policy Number".toUpperCase(),
                         onChanged: (value, FieldAndLabelState state) {
-                          if ((widget.insuranceItemList
-                                      ?.where((hlIns) =>
-                                          (hlIns.policyNumber == value))
-                                      ?.toList()
-                                      ?.length ??
-                                  0) >
-                              0) {
-                            widget.bloc.dispatch(ShowErrorMessageEvent(
-                                message: "Health Insurance already added"));
-                            widget.insuranceItem.policyNumber = "";
+                          if ((widget?.insuranceItemList?.length ?? 0) > 0) {
+                            if ((widget.insuranceItemList
+                                        ?.where((hlIns) =>
+                                            (hlIns.policyNumber == value))
+                                        ?.toList()
+                                        ?.length ??
+                                    0) >
+                                0) {
+                              widget.bloc.dispatch(ShowErrorMessageEvent(
+                                  message: "Health Insurance already added"));
+                              widget.insuranceItem.policyNumber = value;
+                            } else {
+                              widget.insuranceItem.policyNumber = value;
+                            }
                           } else {
                             widget.insuranceItem.policyNumber = value;
                           }
+
                           widget.bloc.dispatch(EnableSaveInsuranceEvent(
                               insurance: widget.insuranceItem));
                         },

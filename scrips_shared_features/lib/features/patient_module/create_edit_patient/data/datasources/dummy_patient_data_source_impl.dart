@@ -66,8 +66,7 @@ class DummyPatientDataSourceImpl extends PatientDataSource {
   }
 
   @override
-  Future<Success> createContactDetails(
-      {UpdatePatientContactRequest contactDetails}) {
+  Future<Success> createContactDetails({Patient patient}) {
     // TODO: implement createContactDetails
     throw UnimplementedError();
   }

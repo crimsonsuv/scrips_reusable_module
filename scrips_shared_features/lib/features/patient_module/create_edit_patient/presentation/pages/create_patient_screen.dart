@@ -410,6 +410,22 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                       isLoading: isLoading,
                                       onPressed: () async {
                                         if (isEdit && isSaveEnabled) {
+                                          if ((patient?.healthInsuranceResponse
+                                                      ?.length ??
+                                                  0) >
+                                              1) {
+                                            if (patient
+                                                    .healthInsuranceResponse[0]
+                                                    .policyNumber ==
+                                                patient
+                                                    .healthInsuranceResponse[1]
+                                                    .policyNumber) {
+                                              bloc.dispatch(ShowErrorMessageEvent(
+                                                  message:
+                                                      "Health Insurance already added"));
+                                              return;
+                                            }
+                                          }
                                           bloc.dispatch(UpdatePatientEvent(
                                               patient: patient,
                                               pid: patient.patientId));
@@ -424,8 +440,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                             isSaveEnabled) {
                                           bloc.dispatch(
                                               CreateContactDetailsEvent(
-                                            contactDetails: patient
-                                                .updatePatientContactRequest,
+                                            patient: patient,
                                           ));
                                         }
                                       },

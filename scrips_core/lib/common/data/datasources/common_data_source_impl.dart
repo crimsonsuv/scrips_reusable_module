@@ -45,7 +45,7 @@ class CommonDataSourceImpl extends CommonDataSource {
     };
     var response = await client
         .get('$endpointTwilio/v1/PhoneNumbers/$phone')
-        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+        .timeout(Duration(seconds: defaultTimeout + 10), onTimeout: () {
       throw Failure('Fetching locations Failed');
     });
     print(utf8.decode(response.data));

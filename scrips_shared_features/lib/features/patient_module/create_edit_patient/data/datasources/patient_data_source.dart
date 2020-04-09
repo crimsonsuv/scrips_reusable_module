@@ -22,7 +22,6 @@ abstract class PatientDataSource {
   Future<Status> saveEmergencyContactList(
       {List<EmergencyContactList> emergencyList});
   Future<CreatePatientResponse> createPatient({Patient patient});
-  Future<Success> createContactDetails(
-      {UpdatePatientContactRequest contactDetails});
+  Future<Success> createContactDetails({Patient patient});
   Future<String> uploadImage({String path});
 }

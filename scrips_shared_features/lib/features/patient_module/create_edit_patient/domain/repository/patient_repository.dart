@@ -27,7 +27,6 @@ abstract class PatientRepository {
       {List<EmergencyContactList> emergencyList});
   Future<Either<Failure, CreatePatientResponse>> createPatient(
       {Patient patient});
-  Future<Either<Failure, Success>> createContactDetails(
-      {UpdatePatientContactRequest contactDetails});
+  Future<Either<Failure, Success>> createContactDetails({Patient patient});
   Future<Either<Failure, String>> uploadImage({String path});
 }

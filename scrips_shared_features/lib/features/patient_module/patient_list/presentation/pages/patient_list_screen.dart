@@ -383,33 +383,38 @@ class _PatientListScreenState extends State<PatientListScreen>
                                         Space(
                                           horizontal: 32,
                                         ),
-                                        InkWell(
-                                          child: Text("Archive",
-                                              style: semiBoldLabelTextStyle(
-                                                  13, enabledBtnBGColor)),
-                                          onTap: () {
-                                            confirmDialog(
-                                                context: context,
-                                                title:
-                                                    "Do you really want to archive selected accounts?",
-                                                message:
-                                                    "We will inform patients about this change. You can unarchive these accounts later in Account Settings.",
-                                                isRemove: true,
-                                                onYes: () {
-                                                  List<String> patientIds = [];
-                                                  selectedPatientIndexes
-                                                      .forEach((data) {
-                                                    patientIds.add(
-                                                        patientsData[data]
-                                                            .patientId);
-                                                  });
-                                                  bloc.dispatch(
-                                                      ArchivePatientEvent(
-                                                          patientIDs:
-                                                              patientIds));
-                                                });
-                                          },
-                                        )
+                                        (isArchived)
+                                            ? Container()
+                                            : InkWell(
+                                                child: Text("Archive",
+                                                    style:
+                                                        semiBoldLabelTextStyle(
+                                                            13,
+                                                            enabledBtnBGColor)),
+                                                onTap: () {
+                                                  confirmDialog(
+                                                      context: context,
+                                                      title:
+                                                          "Do you really want to archive selected accounts?",
+                                                      message:
+                                                          "We will inform patients about this change. You can unarchive these accounts later in Account Settings.",
+                                                      isRemove: true,
+                                                      onYes: () {
+                                                        List<String>
+                                                            patientIds = [];
+                                                        selectedPatientIndexes
+                                                            .forEach((data) {
+                                                          patientIds.add(
+                                                              patientsData[data]
+                                                                  .patientId);
+                                                        });
+                                                        bloc.dispatch(
+                                                            ArchivePatientEvent(
+                                                                patientIDs:
+                                                                    patientIds));
+                                                      });
+                                                },
+                                              )
                                       ],
                                     ),
                                   ),

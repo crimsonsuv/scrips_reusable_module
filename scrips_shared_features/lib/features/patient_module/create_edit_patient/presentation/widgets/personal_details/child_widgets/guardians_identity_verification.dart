@@ -220,7 +220,7 @@ class _GuardiansIdentityVerificationFormWidgetState
                 fieldType: FieldType.DatePicker,
                 icon: Images.instance.licenseExpirationDate(),
                 rightIcon: Images.instance.dropDownIcon(),
-                lastDate: DateTime.now(),
+                lastDate: DateTime.now().subtract(Duration(days: 365 * 18 + 1)),
                 fieldValue: pData?.guardianIdenitification?.birthDate,
                 labelTextStyle: defaultFieldLabelStyle(null, null),
                 labelValue: "DATE OF BIRTH",

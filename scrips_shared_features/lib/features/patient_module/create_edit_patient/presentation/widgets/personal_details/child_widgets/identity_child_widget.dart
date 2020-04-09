@@ -121,7 +121,11 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                 _debounce = Timer(const Duration(milliseconds: 500), () async {
                   fetchMatchingRecord(
                       idType: value,
-                      idNumber: widget.patient.identification.idNumber);
+                      idNumber: (widget.isGuardian)
+                          ? widget?.patient?.guardianIdenitification
+                                  ?.idNumber ??
+                              ""
+                          : widget?.patient?.identification?.idNumber ?? "");
                 });
               },
               validationMessage: "",
@@ -141,7 +145,7 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
           fieldTextColor: textInputColor,
           maxLength: 50,
           fieldValue: (widget.isGuardian)
-              ? widget?.patient?.guardianIdenitification?.idNumber ?? null
+              ? widget?.patient?.guardianIdenitification?.idNumber ?? ""
               : widget?.patient?.identification?.idNumber ?? "",
           fieldType: FieldType.TextField,
           labelTextStyle: defaultFieldLabelStyle(null, null),
@@ -157,7 +161,9 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
             if (_debounce?.isActive ?? false) _debounce.cancel();
             _debounce = Timer(const Duration(milliseconds: 500), () async {
               fetchMatchingRecord(
-                  idType: widget.patient.identification.idType,
+                  idType: (widget.isGuardian)
+                      ? widget?.patient?.guardianIdenitification?.idType ?? ""
+                      : widget?.patient?.identification?.idType ?? "",
                   idNumber: value);
             });
           },
@@ -205,8 +211,15 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                 if (_debounce?.isActive ?? false) _debounce.cancel();
                 _debounce = Timer(const Duration(milliseconds: 500), () async {
                   fetchMatchingRecord(
-                      idType: widget.patient.identification.idType,
-                      idNumber: widget.patient.identification.idNumber);
+                      idType: (widget.isGuardian)
+                          ? widget?.patient?.guardianIdenitification?.idType ??
+                              ""
+                          : widget?.patient?.identification?.idType ?? "",
+                      idNumber: (widget.isGuardian)
+                          ? widget?.patient?.guardianIdenitification
+                                  ?.idNumber ??
+                              ""
+                          : widget?.patient?.identification?.idNumber ?? "");
                 });
               },
               validationMessage: ((widget?.matchingPatientRecords?.length ??

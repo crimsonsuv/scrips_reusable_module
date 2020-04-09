@@ -129,10 +129,10 @@ class PatientRepositoryImpl extends PatientRepository {
 
   @override
   Future<Either<Failure, Success>> createContactDetails(
-      {UpdatePatientContactRequest contactDetails}) async {
+      {Patient patient}) async {
     try {
-      final result = await patientDataSource.createContactDetails(
-          contactDetails: contactDetails);
+      final result =
+          await patientDataSource.createContactDetails(patient: patient);
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));

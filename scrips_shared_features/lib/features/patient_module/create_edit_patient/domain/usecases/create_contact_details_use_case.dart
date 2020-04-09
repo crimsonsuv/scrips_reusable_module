@@ -14,14 +14,12 @@ class CreatePContactDetailsUseCase
 
   @override
   Future<Either<Failure, Success>> call(CreatePContactDetailsParams params) {
-    return repository.createContactDetails(
-        contactDetails: params.contactDetails);
+    return repository.createContactDetails(patient: params.patient);
   }
 }
 
 class CreatePContactDetailsParams extends Equatable {
-  final UpdatePatientContactRequest contactDetails;
+  final Patient patient;
 
-  CreatePContactDetailsParams({@required this.contactDetails})
-      : super([contactDetails]);
+  CreatePContactDetailsParams({@required this.patient}) : super([patient]);
 }

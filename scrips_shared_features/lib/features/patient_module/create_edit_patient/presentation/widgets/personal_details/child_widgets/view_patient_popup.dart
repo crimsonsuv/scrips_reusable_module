@@ -269,7 +269,9 @@ class _ViewPatientViewWidgetState extends State<ViewPatientViewWidget> {
                         ),
                         Expanded(
                           child: Text(
-                            '${widget.maritalStatusList?.where((data) => data.id == widget.patient?.maritalStatus)?.toList()?.first?.name?.toLowerCase()?.capitalize() ?? "—"}',
+                            ((widget?.patient?.maritalStatus ?? "") == "")
+                                ? "—"
+                                : '${widget.maritalStatusList?.where((data) => data.id == widget.patient?.maritalStatus)?.toList()?.first?.name?.toLowerCase()?.capitalize() ?? "—"}',
                             style: normalLabelTextStyle(15, regularTextColor),
                           ),
                         )
@@ -290,7 +292,9 @@ class _ViewPatientViewWidgetState extends State<ViewPatientViewWidget> {
                         ),
                         Expanded(
                           child: Text(
-                            '${widget.languageList?.where((data) => data.id == widget.patient?.language)?.toList()?.first?.languageName?.toLowerCase()?.capitalize() ?? "—"}',
+                            ((widget?.patient?.language ?? "") == "")
+                                ? "—"
+                                : '${widget.languageList?.where((data) => data.id == widget?.patient?.language)?.toList()?.first?.languageName?.toLowerCase()?.capitalize() ?? "—"}',
                             style: normalLabelTextStyle(15, regularTextColor),
                           ),
                         )

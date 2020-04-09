@@ -5,13 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source.dart';
 
 class LoginDataSourceImpl extends LoginDataSource {
-  static final endPoint =
-      'https://scripsidentityapi20191030115107.azurewebsites.net';
+  static final endPoint = identityTestServer;
   static final dummyEndpoint = 'lib/core/mock_jsons/';
   int timeout = 20;
   Dio client = Dio();
