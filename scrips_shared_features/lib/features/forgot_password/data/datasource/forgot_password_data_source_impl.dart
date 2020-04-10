@@ -6,7 +6,7 @@ import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/forgot_password/data/datasource/forgot_password_data_source.dart';
 
 class ForgotPasswordDataSourceImpl extends ForgotPasswordDataSource {
-  static final endPoint = identityTestServer;
+  static final endPoint = identityServer;
   int timeout = 20;
   Dio client = Dio();
 

@@ -368,7 +368,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                                       patient?.photoUrl == null)
                                                   ? Images.instance.userpic()
                                                   : Image.network(
-                                                      patientsTestServer +
+                                                      patientsServer +
                                                           patient.photoUrl,
                                                       fit: BoxFit.fill,
                                                     ),

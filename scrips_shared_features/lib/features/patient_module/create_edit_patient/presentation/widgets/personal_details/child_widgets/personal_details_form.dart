@@ -141,7 +141,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                                   ? Images.instance
                                       .cameraIcon(height: 30, width: 30)
                                   : Image.network(
-                                      patientsTestServer + pData.photoUrl,
+                                      patientsServer + pData.photoUrl,
                                       fit: BoxFit.fill,
                                       height: 80,
                                       width: 80,

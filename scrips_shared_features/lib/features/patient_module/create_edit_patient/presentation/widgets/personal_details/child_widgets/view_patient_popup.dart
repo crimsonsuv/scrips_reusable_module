@@ -181,8 +181,7 @@ class _ViewPatientViewWidgetState extends State<ViewPatientViewWidget> {
                               ? Images.instance.userpic(
                                   fit: BoxFit.contain, height: 50, width: 50)
                               : Image.network(
-                                  patientsTestServer +
-                                          widget?.patient?.photoUrl ??
+                                  patientsServer + widget?.patient?.photoUrl ??
                                       "",
                                   fit: BoxFit.fill,
                                 ),

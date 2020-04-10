@@ -8,7 +8,7 @@ import 'package:scrips_shared_features/features/create_password/data/datamodels/
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
 
 class CreatePasswordDataSourceImpl extends CreatePasswordDataSource {
-  static final endPoint = identityTestServer;
+  static final endPoint = identityServer;
   int timeout = 20;
   Dio client = Dio();
 

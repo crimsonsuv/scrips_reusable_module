@@ -12,7 +12,7 @@ import 'package:scrips_shared_features/features/patient_module/create_edit_patie
 import 'package:scrips_shared_features/features/patient_module/create_edit_patient/data/datasources/patient_data_source.dart';
 
 class PatientDataSourceImpl extends PatientDataSource {
-  static final endpoint = patientsTestServer;
+  static final endpoint = patientsServer;
   int _timeout = 50;
   Dio client = Dio();
 

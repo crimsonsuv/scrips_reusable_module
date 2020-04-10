@@ -11,7 +11,7 @@ import 'package:scrips_shared_features/features/login/data/datamodels/login_user
 import 'package:scrips_shared_features/features/login/data/datasources/login_data_source.dart';
 
 class LoginDataSourceImpl extends LoginDataSource {
-  static final endPoint = identityTestServer;
+  static final endPoint = identityServer;
   static final dummyEndpoint = 'lib/core/mock_jsons/';
   int timeout = 20;
   Dio client = Dio();

@@ -8,7 +8,7 @@ import 'package:scrips_shared_features/features/sign_up_with_access_code/data/da
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source.dart';
 
 class SignUpDataSourceImpl extends SignUpDataSource {
-  static final endPoint = identityTestServer;
+  static final endPoint = identityServer;
   int timeout = 20;
   Dio client = Dio();
 

@@ -8,7 +8,7 @@ import 'package:scrips_shared_features/features/patient_module/patient_list/data
 
 class PatientsListDataSourceImpl extends PatientsListDataSource {
   int _defaultTimeout = 20;
-  static final endpoint = patientsTestServer;
+  static final endpoint = patientsServer;
   Dio client = Dio();
 
   @override
