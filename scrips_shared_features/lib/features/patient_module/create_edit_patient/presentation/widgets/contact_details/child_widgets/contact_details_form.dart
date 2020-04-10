@@ -256,8 +256,24 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                   labelValue: "SECONDARY CONTACT NUMBER".toUpperCase(),
                   maxLength: 20,
                   onChanged: (value, FieldAndLabelState state) {
-                    widget.patient.updatePatientContactRequest.secondayContact =
-                        value;
+                    if (state.currentValidationMessage.length > 0 &&
+                        value.toString().length > 0) {
+                      widget.patient.updatePatientContactRequest
+                          .secondayContact = "";
+                    } else {
+                      if ((widget?.patient?.updatePatientContactRequest
+                                  ?.primaryContact ??
+                              "") ==
+                          value) {
+                        widget.patient.updatePatientContactRequest
+                            .secondayContact = "";
+                        state.setValidationMessage(
+                            "Phone number already used as primary contact");
+                      } else {
+                        widget.patient.updatePatientContactRequest
+                            .secondayContact = value;
+                      }
+                    }
                     widget.bloc.dispatch(
                         EnablePatientSaveEvent(patient: widget.patient));
                   },

@@ -228,7 +228,7 @@ class _EditEmergencyContactWidgetState
                     children: <Widget>[
                       Text(
                         "Make this contact proxy",
-                        style: normalLabelTextStyle(17, textInputColor),
+                        style: normalLabelTextStyle(17, regularTextColor),
                       ),
                       BlocBuilder<CreateEditPatientBloc,
                           CreateEditPatientState>(

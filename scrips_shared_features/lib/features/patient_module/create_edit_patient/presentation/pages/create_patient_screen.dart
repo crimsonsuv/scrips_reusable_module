@@ -66,6 +66,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
   String initialIdType;
   List<MatchingPatient> matchingPatientRecords;
   bool isInitial = true;
+  bool isDataUpdated = false;
 
   @override
   void initState() {
@@ -104,18 +105,38 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
     bloc.dispatch(FetchInsuranceEvent());
   }
 
+  void cancelCreatingDialog() {
+    confirmDialog(
+        context: context,
+        title: "Do you really want to cancel?",
+        message:
+            "Your progress will be discarded and the changes will not be saved.",
+        isRemove: true,
+        onYes: () {
+          widget.doPop();
+        });
+  }
+
+  void cancelContactCreatingDialog() {
+    confirmDialog(
+        context: context,
+        title: "Do you really want to cancel creating address details?",
+        message:
+            "We have created the patient, you can edit the contact details later.",
+        isRemove: true,
+        onYes: () {
+          widget.doPop();
+        });
+  }
+
   void doCancel() {
-    if (patient.patientId != null) {
-      if (!isEdit) {
-        confirmDialog(
-            context: context,
-            title: "Do you really want to cancel creating address details?",
-            message:
-                "We have created the patient, you can edit the contact details later.",
-            isRemove: true,
-            onYes: () {
-              widget.doPop();
-            });
+    if (isDataUpdated) {
+      if (isEdit) {
+        cancelCreatingDialog();
+      } else if (!isEdit && patient.patientId != null) {
+        cancelContactCreatingDialog();
+      } else if (!isEdit && patient.patientId == null) {
+        cancelCreatingDialog();
       } else {
         widget.doPop();
       }
@@ -179,6 +200,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
             } else if (state is EnablePatientSaveState) {
               patient = state.patient;
               isSaveEnabled = state.status;
+              isDataUpdated = true;
             } else if (state is UpdatePatientSuccessState) {
               widget.doPop();
             } else if (state is FetchMatchingRecordsState) {
