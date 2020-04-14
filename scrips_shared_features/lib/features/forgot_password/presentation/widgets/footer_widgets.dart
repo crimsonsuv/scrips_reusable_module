@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +57,7 @@ List<Widget> footerWidgets({
         isLoading: isLoginLoading,
         style: semiBoldLabelTextStyle(17.0, normalBtnTextColor),
         onPressed: () {
-          if (kIsWeb) {
+          if (kIsWeb || Platform.isMacOS) {
             Future.delayed(Duration(milliseconds: 100), () {
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });

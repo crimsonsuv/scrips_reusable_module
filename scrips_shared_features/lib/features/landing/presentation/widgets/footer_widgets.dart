@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:scrips_core/constants/app_constants.dart';
@@ -27,7 +29,7 @@ List<Widget> footerWidgets(
         style: normalLabelTextStyle(17, enabledBtnTextColor),
         buttonBackgroundColor: enabledBtnBGColor,
         onPressed: () {
-          if (kIsWeb) {
+          if (kIsWeb || Platform.isMacOS) {
             Future.delayed(Duration(milliseconds: 100), () {
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });
