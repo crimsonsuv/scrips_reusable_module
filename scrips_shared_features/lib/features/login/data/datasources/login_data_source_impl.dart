@@ -15,10 +15,14 @@ class LoginDataSourceImpl extends LoginDataSource {
   static final dummyEndpoint = 'lib/core/mock_jsons/';
   int timeout = 20;
   Dio client = Dio();
-  String redirectURL =
-      currentAppType == AppType.PM ? 'com.scrips.pm://' : 'com.scrips.pa://';
-  String redirectScheme =
-      currentAppType == AppType.PM ? 'com.scrips.pm' : 'com.scrips.pa';
+  String redirectURL = currentAppType == AppType.PM
+      ? 'com.scrips.pm://'
+      : (currentAppType == AppType.PA
+          ? 'com.scrips.pa://'
+          : 'com.scrips.uk://');
+  String redirectScheme = currentAppType == AppType.PM
+      ? 'com.scrips.pm'
+      : (currentAppType == AppType.PA ? 'com.scrips.pa' : 'com.scrips.uk');
 
   @override
   Future<LoginUserData> oauth2Login() async {

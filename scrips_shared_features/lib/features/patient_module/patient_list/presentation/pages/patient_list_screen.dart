@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:scrips_core/constants/app_assets.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/utils/utils.dart';
@@ -311,26 +312,28 @@ class _PatientListScreenState extends State<PatientListScreen>
                       Expanded(
                         child: Container(),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        children: <Widget>[
-                          Container(
-                            //margin: EdgeInsets.only(left: 24.0, top: 0.0),
-                            child: Button(
-                              height: 32,
-                              width: 72,
-                              buttonBackgroundColor: enabledBtnBGColor,
-                              onPressed: () {
-                                widget.pushCreatePatient();
-                              },
-                              text: "Add",
-                              style: boldLabelTextStyle(
-                                  14.0, disabledBtnTextColor),
+                      (currentAppType == AppType.PA)
+                          ? Container()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              //crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Container(
+                                  //margin: EdgeInsets.only(left: 24.0, top: 0.0),
+                                  child: Button(
+                                    height: 32,
+                                    width: 72,
+                                    buttonBackgroundColor: enabledBtnBGColor,
+                                    onPressed: () {
+                                      widget.pushCreatePatient();
+                                    },
+                                    text: "Add",
+                                    style: boldLabelTextStyle(
+                                        14.0, disabledBtnTextColor),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
