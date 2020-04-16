@@ -6,6 +6,7 @@ setUpAll() async {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setUpAll();
   runApp(MyApp());
 }
