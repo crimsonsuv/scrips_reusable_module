@@ -342,215 +342,235 @@ class _PatientListScreenState extends State<PatientListScreen>
                 height: 1,
                 color: separatorColor,
               ),
-              Container(
-                height: 60,
-                child: (selectedPatientIndexes.length > 0)
-                    ? Column(
-                        children: <Widget>[
-                          Container(
-                            height: 48,
-                            color: enabledBtnTextColor,
-                            child: Column(
+              ((patientsData?.length ?? 0) == 0)
+                  ? Container()
+                  : Container(
+                      height: 60,
+                      child: (selectedPatientIndexes.length > 0)
+                          ? Column(
                               children: <Widget>[
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          "${selectedPatientIndexes.length} selected",
-                                          style: normalLabelTextStyle(
-                                              13, regularTextColor),
-                                        ),
-                                        Space(
-                                          horizontal: 32,
-                                        ),
-                                        InkWell(
-                                          child: Text(
-                                            "Unselect All",
-                                            style: semiBoldLabelTextStyle(
-                                                13, enabledBtnBGColor),
-                                          ),
-                                          onTap: () {
-                                            selectedPatientIndexes.clear();
-                                            bloc.dispatch(SelectPatientItems(
-                                                indexs:
-                                                    selectedPatientIndexes));
-                                          },
-                                        ),
-                                        Space(
-                                          horizontal: 32,
-                                        ),
-                                        (isArchived)
-                                            ? Container()
-                                            : InkWell(
-                                                child: Text("Archive",
-                                                    style:
-                                                        semiBoldLabelTextStyle(
-                                                            13,
-                                                            enabledBtnBGColor)),
+                                Container(
+                                  height: 48,
+                                  color: enabledBtnTextColor,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 24),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text(
+                                                "${selectedPatientIndexes.length} selected",
+                                                style: normalLabelTextStyle(
+                                                    13, regularTextColor),
+                                              ),
+                                              Space(
+                                                horizontal: 32,
+                                              ),
+                                              InkWell(
+                                                child: Text(
+                                                  "Unselect All",
+                                                  style: semiBoldLabelTextStyle(
+                                                      13, enabledBtnBGColor),
+                                                ),
                                                 onTap: () {
-                                                  confirmDialog(
-                                                      context: context,
-                                                      title:
-                                                          "Do you really want to archive selected accounts?",
-                                                      message:
-                                                          "We will inform patients about this change. You can unarchive these accounts later in Account Settings.",
-                                                      isRemove: true,
-                                                      onYes: () {
-                                                        List<String>
-                                                            patientIds = [];
-                                                        selectedPatientIndexes
-                                                            .forEach((data) {
-                                                          patientIds.add(
-                                                              patientsData[data]
-                                                                  .patientId);
-                                                        });
-                                                        bloc.dispatch(
-                                                            ArchivePatientEvent(
-                                                                patientIDs:
-                                                                    patientIds));
-                                                      });
+                                                  selectedPatientIndexes
+                                                      .clear();
+                                                  bloc.dispatch(SelectPatientItems(
+                                                      indexs:
+                                                          selectedPatientIndexes));
                                                 },
-                                              )
-                                      ],
-                                    ),
+                                              ),
+                                              Space(
+                                                horizontal: 32,
+                                              ),
+                                              (isArchived)
+                                                  ? Container()
+                                                  : InkWell(
+                                                      child: Text("Archive",
+                                                          style: semiBoldLabelTextStyle(
+                                                              13,
+                                                              enabledBtnBGColor)),
+                                                      onTap: () {
+                                                        confirmDialog(
+                                                            context: context,
+                                                            title:
+                                                                "Do you really want to archive selected accounts?",
+                                                            message:
+                                                                "We will inform patients about this change. You can unarchive these accounts later in Account Settings.",
+                                                            isRemove: true,
+                                                            onYes: () {
+                                                              List<String>
+                                                                  patientIds =
+                                                                  [];
+                                                              selectedPatientIndexes
+                                                                  .forEach(
+                                                                      (data) {
+                                                                patientIds.add(
+                                                                    patientsData[
+                                                                            data]
+                                                                        .patientId);
+                                                              });
+                                                              bloc.dispatch(
+                                                                  ArchivePatientEvent(
+                                                                      patientIDs:
+                                                                          patientIds));
+                                                            });
+                                                      },
+                                                    )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 1,
+                                        color: separatorColor,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Container(
-                                  height: 1,
-                                  color: separatorColor,
-                                ),
+                                Expanded(
+                                  child: Container(),
+                                )
                               ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          )
-                        ],
-                      )
-                    : Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 18, left: 24, right: 24, bottom: 0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                            )
+                          : Column(
                               children: <Widget>[
-                                Container(
-                                  height: 36.0,
-                                  decoration: BoxDecoration(
-                                      color: searchBGColour,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Container(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: Images.instance.searchIcon(
-                                              width: 14, height: 14),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 8),
-                                          width: 279,
-                                          height: 36,
-                                          child: TextField(
-                                            style: defaultFieldStyle(
-                                                regularTextColor, null),
-                                            textAlign: TextAlign.start,
-                                            enabled: true,
-                                            controller: _textEditController,
-                                            onSubmitted: (query) async {
-                                              selectedQuery = query;
-                                              await _refreshPatientsList(
-                                                  query: query,
-                                                  pageSize: selectedPageSize,
-                                                  currentPage: 1,
-                                                  isArchived: isArchived);
-                                            },
-                                            decoration: InputDecoration(
-                                                counterText: "",
-                                                hintText:
-                                                    "Name, DOB, MRN, Contact Number",
-                                                hintStyle: defaultHintStyle(
-                                                    null, null),
-                                                contentPadding:
-                                                    EdgeInsets.only(bottom: 12),
-                                                border: InputBorder.none),
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: searchBGColour,
-                                              borderRadius: BorderRadius.only(
-                                                  topRight:
-                                                      Radius.circular(10.0),
-                                                  bottomRight:
-                                                      Radius.circular(10.0))),
-                                          height: 36,
-                                          child: Center(
-                                              child: IconButton(
-                                                  icon: Icon(
-                                                    Icons.clear,
-                                                    size: 20,
-                                                  ),
-                                                  color: Colors.grey,
-                                                  onPressed: () async {
-                                                    selectedQuery = "";
-                                                    _textEditController.clear();
-                                                    _refreshPatientsList(
-                                                        query: selectedQuery,
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 18, left: 24, right: 24, bottom: 0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Container(
+                                        height: 36.0,
+                                        decoration: BoxDecoration(
+                                            color: searchBGColour,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0)),
+                                        child: Container(
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Images.instance
+                                                    .searchIcon(
+                                                        width: 14, height: 14),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 8),
+                                                width: 279,
+                                                height: 36,
+                                                child: TextField(
+                                                  style: defaultFieldStyle(
+                                                      regularTextColor, null),
+                                                  textAlign: TextAlign.start,
+                                                  enabled: true,
+                                                  controller:
+                                                      _textEditController,
+                                                  onSubmitted: (query) async {
+                                                    selectedQuery = query;
+                                                    await _refreshPatientsList(
+                                                        query: query,
                                                         pageSize:
                                                             selectedPageSize,
                                                         currentPage: 1,
                                                         isArchived: isArchived);
-                                                  })),
+                                                  },
+                                                  decoration: InputDecoration(
+                                                      counterText: "",
+                                                      hintText:
+                                                          "Name, DOB, MRN, Contact Number",
+                                                      hintStyle:
+                                                          defaultHintStyle(
+                                                              null, null),
+                                                      contentPadding:
+                                                          EdgeInsets.only(
+                                                              bottom: 12),
+                                                      border: InputBorder.none),
+                                                ),
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: searchBGColour,
+                                                    borderRadius: BorderRadius
+                                                        .only(
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    10.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    10.0))),
+                                                height: 36,
+                                                child: Center(
+                                                    child: IconButton(
+                                                        icon: Icon(
+                                                          Icons.clear,
+                                                          size: 20,
+                                                        ),
+                                                        color: Colors.grey,
+                                                        onPressed: () async {
+                                                          selectedQuery = "";
+                                                          _textEditController
+                                                              .clear();
+                                                          _refreshPatientsList(
+                                                              query:
+                                                                  selectedQuery,
+                                                              pageSize:
+                                                                  selectedPageSize,
+                                                              currentPage: 1,
+                                                              isArchived:
+                                                                  isArchived);
+                                                        })),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.only(left: 8),
+                                        height: 36,
+                                        child: Center(
+                                          child: Text(
+                                            S.of(context).press_enter_to_search,
+                                            style: normalLabelTextStyle(
+                                                12, Colors.grey),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: Container()),
+                                      InkWell(
+                                        onTap: () {
+                                          bloc.dispatch(
+                                              ChangeArchiveStatusEvent());
+                                        },
+                                        child: Text(
+                                          (isArchived)
+                                              ? "View Active Patients"
+                                              : "View Archived Patients",
+                                          style: semiBoldLabelTextStyle(
+                                              13, enabledBtnBGColor),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 8),
-                                  height: 36,
-                                  child: Center(
-                                    child: Text(
-                                      S.of(context).press_enter_to_search,
-                                      style:
-                                          normalLabelTextStyle(12, Colors.grey),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(child: Container()),
-                                InkWell(
-                                  onTap: () {
-                                    bloc.dispatch(ChangeArchiveStatusEvent());
-                                  },
-                                  child: Text(
-                                    (isArchived)
-                                        ? "View Active Patients"
-                                        : "View Archived Patients",
-                                    style: semiBoldLabelTextStyle(
-                                        13, enabledBtnBGColor),
-                                  ),
-                                ),
+                                Expanded(
+                                  child: Container(),
+                                )
                               ],
                             ),
-                          ),
-                          Expanded(
-                            child: Container(),
-                          )
-                        ],
-                      ),
-              ),
+                    ),
               Expanded(
                 child: (isLoading)
                     ? Center(
@@ -558,140 +578,191 @@ class _PatientListScreenState extends State<PatientListScreen>
                         valueColor:
                             AlwaysStoppedAnimation<Color>(enabledBtnBGColor),
                       ))
-                    : TableListWidget(
-                        headerList: headerItemRowData,
-                        rowDataList: rowItemDataList,
-                        showThreeDotItemOption: true,
-                        selectedHeader: selectedHeader,
-                        onPageClick: (page) {
-                          currentPage = page;
-                          _refreshPatientsList(
-                              query: selectedQuery,
-                              isArchived: isArchived,
-                              pageSize: selectedPageSize,
-                              currentPage: currentPage);
-                        },
-                        onItemClick: (index) {
-                          print(index);
-                          widget.pushEditPatient(patientsData[index]);
-                        },
-                        onHeaderClick: (data) {
-                          if (selectedHeader == data) {
-                            if (currentSortType == sortType.asc) {
-                              currentSortType = sortType.desc;
-                            } else if (currentSortType == sortType.desc) {
-                              currentSortType = sortType.asc;
-                              selectedHeader = headerItemRowData[4];
-                            }
-                            sortPatient(selectedHeader, currentSortType);
-                          } else {
-                            currentSortType = sortType.asc;
-                            selectedHeader = data;
-                            sortPatient(selectedHeader, currentSortType);
-                          }
-                        },
-                        onPageCountSelection: (count) {
-                          currentPage = 1;
-                          selectedPageSize = count;
-                          _refreshPatientsList(
-                              query: selectedQuery,
-                              isArchived: isArchived,
-                              pageSize: selectedPageSize,
-                              currentPage: currentPage);
-                        },
-                        menuOptions: (isArchived)
-                            ? [
-                                MenuOptions(
-                                    title: "Edit Patient Details",
-                                    icon: Images.instance
-                                        .edit(color: Colors.black),
-                                    onClick: (index) {
-                                      print(index);
-                                      widget
-                                          .pushEditPatient(patientsData[index]);
-                                    }),
-                              ]
-                            : [
-                                MenuOptions(
-                                    title: "Edit Patient Details",
-                                    icon: Images.instance
-                                        .edit(color: Colors.black),
-                                    onClick: (index) {
-                                      print(index);
-                                      widget
-                                          .pushEditPatient(patientsData[index]);
-                                    }),
-                                MenuOptions(
-                                    title: "Archive Patient",
-                                    icon: Images.instance
-                                        .archiveIcon(color: Colors.red),
-                                    color: Colors.red,
-                                    onClick: (index) {
-                                      confirmDialog(
-                                          context: context,
-                                          title: S
-                                              .of(context)
-                                              .do_you_really_want_to_archive_this_account,
-                                          message:
-                                              "We will inform the patient about this change. You can unarchive this account later in Account Settings.",
-                                          isRemove: true,
-                                          onYes: () {
-                                            bloc.dispatch(ArchivePatientEvent(
-                                                patientIDs: [
-                                                  patientsData[index].patientId
-                                                ]));
-                                          });
-                                    })
+                    : ((patientsData?.length ?? 0) > 0)
+                        ? TableListWidget(
+                            headerList: headerItemRowData,
+                            rowDataList: rowItemDataList,
+                            showThreeDotItemOption: true,
+                            selectedHeader: selectedHeader,
+                            onPageClick: (page) {
+                              currentPage = page;
+                              _refreshPatientsList(
+                                  query: selectedQuery,
+                                  isArchived: isArchived,
+                                  pageSize: selectedPageSize,
+                                  currentPage: currentPage);
+                            },
+                            onItemClick: (index) {
+                              print(index);
+                              widget.pushEditPatient(patientsData[index]);
+                            },
+                            onHeaderClick: (data) {
+                              if (selectedHeader == data) {
+                                if (currentSortType == sortType.asc) {
+                                  currentSortType = sortType.desc;
+                                } else if (currentSortType == sortType.desc) {
+                                  currentSortType = sortType.asc;
+                                  selectedHeader = headerItemRowData[4];
+                                }
+                                sortPatient(selectedHeader, currentSortType);
+                              } else {
+                                currentSortType = sortType.asc;
+                                selectedHeader = data;
+                                sortPatient(selectedHeader, currentSortType);
+                              }
+                            },
+                            onPageCountSelection: (count) {
+                              currentPage = 1;
+                              selectedPageSize = count;
+                              _refreshPatientsList(
+                                  query: selectedQuery,
+                                  isArchived: isArchived,
+                                  pageSize: selectedPageSize,
+                                  currentPage: currentPage);
+                            },
+                            menuOptions: (isArchived)
+                                ? [
+                                    MenuOptions(
+                                        title: "Edit Patient Details",
+                                        icon: Images.instance
+                                            .edit(color: Colors.black),
+                                        onClick: (index) {
+                                          print(index);
+                                          widget.pushEditPatient(
+                                              patientsData[index]);
+                                        }),
+                                  ]
+                                : [
+                                    MenuOptions(
+                                        title: "Edit Patient Details",
+                                        icon: Images.instance
+                                            .edit(color: Colors.black),
+                                        onClick: (index) {
+                                          print(index);
+                                          widget.pushEditPatient(
+                                              patientsData[index]);
+                                        }),
+                                    MenuOptions(
+                                        title: "Archive Patient",
+                                        icon: Images.instance
+                                            .archiveIcon(color: Colors.red),
+                                        color: Colors.red,
+                                        onClick: (index) {
+                                          confirmDialog(
+                                              context: context,
+                                              title: S
+                                                  .of(context)
+                                                  .do_you_really_want_to_archive_this_account,
+                                              message:
+                                                  "We will inform the patient about this change. You can unarchive this account later in Account Settings.",
+                                              isRemove: true,
+                                              onYes: () {
+                                                bloc.dispatch(
+                                                    ArchivePatientEvent(
+                                                        patientIDs: [
+                                                      patientsData[index]
+                                                          .patientId
+                                                    ]));
+                                              });
+                                        })
+                                  ],
+                            pageItemCount: intToCount(selectedPageSize),
+                            currentPage: currentPage,
+                            lastPage: totalPage,
+                            onNextPage: () {
+                              currentPage = currentPage + 1;
+                              _refreshPatientsList(
+                                  query: selectedQuery,
+                                  isArchived: isArchived,
+                                  pageSize: selectedPageSize,
+                                  currentPage: currentPage);
+                            },
+                            onPreviousPage: () {
+                              currentPage = currentPage - 1;
+                              _refreshPatientsList(
+                                  query: selectedQuery,
+                                  isArchived: isArchived,
+                                  pageSize: selectedPageSize,
+                                  currentPage: currentPage);
+                            },
+                            selectedItems: selectedPatientIndexes,
+                            onAllSelection: () {
+                              if (selectedPatientIndexes.length ==
+                                  rowItemDataList.length) {
+                                selectedPatientIndexes.clear();
+                              } else {
+                                selectedPatientIndexes.clear();
+                                for (int i = 0;
+                                    i < rowItemDataList.length;
+                                    i++) {
+                                  selectedPatientIndexes.add(i);
+                                }
+                              }
+                              bloc.dispatch(SelectPatientItems(
+                                  indexs: selectedPatientIndexes));
+                            },
+                            onItemSelection: (index) {
+                              if (selectedPatientIndexes
+                                      .where((data) => data == index)
+                                      .toList()
+                                      .length >
+                                  0) {
+                                selectedPatientIndexes.remove(index);
+                              } else {
+                                selectedPatientIndexes.add(index);
+                              }
+                              bloc.dispatch(SelectPatientItems(
+                                  indexs: selectedPatientIndexes));
+                            },
+                            totalItems: totalPatientData,
+                            showPagingOptions: true,
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Space(
+                                  vertical: 28,
+                                ),
+                                Text(
+                                  "Add Patient",
+                                  style: boldLabelTextStyle(
+                                      17, defaultFieldTextColor),
+                                ),
+                                Space(
+                                  vertical: 16,
+                                ),
+                                Text(
+                                  "Start adding patients to get your organization running.",
+                                  style: normalLabelTextStyle(
+                                      15, regularTextColor),
+                                ),
+                                Space(
+                                  vertical: 24,
+                                ),
+                                (currentAppType == AppType.PA)
+                                    ? Container()
+                                    : Row(
+                                        children: <Widget>[
+                                          Button(
+                                            height: 32,
+                                            width: 155,
+                                            text: "Add Patient",
+                                            buttonBackgroundColor:
+                                                enabledBtnBGColor,
+                                            style: semiBoldLabelTextStyle(
+                                                15, enabledBtnTextColor),
+                                            onPressed: () {
+                                              widget.pushCreatePatient();
+                                            },
+                                          ),
+                                        ],
+                                      ),
                               ],
-                        pageItemCount: intToCount(selectedPageSize),
-                        currentPage: currentPage,
-                        lastPage: totalPage,
-                        onNextPage: () {
-                          currentPage = currentPage + 1;
-                          _refreshPatientsList(
-                              query: selectedQuery,
-                              isArchived: isArchived,
-                              pageSize: selectedPageSize,
-                              currentPage: currentPage);
-                        },
-                        onPreviousPage: () {
-                          currentPage = currentPage - 1;
-                          _refreshPatientsList(
-                              query: selectedQuery,
-                              isArchived: isArchived,
-                              pageSize: selectedPageSize,
-                              currentPage: currentPage);
-                        },
-                        selectedItems: selectedPatientIndexes,
-                        onAllSelection: () {
-                          if (selectedPatientIndexes.length ==
-                              rowItemDataList.length) {
-                            selectedPatientIndexes.clear();
-                          } else {
-                            selectedPatientIndexes.clear();
-                            for (int i = 0; i < rowItemDataList.length; i++) {
-                              selectedPatientIndexes.add(i);
-                            }
-                          }
-                          bloc.dispatch(SelectPatientItems(
-                              indexs: selectedPatientIndexes));
-                        },
-                        onItemSelection: (index) {
-                          if (selectedPatientIndexes
-                                  .where((data) => data == index)
-                                  .toList()
-                                  .length >
-                              0) {
-                            selectedPatientIndexes.remove(index);
-                          } else {
-                            selectedPatientIndexes.add(index);
-                          }
-                          bloc.dispatch(SelectPatientItems(
-                              indexs: selectedPatientIndexes));
-                        },
-                        totalItems: totalPatientData,
-                        showPagingOptions: true,
-                      ),
+                            ),
+                          ),
               ),
               Space(
                 vertical: 30,
