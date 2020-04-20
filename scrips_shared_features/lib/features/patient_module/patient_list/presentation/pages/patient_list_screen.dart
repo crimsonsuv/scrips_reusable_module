@@ -99,7 +99,7 @@ class _PatientListScreenState extends State<PatientListScreen>
     rowItemDataList.clear();
     for (int i = 0; i < (patients?.length ?? 0); i++) {
       rowItemDataList.add([
-        "${((patients[i]?.image?.trim()?.length ?? 0) == 0) ? "" : patientsServer + patients[i]?.image?.trim() ?? ""},${patients[i]?.name?.trim() ?? "—"}",
+        "${((patients[i]?.image?.trim()?.length ?? 0) == 0) ? "" : patientsServer + patients[i]?.image?.trim() ?? ""}#${patients[i]?.name?.trim() ?? "—"}",
         "${(patients[i].birthDate == null) ? "—" : scDateFormat(patients[i].birthDate)}",
         "${patients[i]?.mrn ?? "-"}",
         "${(patients[i]?.contactNumber == "") ? "—" : patients[i]?.contactNumber?.trim() ?? "-"}",

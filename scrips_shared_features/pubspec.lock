@@ -370,7 +370,7 @@ packages:
       name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.25+3"
+    version: "0.5.26"
   graphs:
     dependency: transitive
     description:
@@ -461,7 +461,7 @@ packages:
       name: localstorage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1+4"
+    version: "3.0.2+5"
   location:
     dependency: transitive
     description:

@@ -200,7 +200,11 @@ class _TableListWidgetState extends State<TableListWidget>
             width: data.width,
             child: Row(
               children: <Widget>[
-                (data.title == "Name")
+                ((widget.rowDataList[index][widget.headerList.indexOf(data)]
+                                ?.split("#")
+                                ?.length ??
+                            0) >
+                        1)
                     ? Row(
                         children: <Widget>[
                           ClipRRect(
@@ -212,7 +216,7 @@ class _TableListWidgetState extends State<TableListWidget>
                               child: Image.network(
                                 widget.rowDataList[index]
                                         [widget.headerList.indexOf(data)]
-                                    .split(",")
+                                    .split("#")
                                     .first,
                                 fit: BoxFit.fill,
                               ),
@@ -226,8 +230,12 @@ class _TableListWidgetState extends State<TableListWidget>
                     : Container(),
                 Expanded(
                   child: Text(
-                    (data.title == "Name")
-                        ? "${widget.rowDataList[index][widget.headerList.indexOf(data)].split(",")[1]}"
+                    ((widget.rowDataList[index][widget.headerList.indexOf(data)]
+                                    ?.split("#")
+                                    ?.length ??
+                                0) >
+                            1)
+                        ? "${widget.rowDataList[index][widget.headerList.indexOf(data)].split("#")[1]}"
                         : "${widget.rowDataList[index][widget.headerList.indexOf(data)]}",
                     maxLines: 1,
                     style: normalLabelTextStyle(14, regularTextColor),

@@ -72,7 +72,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
     rowItemDataList.clear();
     for (int i = 0; i < (patients?.length ?? 0); i++) {
       rowItemDataList.add([
-        "${patientsServer + patients[i]?.profileImageUrl?.trim() ?? ""},${patients[i]?.name?.trim() ?? "—"}",
+        "${patientsServer + patients[i]?.profileImageUrl?.trim() ?? ""}#${patients[i]?.name?.trim() ?? "—"}",
         "${(patients[i].birthDate == null) ? "—" : scDateFormat(patients[i].birthDate)}",
         "${(patients[i]?.idType == "") ? "—" : patients[i]?.idType?.trim() ?? "-"}",
         "${(patients[i].idNumber == null) ? "-" : patients[i].idNumber}",

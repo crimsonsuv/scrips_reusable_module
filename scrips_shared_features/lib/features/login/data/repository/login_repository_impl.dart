@@ -18,7 +18,7 @@ class LoginRepositoryImpl extends LoginRepository {
   Future<Either<Failure, LoginUserData>> oauth2Login() async {
     try {
       final result = await loginDataSource.oauth2Login();
-      if (currentAppType == AppType.PM || currentAppType == AppType.UK) {
+      if (currentAppType == AppType.UK) {
         if (result.role == "3") {
           return Left(Failure(
               "You are not authorized to use Practice Management App, try using other Scrips Apps"));
@@ -32,6 +32,8 @@ class LoginRepositoryImpl extends LoginRepository {
         } else {
           return Right(result);
         }
+      } else {
+        return Right(result);
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 401) {
@@ -58,7 +60,7 @@ class LoginRepositoryImpl extends LoginRepository {
     try {
       final result =
           await loginDataSource.login(userName: email, password: password);
-      if (currentAppType == AppType.PM || currentAppType == AppType.UK) {
+      if (currentAppType == AppType.UK) {
         if (result.role == "3") {
           return Left(Failure(
               "You are not authorized to use Practice Management App, try using other Scrips Apps"));
@@ -72,6 +74,8 @@ class LoginRepositoryImpl extends LoginRepository {
         } else {
           return Right(result);
         }
+      } else {
+        return Right(result);
       }
     } on DioError catch (e) {
       if (e.response.statusCode == 401) {
