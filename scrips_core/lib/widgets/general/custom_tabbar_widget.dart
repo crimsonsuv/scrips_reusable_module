@@ -49,7 +49,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget>
             padding: const EdgeInsets.all(2.0),
             child: new TabBar(
               labelColor: blackColor,
-              labelStyle: normalLabelTextStyle(13, blackColor),
+              labelStyle: semiBoldLabelTextStyle(13, blackColor),
               unselectedLabelColor: blackColor,
               unselectedLabelStyle: normalLabelTextStyle(13, blackColor),
               isScrollable: false,
