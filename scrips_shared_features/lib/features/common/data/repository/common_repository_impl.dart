@@ -10,6 +10,7 @@ import 'package:scrips_shared_features/features/common/data/datamodels/language_
 import 'package:scrips_shared_features/features/common/data/datamodels/license_authority_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/questionnaire_rules_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/register_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/speciality_list_model.dart';
@@ -136,6 +137,18 @@ class CommonRepositoryImpl extends CommonRepository {
   Future<Either<Failure, List<Insurance>>> insuranceList() async {
     try {
       final result = await commonDataSource.insuranceList();
+      return Right(result);
+    } on DioError catch (e) {
+      return (Left(handleFailure(e)));
+    } on Failure {
+      return Left(Failure("Request time out.."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<QuestionnaireRules>>> questionnaireRule() async {
+    try {
+      final result = await commonDataSource.questionnaireRulesList();
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));

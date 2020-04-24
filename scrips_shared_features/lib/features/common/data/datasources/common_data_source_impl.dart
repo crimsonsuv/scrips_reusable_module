@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
@@ -9,6 +10,7 @@ import 'package:scrips_shared_features/features/common/data/datamodels/language_
 import 'package:scrips_shared_features/features/common/data/datamodels/license_authority_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/questionnaire_rules_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/register_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/speciality_list_model.dart';
@@ -19,6 +21,7 @@ class CommonDataSourceImpl extends CommonDataSource {
   static final endpoint = 'http://75.126.168.31:7084/api/Master';
   static final endpointRegister =
       'https://scripsidentityapi20191030115107.azurewebsites.net';
+  static final endpointPractice = practiceServer;
   Dio client = Dio();
 
   @override
@@ -154,5 +157,18 @@ class CommonDataSourceImpl extends CommonDataSource {
       throw Failure('Fetching Insurance List Failed');
     });
     return insuranceFromJson(utf8.decode(response.data));
+  }
+
+  @override
+  Future<List<QuestionnaireRules>> questionnaireRulesList() async {
+    client.options.responseType = ResponseType.bytes;
+    var response = await client
+        .get(
+      '$endpointPractice/api/Questionnaires/Rules',
+    )
+        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+      throw Failure('Fetching Insurance List Failed');
+    });
+    return questionnaireRulesFromJson(utf8.decode(response.data));
   }
 }

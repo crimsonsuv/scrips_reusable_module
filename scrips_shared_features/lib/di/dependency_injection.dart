@@ -10,6 +10,7 @@ import 'package:scrips_shared_features/features/common/domain/usecases/fetch_lan
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_license_authority_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_maritial_status_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_ownership_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_questionnaire_rule_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/register_provider_use_case.dart';
@@ -224,6 +225,8 @@ Future<void> initServiceLocator() async {
   sl.registerLazySingleton(() => FetchRelationshipUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchOwnershipUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchInsuranceUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => FetchQuestionnaireRuleUseCase(repository: sl()));
 
   // Data sources
   sl.registerLazySingleton<CommonDataSource>(() => CommonDataSourceImpl());

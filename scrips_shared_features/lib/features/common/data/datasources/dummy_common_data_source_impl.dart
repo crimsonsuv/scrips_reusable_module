@@ -7,6 +7,7 @@ import 'package:scrips_shared_features/features/common/data/datamodels/language_
 import 'package:scrips_shared_features/features/common/data/datamodels/license_authority_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/questionnaire_rules_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/register_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/speciality_list_model.dart';
@@ -82,6 +83,12 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<Insurance>> insuranceList() {
     // TODO: implement insuranceList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<QuestionnaireRules>> questionnaireRulesList() {
+    // TODO: implement questionnaireRulesList
     throw UnimplementedError();
   }
 }
