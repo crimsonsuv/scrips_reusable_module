@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:scrips_core/common/data/datamodels/country_code_model.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/data/datamodels/twilio_response_model.dart';
+import 'package:scrips_core/common/data/datamodels/valueset_data_model.dart';
 import 'package:scrips_core/common/data/datasources/common_data_source.dart';
 import 'package:scrips_core/common/domain/repository/common_repository.dart';
 import 'package:scrips_core/constants/status_objects.dart';
@@ -59,6 +60,19 @@ class CommonRepositoryImpl extends CommonRepository {
       return Left(Failure("Please, provide a valid number"));
     } on Failure {
       return Left(Failure("Timeout.."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ValueSetData>>> valueSetsData(
+      Map<String, String> request) async {
+    try {
+      final result = await commonDataSource.valueSetsData(request);
+      return Right(result);
+    } on DioError catch (e) {
+      return (Left(Failure("Fetching Data Failed")));
+    } on Failure {
+      return Left(Failure("Request time out.."));
     }
   }
 }

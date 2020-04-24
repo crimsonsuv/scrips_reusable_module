@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:scrips_core/common/data/datamodels/location_request_model.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/data/datamodels/twilio_response_model.dart';
+import 'package:scrips_core/common/data/datamodels/valueset_data_model.dart';
 import 'package:scrips_core/common/data/datasources/common_data_source.dart';
 import 'package:scrips_core/constants/status_objects.dart';
 
@@ -12,6 +13,7 @@ class CommonDataSourceImpl extends CommonDataSource {
   static final googleAPIKey = 'AIzaSyBCrQ1GzILNdnaeDRUZbKzGc1CIICTIAXw';
   static final endpointPlaces = 'http://52.25.96.244:7008';
   static final endpointTwilio = 'https://lookups.twilio.com';
+  static final endpointMaster = 'http://75.126.168.31:7084/api/Master';
   Dio client = Dio();
 
   @override
@@ -50,5 +52,17 @@ class CommonDataSourceImpl extends CommonDataSource {
     });
     print(utf8.decode(response.data));
     return twilioResponseFromJson(utf8.decode(response.data));
+  }
+
+  @override
+  Future<List<ValueSetData>> valueSetsData(Map<String, String> request) async {
+    client.options.responseType = ResponseType.bytes;
+    var body = jsonEncode(request);
+    var response = await client
+        .post('$endpointMaster/api/Master/SearchValueSets', data: body)
+        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+      throw Failure('Fetching valuesets Failed');
+    });
+    return valueSetDataFromJson(utf8.decode(response.data));
   }
 }

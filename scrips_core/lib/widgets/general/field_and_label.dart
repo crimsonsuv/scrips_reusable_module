@@ -7,6 +7,7 @@ import 'package:flutter_tags/flutter_tags.dart';
 import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
+import 'package:scrips_core/common/domain/usecases/fetch_value_sets_use_case.dart';
 import 'package:scrips_core/common/domain/usecases/verify_phone_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/di/dependency_injection.dart';
@@ -26,7 +27,8 @@ enum FieldType {
   LocationPicker,
   PhoneField,
   SingleTagPicker,
-  MultiTagPicker
+  MultiTagPicker,
+  ValueSetPicker,
 }
 
 enum LocationType {
@@ -70,6 +72,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final DateTime lastDate;
   final List<ListItemType> listItems;
   final List<ValueDisplayPair> tagsItems;
+  final String valueSetGroup;
   FieldAndLabelState _myState;
 
   //
@@ -109,6 +112,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.rightIcon,
       this.locationType = LocationType.Establishment,
       this.maxLength = 300,
+      this.valueSetGroup,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
 
@@ -135,6 +139,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
   FetchLocationsByQueryUseCase fetchLocationsByQueryUseCase;
   VerifyPhoneUseCase verifyPhoneUseCase;
   Timer _debounce;
+  FetchValueSetsUseCase fetchValueSetsUseCase;
 
   //  ZefyrController _richTextEditController;
   //  FocusNode _richTextEditFocusNode;
@@ -143,13 +148,15 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     super.initState();
     fetchLocationsByQueryUseCase =
         FetchLocationsByQueryUseCase(repository: coreSl());
+    fetchValueSetsUseCase = FetchValueSetsUseCase(repository: coreSl());
 
     verifyPhoneUseCase = VerifyPhoneUseCase(repository: coreSl());
 
     currentFieldValue = widget.fieldValue ?? null;
 
     if (widget.fieldType == FieldType.TextField ||
-        widget.fieldType == FieldType.LocationPicker) {
+        widget.fieldType == FieldType.LocationPicker ||
+        widget.fieldType == FieldType.ValueSetPicker) {
       // a controller is needed to Set initial value for textfield
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
@@ -350,6 +357,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         break;
       case FieldType.LocationPicker:
         field = buildLocationPicker(context);
+        break;
+      case FieldType.ValueSetPicker:
+        field = buildSearchValueSetsPicker(context);
         break;
       case FieldType.PhoneField:
         field = buildPhoneField(context);
@@ -731,6 +741,102 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               },
               onSuggestionSelected: (suggestion) {
                 onChangedInternal(suggestion);
+              },
+            ),
+          ),
+          (currentFieldValue == "")
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          if (currentFieldValue != "") {
+                            _textEditController.clear();
+                            onChangedInternal(Prediction());
+                          }
+                        },
+                        child: SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: (currentFieldValue != "")
+                                ? Images.instance.cross()
+                                : Container())),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSearchValueSetsPicker(BuildContext context) {
+    return Container(
+      height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: TypeAheadField(
+              hideOnEmpty: true,
+              debounceDuration: Duration(milliseconds: 200),
+              hideOnError: true,
+              textFieldConfiguration: TextFieldConfiguration(
+                autofocus: false,
+                style: normalLabelTextStyle(15, regularTextColor),
+                controller: _textEditController,
+                decoration: InputDecoration(
+                  counterText: "",
+                  contentPadding: EdgeInsets.only(bottom: 12),
+                  hintText: widget.placeholder,
+                  hintStyle: defaultHintStyle(null, null),
+                  border: InputBorder.none,
+                ),
+              ),
+              suggestionsCallback: (pattern) async {
+                final result = await fetchValueSetsUseCase(FetchValueSetsParams(
+                    request: {
+                      "SearchText": pattern,
+                      "SearchFor": widget.valueSetGroup,
+                      "Country": "UAE"
+                    }));
+                return result.fold(
+                  (error) => [],
+                  (success) => success,
+                );
+              },
+              itemBuilder: (context, prediction) {
+                return Listener(
+                  child: ListTile(
+                    title: Text(
+                      prediction.Display,
+                      style: normalLabelTextStyle(15, regularTextColor),
+                    ),
+//                    subtitle: Text(
+//                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
+//                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
+//                    ),
+                  ),
+                  onPointerDown: (_) => (prediction) {
+                    onChangedInternal(prediction);
+                  },
+                );
+              },
+              onSuggestionSelected: (prediction) {
+                onChangedInternal(prediction);
               },
             ),
           ),
