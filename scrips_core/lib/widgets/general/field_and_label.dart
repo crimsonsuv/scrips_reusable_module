@@ -811,7 +811,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     request: {
                       "SearchText": pattern,
                       "SearchFor": widget.valueSetGroup,
-                      "Country": "UAE"
+                      "Country": ""
                     }));
                 return result.fold(
                   (error) => [],
@@ -822,7 +822,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 return Listener(
                   child: ListTile(
                     title: Text(
-                      prediction.Display,
+                      prediction?.valueCoding?.display ?? "n/a",
                       style: normalLabelTextStyle(15, regularTextColor),
                     ),
 //                    subtitle: Text(

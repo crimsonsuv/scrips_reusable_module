@@ -57,9 +57,13 @@ class CommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<ValueSetData>> valueSetsData(Map<String, String> request) async {
     client.options.responseType = ResponseType.bytes;
-    var body = jsonEncode(request);
+    client.options.headers = {
+      'accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+    var jsonData = jsonEncode(request);
     var response = await client
-        .post('$endpointMaster/api/Master/SearchValueSets', data: body)
+        .post('$endpointMaster/SearchValueSets', data: jsonData)
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching valuesets Failed');
     });

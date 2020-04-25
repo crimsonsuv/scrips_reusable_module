@@ -11,25 +11,43 @@ String valueSetDataToJson(List<ValueSetData> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ValueSetData {
-  String code;
-  String display;
-  dynamic system;
+  ValueCoding valueCoding;
 
   ValueSetData({
+    this.valueCoding,
+  });
+
+  factory ValueSetData.fromJson(Map<String, dynamic> json) => ValueSetData(
+        valueCoding: json["valueCoding"] == null
+            ? null
+            : ValueCoding.fromJson(json["valueCoding"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "valueCoding": valueCoding == null ? null : valueCoding.toJson(),
+      };
+}
+
+class ValueCoding {
+  String code;
+  String display;
+  String system;
+
+  ValueCoding({
     this.code,
     this.display,
     this.system,
   });
 
-  factory ValueSetData.fromJson(Map<String, dynamic> json) => ValueSetData(
-        code: json["Code"] == null ? null : json["Code"],
-        display: json["Display"] == null ? null : json["Display"],
-        system: json["System"],
+  factory ValueCoding.fromJson(Map<String, dynamic> json) => ValueCoding(
+        code: json["code"] == null ? null : json["code"],
+        display: json["display"] == null ? null : json["display"],
+        system: json["system"] == null ? null : json["system"],
       );
 
   Map<String, dynamic> toJson() => {
-        "Code": code == null ? null : code,
-        "Display": display == null ? null : display,
-        "System": system,
+        "code": code == null ? null : code,
+        "display": display == null ? null : display,
+        "system": system,
       };
 }
