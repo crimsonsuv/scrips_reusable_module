@@ -844,9 +844,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 //                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
 //                    ),
                   ),
-                  onPointerDown: (_) => (prediction) {
-                    onChangedInternal(prediction);
-                  },
+                  onPointerDown: (_) => onChangedInternal(prediction),
                 );
               },
               onSuggestionSelected: (prediction) {
