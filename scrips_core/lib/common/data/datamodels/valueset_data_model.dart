@@ -48,6 +48,6 @@ class ValueCoding {
   Map<String, dynamic> toJson() => {
         "code": code == null ? null : code,
         "display": display == null ? null : display,
-        "system": system,
+        "system": system == null ? null : system,
       };
 }

@@ -794,6 +794,20 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               hideOnEmpty: true,
               debounceDuration: Duration(milliseconds: 200),
               hideOnError: true,
+              loadingBuilder: (context) {
+                return Container(
+                  height: 100,
+                  child: Center(
+                    child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(enabledBtnBGColor),
+                        )),
+                  ),
+                );
+              },
               textFieldConfiguration: TextFieldConfiguration(
                 autofocus: false,
                 style: normalLabelTextStyle(15, regularTextColor),

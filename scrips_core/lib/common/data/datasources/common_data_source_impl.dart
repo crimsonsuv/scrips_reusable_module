@@ -59,11 +59,12 @@ class CommonDataSourceImpl extends CommonDataSource {
     client.options.responseType = ResponseType.bytes;
     client.options.headers = {
       'accept': 'application/json',
-      'Content-Type': 'application/json',
     };
     var jsonData = jsonEncode(request);
     var response = await client
-        .post('$endpointMaster/SearchValueSets', data: jsonData)
+        .get(
+      '$endpointMaster/SearchValueSets?request.searchText=${request.values.toList()[0]}&request.searchFor=${request.values.toList()[1]}',
+    )
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching valuesets Failed');
     });
