@@ -86,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpWithAccessCode" : MessageLookupByLibrary.simpleMessage("Sign Up With Access Code"),
     "staff_member_details" : MessageLookupByLibrary.simpleMessage("STAFF MEMBER DETAILS"),
     "start" : MessageLookupByLibrary.simpleMessage("Start"),
+    "ua_app_name" : MessageLookupByLibrary.simpleMessage("User App"),
     "uk_app_name" : MessageLookupByLibrary.simpleMessage("Check-In"),
     "we_are_here_to_help_you" : MessageLookupByLibrary.simpleMessage("We are here to help you"),
     "we_will_inform_the_staff_member_about_this_change_you" : MessageLookupByLibrary.simpleMessage("We will inform the staff member about this change. You can unarchive this account later in Account Settings."),

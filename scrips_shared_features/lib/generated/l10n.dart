@@ -54,6 +54,15 @@ class S {
     );
   }
 
+  String get ua_app_name {
+    return Intl.message(
+      'User App',
+      name: 'ua_app_name',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get welcomeTo {
     return Intl.message(
       'Welcome to',
@@ -699,7 +708,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'en'), Locale.fromSubtags(languageCode: 'ar'),
+      Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 
