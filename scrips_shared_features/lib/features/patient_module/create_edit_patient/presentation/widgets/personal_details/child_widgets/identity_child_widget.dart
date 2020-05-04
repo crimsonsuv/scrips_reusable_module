@@ -101,8 +101,8 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                   : pData?.identification?.idType ?? null,
               tagsItems: ((widget?.idTypeList?.length ?? 0) > 0)
                   ? widget.idTypeList
-                      .map((item) => ValueDisplayPair(item?.id ?? '',
-                          item?.name?.toLowerCase()?.capitalize() ?? ''))
+                      .map((item) => ValueDisplayPair(
+                          item?.id ?? '', item?.name?.trim() ?? ''))
                       .toList()
                   : null,
               fieldTextColor: textInputColor,

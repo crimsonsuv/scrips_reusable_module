@@ -56,8 +56,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                     pData?.updatePatientContactRequest?.ownership ?? null,
                 tagsItems: ((widget?.ownershipList?.length ?? 0) > 0)
                     ? widget.ownershipList
-                        .map((item) => ValueDisplayPair(item?.id ?? '',
-                            item?.name?.toLowerCase()?.capitalize() ?? ''))
+                        .map((item) => ValueDisplayPair(
+                            item?.id ?? '', item?.name?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,

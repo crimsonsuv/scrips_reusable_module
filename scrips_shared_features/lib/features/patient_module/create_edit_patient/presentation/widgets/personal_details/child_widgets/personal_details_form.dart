@@ -281,8 +281,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 fieldValue: pData?.gender ?? null,
                 tagsItems: ((widget?.genderList?.length ?? 0) > 0)
                     ? widget.genderList
-                        .map((item) => ValueDisplayPair(item?.id ?? '',
-                            item?.gender?.toLowerCase()?.capitalize() ?? ''))
+                        .map((item) => ValueDisplayPair(
+                            item?.id ?? '', item?.gender?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,
@@ -318,8 +318,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 fieldValue: pData?.maritalStatus ?? null,
                 tagsItems: ((widget?.maritalStatusList?.length ?? 0) > 0)
                     ? widget.maritalStatusList
-                        .map((item) => ValueDisplayPair(item?.id ?? '',
-                            item?.name?.toLowerCase()?.capitalize() ?? ''))
+                        .map((item) => ValueDisplayPair(
+                            item?.id ?? '', item?.name?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,
@@ -356,9 +356,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 tagsItems: ((widget?.languageList?.length ?? 0) > 0)
                     ? widget.languageList
                         .map((item) => ValueDisplayPair(
-                            item?.id ?? '',
-                            item?.languageName?.toLowerCase()?.capitalize() ??
-                                ''))
+                            item?.id ?? '', item?.languageName?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,

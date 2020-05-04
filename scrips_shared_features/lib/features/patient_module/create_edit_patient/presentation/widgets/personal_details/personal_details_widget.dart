@@ -427,7 +427,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                     idTypeList: widget.idTypeList,
                   ),
             Space(
-              vertical: 28,
+              vertical: 50,
             ),
           ],
         ),
