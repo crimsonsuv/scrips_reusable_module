@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_core/utils/utils.dart';
-import 'package:scrips_shared_features/core/usecase/no_params.dart';
 import 'package:scrips_shared_features/features/forgot_password/domain/usecase/forgot_password_use_case.dart';
 import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/domain/usecases/signup_by_code_use_case.dart';

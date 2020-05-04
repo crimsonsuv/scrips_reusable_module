@@ -9,13 +9,16 @@ import 'package:scrips_shared_features/features/reset_password_new_password/pres
 import 'package:scrips_shared_features/generated/l10n.dart';
 import 'package:validators/validators.dart';
 
-bool isValid = false;
 List<Widget> bodyWidgets(
         {BuildContext context,
         String password,
         String confirmPassword,
-        ResetPasswordNewPasswordBloc bloc}) =>
+        ResetPasswordNewPasswordBloc bloc,
+        bool isValid}) =>
     [
+      Space(
+        vertical: 8,
+      ),
       FieldAndLabel(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         fieldType: FieldType.TextField,
@@ -152,4 +155,7 @@ List<Widget> bodyWidgets(
           }
         },
       ),
+      Space(
+        vertical: 8,
+      )
     ];

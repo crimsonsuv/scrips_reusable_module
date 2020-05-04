@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/forgot_password/presentation/bloc/bloc.dart';
@@ -16,13 +17,13 @@ List<Widget> bodyWidgets(
         labelTextStyle: defaultFieldLabelStyle(null, null),
         labelValue: 'Email Address'.toUpperCase(),
         fieldValue: email,
-        placeholder: 'Email Address',
+        placeholder: 'Enter email address',
         axis: Axis.vertical,
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
-          if (!isEmail(value)) {
+          if (!isEmail(value) && !isBlank(value.toString())) {
             email = "";
-            state.setValidationMessage("Not a valid Email");
+            state.setValidationMessage("Email is not valid");
             bloc.dispatch(
               EnabledButtonEvent(email: email),
             );

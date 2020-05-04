@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'package:scrips_shared_features/core/constants/status_objects.dart';
+
+import 'package:dio/dio.dart';
+import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datamodels/signup_by_code_request_model.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datamodels/signup_by_code_response_model.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source.dart';
-import 'package:dio/dio.dart';
 
 class SignUpDataSourceImpl extends SignUpDataSource {
-  static final endPoint =
-      'https://scripsidentityapi20191030115107.azurewebsites.net';
+  static final endPoint = identityServer;
   int timeout = 20;
   Dio client = Dio();
 

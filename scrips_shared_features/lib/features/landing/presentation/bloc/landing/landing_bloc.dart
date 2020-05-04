@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:scrips_shared_features/core/usecase/no_params.dart';
+import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_shared_features/features/landing/domain/usecases/get_logged_user_use_case.dart';
-import 'package:scrips_shared_features/features/login/data/datamodels/login_reponse_model.dart';
 import 'package:scrips_shared_features/features/login/data/datamodels/login_user_data_model.dart';
 import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
 

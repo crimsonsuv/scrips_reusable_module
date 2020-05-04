@@ -1141,6 +1141,18 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     assert(_mode != null);
     switch (_mode) {
       case DatePickerMode.day:
+        _selectedFirstDate = _selectedFirstDate.isAfter(widget.lastDate)
+            ? widget.lastDate
+            : (_selectedFirstDate.isBefore(widget.firstDate)
+                ? widget.firstDate
+                : _selectedFirstDate);
+        _selectedLastDate = (_selectedLastDate == null)
+            ? null
+            : _selectedLastDate.isAfter(widget.lastDate)
+                ? widget.lastDate
+                : (_selectedLastDate.isBefore(widget.firstDate)
+                    ? widget.firstDate
+                    : _selectedLastDate);
         return new MonthPicker(
           key: _pickerKey,
           selectedFirstDate: _selectedFirstDate,
@@ -1179,7 +1191,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           child: Container(),
         ),
         Button(
-          text: localizations.cancelButtonLabel,
+          text: "Cancel",
           style: semiBoldLabelTextStyle(15, enabledBtnBGColor),
           onPressed: _handleCancel,
           buttonBackgroundColor: bgColor,
@@ -1190,7 +1202,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           horizontal: 10,
         ),
         Button(
-          text: localizations.okButtonLabel,
+          text: "Ok",
           style: semiBoldLabelTextStyle(15, enabledBtnTextColor),
           onPressed: _handleOk,
           buttonBackgroundColor: enabledBtnBGColor,

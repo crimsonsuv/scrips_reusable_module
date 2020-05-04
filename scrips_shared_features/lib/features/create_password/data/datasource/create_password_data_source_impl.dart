@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:scrips_shared_features/core/constants/status_objects.dart';
+import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/create_password/data/datamodels/create_password_request_model.dart';
 import 'package:scrips_shared_features/features/create_password/data/datamodels/signup_user_data_model.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
 
 class CreatePasswordDataSourceImpl extends CreatePasswordDataSource {
-  static final endPoint =
-      'https://scripsidentityapi20191030115107.azurewebsites.net';
+  static final endPoint = identityServer;
   int timeout = 20;
   Dio client = Dio();
 

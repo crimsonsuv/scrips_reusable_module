@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/constants/app_constants.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
@@ -15,15 +18,18 @@ List<Widget> footerWidgets(
         LandingBloc bloc,
         bool isLoading}) =>
     <Widget>[
+      Space(
+        vertical: 97,
+      ),
       Button(
         height: 48,
         width: 176,
-        text: S.of(context).login,
+        text: "Log In",
         isLoading: isLoading,
         style: normalLabelTextStyle(17, enabledBtnTextColor),
         buttonBackgroundColor: enabledBtnBGColor,
         onPressed: () {
-          if (kIsWeb) {
+          if (kIsWeb || Platform.isMacOS) {
             Future.delayed(Duration(milliseconds: 100), () {
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });
@@ -33,7 +39,7 @@ List<Widget> footerWidgets(
         },
       ),
       Space(
-        vertical: 24,
+        vertical: 32,
       ),
       Button(
         width: 222.0,
@@ -43,12 +49,17 @@ List<Widget> footerWidgets(
         onPressed: goToForgotPassword,
         buttonBackgroundColor: bgColor,
       ),
-      Button(
-        height: 48,
-        width: 222,
-        text: S.of(context).signUpWithAccessCode,
-        style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
-        buttonBackgroundColor: textFieldBGcolor,
-        onPressed: goToSignup,
+      Space(
+        vertical: 10,
       ),
+      (currentAppType == AppType.UK)
+          ? Container()
+          : Button(
+              height: 48,
+              width: 222,
+              text: S.of(context).signUpWithAccessCode,
+              style: semiBoldLabelTextStyle(17, enabledBtnBGColor),
+              buttonBackgroundColor: textFieldBGcolor,
+              onPressed: goToSignup,
+            ),
     ];

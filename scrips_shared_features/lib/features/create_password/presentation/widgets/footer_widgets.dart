@@ -54,7 +54,7 @@ List<Widget> footerWidgets(
           text: S.of(context).byCompletingSigningUpYouAcceptThe,
           children: <TextSpan>[
             TextSpan(
-                text: 'Terms and\n Conditions',
+                text: ' Terms and\n Conditions',
                 style: boldLabelTextStyle(15, enabledBtnBGColor)),
             TextSpan(
                 text: ' and ',

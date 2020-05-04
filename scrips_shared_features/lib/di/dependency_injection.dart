@@ -1,4 +1,19 @@
 import 'package:get_it/get_it.dart';
+import 'package:scrips_shared_features/features/common/data/datasources/common_data_source.dart';
+import 'package:scrips_shared_features/features/common/data/datasources/common_data_source_impl.dart';
+import 'package:scrips_shared_features/features/common/data/repository/common_repository_impl.dart';
+import 'package:scrips_shared_features/features/common/domain/repository/common_repository.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gender_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_idtype_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_insurace_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_license_authority_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_maritial_status_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_ownership_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_questionnaire_rule_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/register_provider_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source_impl.dart';
 import 'package:scrips_shared_features/features/create_password/data/repository/create_password_repository_impl.dart';
@@ -27,6 +42,28 @@ import 'package:scrips_shared_features/features/login/domain/usecases/get_login_
 import 'package:scrips_shared_features/features/login/domain/usecases/oauth_login_use_case.dart';
 import 'package:scrips_shared_features/features/login/presentation/bloc/login/login_bloc.dart';
 import 'package:scrips_shared_features/features/password_changed_success/presentation/bloc/bloc.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/data/datasources/patient_data_source.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/data/datasources/patient_data_source_impl.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/data/repository/patient_repository_impl.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/repository/patient_repository.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/create_contact_details_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/create_patient_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/fetch_emergency_contacts_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/fetch_insurance_list_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/fetch_matching_records_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/fetch_patient_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/save_emergency_contacts_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/save_insurance_list_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/update_patient_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/domain/usecases/upload_image_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/create_edit_patient/presentation/bloc/bloc.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/data/datasources/patients_list_data_source.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/data/datasources/patients_list_data_source_impl.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/data/repository/patients_list_repository_impl.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/domain/repository/patients_list_repository.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/domain/usecases/archive_patiets_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/domain/usecases/fetch_patients_use_case.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/reset_password_access_code/presentation/bloc/reset_password_access_code_bloc.dart';
 import 'package:scrips_shared_features/features/reset_password_new_password/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/data/datasources/sign_up_data_source.dart';
@@ -155,4 +192,94 @@ Future<void> initServiceLocator() async {
   // Data sources
 
   // repository
+
+  /// Patient List
+  // bloc
+  sl.registerFactory(
+    () => PatientListBloc(
+        fetchPatientsUseCase: sl(), archivePatientsUseCase: sl()),
+  );
+
+  // use cases
+  sl.registerLazySingleton(() => FetchPatientsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => ArchivePatientsUseCase(repository: sl()));
+
+  // data sources
+  sl.registerLazySingleton<PatientsListDataSource>(
+    () => PatientsListDataSourceImpl(),
+  );
+
+  // repository
+  sl.registerLazySingleton<PatientsListRepository>(
+      () => PatientsListRepositoryImpl(patientsListDataSource: sl()));
+
+  ///Common
+  //Use cases
+  sl.registerLazySingleton(() => FetchLicencesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchSpecialitiesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => RegisterProviderUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchGenderUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchIdTypeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchLanguageUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchMaritialStatusUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchRelationshipUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchOwnershipUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchInsuranceUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => FetchQuestionnaireRuleUseCase(repository: sl()));
+
+  // Data sources
+  sl.registerLazySingleton<CommonDataSource>(() => CommonDataSourceImpl());
+
+  // Repository
+  sl.registerLazySingleton<CommonRepository>(
+      () => CommonRepositoryImpl(commonDataSource: sl()));
+
+  /// Create/Edit List
+  // bloc
+  sl.registerFactory(
+    () => CreateEditPatientBloc(
+        fetchGenderUseCase: sl(),
+        fetchIdTypeUseCase: sl(),
+        fetchLanguageUseCase: sl(),
+        fetchMaritialStatusUseCase: sl(),
+        fetchRelationshipUseCase: sl(),
+        fetchPatientUseCase: sl(),
+        fetchOwnershipUseCase: sl(),
+        fetchInsuranceUseCase: sl(),
+        updatePatientUseCase: sl(),
+        fetchMatchingPatientUseCase: sl(),
+        fetchEmergencyContactsUseCase: sl(),
+        fetchInsuranceListUseCase: sl(),
+        saveEmergencyContactsUseCase: sl(),
+        saveInsuranceListUseCase: sl(),
+        createContactDeatilsUseCase: sl(),
+        createPatientUseCase: sl(),
+        uploadImageUseCase: sl()),
+  );
+
+  // use cases
+  sl.registerLazySingleton(() => FetchPatientUseCase(repository: sl()));
+  sl.registerLazySingleton(() => UpdatePatientUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchMatchingPatientUseCase(repository: sl()));
+
+  sl.registerLazySingleton(
+      () => FetchEmergencyContactsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchInsuranceListUseCase(repository: sl()));
+  sl.registerLazySingleton(() => CreatePatientUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => CreatePContactDetailsUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => SaveEmergencyContactsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => SaveInsuranceListUseCase(repository: sl()));
+  sl.registerLazySingleton(() => UploadImageUseCase(repository: sl()));
+
+  // data sources
+  sl.registerLazySingleton<PatientDataSource>(
+    () => PatientDataSourceImpl(),
+  );
+
+  // repository
+  sl.registerLazySingleton<PatientRepository>(
+      () => PatientRepositoryImpl(patientDataSource: sl()));
 }

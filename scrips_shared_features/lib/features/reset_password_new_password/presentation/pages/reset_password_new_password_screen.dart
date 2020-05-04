@@ -31,6 +31,7 @@ class _ResetPasswordNewPasswordScreenState
   bool isLoading = false;
   bool isLoginLoading = false;
   bool isEnabled = false;
+  bool isValid = false;
 
   @override
   void initState() {
@@ -54,6 +55,7 @@ class _ResetPasswordNewPasswordScreenState
             password = state.password;
             confirmPassword = state.confirmPassword;
             isEnabled = state.status;
+            isValid = state.valid;
           } else if (state is LoadingBeginState) {
             isLoading = true;
           } else if (state is LoadingEndState) {
@@ -100,7 +102,8 @@ class _ResetPasswordNewPasswordScreenState
                       context: context,
                       password: password,
                       confirmPassword: confirmPassword,
-                      bloc: bloc),
+                      bloc: bloc,
+                      isValid: isValid),
                   footerWidgets: footerWidgets(
                       context: context,
                       password: password,

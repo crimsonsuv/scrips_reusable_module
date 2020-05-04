@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:scrips_shared_features/core/constants/status_objects.dart';
+import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/util/utils.dart';
 import 'package:scrips_shared_features/features/forgot_password/data/datasource/forgot_password_data_source.dart';
 import 'package:scrips_shared_features/features/forgot_password/domain/repository/forgot_password_repository.dart';
@@ -23,6 +23,9 @@ class ForgotPasswordRepositoryImpl extends ForgotPasswordRepository {
       if (e.response.statusCode == 400) {
         return (Left(
             Failure("Code generated recently, please try after some time")));
+      }
+      if (e.response.statusCode == 401) {
+        return (Left(Failure("You need to complete signup process first.")));
       }
       if (e.response.statusCode == 404) {
         return (Left(Failure("The Email is not registered yet")));

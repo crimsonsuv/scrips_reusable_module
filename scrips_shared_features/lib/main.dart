@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'core/constants/app_config.dart';
-
 // setup All services, etc
 setUpAll() async {
-
   // global config
-  await Configuration.loadConfig();
 }
+
 void main() async {
- await setUpAll();
+  WidgetsFlutterBinding.ensureInitialized();
+  await setUpAll();
   runApp(MyApp());
 }
 

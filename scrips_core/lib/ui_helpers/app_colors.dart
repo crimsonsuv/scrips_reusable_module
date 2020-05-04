@@ -11,6 +11,7 @@ final Color enabledBtnBGColor = Color(0xFF00B8E3); //getColorFromHex('#00B8E3');
 
 final Color disabledBtnTextColor =
     Color(0xFFFFFFFF); //getColorFromHex('#FFFFFF');
+final Color tabBgColor = Color(0xFFEFEFF0);
 final Color disabledBtnBGColor =
     Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
 

@@ -1,6 +1,8 @@
 {
   "pm_app_name": "Practice Management",
   "pa_app_name": "Provider",
+  "uk_app_name": "Check-In",
+  "ua_app_name": "User App",
   "welcomeTo": "Welcome to",
   "pleaseEnterYourLoginDetails": "Please, enter your login details",
   "login": "Login",

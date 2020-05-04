@@ -117,3 +117,9 @@ bool isPlatformExperimental(BuildContext context) {
 bool isBetween(int x, int lower, int upper) {
   return lower <= x && x <= upper;
 }
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1)}";
+  }
+}

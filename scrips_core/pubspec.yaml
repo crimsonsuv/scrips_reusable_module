@@ -31,7 +31,6 @@ dependencies:
   # scoped model packages
   scoped_model:
   flutter_platform_widgets:
-    path: ../third-party/flutter_platform_widgets
   date_range_picker:
     path: ../third-party/date_range_picker-master
   google_maps_flutter: ^0.5.21+12
@@ -39,6 +38,7 @@ dependencies:
   flutter_typeahead_web: ^1.0.0+1
   dartz: ^0.8.6
   equatable: ^0.4.0
+  flutter_tags: ^0.4.8
 
 
 dev_dependencies:

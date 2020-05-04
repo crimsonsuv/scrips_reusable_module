@@ -24,7 +24,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_platform_widgets:
-    path: ../third-party/flutter_platform_widgets
   scrips_core:
     path: ../scrips_core
   equatable: ^0.4.0
@@ -42,6 +41,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   oktoast: ^2.3.0
   flutter_web_auth: ^0.1.3
+  image_picker:
+  shared_preferences:
+  universal_html:
 
 
 dev_dependencies:

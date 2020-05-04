@@ -17,7 +17,7 @@ List<Widget> bodyWidgets(
         fieldBackgroundColor: textFieldBGcolor,
         fieldType: FieldType.TextField,
         labelTextStyle: defaultFieldLabelStyle(null, null),
-        labelValue: 'Access code'.toUpperCase(),
+        labelValue: 'RESET CODE'.toUpperCase(),
         fieldValue: code,
         placeholder: 'Enter reset code',
         axis: Axis.vertical,

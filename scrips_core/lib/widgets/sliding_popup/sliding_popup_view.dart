@@ -7,13 +7,17 @@ class SlidingPopupWidget extends StatefulWidget {
   final Widget child;
   final double width;
   final Function onSave;
+  final Function onCancel;
   final Color backgroundColor;
+  final String doneText;
 
   SlidingPopupWidget(
       {this.title,
       this.child,
       @required this.width,
+      this.doneText = "Save",
       this.onSave,
+      this.onCancel,
       this.backgroundColor = Colors.white});
 
   @override
@@ -104,12 +108,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  animationController.reverse();
-                                  opacityController.reverse();
-                                  Future<void>.delayed(
-                                      Duration(milliseconds: 200), () {
-                                    Navigator.pop(context);
-                                  });
+                                  widget.onCancel();
                                 },
                                 child: Container(
                                   color: Colors.white,
@@ -149,7 +148,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),
                                       child: Text(
-                                        "Save",
+                                        widget.doneText,
                                         style: semiBoldLabelTextStyle(
                                             15, enabledBtnBGColor),
                                       ),
@@ -164,13 +163,12 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                         color: separatorColor,
                       ),
                       Expanded(
-                          child: SingleChildScrollView(
-                              child: AnimatedContainer(
-                                  color: widget?.backgroundColor ?? bgColor,
-                                  padding: mediaQuery.viewInsets,
-                                  duration: const Duration(milliseconds: 300),
-                                  child: SizedBox.fromSize(
-                                      child: this.widget.child))))
+                          child: AnimatedContainer(
+                              color: widget?.backgroundColor ?? bgColor,
+                              padding: mediaQuery.viewInsets,
+                              duration: const Duration(milliseconds: 300),
+                              child:
+                                  SizedBox.fromSize(child: this.widget.child)))
                     ],
                   ),
                 ),
