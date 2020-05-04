@@ -446,7 +446,7 @@ packages:
   scrips_core:
     dependency: "direct main"
     description:
-      path: "../../scrips_core"
+      path: "..\\..\\scrips_core"
       relative: true
     source: path
     version: "0.20.1"
