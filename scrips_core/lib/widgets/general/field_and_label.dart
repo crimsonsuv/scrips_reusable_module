@@ -55,6 +55,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final bool isPassword;
   final bool isMandatory;
   final bool wrapWithRow;
+  final bool autoFocus;
   final double spaceBetweenTitle;
   final String placeholder;
   final String validationMessage;
@@ -94,6 +95,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.tagsItems,
       this.icon,
       this.focusNode,
+      this.autoFocus = false,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -578,6 +580,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                           : Colors.black45),
                   textAlign: TextAlign.justify,
                   focusNode: widget.focusNode,
+                  autofocus: widget.autoFocus,
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
@@ -645,9 +648,13 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
-                  onSubmitted: onSubmitted,
+                  onSubmitted: (val) {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    onSubmitted(val);
+                  },
                   onEditingComplete: onEditingComplete,
                   maxLines: 1,
+                  autofocus: widget.autoFocus,
                   maxLength: widget.maxLength,
                   onTap: () {
                     onTapInternal();
@@ -701,7 +708,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               debounceDuration: Duration(milliseconds: 200),
               hideOnError: true,
               textFieldConfiguration: TextFieldConfiguration(
-                autofocus: false,
+                autofocus: widget.autoFocus,
                 style: normalLabelTextStyle(15, regularTextColor),
                 controller: _textEditController,
                 decoration: InputDecoration(
@@ -779,77 +786,89 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          (widget.icon == null)
-              ? Container()
-              : Row(
-                  children: <Widget>[
-                    SizedBox(height: 24, width: 24, child: widget.icon),
-                    Padding(
-                      padding: EdgeInsets.only(left: 6),
-                    ),
-                  ],
-                ),
           Expanded(
-            child: TypeAheadField(
-              hideOnEmpty: true,
-              debounceDuration: Duration(milliseconds: 200),
-              hideOnError: true,
-              loadingBuilder: (context) {
-                return Container(
-                  height: 100,
-                  child: Center(
-                    child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(enabledBtnBGColor),
-                        )),
-                  ),
-                );
-              },
-              textFieldConfiguration: TextFieldConfiguration(
-                autofocus: false,
-                style: normalLabelTextStyle(15, regularTextColor),
-                controller: _textEditController,
-                decoration: InputDecoration(
-                  counterText: "",
-                  contentPadding: EdgeInsets.only(bottom: 12),
-                  hintText: widget.placeholder,
-                  hintStyle: defaultHintStyle(null, null),
-                  border: InputBorder.none,
-                ),
-              ),
-              suggestionsCallback: (pattern) async {
-                final result = await fetchValueSetsUseCase(FetchValueSetsParams(
-                    request: {
-                      "SearchText": pattern,
-                      "SearchFor": widget.valueSetGroup,
-                      "Country": ""
-                    }));
-                return result.fold(
-                  (error) => [],
-                  (success) => success,
-                );
-              },
-              itemBuilder: (context, prediction) {
-                return Listener(
-                  child: ListTile(
-                    title: Text(
-                      prediction?.valueCoding?.display ?? "n/a",
-                      style: normalLabelTextStyle(15, regularTextColor),
-                    ),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: TypeAheadField(
+                    hideOnEmpty: true,
+                    debounceDuration: Duration(milliseconds: 200),
+                    hideOnError: true,
+                    loadingBuilder: (context) {
+                      return Container(
+                        height: 100,
+                        child: Center(
+                          child: SizedBox(
+                              height: 30,
+                              width: 30,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    enabledBtnBGColor),
+                              )),
+                        ),
+                      );
+                    },
+                    textFieldConfiguration: TextFieldConfiguration(
+                        autofocus: widget.autoFocus,
+                        style: normalLabelTextStyle(15, regularTextColor),
+                        controller: _textEditController,
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding: EdgeInsets.only(bottom: 12, left: 26),
+                          hintText: widget.placeholder,
+                          hintStyle: defaultHintStyle(null, null),
+                          border: InputBorder.none,
+                        ),
+                        onChanged: (value) {}),
+                    suggestionsCallback: (pattern) async {
+                      final result = await fetchValueSetsUseCase(
+                          FetchValueSetsParams(request: {
+                        "SearchText": pattern,
+                        "SearchFor": widget.valueSetGroup,
+                        "Country": ""
+                      }));
+                      return result.fold(
+                        (error) => [],
+                        (success) => success,
+                      );
+                    },
+                    itemBuilder: (context, prediction) {
+                      return Listener(
+                        child: ListTile(
+                          title: Text(
+                            prediction?.valueCoding?.display ?? "n/a",
+                            style: normalLabelTextStyle(15, regularTextColor),
+                          ),
 //                    subtitle: Text(
 //                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
 //                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
 //                    ),
+                        ),
+                        onPointerDown: (_) =>
+                            (kIsWeb) ? onChangedInternal(prediction) : null,
+                      );
+                    },
+                    onSuggestionSelected: (prediction) {
+                      onChangedInternal(prediction);
+                    },
                   ),
-                  onPointerDown: (_) => onChangedInternal(prediction),
-                );
-              },
-              onSuggestionSelected: (prediction) {
-                onChangedInternal(prediction);
-              },
+                ),
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: (widget.icon == null)
+                      ? Container()
+                      : Row(
+                          children: <Widget>[
+                            SizedBox(height: 24, width: 24, child: widget.icon),
+                            Padding(
+                              padding: EdgeInsets.only(left: 6),
+                            ),
+                          ],
+                        ),
+                )
+              ],
             ),
           ),
           (currentFieldValue == "")
@@ -1075,6 +1094,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               enabled: widget.enabled ?? true,
               maxLines: null,
               controller: _textEditController,
+              autofocus: widget.autoFocus,
               onChanged: onChangedInternal,
               onSubmitted: onSubmitted,
               onEditingComplete: onEditingComplete,
