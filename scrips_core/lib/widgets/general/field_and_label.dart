@@ -786,89 +786,80 @@ class FieldAndLabelState extends State<FieldAndLabel> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
           Expanded(
-            child: Stack(
-              children: <Widget>[
-                Positioned.fill(
-                  child: TypeAheadField(
-                    hideOnEmpty: true,
-                    debounceDuration: Duration(milliseconds: 200),
-                    hideOnError: true,
-                    loadingBuilder: (context) {
-                      return Container(
-                        height: 100,
-                        child: Center(
-                          child: SizedBox(
-                              height: 30,
-                              width: 30,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    enabledBtnBGColor),
-                              )),
-                        ),
-                      );
-                    },
-                    textFieldConfiguration: TextFieldConfiguration(
-                        autofocus: widget.autoFocus,
-                        style: normalLabelTextStyle(15, regularTextColor),
-                        controller: _textEditController,
-                        decoration: InputDecoration(
-                          counterText: "",
-                          contentPadding: EdgeInsets.only(bottom: 12, left: 26),
-                          hintText: widget.placeholder,
-                          hintStyle: defaultHintStyle(null, null),
-                          border: InputBorder.none,
-                        ),
-                        onChanged: (value) {}),
-                    suggestionsCallback: (pattern) async {
-                      final result = await fetchValueSetsUseCase(
-                          FetchValueSetsParams(request: {
-                        "SearchText": pattern,
-                        "SearchFor": widget.valueSetGroup,
-                        "Country": ""
-                      }));
-                      return result.fold(
-                        (error) => [],
-                        (success) => success,
-                      );
-                    },
-                    itemBuilder: (context, prediction) {
-                      return Listener(
-                        child: ListTile(
-                          title: Text(
-                            prediction?.valueCoding?.display ?? "n/a",
-                            style: normalLabelTextStyle(15, regularTextColor),
-                          ),
+            child: TypeAheadField(
+              hideOnEmpty: true,
+              debounceDuration: Duration(milliseconds: 200),
+              hideOnError: true,
+              loadingBuilder: (context) {
+                return Container(
+                  height: 100,
+                  child: Center(
+                    child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(enabledBtnBGColor),
+                        )),
+                  ),
+                );
+              },
+              textFieldConfiguration: TextFieldConfiguration(
+                  autofocus: widget.autoFocus,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  controller: _textEditController,
+                  decoration: InputDecoration(
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    hintText: widget.placeholder,
+                    hintStyle: defaultHintStyle(null, null),
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value) {}),
+              suggestionsCallback: (pattern) async {
+                final result = await fetchValueSetsUseCase(FetchValueSetsParams(
+                    request: {
+                      "SearchText": pattern,
+                      "SearchFor": widget.valueSetGroup,
+                      "Country": ""
+                    }));
+                return result.fold(
+                  (error) => [],
+                  (success) => success,
+                );
+              },
+              itemBuilder: (context, prediction) {
+                return Listener(
+                  child: ListTile(
+                    title: Text(
+                      prediction?.valueCoding?.display ?? "n/a",
+                      style: normalLabelTextStyle(15, regularTextColor),
+                    ),
 //                    subtitle: Text(
 //                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
 //                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
 //                    ),
-                        ),
-                        onPointerDown: (_) =>
-                            (kIsWeb) ? onChangedInternal(prediction) : null,
-                      );
-                    },
-                    onSuggestionSelected: (prediction) {
-                      onChangedInternal(prediction);
-                    },
                   ),
-                ),
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                  child: (widget.icon == null)
-                      ? Container()
-                      : Row(
-                          children: <Widget>[
-                            SizedBox(height: 24, width: 24, child: widget.icon),
-                            Padding(
-                              padding: EdgeInsets.only(left: 6),
-                            ),
-                          ],
-                        ),
-                )
-              ],
+                  onPointerDown: (_) =>
+                      (kIsWeb) ? onChangedInternal(prediction) : null,
+                );
+              },
+              onSuggestionSelected: (prediction) {
+                onChangedInternal(prediction);
+              },
             ),
           ),
           (currentFieldValue == "")
