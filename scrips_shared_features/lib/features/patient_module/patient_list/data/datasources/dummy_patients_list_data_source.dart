@@ -12,6 +12,7 @@ class DummyPatientsDataSourceImpl extends PatientsListDataSource {
       String query,
       int pageNum,
       int pageSize,
+      bool status,
       bool isArchived}) {
     // TODO: implement getPatients
     throw UnimplementedError();

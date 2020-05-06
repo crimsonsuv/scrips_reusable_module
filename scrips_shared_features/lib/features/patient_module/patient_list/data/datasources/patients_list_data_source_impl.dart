@@ -17,6 +17,7 @@ class PatientsListDataSourceImpl extends PatientsListDataSource {
       String practiceId,
       String query,
       int pageNum,
+      bool status,
       int pageSize,
       bool isArchived}) async {
     client.options.responseType = ResponseType.bytes;
@@ -28,11 +29,21 @@ class PatientsListDataSourceImpl extends PatientsListDataSource {
     String apiLink = '';
 
     if (query.length > 0) {
-      apiLink =
-          '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
+      if (status != null) {
+        apiLink =
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize&Status=$status';
+      } else {
+        apiLink =
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
+      }
     } else {
-      apiLink =
-          '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
+      if (status != null) {
+        apiLink =
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize&Status=$status';
+      } else {
+        apiLink =
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
+      }
     }
 
     var response = await client
