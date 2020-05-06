@@ -26,8 +26,7 @@ class LoginDataSourceImpl extends LoginDataSource {
 
   @override
   Future<LoginUserData> oauth2Login() async {
-    final url =
-        Uri.https('identitystaging.azurewebsites.net', '/connect/authorize', {
+    final url = Uri.https(oath2LoginUrl, '/connect/authorize', {
       'response_type': 'code',
       'grant_type': 'authorization_code',
       'client_id': 'Scrips.Consumer',
