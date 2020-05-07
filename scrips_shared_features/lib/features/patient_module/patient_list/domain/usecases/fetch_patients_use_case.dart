@@ -14,13 +14,13 @@ class FetchPatientsUseCase extends UseCase<PatientsList, FetchPatientsParams> {
   @override
   Future<Either<Failure, PatientsList>> call(FetchPatientsParams params) {
     return repository.fetchPatients(
-      orgId: params.orgId,
-      practiceId: params.practiceId,
-      isArchived: params.isArchived,
-      query: params.query,
-      pageSize: params.pageSize,
-      pageNum: params.pageNum,
-    );
+        orgId: params.orgId,
+        practiceId: params.practiceId,
+        isArchived: params.isArchived,
+        query: params.query,
+        pageSize: params.pageSize,
+        pageNum: params.pageNum,
+        status: params.status);
   }
 }
 
@@ -31,6 +31,7 @@ class FetchPatientsParams extends Equatable {
   final String query;
   final int pageNum;
   final int pageSize;
+  final bool status;
 
   FetchPatientsParams({
     @required this.orgId,
@@ -39,5 +40,6 @@ class FetchPatientsParams extends Equatable {
     @required this.query,
     @required this.pageNum,
     @required this.pageSize,
-  }) : super([orgId, isArchived, practiceId, query, pageNum, pageSize]);
+    @required this.status,
+  }) : super([orgId, isArchived, practiceId, query, pageNum, pageSize, status]);
 }

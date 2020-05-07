@@ -8,6 +8,7 @@ abstract class PatientsListDataSource {
       String query,
       int pageNum,
       int pageSize,
+      bool status,
       bool isArchived});
 
   Future<Status> archivePatient({List<String> patientIDs});

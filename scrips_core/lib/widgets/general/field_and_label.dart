@@ -55,6 +55,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final bool isPassword;
   final bool isMandatory;
   final bool wrapWithRow;
+  final bool autoFocus;
   final double spaceBetweenTitle;
   final String placeholder;
   final String validationMessage;
@@ -94,6 +95,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.tagsItems,
       this.icon,
       this.focusNode,
+      this.autoFocus = false,
       this.axis,
       this.enabled = true,
       this.boxDecoration,
@@ -578,6 +580,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                           : Colors.black45),
                   textAlign: TextAlign.justify,
                   focusNode: widget.focusNode,
+                  autofocus: widget.autoFocus,
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
@@ -645,9 +648,13 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   enabled: widget.enabled ?? true,
                   controller: _textEditController,
                   onChanged: onChangedInternal,
-                  onSubmitted: onSubmitted,
+                  onSubmitted: (val) {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    onSubmitted(val);
+                  },
                   onEditingComplete: onEditingComplete,
                   maxLines: 1,
+                  autofocus: widget.autoFocus,
                   maxLength: widget.maxLength,
                   onTap: () {
                     onTapInternal();
@@ -701,7 +708,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               debounceDuration: Duration(milliseconds: 200),
               hideOnError: true,
               textFieldConfiguration: TextFieldConfiguration(
-                autofocus: false,
+                autofocus: widget.autoFocus,
                 style: normalLabelTextStyle(15, regularTextColor),
                 controller: _textEditController,
                 decoration: InputDecoration(
@@ -809,17 +816,19 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 );
               },
               textFieldConfiguration: TextFieldConfiguration(
-                autofocus: false,
-                style: normalLabelTextStyle(15, regularTextColor),
-                controller: _textEditController,
-                decoration: InputDecoration(
-                  counterText: "",
-                  contentPadding: EdgeInsets.only(bottom: 12),
-                  hintText: widget.placeholder,
-                  hintStyle: defaultHintStyle(null, null),
-                  border: InputBorder.none,
-                ),
-              ),
+                  autofocus: widget.autoFocus,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  controller: _textEditController,
+                  decoration: InputDecoration(
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    hintText: widget.placeholder,
+                    hintStyle: defaultHintStyle(null, null),
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value) {}),
               suggestionsCallback: (pattern) async {
                 final result = await fetchValueSetsUseCase(FetchValueSetsParams(
                     request: {
@@ -844,7 +853,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 //                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
 //                    ),
                   ),
-                  onPointerDown: (_) => onChangedInternal(prediction),
+                  onPointerDown: (_) =>
+                      (kIsWeb) ? onChangedInternal(prediction) : null,
                 );
               },
               onSuggestionSelected: (prediction) {
@@ -1075,6 +1085,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               enabled: widget.enabled ?? true,
               maxLines: null,
               controller: _textEditController,
+              autofocus: widget.autoFocus,
               onChanged: onChangedInternal,
               onSubmitted: onSubmitted,
               onEditingComplete: onEditingComplete,

@@ -9,6 +9,7 @@ abstract class PatientsListRepository {
       String practiceId,
       String query,
       int pageNum,
+      bool status,
       int pageSize});
 
   Future<Either<Failure, Success>> archivePatient({List<String> patientIDs});

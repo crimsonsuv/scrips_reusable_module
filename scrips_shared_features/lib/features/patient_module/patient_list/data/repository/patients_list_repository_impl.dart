@@ -19,6 +19,7 @@ class PatientsListRepositoryImpl extends PatientsListRepository {
       String practiceId,
       String query,
       int pageNum,
+      bool status,
       int pageSize}) async {
     try {
       final result = await patientsListDataSource.getPatients(
@@ -27,6 +28,7 @@ class PatientsListRepositoryImpl extends PatientsListRepository {
           query: query,
           pageNum: pageNum,
           pageSize: pageSize,
+          status: status,
           isArchived: isArchived);
       return Right(result);
     } on DioError catch (e) {
