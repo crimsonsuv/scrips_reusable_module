@@ -207,7 +207,7 @@ packages:
   date_range_picker:
     dependency: transitive
     description:
-      path: "../third-party/date_range_picker-master"
+      path: "..\\third-party\\date_range_picker-master"
       relative: true
     source: path
     version: "1.0.6"
@@ -668,7 +668,7 @@ packages:
   scrips_core:
     dependency: "direct main"
     description:
-      path: "../scrips_core"
+      path: "..\\scrips_core"
       relative: true
     source: path
     version: "0.20.1"
