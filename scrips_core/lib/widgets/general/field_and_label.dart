@@ -1099,6 +1099,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   //counterText: "",
                   counterStyle: normalLabelTextStyle(8, regularTextColor),
                   hintText: widget.placeholder,
+                  hintMaxLines: 4,
                   hintStyle: defaultHintStyle(null, null),
                   contentPadding: EdgeInsets.only(bottom: -10, top: 4),
                   border: InputBorder.none),

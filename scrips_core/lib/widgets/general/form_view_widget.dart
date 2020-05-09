@@ -9,6 +9,7 @@ class FormView extends StatelessWidget {
   final String subtitle;
   final Widget child;
   final EdgeInsets margin;
+  final bool isMandatory;
   //
   FormView({
     Key key,
@@ -16,6 +17,7 @@ class FormView extends StatelessWidget {
     this.subtitle,
     @required this.margin,
     @required this.child,
+    this.isMandatory = false,
   }) : super(key: key);
   //
   @override
@@ -28,10 +30,19 @@ class FormView extends StatelessWidget {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text(
-                    "${this.header}",
-                    style: boldLabelTextStyle(12, textInputColor),
-                  ),
+                  Row(children: <Widget>[
+                    Text(
+                      "${this.header}",
+                      style: boldLabelTextStyle(12, textInputColor),
+                    ),
+                    isMandatory
+                        ? Text(
+                            ' *',
+                            style: boldLabelTextStyle(12, red),
+                            textAlign: TextAlign.start,
+                          )
+                        : Container(),
+                  ]),
                   (subtitle == null)
                       ? Container()
                       : Column(
