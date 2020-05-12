@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_shared_features/core/util/device_screen_type.dart';
+import 'package:scrips_core/utils/device_screen_type.dart';
 
 /// Provide different designs for [mobile], [tablet] and [desktop] devices
 ///

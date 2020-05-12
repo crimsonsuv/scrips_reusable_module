@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
+import 'package:scrips_core/base/screens/base_screen_view.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/presentation/pages/create_patient_screen.dart';
 import 'package:scrips_shared_features/features/patient_module/patient_list/data/datamodels/patients_list_model.dart';
 

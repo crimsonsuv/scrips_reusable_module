@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/status_objects.dart';
-import 'package:scrips_shared_features/core/util/utils.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/forgot_password/data/datasource/forgot_password_data_source.dart';
 import 'package:scrips_shared_features/features/forgot_password/domain/repository/forgot_password_repository.dart';
 

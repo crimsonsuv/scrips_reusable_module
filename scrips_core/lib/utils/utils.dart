@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scrips_core/constants/status_objects.dart';
 
 Color getColorFromHex(String hexColor) {
   hexColor = hexColor.toUpperCase().replaceAll('#', '');
@@ -121,5 +123,17 @@ bool isBetween(int x, int lower, int upper) {
 extension StringExtension on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${this.substring(1)}";
+  }
+}
+
+Failure handleFailure(DioError e) {
+  int responseCode = e.response.statusCode;
+  if (isBetween(responseCode, 400, 499)) {
+    return Failure("Request fields are missing.");
+  } else if (isBetween(responseCode, 500, 599)) {
+    return Failure(
+        "Something bad happend in Server, please contact scrips support.");
+  } else {
+    return Failure(e?.message ?? "");
   }
 }

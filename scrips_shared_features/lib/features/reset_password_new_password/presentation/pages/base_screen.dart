@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrips_shared_features/core/base/screens/base_screen_view.dart';
+import 'package:scrips_core/base/screens/base_screen_view.dart';
 
 import 'reset_password_new_password_screen.dart';
 
