@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:scrips_shared_features/core/enums/screen_type.dart';
+import 'package:scrips_core/enums/screen_type.dart';
 
 const double minWidthDesktop = 950.0;
 const double minWidthTablet = 600.0;
