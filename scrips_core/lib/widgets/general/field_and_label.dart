@@ -8,12 +8,14 @@ import 'package:flutter_typeahead_web/flutter_typeahead.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_locations_by_query_use_case.dart';
 import 'package:scrips_core/common/domain/usecases/fetch_value_sets_use_case.dart';
+import 'package:scrips_core/common/domain/usecases/query_params.dart';
 import 'package:scrips_core/common/domain/usecases/verify_phone_use_case.dart';
 import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/di/dependency_injection.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
+import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_core/utils/utils.dart';
 
 enum FieldType {
@@ -29,6 +31,7 @@ enum FieldType {
   SingleTagPicker,
   MultiTagPicker,
   ValueSetPicker,
+  SearchPicker,
 }
 
 enum LocationType {
@@ -74,7 +77,9 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final List<ListItemType> listItems;
   final List<ValueDisplayPair> tagsItems;
   final String valueSetGroup;
+  final dynamic useCase;
   FieldAndLabelState _myState;
+  final AxisDirection direction;
 
   //
   FieldAndLabel(
@@ -115,6 +120,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.locationType = LocationType.Establishment,
       this.maxLength = 300,
       this.valueSetGroup,
+      this.useCase,
+      this.direction = AxisDirection.down,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
 
@@ -158,8 +165,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
     if (widget.fieldType == FieldType.TextField ||
         widget.fieldType == FieldType.LocationPicker ||
-        widget.fieldType == FieldType.ValueSetPicker) {
-      // a controller is needed to Set initial value for textfield
+        widget.fieldType == FieldType.ValueSetPicker ||
+        widget.fieldType == FieldType.SearchPicker) {
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
       _textEditController = TextEditingController(text: currentFieldValue);
@@ -363,6 +370,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.ValueSetPicker:
         field = buildSearchValueSetsPicker(context);
         break;
+      case FieldType.SearchPicker:
+        field = buildSearchPicker(context);
+        break;
       case FieldType.PhoneField:
         field = buildPhoneField(context);
         break;
@@ -474,7 +484,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   itemCount: (widget.tagsItems ?? []).length,
                   itemBuilder: (int index) {
                     return ItemTags(
-                      index: index, // required
+                      index: index,
                       elevation: 0,
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -505,46 +515,57 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 
   Widget buildMultiTagPicker(BuildContext context) {
     return Container(
-      constraints: BoxConstraints.expand(height: 36),
-      height: 36.0,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          (widget.icon == null)
-              ? Container()
-              : Row(
-                  children: <Widget>[
-                    SizedBox(height: 24, width: 24, child: widget.icon),
-                    Padding(
-                      padding: EdgeInsets.only(left: 6),
-                    ),
-                  ],
+//      constraints: BoxConstraints.expand(height: 100),
+//      height: 100.0,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 4),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: IgnorePointer(
+                ignoring: !(widget?.enabled ?? true),
+                child: Tags(
+                  spacing: 8,
+                  columns: 5,
+                  runSpacing: 8,
+                  alignment: WrapAlignment.start,
+                  runAlignment: WrapAlignment.start,
+                  symmetry: false,
+                  itemCount: (widget.tagsItems ?? []).length,
+                  itemBuilder: (int index) {
+                    return ItemTags(
+                      index: index,
+                      elevation: 0,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                      title: widget.tagsItems[index].label,
+                      textColor: regularTextColor,
+                      textActiveColor: enabledBtnTextColor,
+                      color: bgColor,
+                      activeColor: enabledBtnBGColor,
+                      border: Border.all(width: 0, color: Colors.transparent),
+                      active: (widget?.fieldValue
+                                  ?.where((data) =>
+                                      data == widget.tagsItems[index].value)
+                                  ?.toList()
+                                  ?.length ??
+                              0) >
+                          0,
+                      textStyle: normalLabelTextStyle(15, regularTextColor),
+                      combine: ItemTagsCombine.withTextBefore, // OR null,
+                      onPressed: (item) {
+                        onChangedInternal(widget.tagsItems[index].value);
+                      },
+                      onLongPressed: (item) => print(item),
+                    );
+                  },
                 ),
-          Expanded(
-            child: IgnorePointer(
-              ignoring: !(widget?.enabled ?? true),
-              child: DropdownButton(
-                underline: Container(),
-                isExpanded: true,
-                value: currentFieldValue ?? widget.fieldValue,
-                items: widget.listItems ?? [],
-                icon: Images.instance.dropDownIcon(height: 24, width: 24),
-                iconSize: 12.0,
-                onChanged: onChangedInternal,
-                style: normalLabelTextStyle(
-                    15,
-                    (widget?.enabled ?? true)
-                        ? regularTextColor
-                        : Colors.black45),
-                hint: Text(widget.placeholder ?? '',
-                    style: defaultHintStyle(null, null)),
-                disabledHint: Text(widget.validationMessage ?? '',
-                    style: defaultHintStyle(null, null)),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -705,6 +726,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
           Expanded(
             child: TypeAheadField(
               hideOnEmpty: true,
+              direction: widget.direction,
               debounceDuration: Duration(milliseconds: 200),
               hideOnError: true,
               textFieldConfiguration: TextFieldConfiguration(
@@ -778,6 +800,115 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     );
   }
 
+  Widget buildSearchPicker(BuildContext context) {
+    return Container(
+      height: 36.0,
+      constraints: BoxConstraints.expand(height: 36),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          (widget.icon == null)
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    SizedBox(height: 24, width: 24, child: widget.icon),
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                  ],
+                ),
+          Expanded(
+            child: TypeAheadField(
+              hideOnEmpty: true,
+              hideOnLoading: false,
+              direction: widget.direction,
+              debounceDuration: Duration(milliseconds: 200),
+              hideOnError: true,
+              loadingBuilder: (context) {
+                return Container(
+                  height: 100,
+                  child: Center(
+                    child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(enabledBtnBGColor),
+                        )),
+                  ),
+                );
+              },
+              textFieldConfiguration: TextFieldConfiguration(
+                  autofocus: widget.autoFocus,
+                  style: normalLabelTextStyle(15, regularTextColor),
+                  controller: _textEditController,
+                  decoration: InputDecoration(
+                    counterText: "",
+                    contentPadding: EdgeInsets.only(
+                      bottom: 12,
+                    ),
+                    hintText: widget.placeholder,
+                    hintStyle: defaultHintStyle(null, null),
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (value) {}),
+              suggestionsCallback: (pattern) async {
+                final result =
+                    await widget.useCase(QueryParams(query: pattern));
+                return result.fold(
+                  (error) => [],
+                  (success) => success,
+                );
+              },
+              itemBuilder: (context, item) {
+                return Listener(
+                  child: ListTile(
+                    title: Text(
+                      item?.code?.displayName ?? "n/a",
+                      style: normalLabelTextStyle(15, regularTextColor),
+                    ),
+//                    subtitle: Text(
+//                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
+//                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
+//                    ),
+                  ),
+                  onPointerDown: (_) =>
+                      (kIsWeb) ? onChangedInternal(item) : null,
+                );
+              },
+              onSuggestionSelected: (item) {
+                onChangedInternal(item);
+              },
+            ),
+          ),
+          (currentFieldValue == "")
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(left: 6),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          if (currentFieldValue != "") {
+                            _textEditController.clear();
+                            onChangedInternal(Prediction());
+                          }
+                        },
+                        child: SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: (currentFieldValue != "")
+                                ? Images.instance.cross()
+                                : Container())),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
   Widget buildSearchValueSetsPicker(BuildContext context) {
     return Container(
       height: 36.0,
@@ -801,6 +932,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               hideOnEmpty: true,
               debounceDuration: Duration(milliseconds: 200),
               hideOnError: true,
+              direction: widget.direction,
               loadingBuilder: (context) {
                 return Container(
                   height: 100,

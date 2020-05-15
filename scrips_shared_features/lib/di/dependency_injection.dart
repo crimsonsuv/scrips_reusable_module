@@ -3,16 +3,21 @@ import 'package:scrips_shared_features/features/common/data/datasources/common_d
 import 'package:scrips_shared_features/features/common/data/datasources/common_data_source_impl.dart';
 import 'package:scrips_shared_features/features/common/data/repository/common_repository_impl.dart';
 import 'package:scrips_shared_features/features/common/domain/repository/common_repository.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_degree_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gender_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_idtype_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_insurace_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_license_authority_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_maritial_status_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_medical_school_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_ownership_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_procedure_code_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_questionnaire_rule_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/register_provider_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source_impl.dart';
@@ -227,6 +232,13 @@ Future<void> initServiceLocator() async {
   sl.registerLazySingleton(() => FetchInsuranceUseCase(repository: sl()));
   sl.registerLazySingleton(
       () => FetchQuestionnaireRuleUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchDegreeUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => FetchLanguageValueSetUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => FetchMedicalSchoolSetUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchProcedureCodeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchSpecialityCodeUseCase(repository: sl()));
 
   // Data sources
   sl.registerLazySingleton<CommonDataSource>(() => CommonDataSourceImpl());

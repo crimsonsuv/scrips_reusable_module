@@ -1,16 +1,21 @@
 import 'package:flutter/services.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/license_authority_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/procedure_skill_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/questionnaire_rules_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/register_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/speciality_list_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/speciality_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datasources/common_data_source.dart';
 
 class DummyCommonDataSourceImpl extends CommonDataSource {
@@ -89,6 +94,36 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<QuestionnaireRules>> questionnaireRulesList() {
     // TODO: implement questionnaireRulesList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<MedicalSchools>> medicalSchoolList() {
+    // TODO: implement MedicalSchoolList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<CodeList>> procedureCodeList(String query) {
+    // TODO: implement ProcedureCodeList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<DegreeValueSet>> degreeList() {
+    // TODO: implement degreeList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<LanguageValueSetList>> languageValueSetList() {
+    // TODO: implement languageValueSetList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<CodeList>> practiceCodeList(String query) {
+    // TODO: implement practiceCodeList
     throw UnimplementedError();
   }
 }
