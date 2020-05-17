@@ -1,0 +1,56 @@
+name: scrips_core
+description: Simplifying the use of both Material and Cupertino widgets with a single widget
+version: 0.20.1
+author: Lance Johnstone <flutterlance@outlook.com>
+homepage: https://github.com/aqwert/flutter_platform_widgets
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+  flutter: ^1.9.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons:
+  flare_splash_screen:
+  dio: ^3.0.8
+  provider: ^3.2.0
+  rflutter_alert:
+  get_it:
+  location:
+  localstorage:
+  connectivity:
+  json_serializable:
+  device_preview:
+  #  zefyr:
+  # cloud_firestore:
+  # scoped model packages
+  scoped_model:
+  flutter_platform_widgets:
+  date_range_picker:
+    path: ../third-party/date_range_picker-master
+  google_maps_flutter: ^0.5.21+12
+  flutter_svg:
+  flutter_typeahead_web: ^1.0.0+1
+  dartz: ^0.8.6
+  equatable: ^0.4.0
+  flutter_tags: ^0.4.8
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner:
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  # To add assets to your package, add an assets section, like this:
+  # To add assets to your application, add an assets section, like this:
+  #  - images/a_dot_burr.jpeg
+  #  - images/a_dot_ham.jpeg
