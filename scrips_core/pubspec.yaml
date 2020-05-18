@@ -33,6 +33,8 @@ dependencies:
   flutter_platform_widgets:
   date_range_picker:
     path: ../third-party/date_range_picker-master
+  scrips_shared_features:
+    path: ../scrips_shared_features
   google_maps_flutter: ^0.5.21+12
   flutter_svg:
   flutter_typeahead_web: ^1.0.0+1

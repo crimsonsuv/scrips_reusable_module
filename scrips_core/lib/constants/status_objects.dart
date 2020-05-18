@@ -15,3 +15,8 @@ class Failure extends Status {
 
   Failure(this.message);
 }
+
+const String parsingError =
+    "Something bad happened in the background, please try after some time.";
+const String serverError =
+    "Something bad happened in the background, please try after some time.";

@@ -5,6 +5,7 @@ import 'package:scrips_shared_features/features/common/data/repository/common_re
 import 'package:scrips_shared_features/features/common/domain/repository/common_repository.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_degree_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gender_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_hospital_list_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_idtype_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_insurace_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_use_case.dart';
@@ -16,6 +17,7 @@ import 'package:scrips_shared_features/features/common/domain/usecases/fetch_own
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_procedure_code_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_questionnaire_rule_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_by_id_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/register_provider_use_case.dart';
@@ -239,6 +241,9 @@ Future<void> initServiceLocator() async {
       () => FetchMedicalSchoolSetUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchProcedureCodeUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchSpecialityCodeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchHospitalListUseCase(repository: sl()));
+  sl.registerLazySingleton(
+      () => FetchSpecialityByIdCodeUseCase(repository: sl()));
 
   // Data sources
   sl.registerLazySingleton<CommonDataSource>(() => CommonDataSourceImpl());

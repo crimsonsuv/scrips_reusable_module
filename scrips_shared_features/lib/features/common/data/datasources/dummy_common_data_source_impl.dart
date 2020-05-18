@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
@@ -98,7 +99,7 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   }
 
   @override
-  Future<List<MedicalSchools>> medicalSchoolList() {
+  Future<List<MedicalSchools>> medicalSchoolList(String query) {
     // TODO: implement MedicalSchoolList
     throw UnimplementedError();
   }
@@ -110,13 +111,13 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   }
 
   @override
-  Future<List<DegreeValueSet>> degreeList() {
+  Future<List<DegreeValueSet>> degreeList(String query) {
     // TODO: implement degreeList
     throw UnimplementedError();
   }
 
   @override
-  Future<List<LanguageValueSetList>> languageValueSetList() {
+  Future<List<LanguageValueSetList>> languageValueSetList(String query) {
     // TODO: implement languageValueSetList
     throw UnimplementedError();
   }
@@ -124,6 +125,18 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<CodeList>> practiceCodeList(String query) {
     // TODO: implement practiceCodeList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<HospitalList>> hospitalList(String query) {
+    // TODO: implement hospitalList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<CodeList>> practiceCodeListById(String id) {
+    // TODO: implement practiceCodeListById
     throw UnimplementedError();
   }
 }

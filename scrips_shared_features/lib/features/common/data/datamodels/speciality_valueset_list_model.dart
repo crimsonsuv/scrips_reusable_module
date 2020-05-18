@@ -34,7 +34,7 @@ class CodeList {
 }
 
 class Code {
-  int code;
+  String code;
   String displayName;
   String system;
 

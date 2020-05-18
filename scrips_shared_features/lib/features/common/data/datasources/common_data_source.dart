@@ -1,6 +1,7 @@
 import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
@@ -28,9 +29,11 @@ abstract class CommonDataSource {
   Future<List<Ownership>> ownershipList();
   Future<List<Insurance>> insuranceList();
   Future<List<QuestionnaireRules>> questionnaireRulesList();
-  Future<List<DegreeValueSet>> degreeList();
-  Future<List<LanguageValueSetList>> languageValueSetList();
-  Future<List<MedicalSchools>> medicalSchoolList();
+  Future<List<DegreeValueSet>> degreeList(String query);
+  Future<List<LanguageValueSetList>> languageValueSetList(String query);
+  Future<List<MedicalSchools>> medicalSchoolList(String query);
   Future<List<CodeList>> procedureCodeList(String query);
   Future<List<CodeList>> practiceCodeList(String query);
+  Future<List<HospitalList>> hospitalList(String query);
+  Future<List<CodeList>> practiceCodeListById(String id);
 }

@@ -17,6 +17,8 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_core/utils/utils.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
 
 enum FieldType {
   TextField,
@@ -862,10 +864,18 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                 );
               },
               itemBuilder: (context, item) {
+                String displayText = "";
+                if (item is HospitalList) {
+                  displayText = item?.hospitalName ?? "";
+                } else if (item is MedicalSchools) {
+                  displayText = item?.medicalSchool ?? "";
+                } else {
+                  displayText = item?.code?.displayName ?? "n/a";
+                }
                 return Listener(
                   child: ListTile(
                     title: Text(
-                      item?.code?.displayName ?? "n/a",
+                      displayText,
                       style: normalLabelTextStyle(15, regularTextColor),
                     ),
 //                    subtitle: Text(
@@ -882,7 +892,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               },
             ),
           ),
-          (currentFieldValue == "")
+          (currentFieldValue == "" || currentFieldValue == null)
               ? Container()
               : Row(
                   children: <Widget>[
@@ -893,7 +903,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                         onTap: () {
                           if (currentFieldValue != "") {
                             _textEditController.clear();
-                            onChangedInternal(Prediction());
+                            onChangedInternal(null);
                           }
                         },
                         child: SizedBox(

@@ -5,6 +5,7 @@ import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
@@ -39,7 +40,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching License Authority List Failed');
     });
-    return licenseAuthorityFromJson(utf8.decode(response.data));
+    try {
+      var result = licenseAuthorityFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -52,7 +60,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Specialities List Failed');
     });
-    return specialityFromJson(utf8.decode(response.data));
+    try {
+      var result = specialityFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -70,7 +85,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Register Provider Failed');
     });
-    return Success('Provider Successfully Registered');
+    try {
+      var result = Success('Provider Successfully Registered');
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -83,7 +105,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Gender List Failed');
     });
-    return genderFromJson(utf8.decode(response.data));
+    try {
+      var result = genderFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -96,7 +125,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching ID Type List Failed');
     });
-    return idTypeFromJson(utf8.decode(response.data));
+    try {
+      var result = idTypeFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -109,7 +145,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Language List Failed');
     });
-    return languageFromJson(utf8.decode(response.data));
+    try {
+      var result = languageFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -122,7 +165,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Maritial Status List Failed');
     });
-    return maritalStatusFromJson(utf8.decode(response.data));
+    try {
+      var result = maritalStatusFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -135,7 +185,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Relationship List Failed');
     });
-    return relationshipFromJson(utf8.decode(response.data));
+    try {
+      var result = relationshipFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -148,7 +205,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Ownership List Failed');
     });
-    return ownershipFromJson(utf8.decode(response.data));
+    try {
+      var result = ownershipFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -161,7 +225,14 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Insurance List Failed');
     });
-    return insuranceFromJson(utf8.decode(response.data));
+    try {
+      var result = insuranceFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -174,15 +245,22 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Insurance List Failed');
     });
-    return questionnaireRulesFromJson(utf8.decode(response.data));
+    try {
+      var result = questionnaireRulesFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
-  Future<List<MedicalSchools>> medicalSchoolList() async {
+  Future<List<MedicalSchools>> medicalSchoolList(String query) async {
     client.options.responseType = ResponseType.bytes;
     var response = await client
         .get(
-      '$endpoint/MedicalSchools',
+      '$endpoint/MedicalSchools?searchQuery=$query',
     )
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching Medical schools List Failed');
@@ -195,38 +273,59 @@ class CommonDataSourceImpl extends CommonDataSource {
     client.options.responseType = ResponseType.bytes;
     var response = await client
         .get(
-      '$endpoint/PracticeCodeList?searchQuery=$query',
+      '$endpoint/ProcedureCodesList?searchQuery=$query',
     )
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () async {
       throw Failure('Fetching Procedure Code List Failed');
     });
-    return procedureCodesListFromJson(utf8.decode(response.data));
+    try {
+      var result = procedureCodesListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
-  Future<List<DegreeValueSet>> degreeList() async {
+  Future<List<DegreeValueSet>> degreeList(String query) async {
     client.options.responseType = ResponseType.bytes;
     var response = await client
         .get(
-      '$endpoint/DegreeValueSet',
+      '$endpoint/DegreeValueSet?searchQuery=$query',
     )
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () async {
       throw Failure('Fetching Degree List Failed');
     });
-    return degreeValueSetFromJson(utf8.decode(response.data));
+    try {
+      var result = degreeValueSetFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
-  Future<List<LanguageValueSetList>> languageValueSetList() async {
+  Future<List<LanguageValueSetList>> languageValueSetList(String query) async {
     client.options.responseType = ResponseType.bytes;
     var response = await client
         .get(
-      '$endpoint/LanguageValueSetList',
+      '$endpoint/LanguageValueSetList?searchQuery=$query',
     )
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching language valueset List Failed');
     });
-    return languageValueSetListFromJson(utf8.decode(response.data));
+    try {
+      var result = languageValueSetListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 
   @override
@@ -239,6 +338,53 @@ class CommonDataSourceImpl extends CommonDataSource {
         .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
       throw Failure('Fetching speciality valueset List Failed');
     });
-    return practiceCodeListFromJson(utf8.decode(response.data));
+    try {
+      var result = practiceCodeListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
+  }
+
+  @override
+  Future<List<HospitalList>> hospitalList(String query) async {
+    client.options.responseType = ResponseType.bytes;
+    var response = await client
+        .get(
+      '$endpoint/Hospital?searchQuery=$query',
+    )
+        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+      throw Failure('Fetching speciality valueset List Failed');
+    });
+    try {
+      var result = hospitalListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
+  }
+
+  @override
+  Future<List<CodeList>> practiceCodeListById(String id) async {
+    client.options.responseType = ResponseType.bytes;
+    var response = await client
+        .get(
+      '$endpoint/GetPracticeCodeListById/$id',
+    )
+        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+      throw Failure('Fetching speciality valueset List Failed');
+    });
+    try {
+      var result = practiceCodeListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
   }
 }

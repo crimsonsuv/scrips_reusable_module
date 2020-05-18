@@ -5,6 +5,7 @@ import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
@@ -35,8 +36,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -47,8 +48,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -61,8 +62,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -73,8 +74,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -85,8 +86,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -97,8 +98,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -109,8 +110,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -121,8 +122,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -133,8 +134,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -145,8 +146,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -157,45 +158,46 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, List<DegreeValueSet>>> degreeList() async {
+  Future<Either<Failure, List<DegreeValueSet>>> degreeList(String query) async {
     try {
-      final result = await commonDataSource.degreeList();
+      final result = await commonDataSource.degreeList(query);
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, List<LanguageValueSetList>>>
-      languageValueSetList() async {
+  Future<Either<Failure, List<LanguageValueSetList>>> languageValueSetList(
+      String query) async {
     try {
-      final result = await commonDataSource.languageValueSetList();
+      final result = await commonDataSource.languageValueSetList(query);
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, List<MedicalSchools>>> medicalSchoolList() async {
+  Future<Either<Failure, List<MedicalSchools>>> medicalSchoolList(
+      String query) async {
     try {
-      final result = await commonDataSource.medicalSchoolList();
+      final result = await commonDataSource.medicalSchoolList(query);
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -207,8 +209,8 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 
@@ -219,8 +221,33 @@ class CommonRepositoryImpl extends CommonRepository {
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));
-    } on Failure {
-      return Left(Failure("Request time out.."));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<HospitalList>>> hospitalList(String query) async {
+    try {
+      final result = await commonDataSource.hospitalList(query);
+      return Right(result);
+    } on DioError catch (e) {
+      return (Left(handleFailure(e)));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<CodeList>>> practiceCodeListById(
+      String id) async {
+    try {
+      final result = await commonDataSource.practiceCodeListById(id);
+      return Right(result);
+    } on DioError catch (e) {
+      return (Left(handleFailure(e)));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
     }
   }
 }
