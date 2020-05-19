@@ -13,9 +13,11 @@ import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/form_view_widget.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/core/constants/api_constats.dart';
+import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/patients_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/presentation/bloc/bloc.dart';
 import 'package:universal_html/prefer_universal/html.dart' as html;
@@ -41,11 +43,14 @@ class PersonalDetailsFormWidget extends StatefulWidget {
 
 class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
   bool imageUploading = false;
+  FetchLanguageValueSetUseCase fetchLanguageValueSetUseCase;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchLanguageValueSetUseCase =
+        FetchLanguageValueSetUseCase(repository: sl());
   }
 
   void pickImage() async {
@@ -352,15 +357,28 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 margin: EdgeInsets.all(0),
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                 fieldBackgroundColor: textFieldBGcolor,
-                fieldValue: pData?.language ?? null,
-                tagsItems: ((widget?.languageList?.length ?? 0) > 0)
-                    ? widget.languageList
-                        .map((item) => ValueDisplayPair(item?.languageId ?? '',
-                            item?.code?.displayName?.trim() ?? ''))
-                        .toList()
+                listItems: ((widget?.languageList?.length ?? 0) > 0)
+                    ? (widget.languageList
+                        .map((item) => DropdownMenuItem(
+                            value: item.languageId,
+                            child: Text(item.code.displayName)))
+                        .toList())
                     : null,
+                fieldValue: pData?.language == null
+                    ? null
+                    : (widget?.languageList
+                                    ?.where((data) =>
+                                        data.languageId ==
+                                        widget?.patient?.language)
+                                    ?.toList()
+                                    ?.length ??
+                                0) >
+                            0
+                        ? widget?.patient?.language
+                        : null,
                 fieldTextColor: textInputColor,
-                fieldType: FieldType.SingleTagPicker,
+                fieldType: FieldType.DropDownList,
+                placeholder: "Select language",
                 labelTextStyle: defaultFieldLabelStyle(null, null),
                 labelValue: "Preferred Language".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {

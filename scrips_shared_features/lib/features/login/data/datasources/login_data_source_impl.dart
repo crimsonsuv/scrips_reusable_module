@@ -61,7 +61,7 @@ class LoginDataSourceImpl extends LoginDataSource {
     var userDataResponse = await client
         .get('$endPoint/GetUserDataToken')
         .timeout(Duration(seconds: timeout), onTimeout: () {
-      throw Failure('Failed to signup');
+      throw Failure('Failed to process request, try again');
     });
 
     return loginUserDataFromJson(utf8.decode(userDataResponse.data));
@@ -98,7 +98,7 @@ class LoginDataSourceImpl extends LoginDataSource {
     var userDataResponse = await client
         .get('$endPoint/GetUserDataToken')
         .timeout(Duration(seconds: timeout), onTimeout: () {
-      throw Failure('Failed to signup');
+      throw Failure('Failed to process request, try again');
     });
 
     return loginUserDataFromJson(utf8.decode(userDataResponse.data));

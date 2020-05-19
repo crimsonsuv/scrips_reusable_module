@@ -186,7 +186,9 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
               }
               isInitial = false;
               isEdit = true;
-              matchingPatientRecords.clear();
+              if ((matchingPatientRecords?.length ?? 0) > 0) {
+                matchingPatientRecords.clear();
+              }
             } else if (state is LoadingDropDownBeginState) {
               isDropDownLoading = true;
             } else if (state is LoadingDropDownEndState) {
@@ -593,10 +595,21 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                           Text("Language: ".toUpperCase(),
                                               style: boldLabelTextStyle(12.0,
                                                   labelTextStyleTextColor)),
-                                          Text(
-                                              '${((patient?.language ?? "") != "") ? languageList?.where((data) => data.languageId == patient?.language)?.toList()?.first?.code?.displayName?.toLowerCase()?.capitalize() ?? "N/A" : "N/A"}',
-                                              style: normalLabelTextStyle(
-                                                  13.0, regularTextColor)),
+                                          ConstrainedBox(
+                                            constraints:
+                                                BoxConstraints(maxWidth: 120),
+                                            child: Tooltip(
+                                              message:
+                                                  '${((patient?.language ?? "") != "") ? ((languageList?.where((data) => data.languageId == patient?.language)?.toList()?.length ?? 0) > 0) ? languageList?.where((data) => data.languageId == patient?.language)?.toList()?.elementAt(0)?.code?.displayName?.trim() ?? "N/A" : "N/A" : "N/A"}',
+                                              child: Text(
+                                                '${((patient?.language ?? "") != "") ? ((languageList?.where((data) => data.languageId == patient?.language)?.toList()?.length ?? 0) > 0) ? languageList?.where((data) => data.languageId == patient?.language)?.toList()?.elementAt(0)?.code?.displayName?.trim() ?? "N/A" : "N/A" : "N/A"}',
+                                                style: normalLabelTextStyle(
+                                                    13.0, regularTextColor),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ),
                                           Space(
                                             horizontal: 22,
                                           )
