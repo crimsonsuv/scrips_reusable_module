@@ -19,7 +19,7 @@ import 'package:scrips_shared_features/di/dependency_injection.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
-import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
@@ -57,7 +57,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
   List<Gender> genderList;
   List<IdType> idTypeList;
   List<MaritalStatus> maritalStatusList;
-  List<Language> languageList;
+  List<LanguageValueSetList> languageList;
   List<Relationship> relationshipList;
   List<Ownership> ownershipList;
   List<Insurance> insuranceList;
@@ -594,7 +594,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                               style: boldLabelTextStyle(12.0,
                                                   labelTextStyleTextColor)),
                                           Text(
-                                              '${((patient?.language ?? "") != "") ? languageList?.where((data) => data.id == patient?.language)?.toList()?.first?.languageName?.toLowerCase()?.capitalize() ?? "N/A" : "N/A"}',
+                                              '${((patient?.language ?? "") != "") ? languageList?.where((data) => data.languageId == patient?.language)?.toList()?.first?.code?.displayName?.toLowerCase()?.capitalize() ?? "N/A" : "N/A"}',
                                               style: normalLabelTextStyle(
                                                   13.0, regularTextColor)),
                                           Space(

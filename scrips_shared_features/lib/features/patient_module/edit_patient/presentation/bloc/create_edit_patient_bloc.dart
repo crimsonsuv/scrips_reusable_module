@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:scrips_core/common/domain/usecases/query_params.dart';
 import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gender_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_idtype_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_insurace_use_case.dart';
-import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_use_case.dart';
-import 'package:scrips_shared_features/features/common/domain/usecases/fetch_maritial_status_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_valueset_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_marital_status_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_ownership_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/domain/usecases/create_contact_details_use_case.dart';
@@ -31,9 +32,9 @@ class CreateEditPatientBloc
 
   final FetchGenderUseCase fetchGenderUseCase;
   final FetchRelationshipUseCase fetchRelationshipUseCase;
-  final FetchMaritialStatusUseCase fetchMaritialStatusUseCase;
+  final FetchMaritalStatusUseCase fetchMaritalStatusUseCase;
   final FetchIdTypeUseCase fetchIdTypeUseCase;
-  final FetchLanguageUseCase fetchLanguageUseCase;
+  final FetchLanguageValueSetUseCase fetchLanguageUseCase;
   final FetchPatientUseCase fetchPatientUseCase;
   final FetchOwnershipUseCase fetchOwnershipUseCase;
   final FetchInsuranceUseCase fetchInsuranceUseCase;
@@ -50,7 +51,7 @@ class CreateEditPatientBloc
   CreateEditPatientBloc(
       {@required this.fetchGenderUseCase,
       @required this.fetchRelationshipUseCase,
-      @required this.fetchMaritialStatusUseCase,
+      @required this.fetchMaritalStatusUseCase,
       @required this.fetchIdTypeUseCase,
       @required this.fetchLanguageUseCase,
       @required this.fetchPatientUseCase,
@@ -94,7 +95,7 @@ class CreateEditPatientBloc
       );
     } else if (event is FetchLanguageEvent) {
       yield LoadingDropDownBeginState();
-      final result = await fetchLanguageUseCase(NoParams());
+      final result = await fetchLanguageUseCase(QueryParams(query: ""));
       yield LoadingDropDownEndState();
       yield result.fold(
         (error) => ErrorState(error.message),
@@ -102,7 +103,7 @@ class CreateEditPatientBloc
       );
     } else if (event is FetchMaritalStatusEvent) {
       yield LoadingDropDownBeginState();
-      final result = await fetchMaritialStatusUseCase(NoParams());
+      final result = await fetchMaritalStatusUseCase(NoParams());
       yield LoadingDropDownEndState();
       yield result.fold(
         (error) => ErrorState(error.message),

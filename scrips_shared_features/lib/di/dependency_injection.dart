@@ -8,17 +8,15 @@ import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gen
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_hospital_list_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_idtype_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_insurace_use_case.dart';
-import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_language_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_license_authority_use_case.dart';
-import 'package:scrips_shared_features/features/common/domain/usecases/fetch_maritial_status_use_case.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_marital_status_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_medical_school_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_ownership_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_procedure_code_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_questionnaire_rule_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_relationship_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_by_id_use_case.dart';
-import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_speciality_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/register_provider_use_case.dart';
 import 'package:scrips_shared_features/features/create_password/data/datasource/create_password_data_source.dart';
@@ -223,12 +221,10 @@ Future<void> initServiceLocator() async {
   ///Common
   //Use cases
   sl.registerLazySingleton(() => FetchLicencesUseCase(repository: sl()));
-  sl.registerLazySingleton(() => FetchSpecialitiesUseCase(repository: sl()));
   sl.registerLazySingleton(() => RegisterProviderUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchGenderUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchIdTypeUseCase(repository: sl()));
-  sl.registerLazySingleton(() => FetchLanguageUseCase(repository: sl()));
-  sl.registerLazySingleton(() => FetchMaritialStatusUseCase(repository: sl()));
+  sl.registerLazySingleton(() => FetchMaritalStatusUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchRelationshipUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchOwnershipUseCase(repository: sl()));
   sl.registerLazySingleton(() => FetchInsuranceUseCase(repository: sl()));
@@ -259,7 +255,7 @@ Future<void> initServiceLocator() async {
         fetchGenderUseCase: sl(),
         fetchIdTypeUseCase: sl(),
         fetchLanguageUseCase: sl(),
-        fetchMaritialStatusUseCase: sl(),
+        fetchMaritalStatusUseCase: sl(),
         fetchRelationshipUseCase: sl(),
         fetchPatientUseCase: sl(),
         fetchOwnershipUseCase: sl(),

@@ -14,7 +14,7 @@ import 'package:scrips_core/widgets/general/form_view_widget.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
-import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/patients_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/presentation/bloc/bloc.dart';
@@ -26,7 +26,7 @@ class PersonalDetailsFormWidget extends StatefulWidget {
   final Patient patient;
   final List<Gender> genderList;
   final List<MaritalStatus> maritalStatusList;
-  final List<Language> languageList;
+  final List<LanguageValueSetList> languageList;
   @override
   _PersonalDetailsFormWidgetState createState() =>
       _PersonalDetailsFormWidgetState();
@@ -355,8 +355,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 fieldValue: pData?.language ?? null,
                 tagsItems: ((widget?.languageList?.length ?? 0) > 0)
                     ? widget.languageList
-                        .map((item) => ValueDisplayPair(
-                            item?.id ?? '', item?.languageName?.trim() ?? ''))
+                        .map((item) => ValueDisplayPair(item?.languageId ?? '',
+                            item?.code?.displayName?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,

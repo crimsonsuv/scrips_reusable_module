@@ -8,7 +8,6 @@ import 'package:scrips_shared_features/features/common/data/datamodels/gender_mo
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
-import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/license_authority_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
@@ -18,7 +17,6 @@ import 'package:scrips_shared_features/features/common/data/datamodels/procedure
 import 'package:scrips_shared_features/features/common/data/datamodels/questionnaire_rules_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/register_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
-import 'package:scrips_shared_features/features/common/data/datamodels/speciality_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/speciality_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datasources/common_data_source.dart';
 
@@ -42,26 +40,6 @@ class CommonDataSourceImpl extends CommonDataSource {
     });
     try {
       var result = licenseAuthorityFromJson(utf8.decode(response.data));
-      return result;
-    } on TypeError {
-      throw Failure(parsingError);
-    } on NoSuchMethodError {
-      throw Failure(parsingError);
-    }
-  }
-
-  @override
-  Future<List<Speciality>> fetchSpecialityList() async {
-    client.options.responseType = ResponseType.bytes;
-    var response = await client
-        .get(
-      '$endpoint/Specialities',
-    )
-        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
-      throw Failure('Fetching Specialities List Failed');
-    });
-    try {
-      var result = specialityFromJson(utf8.decode(response.data));
       return result;
     } on TypeError {
       throw Failure(parsingError);
@@ -136,27 +114,7 @@ class CommonDataSourceImpl extends CommonDataSource {
   }
 
   @override
-  Future<List<Language>> languageList() async {
-    client.options.responseType = ResponseType.bytes;
-    var response = await client
-        .get(
-      '$endpoint/Languages',
-    )
-        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
-      throw Failure('Fetching Language List Failed');
-    });
-    try {
-      var result = languageFromJson(utf8.decode(response.data));
-      return result;
-    } on TypeError {
-      throw Failure(parsingError);
-    } on NoSuchMethodError {
-      throw Failure(parsingError);
-    }
-  }
-
-  @override
-  Future<List<MaritalStatus>> maritialList() async {
+  Future<List<MaritalStatus>> maritalList() async {
     client.options.responseType = ResponseType.bytes;
     var response = await client
         .get(

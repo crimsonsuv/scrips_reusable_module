@@ -12,7 +12,7 @@ import 'package:scrips_shared_features/core/constants/api_constats.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
-import 'package:scrips_shared_features/features/common/data/datamodels/language_model.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/language_valueset_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/maritial_status_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/ownership_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/relationship_model.dart';
@@ -25,7 +25,7 @@ class ViewPatientViewWidget extends StatefulWidget {
   final List<Gender> genderList;
   final List<IdType> idTypeList;
   final List<MaritalStatus> maritalStatusList;
-  final List<Language> languageList;
+  final List<LanguageValueSetList> languageList;
   final List<Relationship> relationshipList;
   final List<Ownership> ownershipList;
   final List<Insurance> insuranceList;
@@ -121,7 +121,7 @@ class _ViewPatientViewWidgetState extends State<ViewPatientViewWidget> {
                                     Text(
                                         ((widget.patient?.language ?? "") == "")
                                             ? "—"
-                                            : '${widget.languageList?.where((data) => data.id == widget.patient?.language)?.toList()?.first?.languageName?.toLowerCase()?.capitalize() ?? "—"}',
+                                            : '${widget.languageList?.where((data) => data.languageId == widget.patient?.language)?.toList()?.first?.code?.displayName?.trim() ?? "—"}',
                                         style: normalLabelTextStyle(
                                             13.0, regularTextColor)),
                                     Space(
@@ -293,7 +293,7 @@ class _ViewPatientViewWidgetState extends State<ViewPatientViewWidget> {
                           child: Text(
                             ((widget?.patient?.language ?? "") == "")
                                 ? "—"
-                                : '${widget.languageList?.where((data) => data.id == widget?.patient?.language)?.toList()?.first?.languageName?.toLowerCase()?.capitalize() ?? "—"}',
+                                : '${widget.languageList?.where((data) => data.languageId == widget?.patient?.language)?.toList()?.first?.code?.displayName?.toLowerCase()?.capitalize() ?? "—"}',
                             style: normalLabelTextStyle(15, regularTextColor),
                           ),
                         )
