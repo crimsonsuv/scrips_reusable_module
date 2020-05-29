@@ -15,7 +15,6 @@ import 'package:scrips_core/di/dependency_injection.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
-import 'package:scrips_core/usecase/no_params.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
@@ -856,12 +855,16 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   ),
                   onChanged: (value) {}),
               suggestionsCallback: (pattern) async {
-                final result =
-                    await widget.useCase(QueryParams(query: pattern));
-                return result.fold(
-                  (error) => [],
-                  (success) => success,
-                );
+                if (pattern != null || pattern != "") {
+                  final result =
+                      await widget.useCase(QueryParams(query: pattern));
+                  return result.fold(
+                    (error) => [],
+                    (success) => success,
+                  );
+                } else {
+                  return [];
+                }
               },
               itemBuilder: (context, item) {
                 String displayText = "";
@@ -901,10 +904,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          if (currentFieldValue != "") {
-                            _textEditController.clear();
-                            onChangedInternal(null);
-                          }
+                          _textEditController.clear();
+                          onChangedInternal(null);
                         },
                         child: SizedBox(
                             height: 24,
