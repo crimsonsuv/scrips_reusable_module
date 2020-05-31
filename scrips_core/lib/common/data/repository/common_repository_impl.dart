@@ -38,7 +38,7 @@ class CommonRepositoryImpl extends CommonRepository {
     try {
       final result =
           await commonDataSource.verifyPhone(phone: phone, country: country);
-      if (country == null) {
+      if (country == null || country == "") {
         return Right(result);
       } else {
         var countryCodeList =

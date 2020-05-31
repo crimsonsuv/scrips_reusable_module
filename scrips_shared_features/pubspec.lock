@@ -207,7 +207,7 @@ packages:
   date_range_picker:
     dependency: transitive
     description:
-      path: "../third-party/date_range_picker-master"
+      path: "..\\third-party\\date_range_picker-master"
       relative: true
     source: path
     version: "1.0.6"
@@ -462,27 +462,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2+5"
-  location:
-    dependency: transitive
-    description:
-      name: location
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.2"
-  location_platform_interface:
-    dependency: transitive
-    description:
-      name: location_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
-  location_web:
-    dependency: transitive
-    description:
-      name: location_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   logging:
     dependency: transitive
     description:
@@ -668,7 +647,7 @@ packages:
   scrips_core:
     dependency: "direct main"
     description:
-      path: "../scrips_core"
+      path: "..\\scrips_core"
       relative: true
     source: path
     version: "0.20.1"

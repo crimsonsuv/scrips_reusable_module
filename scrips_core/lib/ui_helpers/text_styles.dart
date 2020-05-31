@@ -31,12 +31,18 @@ TextStyle semiBoldLabelTextStyle(double size, color) => TextStyle(
       color: color ?? textInputColor,
     );
 
-TextStyle normalLabelTextStyle(double size, color,{double height = 1.2} ) => TextStyle(
+TextStyle normalBoldTextStyle(double size, color) => TextStyle(
       fontSize: size,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       color: color ?? textInputColor,
-  height: height
     );
+
+TextStyle normalLabelTextStyle(double size, color, {double height = 1.2}) =>
+    TextStyle(
+        fontSize: size,
+        fontWeight: FontWeight.normal,
+        color: color ?? textInputColor,
+        height: height);
 
 // TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: labelTextStyleTextColor)
 TextStyle defaultFieldLabelStyle(color, backgroundColor,

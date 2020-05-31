@@ -40,6 +40,7 @@ dependencies:
   dartz: ^0.8.6
   equatable: ^0.4.0
   flutter_tags: ^0.4.8
+  flutter_bloc:
 
 
 dev_dependencies:
