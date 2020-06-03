@@ -31,10 +31,10 @@ class PatientsListDataSourceImpl extends PatientsListDataSource {
     if (query.length > 0) {
       if (status != null) {
         apiLink =
-            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize&Status=$status';
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize&Status=$status';
       } else {
         apiLink =
-            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&PracticeId=$practiceId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
+            '$endpoint/api/Patients/GetPatientList?OrganizationId=$orgId&Search=$query&IsArchived=$isArchived&PageNumber=$pageNum&PageSize=$pageSize';
       }
     } else {
       if (status != null) {
