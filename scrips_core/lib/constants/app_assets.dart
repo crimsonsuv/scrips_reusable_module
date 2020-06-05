@@ -78,6 +78,36 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
+  Image plusStepper(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_stepper_plus.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
+  Image minusStepper(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_stepper_minus.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
   Image plus(
           {double width,
           double height,

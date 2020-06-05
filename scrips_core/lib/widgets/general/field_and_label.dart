@@ -467,7 +467,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
 //      constraints: BoxConstraints.expand(height: 100),
 //      height: 100.0,
       child: Padding(
-        padding: const EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.only(top: 3),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -488,7 +488,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       index: index,
                       elevation: 0,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 7),
                       title: widget.tagsItems[index].label,
                       textColor: regularTextColor,
                       textActiveColor: enabledBtnTextColor,

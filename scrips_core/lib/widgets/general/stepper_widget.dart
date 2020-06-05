@@ -17,8 +17,9 @@ class CountStepper extends StatelessWidget {
       height: this.height,
       width: this.width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: enabledBtnBGColor, width: 1),
+        borderRadius: BorderRadius.circular(9),
+        color: bgColor,
+        border: Border.all(color: bgColor, width: 1),
       ),
       child: Row(
         children: <Widget>[
@@ -29,17 +30,20 @@ class CountStepper extends StatelessWidget {
               child: InkWell(
                 onTap: this.decrement,
                 child: Container(
-                  color: enabledBtnTextColor,
+                  color: bgColor,
                   child: Center(
-                    child: Images.instance.minus(),
+                    child: Images.instance.minusStepper(),
                   ),
                 ),
               ),
             ),
           ),
-          Container(
-            width: 1,
-            color: enabledBtnBGColor,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Container(
+              width: 1,
+              color: separatorColor,
+            ),
           ),
           Expanded(
             child: ClipRRect(
@@ -49,9 +53,9 @@ class CountStepper extends StatelessWidget {
               child: InkWell(
                 onTap: this.increment,
                 child: Container(
-                  color: enabledBtnTextColor,
+                  color: bgColor,
                   child: Center(
-                    child: Images.instance.plus(),
+                    child: Images.instance.plusStepper(),
                   ),
                 ),
               ),
