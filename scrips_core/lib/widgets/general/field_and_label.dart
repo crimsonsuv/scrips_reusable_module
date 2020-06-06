@@ -17,6 +17,7 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
 
@@ -933,6 +934,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   displayText = item?.hospitalName ?? "";
                 } else if (item is MedicalSchools) {
                   displayText = item?.medicalSchool ?? "";
+                } else if (item is AppointmentValueSets) {
+                  displayText = item?.display ?? "";
                 } else {
                   displayText = item?.code?.displayName ?? "n/a";
                 }
