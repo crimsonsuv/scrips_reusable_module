@@ -255,7 +255,8 @@ class _GuardiansIdentityVerificationFormWidgetState
                 tagsItems: ((widget?.genderList?.length ?? 0) > 0)
                     ? widget.genderList
                         .map((item) => ValueDisplayPair(
-                            item?.id ?? '', item?.gender?.trim() ?? ''))
+                            value: item?.id ?? '',
+                            label: item?.gender?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,

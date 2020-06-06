@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class QueryParams extends Equatable {
   final String query;
+  final String searchFor;
 
-  QueryParams({
-    @required this.query,
-  }) : super([query]);
+  QueryParams({@required this.query, this.searchFor})
+      : super([query, searchFor]);
 }

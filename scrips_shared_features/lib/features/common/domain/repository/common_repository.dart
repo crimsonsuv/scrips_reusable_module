@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
@@ -34,4 +35,6 @@ abstract class CommonRepository {
   Future<Either<Failure, List<CodeList>>> practiceCodeList(String query);
   Future<Either<Failure, List<HospitalList>>> hospitalList(String query);
   Future<Either<Failure, List<CodeList>>> practiceCodeListById(String id);
+  Future<Either<Failure, List<AppointmentValueSets>>>
+      appointmentValueSetsByQuery(String query, String searchFor);
 }

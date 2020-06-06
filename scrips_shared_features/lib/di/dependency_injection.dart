@@ -3,6 +3,7 @@ import 'package:scrips_shared_features/features/common/data/datasources/common_d
 import 'package:scrips_shared_features/features/common/data/datasources/common_data_source_impl.dart';
 import 'package:scrips_shared_features/features/common/data/repository/common_repository_impl.dart';
 import 'package:scrips_shared_features/features/common/domain/repository/common_repository.dart';
+import 'package:scrips_shared_features/features/common/domain/usecases/fetch_appointment_valueset_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_degree_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_gender_use_case.dart';
 import 'package:scrips_shared_features/features/common/domain/usecases/fetch_hospital_list_use_case.dart';
@@ -240,6 +241,7 @@ Future<void> initServiceLocator() async {
   sl.registerLazySingleton(() => FetchHospitalListUseCase(repository: sl()));
   sl.registerLazySingleton(
       () => FetchSpecialityByIdCodeUseCase(repository: sl()));
+  sl.registerLazySingleton(() => AppointmentValueSetsUseCase(repository: sl()));
 
   // Data sources
   sl.registerLazySingleton<CommonDataSource>(() => CommonDataSourceImpl());

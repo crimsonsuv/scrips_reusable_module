@@ -95,10 +95,21 @@ String dateTimeToISOString(DateTime aDate) {
 class ValueDisplayPair {
   final String value;
   final String label;
-  ValueDisplayPair(
+  final IconData icon;
+  ValueDisplayPair({
     this.value,
     this.label,
-  );
+    this.icon,
+  });
+}
+
+class ColorCodePair {
+  final int colorCode;
+  final String value;
+  ColorCodePair({
+    this.colorCode,
+    this.value,
+  });
 }
 
 bool isPlatformStandard(BuildContext context) {

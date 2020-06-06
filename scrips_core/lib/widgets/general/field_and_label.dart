@@ -16,6 +16,7 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/utils/utils.dart';
+import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
 
@@ -33,6 +34,7 @@ enum FieldType {
   MultiTagPicker,
   ValueSetPicker,
   SearchPicker,
+  ColorPicker,
 }
 
 enum LocationType {
@@ -77,6 +79,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final DateTime lastDate;
   final List<ListItemType> listItems;
   final List<ValueDisplayPair> tagsItems;
+  final List<ColorCodePair> colorItems;
   final String valueSetGroup;
   final dynamic useCase;
   FieldAndLabelState _myState;
@@ -99,6 +102,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldType = FieldType.TextField,
       this.listItems,
       this.tagsItems,
+      this.colorItems,
       this.icon,
       this.focusNode,
       this.autoFocus = false,
@@ -383,25 +387,31 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.MultiTagPicker:
         field = buildMultiTagPicker(context);
         break;
+      case FieldType.ColorPicker:
+        field = buildColorPicker(context);
+        break;
       default:
         field = Container();
         break;
     }
     return Container(
       padding: (widget.fieldType == FieldType.SingleTagPicker ||
-              widget.fieldType == FieldType.MultiTagPicker)
+              widget.fieldType == FieldType.MultiTagPicker ||
+              widget.fieldType == FieldType.ColorPicker)
           ? EdgeInsets.symmetric(horizontal: 0)
           : EdgeInsets.symmetric(horizontal: 8),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         border: (widget.fieldType == FieldType.SingleTagPicker ||
-                widget.fieldType == FieldType.MultiTagPicker)
+                widget.fieldType == FieldType.MultiTagPicker ||
+                widget.fieldType == FieldType.ColorPicker)
             ? null
             : Border.all(
                 color:
                     widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: (widget.fieldType == FieldType.SingleTagPicker ||
-                widget.fieldType == FieldType.MultiTagPicker)
+                widget.fieldType == FieldType.MultiTagPicker ||
+                widget.fieldType == FieldType.ColorPicker)
             ? Colors.transparent
             : widget.fieldBackgroundColor,
       ),
@@ -461,6 +471,54 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     );
   }
 
+  Widget buildColorPicker(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints.expand(height: 36),
+      height: 36.0,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: (widget.colorItems ?? []).length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            onChangedInternal(widget.colorItems[index].value);
+                          },
+                          child: Container(
+                            height: 17,
+                            width: 17,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(17),
+                                color:
+                                    Color(widget.colorItems[index].colorCode)),
+                            child: Center(
+                              child: (widget.fieldValue.toString() ==
+                                      widget.colorItems[index].value)
+                                  ? Images.instance.smallCheck()
+                                  : Container(),
+                            ),
+                          ),
+                        ),
+                        Space(
+                          horizontal: 8,
+                        )
+                      ],
+                    );
+                  }))
+        ],
+      ),
+    );
+  }
+
   Widget buildSingleTagPicker(BuildContext context) {
     int selected = 0;
     return Container(
@@ -487,6 +545,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     return ItemTags(
                       index: index,
                       elevation: 0,
+                      icon: widget.tagsItems[index].icon != null
+                          ? ItemTagsIcon(icon: widget.tagsItems[index].icon)
+                          : null,
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 7),
                       title: widget.tagsItems[index].label,
@@ -498,7 +559,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       active: widget.tagsItems[index].value ==
                           widget.fieldValue.toString(),
                       textStyle: normalLabelTextStyle(15, regularTextColor),
-                      combine: ItemTagsCombine.withTextBefore, // OR null,
+                      combine: ItemTagsCombine.withTextAfter, // OR null,
                       onPressed: (item) {
                         onChangedInternal(widget.tagsItems[index].value);
                       },
@@ -856,8 +917,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   onChanged: (value) {}),
               suggestionsCallback: (pattern) async {
                 if (pattern != null || pattern != "") {
-                  final result =
-                      await widget.useCase(QueryParams(query: pattern));
+                  final result = await widget.useCase(QueryParams(
+                      query: pattern, searchFor: widget.valueSetGroup));
                   return result.fold(
                     (error) => [],
                     (success) => success,

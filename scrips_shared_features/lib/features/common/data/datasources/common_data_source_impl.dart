@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_shared_features/core/constants/api_constats.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
@@ -23,9 +24,9 @@ import 'package:scrips_shared_features/features/common/data/datasources/common_d
 class CommonDataSourceImpl extends CommonDataSource {
   int defaultTimeout = 120;
   static final endpoint = 'http://75.126.168.31:7084/api/Master';
-  static final endpointRegister =
-      'https://scripsidentityapi20191030115107.azurewebsites.net';
+  static final endpointRegister = identityServer;
   static final endpointPractice = practiceServer;
+  static final endpointAppointment = appointmentServer;
   Dio client = Dio();
 
   @override
@@ -338,6 +339,27 @@ class CommonDataSourceImpl extends CommonDataSource {
     });
     try {
       var result = practiceCodeListFromJson(utf8.decode(response.data));
+      return result;
+    } on TypeError {
+      throw Failure(parsingError);
+    } on NoSuchMethodError {
+      throw Failure(parsingError);
+    }
+  }
+
+  @override
+  Future<List<AppointmentValueSets>> appointmentValueSets(
+      String query, String searchFor) async {
+    client.options.responseType = ResponseType.bytes;
+    var response = await client
+        .get(
+      '$appointmentServer/api/Appointment/:SearchValueSets?SearchText=$query&SearchFor=$searchFor',
+    )
+        .timeout(Duration(seconds: defaultTimeout), onTimeout: () {
+      throw Failure('Fetching appointment valueset List Failed');
+    });
+    try {
+      var result = appointmentValueSetsFromJson(utf8.decode(response.data));
       return result;
     } on TypeError {
       throw Failure(parsingError);

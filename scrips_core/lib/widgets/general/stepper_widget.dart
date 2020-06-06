@@ -42,7 +42,7 @@ class CountStepper extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: Container(
               width: 1,
-              color: separatorColor,
+              color: disabledBtnBGColor,
             ),
           ),
           Expanded(

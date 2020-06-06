@@ -123,6 +123,21 @@ class Images {
           color: color,
           colorBlendMode: colorBlendMode);
 
+  Image smallCheck(
+          {double width,
+          double height,
+          Color color,
+          BlendMode colorBlendMode,
+          BoxFit fit}) =>
+      Image(
+          image: AssetImage(
+              "submodules/scrips_msp1_flutter_shared/scrips_core/assets/ic_small_check.png"),
+          height: height,
+          width: width,
+          fit: fit,
+          color: color,
+          colorBlendMode: colorBlendMode);
+
   Image back(
           {double width,
           double height,

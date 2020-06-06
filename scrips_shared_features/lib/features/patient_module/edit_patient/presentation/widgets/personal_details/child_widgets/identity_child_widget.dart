@@ -102,7 +102,8 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
               tagsItems: ((widget?.idTypeList?.length ?? 0) > 0)
                   ? widget.idTypeList
                       .map((item) => ValueDisplayPair(
-                          item?.id ?? '', item?.name?.trim() ?? ''))
+                          value: item?.id ?? '',
+                          label: item?.name?.trim() ?? ''))
                       .toList()
                   : null,
               fieldTextColor: textInputColor,

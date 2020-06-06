@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
@@ -117,6 +118,13 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<CodeList>> practiceCodeListById(String id) {
     // TODO: implement practiceCodeListById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<AppointmentValueSets>> appointmentValueSets(
+      String query, String searchFor) {
+    // TODO: implement appointmentValueSets
     throw UnimplementedError();
   }
 }

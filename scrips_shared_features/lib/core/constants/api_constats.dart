@@ -14,3 +14,6 @@ const String oath2LoginUrl = "identitystaging.azurewebsites.net";
 
 const String providerServer = "http://52.25.96.244:7023";
 //const String providerServer = "https://scripsprovidersetup.azurewebsites.net";
+
+const String appointmentServer = "http://52.25.96.244:7026";
+//const String appointmentServer = "https://scripsprovidersetup.azurewebsites.net";

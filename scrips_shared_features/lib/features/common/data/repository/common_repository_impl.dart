@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scrips_core/constants/status_objects.dart';
 import 'package:scrips_core/utils/utils.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/degree_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
@@ -216,6 +217,20 @@ class CommonRepositoryImpl extends CommonRepository {
       String id) async {
     try {
       final result = await commonDataSource.practiceCodeListById(id);
+      return Right(result);
+    } on DioError catch (e) {
+      return (Left(handleFailure(e)));
+    } on Failure catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AppointmentValueSets>>>
+      appointmentValueSetsByQuery(String query, String searchFor) async {
+    try {
+      final result =
+          await commonDataSource.appointmentValueSets(query, searchFor);
       return Right(result);
     } on DioError catch (e) {
       return (Left(handleFailure(e)));

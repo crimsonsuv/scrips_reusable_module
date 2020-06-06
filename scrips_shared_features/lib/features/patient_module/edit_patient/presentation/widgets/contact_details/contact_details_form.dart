@@ -57,7 +57,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                 tagsItems: ((widget?.ownershipList?.length ?? 0) > 0)
                     ? widget.ownershipList
                         .map((item) => ValueDisplayPair(
-                            item?.id ?? '', item?.name?.trim() ?? ''))
+                            value: item?.id ?? '',
+                            label: item?.name?.trim() ?? ''))
                         .toList()
                     : null,
                 fieldTextColor: textInputColor,
