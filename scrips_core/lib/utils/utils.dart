@@ -96,11 +96,8 @@ class ValueDisplayPair {
   final String value;
   final String label;
   final IconData icon;
-  ValueDisplayPair({
-    this.value,
-    this.label,
-    this.icon,
-  });
+  final bool isEnabled;
+  ValueDisplayPair({this.value, this.label, this.icon, this.isEnabled = true});
 }
 
 class ColorCodePair {

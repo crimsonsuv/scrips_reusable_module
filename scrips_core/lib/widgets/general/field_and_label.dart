@@ -544,6 +544,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   itemCount: (widget.tagsItems ?? []).length,
                   itemBuilder: (int index) {
                     return ItemTags(
+                      pressEnabled: widget.tagsItems[index].isEnabled,
                       index: index,
                       elevation: 0,
                       icon: widget.tagsItems[index].icon != null
