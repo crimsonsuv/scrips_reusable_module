@@ -328,7 +328,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.1"
+    version: "0.16.0"
   js:
     dependency: transitive
     description:
@@ -357,13 +357,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1+4"
-  location:
-    dependency: transitive
-    description:
-      name: location
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.3.5"
   logging:
     dependency: transitive
     description:
@@ -521,14 +514,14 @@ packages:
   scrips_core:
     dependency: "direct main"
     description:
-      path: "../../scrips_core"
+      path: "..\\..\\scrips_core"
       relative: true
     source: path
     version: "0.20.1"
   scrips_shared_features:
     dependency: transitive
     description:
-      path: "../../scrips_shared_features"
+      path: "..\\..\\scrips_shared_features"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -613,7 +606,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.11"
   typed_data:
     dependency: transitive
     description:

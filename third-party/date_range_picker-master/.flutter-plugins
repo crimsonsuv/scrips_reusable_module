@@ -1,11 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-connectivity=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.4.6+2/
-flutter_plugin_android_lifecycle=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.8/
-flutter_web_auth=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_web_auth-0.1.3/
-google_maps_flutter=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-0.5.21+15/
-image_picker=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.6+5/
-location=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/location-2.3.5/
-path_provider=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.5.1/
-shared_preferences=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.7+3/
-shared_preferences_macos=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_macos-0.0.1+9/
-shared_preferences_web=/Users/excalibur/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+7/
+connectivity=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\connectivity-0.4.6+2\\
+flutter_plugin_android_lifecycle=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\flutter_plugin_android_lifecycle-1.0.8\\
+flutter_web_auth=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\flutter_web_auth-0.1.3\\
+google_maps_flutter=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\google_maps_flutter-0.5.21+15\\
+image_picker=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\image_picker-0.6.6+5\\
+path_provider=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\path_provider-1.5.1\\
+shared_preferences=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\shared_preferences-0.5.7+3\\
+shared_preferences_macos=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\shared_preferences_macos-0.0.1+9\\
+shared_preferences_web=C:\\Users\\crimsonsuv\\AppData\\Roaming\\Pub\\Cache\\hosted\\pub.dartlang.org\\shared_preferences_web-0.1.2+7\\

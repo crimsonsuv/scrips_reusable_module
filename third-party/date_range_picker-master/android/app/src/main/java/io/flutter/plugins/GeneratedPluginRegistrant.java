@@ -6,7 +6,6 @@ import io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyc
 import com.linusu.flutter_web_auth.FlutterWebAuthPlugin;
 import io.flutter.plugins.googlemaps.GoogleMapsPlugin;
 import io.flutter.plugins.imagepicker.ImagePickerPlugin;
-import com.lyokone.location.LocationPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
 import io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin;
 
@@ -23,7 +22,6 @@ public final class GeneratedPluginRegistrant {
     FlutterWebAuthPlugin.registerWith(registry.registrarFor("com.linusu.flutter_web_auth.FlutterWebAuthPlugin"));
     GoogleMapsPlugin.registerWith(registry.registrarFor("io.flutter.plugins.googlemaps.GoogleMapsPlugin"));
     ImagePickerPlugin.registerWith(registry.registrarFor("io.flutter.plugins.imagepicker.ImagePickerPlugin"));
-    LocationPlugin.registerWith(registry.registrarFor("com.lyokone.location.LocationPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
     SharedPreferencesPlugin.registerWith(registry.registrarFor("io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin"));
   }
