@@ -553,7 +553,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 7),
                       title: widget.tagsItems[index].label,
-                      textColor: regularTextColor,
+                      textColor: widget.tagsItems[index].isEnabled
+                          ? regularTextColor
+                          : disabledBtnBGColor,
                       textActiveColor: enabledBtnTextColor,
                       color: bgColor,
                       activeColor: enabledBtnBGColor,
@@ -1298,16 +1300,13 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               onSubmitted: onSubmitted,
               onEditingComplete: onEditingComplete,
               keyboardType: TextInputType.multiline,
-              maxLength: 500,
+              maxLength: widget.maxLength,
               minLines: 3,
-              onTap: () {
-                onTapInternal();
-              },
+              onTap: onTapInternal,
               decoration: InputDecoration(
                   //counterText: "",
                   counterStyle: normalLabelTextStyle(8, regularTextColor),
                   hintText: widget.placeholder,
-                  hintMaxLines: 4,
                   hintStyle: defaultHintStyle(null, null),
                   contentPadding: EdgeInsets.only(bottom: -10, top: 4),
                   border: InputBorder.none),
