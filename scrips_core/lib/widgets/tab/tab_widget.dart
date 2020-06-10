@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/app_sizes.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
+import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_core/widgets/tab/tab_item.dart';
 
 class TabWidget extends StatelessWidget {
@@ -31,8 +32,28 @@ class TabWidget extends StatelessWidget {
         labelColor: normalBtnTextColor,
         indicatorColor: Colors.transparent,
         tabs: tabs.map((TabItem choice) {
-          return Tab(
-            text: choice.title,
+          return Row(
+            children: <Widget>[
+              Text(choice.title),
+              (choice?.isUnsaved ?? false)
+                  ? Row(
+                      children: <Widget>[
+                        Space(
+                          horizontal: 4,
+                        ),
+                        Container(
+                          height: 6,
+                          width: 6,
+                          decoration: BoxDecoration(
+                            color: red,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Container()
+            ],
+            // text: choice.title,
           );
         }).toList(),
       ),

@@ -31,11 +31,12 @@ TextStyle semiBoldLabelTextStyle(double size, color) => TextStyle(
       color: color ?? textInputColor,
     );
 
-TextStyle normalBoldTextStyle(double size, color) => TextStyle(
-      fontSize: size,
-      fontWeight: FontWeight.w500,
-      color: color ?? textInputColor,
-    );
+TextStyle normalBoldTextStyle(double size, color, {double height = 1.2}) =>
+    TextStyle(
+        fontSize: size,
+        fontWeight: FontWeight.w500,
+        color: color ?? textInputColor,
+        height: height);
 
 TextStyle normalLabelTextStyle(double size, color, {double height = 1.2}) =>
     TextStyle(

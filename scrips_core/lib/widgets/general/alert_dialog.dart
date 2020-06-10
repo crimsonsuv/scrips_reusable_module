@@ -4,12 +4,15 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 
-confirmDialog(
-    {BuildContext context,
-    String title,
-    String message,
-    bool isRemove = false,
-    Function onYes}) async {
+confirmDialog({
+  BuildContext context,
+  String title,
+  String message,
+  String yesText = "Yes",
+  String noText = "No",
+  bool isRemove = false,
+  Function onYes,
+}) async {
   return showDialog(
     context: context,
     barrierDismissible: false, // user must tap button for close dialog!
@@ -54,7 +57,7 @@ confirmDialog(
                             children: <Widget>[
                               Button(
                                 buttonBackgroundColor: enabledBtnBGColor,
-                                text: "No",
+                                text: noText,
                                 height: 32,
                                 width: 80,
                                 style: semiBoldLabelTextStyle(
@@ -68,11 +71,11 @@ confirmDialog(
                               ),
                               Button(
                                 buttonBackgroundColor: bgColor,
-                                text: "Yes",
+                                text: yesText,
                                 height: 32,
                                 width: 80,
                                 style: semiBoldLabelTextStyle(
-                                    15, isRemove ? red : disabledBtnTextColor),
+                                    15, isRemove ? red : enabledBtnBGColor),
                                 onPressed: () {
                                   onYes();
                                   Navigator.of(context).pop();
