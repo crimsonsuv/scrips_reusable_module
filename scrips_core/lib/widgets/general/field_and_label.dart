@@ -17,6 +17,7 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
 import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/space.dart';
+import 'package:scrips_core/widgets/general/stepper_widget.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
@@ -36,6 +37,7 @@ enum FieldType {
   ValueSetPicker,
   SearchPicker,
   ColorPicker,
+  StepperField,
 }
 
 enum LocationType {
@@ -71,6 +73,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final Function onEditingComplete;
   final Function onSubmitted;
   final Function onTap;
+  final Function onIncrement;
+  final Function onDecrement;
   final Widget icon;
   final Widget rightIcon;
   final int maxLength;
@@ -123,6 +127,8 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.fieldBackgroundColor,
       this.fieldTextColor,
       this.rightIcon,
+      this.onIncrement,
+      this.onDecrement,
       this.locationType = LocationType.Establishment,
       this.maxLength = 300,
       this.valueSetGroup,
@@ -172,7 +178,8 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     if (widget.fieldType == FieldType.TextField ||
         widget.fieldType == FieldType.LocationPicker ||
         widget.fieldType == FieldType.ValueSetPicker ||
-        widget.fieldType == FieldType.SearchPicker) {
+        widget.fieldType == FieldType.SearchPicker ||
+        widget.fieldType == FieldType.StepperField) {
       _textEditController = TextEditingController(text: currentFieldValue);
     } else if (widget.fieldType == FieldType.RichTextEdit) {
       _textEditController = TextEditingController(text: currentFieldValue);
@@ -391,6 +398,9 @@ class FieldAndLabelState extends State<FieldAndLabel> {
       case FieldType.ColorPicker:
         field = buildColorPicker(context);
         break;
+      case FieldType.StepperField:
+        field = buildStepperField(context);
+        break;
       default:
         field = Container();
         break;
@@ -398,21 +408,24 @@ class FieldAndLabelState extends State<FieldAndLabel> {
     return Container(
       padding: (widget.fieldType == FieldType.SingleTagPicker ||
               widget.fieldType == FieldType.MultiTagPicker ||
-              widget.fieldType == FieldType.ColorPicker)
+              widget.fieldType == FieldType.ColorPicker ||
+              widget.fieldType == FieldType.StepperField)
           ? EdgeInsets.symmetric(horizontal: 0)
           : EdgeInsets.symmetric(horizontal: 8),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.circular(7.0),
         border: (widget.fieldType == FieldType.SingleTagPicker ||
                 widget.fieldType == FieldType.MultiTagPicker ||
-                widget.fieldType == FieldType.ColorPicker)
+                widget.fieldType == FieldType.ColorPicker ||
+                widget.fieldType == FieldType.StepperField)
             ? null
             : Border.all(
                 color:
                     widget.fieldBackgroundColor ?? defaultFieldBackgroundColor),
         color: (widget.fieldType == FieldType.SingleTagPicker ||
                 widget.fieldType == FieldType.MultiTagPicker ||
-                widget.fieldType == FieldType.ColorPicker)
+                widget.fieldType == FieldType.ColorPicker ||
+                widget.fieldType == FieldType.StepperField)
             ? Colors.transparent
             : widget.fieldBackgroundColor,
       ),
@@ -516,6 +529,66 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                     );
                   }))
         ],
+      ),
+    );
+  }
+
+  Widget buildStepperField(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 3),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 62,
+              height: 36,
+              child: IgnorePointer(
+                ignoring: !(widget?.enabled ?? true),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0),
+                    border: Border.all(
+                        color: widget.fieldBackgroundColor ??
+                            defaultFieldBackgroundColor),
+                    color: widget.fieldBackgroundColor,
+                  ),
+                  child: Center(
+                    child: TextField(
+                      style: normalLabelTextStyle(
+                          15,
+                          (widget?.enabled ?? true)
+                              ? regularTextColor
+                              : Colors.black45),
+                      textAlign: TextAlign.center,
+                      enabled: false,
+                      controller: _textEditController,
+                      maxLines: 1,
+                      maxLength: 3,
+                      decoration: InputDecoration(
+                          counterText: "",
+                          hintText: widget.placeholder,
+                          hintStyle: defaultHintStyle(null, null),
+                          contentPadding: EdgeInsets.only(bottom: 12),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Space(
+              horizontal: 8,
+            ),
+            CountStepper(
+              height: 28,
+              width: 101,
+              increment: (widget.enabled) ? widget.onIncrement : null,
+              decrement: (widget.enabled) ? widget.onDecrement : null,
+            ),
+          ],
+        ),
       ),
     );
   }
