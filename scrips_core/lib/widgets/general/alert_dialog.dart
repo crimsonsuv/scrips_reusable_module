@@ -11,6 +11,7 @@ confirmDialog({
   String yesText = "Yes",
   String noText = "No",
   bool isRemove = false,
+  bool hideNo = false,
   Function onYes,
 }) async {
   return showDialog(
@@ -55,20 +56,27 @@ confirmDialog({
                           ),
                           Row(
                             children: <Widget>[
-                              Button(
-                                buttonBackgroundColor: enabledBtnBGColor,
-                                text: noText,
-                                height: 32,
-                                width: 80,
-                                style: semiBoldLabelTextStyle(
-                                    15, enabledBtnTextColor),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              Space(
-                                horizontal: 8,
-                              ),
+                              (hideNo)
+                                  ? Container()
+                                  : Row(
+                                      children: <Widget>[
+                                        Button(
+                                          buttonBackgroundColor:
+                                              enabledBtnBGColor,
+                                          text: noText,
+                                          height: 32,
+                                          width: 80,
+                                          style: semiBoldLabelTextStyle(
+                                              15, enabledBtnTextColor),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        Space(
+                                          horizontal: 8,
+                                        ),
+                                      ],
+                                    ),
                               Button(
                                 buttonBackgroundColor: bgColor,
                                 text: yesText,
