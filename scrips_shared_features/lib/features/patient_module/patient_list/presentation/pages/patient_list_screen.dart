@@ -21,8 +21,6 @@ import 'package:scrips_shared_features/generated/l10n.dart';
 
 typedef PatientCallBack(PatientDatum patientData);
 
-enum sortType { asc, desc }
-
 class PatientListScreen extends StatefulWidget {
   PatientListScreen(
       {Key key,

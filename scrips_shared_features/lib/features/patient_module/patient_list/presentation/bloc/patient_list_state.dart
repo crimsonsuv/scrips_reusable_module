@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/patient_module/patient_list/data/datamodels/patients_list_model.dart';
 import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/pages/patient_list_screen.dart';
 

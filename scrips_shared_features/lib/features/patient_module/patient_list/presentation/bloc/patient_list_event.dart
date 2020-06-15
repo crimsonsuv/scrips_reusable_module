@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/pages/patient_list_screen.dart';
+import 'package:scrips_core/utils/utils.dart';
 
 @immutable
 abstract class PatientListEvent {}

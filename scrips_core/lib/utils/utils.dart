@@ -17,6 +17,8 @@ Color getColorFromHex(String hexColor) {
   return Color(int.parse(hexColor, radix: 16));
 }
 
+enum sortType { asc, desc }
+
 bool isBlank(String value) {
   return value == null || value == '';
 }

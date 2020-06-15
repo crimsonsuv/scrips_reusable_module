@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/emergency_contact_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/insurance_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/patients_model.dart';
-import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/pages/patient_list_screen.dart';
 
 @immutable
 abstract class CreateEditPatientEvent {}

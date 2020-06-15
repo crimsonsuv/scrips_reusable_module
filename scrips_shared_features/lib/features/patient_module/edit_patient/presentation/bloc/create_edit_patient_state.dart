@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/gender_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/id_type_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/insurance_model.dart';
