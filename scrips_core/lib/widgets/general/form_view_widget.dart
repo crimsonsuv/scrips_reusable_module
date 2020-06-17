@@ -7,16 +7,22 @@ import 'package:scrips_core/widgets/general/space.dart';
 class FormView extends StatelessWidget {
   final String header;
   final String subtitle;
+  final String headerButtonText;
   final Widget child;
   final EdgeInsets margin;
   final bool isMandatory;
+  final Color backgroundColor;
+  final Function onHeaderButtonTap;
   //
   FormView({
     Key key,
     this.header,
     this.subtitle,
     @required this.margin,
+    this.headerButtonText = "",
+    this.onHeaderButtonTap,
     @required this.child,
+    this.backgroundColor = Colors.white,
     this.isMandatory = false,
   }) : super(key: key);
   //
@@ -42,6 +48,18 @@ class FormView extends StatelessWidget {
                             textAlign: TextAlign.start,
                           )
                         : Container(),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    (headerButtonText != '')
+                        ? InkWell(
+                            onTap: onHeaderButtonTap,
+                            child: Text(
+                              "$headerButtonText",
+                              style: normalBoldTextStyle(13, enabledBtnBGColor),
+                            ),
+                          )
+                        : Container()
                   ]),
                   (subtitle == null)
                       ? Container()
@@ -65,7 +83,7 @@ class FormView extends StatelessWidget {
               ),
         Container(
           decoration: BoxDecoration(
-            color: disabledBtnTextColor,
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(13),
           ),
           child: Padding(
