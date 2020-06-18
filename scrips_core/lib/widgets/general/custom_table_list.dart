@@ -130,7 +130,7 @@ class _CustomTableListWidgetState extends State<CustomTableListWidget>
             ),
     );
     dataList.add(Space(
-      horizontal: 24,
+      horizontal: 16,
     ));
     widget.headerList.forEach((data) {
       if (data.title == "" || data.title == null) {
@@ -197,7 +197,7 @@ class _CustomTableListWidgetState extends State<CustomTableListWidget>
       ),
     );
     dataList.add(Space(
-      horizontal: 24,
+      horizontal: 16,
     ));
     widget.headerList.forEach((data) {
       dataList.add(Row(
@@ -302,20 +302,69 @@ class _CustomTableListWidgetState extends State<CustomTableListWidget>
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 13),
-                    child: SizedBox(
-                      height: 40,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: headerRowWidget(),
-                      ),
+                  SizedBox(
+                    height: 40,
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          height: 40,
+                          width: 43,
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                "GMT+04",
+                                style:
+                                    normalLabelTextStyle(11, regularTextColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Space(
+                          horizontal: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: headerRowWidget(),
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: itemsList(),
+                      child: Row(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 40,
+                                child: ListView.builder(
+                                    padding: const EdgeInsets.only(
+                                        top: 0, bottom: 0),
+                                    itemCount: widget?.rowDataList?.length ?? 0,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Container(
+                                        height: 40,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "9a",
+                                              style: normalLabelTextStyle(
+                                                  13, regularTextColor),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: itemsList(),
+                          ),
+                        ],
                       ),
                     ),
                   )

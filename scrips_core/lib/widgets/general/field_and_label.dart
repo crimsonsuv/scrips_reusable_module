@@ -624,7 +624,7 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                           ? ItemTagsIcon(icon: widget.tagsItems[index].icon)
                           : null,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                       title: widget.tagsItems[index].label,
                       textColor: widget.tagsItems[index].isEnabled
                           ? regularTextColor
