@@ -81,7 +81,6 @@ class _PatientListScreenState extends State<PatientListScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    bloc.dispose();
   }
 
   @override
@@ -164,7 +163,7 @@ class _PatientListScreenState extends State<PatientListScreen>
         break;
     }
     setPatientsRowData(patientsData);
-    bloc.dispatch(SortPatientItemsEvent(sort: currentSortType));
+    bloc.add(SortPatientItemsEvent(sort: currentSortType));
   }
 
   @override
@@ -379,7 +378,7 @@ class _PatientListScreenState extends State<PatientListScreen>
                                                 onTap: () {
                                                   selectedPatientIndexes
                                                       .clear();
-                                                  bloc.dispatch(SelectPatientItems(
+                                                  bloc.add(SelectPatientItems(
                                                       indexs:
                                                           selectedPatientIndexes));
                                                 },
@@ -414,10 +413,9 @@ class _PatientListScreenState extends State<PatientListScreen>
                                                                             data]
                                                                         .patientId);
                                                               });
-                                                              bloc.dispatch(
-                                                                  ArchivePatientEvent(
-                                                                      patientIDs:
-                                                                          patientIds));
+                                                              bloc.add(ArchivePatientEvent(
+                                                                  patientIDs:
+                                                                      patientIds));
                                                             });
                                                       },
                                                     )
@@ -549,8 +547,7 @@ class _PatientListScreenState extends State<PatientListScreen>
                                       Expanded(child: Container()),
                                       InkWell(
                                         onTap: () {
-                                          bloc.dispatch(
-                                              ChangeArchiveStatusEvent());
+                                          bloc.add(ChangeArchiveStatusEvent());
                                         },
                                         child: Text(
                                           (isArchived)
@@ -655,9 +652,8 @@ class _PatientListScreenState extends State<PatientListScreen>
                                                   "We will inform the patient about this change. You can unarchive this account later in Account Settings.",
                                               isRemove: true,
                                               onYes: () {
-                                                bloc.dispatch(
-                                                    ArchivePatientEvent(
-                                                        patientIDs: [
+                                                bloc.add(ArchivePatientEvent(
+                                                    patientIDs: [
                                                       patientsData[index]
                                                           .patientId
                                                     ]));
@@ -696,7 +692,7 @@ class _PatientListScreenState extends State<PatientListScreen>
                                   selectedPatientIndexes.add(i);
                                 }
                               }
-                              bloc.dispatch(SelectPatientItems(
+                              bloc.add(SelectPatientItems(
                                   indexs: selectedPatientIndexes));
                             },
                             onItemSelection: (index) {
@@ -709,7 +705,7 @@ class _PatientListScreenState extends State<PatientListScreen>
                               } else {
                                 selectedPatientIndexes.add(index);
                               }
-                              bloc.dispatch(SelectPatientItems(
+                              bloc.add(SelectPatientItems(
                                   indexs: selectedPatientIndexes));
                             },
                             totalItems: totalPatientData,
@@ -778,7 +774,7 @@ class _PatientListScreenState extends State<PatientListScreen>
     selectedPageSize = pageSize;
     currentPage = currentPage;
     isArchived = isArchived;
-    bloc.dispatch(PatientsFetchByQueryEvent(
+    bloc.add(PatientsFetchByQueryEvent(
       orgId: widget.orgId,
       practiceId: widget.practiceId,
       pageSize: selectedPageSize,

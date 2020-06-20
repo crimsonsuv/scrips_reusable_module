@@ -73,7 +73,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
     super.initState();
     isEdit = widget.pData != null;
     if (widget.pData != null) {
-      bloc.dispatch(FetchPatientEvent(pid: widget.pData.patientId));
+      bloc.add(FetchPatientEvent(pid: widget.pData.patientId));
     } else {
       patient = Patient(
           isAdult: true,
@@ -91,18 +91,17 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    bloc.dispose();
   }
 
   @override
   void didInitState() {
-    bloc.dispatch(FetchGendersEvent());
-    bloc.dispatch(FetchIdTypeEvent());
-    bloc.dispatch(FetchLanguageEvent());
-    bloc.dispatch(FetchMaritalStatusEvent());
-    bloc.dispatch(FetchRelationshipEvent());
-    bloc.dispatch(FetchOwnershipEvent());
-    bloc.dispatch(FetchInsuranceEvent());
+    bloc.add(FetchGendersEvent());
+    bloc.add(FetchIdTypeEvent());
+    bloc.add(FetchLanguageEvent());
+    bloc.add(FetchMaritalStatusEvent());
+    bloc.add(FetchRelationshipEvent());
+    bloc.add(FetchOwnershipEvent());
+    bloc.add(FetchInsuranceEvent());
   }
 
   void cancelCreatingDialog() {
@@ -181,7 +180,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
               initialIdNumber = patient.identification.idNumber;
               initialIdType = patient.identification.idType;
               if (!isInitial) {
-                bloc.dispatch(FetchMatchingRecordsEvent(
+                bloc.add(FetchMatchingRecordsEvent(
                     idNumber: initialIdNumber, idType: initialIdType));
               }
               isInitial = false;
@@ -210,19 +209,19 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                   .removeWhere((data) => data.idNumber == initialIdNumber);
               matchingPatientRecords = state.matchingRecords;
               Timer(Duration(seconds: 3), () {
-                bloc.dispatch(EnablePatientSaveEvent(
+                bloc.add(EnablePatientSaveEvent(
                     patient: patient,
                     matchingRecordCount: matchingPatientRecords.length));
               });
             } else if (state is UseRecordAnywayState) {
               matchingPatientRecords.clear();
-              bloc.dispatch(EnablePatientSaveEvent(
+              bloc.add(EnablePatientSaveEvent(
                   patient: patient,
                   matchingRecordCount: matchingPatientRecords.length));
             } else if (state is UpdateInsuranceListState ||
                 state is UpdateEmergencyContactListState) {
               Timer(Duration(seconds: 2), () {
-                bloc.dispatch(EnablePatientSaveEvent(
+                bloc.add(EnablePatientSaveEvent(
                     patient: patient,
                     matchingRecordCount: matchingPatientRecords?.length ?? 0));
               });
@@ -233,10 +232,10 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
               patient.isActive = state.response.status;
               patient.updatePatientContactRequest.patientId =
                   state.response.patientId;
-              bloc.dispatch(EnablePatientSaveEvent(
+              bloc.add(EnablePatientSaveEvent(
                   patient: patient,
                   matchingRecordCount: matchingPatientRecords?.length ?? 0));
-              bloc.dispatch(ChangeTabIndexEvent(1));
+              bloc.add(ChangeTabIndexEvent(1));
             } else if (state is CreateContactDetailsState) {
               showToastWidget(
                   ToastWidget(
@@ -280,14 +279,14 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
 //  void updateOrg() {
 //    if (selectedCountry != null || selectedCountry != "") {
 //      if (editedOrgData.contactDetails.country != selectedCountry) {
-//        bloc.dispatch(ShowErrorEvent(
+//        bloc.add(ShowErrorEvent(
 //            "Contact Address outside $selectedCountry not allowed, Please contact Scrips to change country."));
 //        return;
 //      } else {
-//        bloc.dispatch(UpdateEvent(organization: editedOrgData));
+//        bloc.add(UpdateEvent(organization: editedOrgData));
 //      }
 //    } else {
-//      bloc.dispatch(UpdateEvent(organization: editedOrgData));
+//      bloc.add(UpdateEvent(organization: editedOrgData));
 //    }
 //  }
 
@@ -444,26 +443,25 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                                                 patient
                                                     .healthInsuranceResponse[1]
                                                     .policyNumber) {
-                                              bloc.dispatch(ShowErrorMessageEvent(
+                                              bloc.add(ShowErrorMessageEvent(
                                                   message:
                                                       "Health Insurance already added"));
                                               return;
                                             }
                                           }
-                                          bloc.dispatch(UpdatePatientEvent(
+                                          bloc.add(UpdatePatientEvent(
                                               patient: patient,
                                               pid: patient.patientId));
                                         } else if ((!isEdit) &&
                                             (selectedTab == 0) &&
                                             isSaveEnabled) {
-                                          bloc.dispatch(CreatePatientEvent(
+                                          bloc.add(CreatePatientEvent(
                                             patient: patient,
                                           ));
                                         } else if ((!isEdit) &&
                                             (selectedTab == 1) &&
                                             isSaveEnabled) {
-                                          bloc.dispatch(
-                                              CreateContactDetailsEvent(
+                                          bloc.add(CreateContactDetailsEvent(
                                             patient: patient,
                                           ));
                                         }
@@ -498,7 +496,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                         FlatButton(
                           onPressed: (isEdit)
                               ? () {
-                                  bloc.dispatch(ChangeTabIndexEvent(0));
+                                  bloc.add(ChangeTabIndexEvent(0));
                                 }
                               : null,
                           child: Text(
@@ -513,7 +511,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                         FlatButton(
                           onPressed: (isEdit)
                               ? () {
-                                  bloc.dispatch(ChangeTabIndexEvent(1));
+                                  bloc.add(ChangeTabIndexEvent(1));
                                 }
                               : null,
                           child: Text(
@@ -528,7 +526,7 @@ class _CreatePatientScreen extends State<CreatePatientScreen>
                         FlatButton(
                           onPressed: (isEdit)
                               ? () {
-                                  bloc.dispatch(ChangeTabIndexEvent(2));
+                                  bloc.add(ChangeTabIndexEvent(2));
                                 }
                               : null,
                           child: Text(

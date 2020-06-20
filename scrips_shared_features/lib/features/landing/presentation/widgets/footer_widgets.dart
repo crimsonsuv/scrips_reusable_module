@@ -34,7 +34,7 @@ List<Widget> footerWidgets(
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });
           } else {
-            bloc.dispatch(OAuthLoginEvent());
+            bloc.add(OAuthLoginEvent());
           }
         },
       ),

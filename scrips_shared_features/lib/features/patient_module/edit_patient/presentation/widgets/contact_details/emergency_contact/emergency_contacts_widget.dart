@@ -113,17 +113,15 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                                   .removeAt(selectedIndex);
                             }
                             selectedIndex = -1;
-                            widget.bloc.dispatch(
-                                UpdateEmergencyContactListEvent(
-                                    patient: widget.patient));
+                            widget.bloc.add(UpdateEmergencyContactListEvent(
+                                patient: widget.patient));
                           },
                           onRemove: () {
                             selectedIndex = -1;
                             widget.patient.emergencyContactResponse
                                 .removeAt(index);
-                            widget.bloc.dispatch(
-                                UpdateEmergencyContactListEvent(
-                                    patient: widget.patient));
+                            widget.bloc.add(UpdateEmergencyContactListEvent(
+                                patient: widget.patient));
                           },
                           onSave: (EmergencyContactList data) {
                             if ((widget.patient.emergencyContactResponse
@@ -133,7 +131,7 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                                         ?.length ??
                                     0) >
                                 1) {
-                              widget.bloc.dispatch(ShowErrorMessageEvent(
+                              widget.bloc.add(ShowErrorMessageEvent(
                                   message:
                                       "Emergency Contact Number already added"));
                               return;
@@ -151,9 +149,8 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                               widget.patient.emergencyContactResponse[index]
                                   .isProxy = true;
                             }
-                            widget.bloc.dispatch(
-                                UpdateEmergencyContactListEvent(
-                                    patient: widget.patient));
+                            widget.bloc.add(UpdateEmergencyContactListEvent(
+                                patient: widget.patient));
                           },
                         )
                       : Column(
@@ -245,7 +242,7 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                                         });
                                         isEdit = true;
                                         selectedIndex = index;
-                                        widget.bloc.dispatch(
+                                        widget.bloc.add(
                                             UpdateEmergencyContactListEvent(
                                                 patient: widget.patient));
                                       },
@@ -280,7 +277,7 @@ class _EmergencyContactsWidgetState extends State<EmergencyContactsWidget> {
                         (widget?.patient?.emergencyContactResponse?.length ??
                                 0) -
                             1;
-                    widget.bloc.dispatch(UpdateEmergencyContactListEvent(
+                    widget.bloc.add(UpdateEmergencyContactListEvent(
                         patient: widget.patient));
                   },
                   child: Container(

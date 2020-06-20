@@ -70,7 +70,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
         final stripped =
             encoded.replaceFirst(RegExp(r'data:image/[^;]+;base64,'), '');
         final Uint8List data = base64.decode(stripped);
-        widget.bloc.dispatch(UploadImageEvent(path: encoded));
+        widget.bloc.add(UploadImageEvent(path: encoded));
       });
     });
     input.click();
@@ -105,7 +105,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 imageUploading = false;
                 widget.patient.photoUrl = state.link;
 //                widget.bloc
-//                    .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+//                    .add(EnablePatientSaveEvent(patient: widget.patient));
               }
               return ClipRRect(
                 borderRadius: BorderRadius.circular(40),
@@ -135,8 +135,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                                           source: ImageSource.gallery,
                                           imageQuality: 80)
                                       .then((file) {
-                                    widget.bloc.dispatch(
-                                        UploadImageEvent(path: file.path));
+                                    widget.bloc
+                                        .add(UploadImageEvent(path: file.path));
                                   });
                                 }
                               },
@@ -172,8 +172,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
             labelValue: "FIRST NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.firstName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter first name",
@@ -196,8 +195,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
             labelValue: "MIDDLE NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.middleName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter middle name (Optional)",
@@ -220,8 +218,7 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
             labelValue: "LAST NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.lastName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter last name",
@@ -258,8 +255,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 labelValue: "DATE OF BIRTH",
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.birthDate = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 placeholder: "Select date of birth",
@@ -297,8 +294,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 labelValue: "GENDER".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.gender = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 axis: Axis.vertical,
@@ -335,8 +332,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 labelValue: "Marital status".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.maritalStatus = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 axis: Axis.vertical,
@@ -385,8 +382,8 @@ class _PersonalDetailsFormWidgetState extends State<PersonalDetailsFormWidget> {
                 labelValue: "Preferred Language".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.language = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 axis: Axis.vertical,

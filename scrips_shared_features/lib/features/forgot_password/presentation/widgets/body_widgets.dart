@@ -24,12 +24,12 @@ List<Widget> bodyWidgets(
           if (!isEmail(value) && !isBlank(value.toString())) {
             email = "";
             state.setValidationMessage("Email is not valid");
-            bloc.dispatch(
+            bloc.add(
               EnabledButtonEvent(email: email),
             );
           } else {
             email = value;
-            bloc.dispatch(
+            bloc.add(
               EnabledButtonEvent(email: email),
             );
             state.setValidationMessage('');

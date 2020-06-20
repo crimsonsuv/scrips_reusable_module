@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    bloc.dispatch(
+    bloc.add(
       SetLoginDummyDataEvent(context),
     );
   }
@@ -41,7 +41,6 @@ class _LoginState extends State<Login> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    bloc.dispose();
   }
 
   @override
@@ -89,9 +88,19 @@ class _LoginState extends State<Login> {
                   showNext: false,
                   iconImage: Images.instance.banner(),
                   headerWidgets: headerWidgets(context),
-                  bodyWidgets:
-                      bodyWidgets(context: context, email: email, password: password, bloc: bloc),
-                  footerWidgets: footerWidgets(email: email, password: password, context: context, bloc: bloc, isLoading: isLoading, isEnabled: isEnabled, shouldShowSignUpWithAccessCode: false),
+                  bodyWidgets: bodyWidgets(
+                      context: context,
+                      email: email,
+                      password: password,
+                      bloc: bloc),
+                  footerWidgets: footerWidgets(
+                      email: email,
+                      password: password,
+                      context: context,
+                      bloc: bloc,
+                      isLoading: isLoading,
+                      isEnabled: isEnabled,
+                      shouldShowSignUpWithAccessCode: false),
                 ),
               );
             },

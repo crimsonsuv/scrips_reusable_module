@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
-import 'package:scrips_core/utils/utils.dart';
 import 'package:scrips_core/widgets/general/field_and_label.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 import 'package:scrips_shared_features/features/sign_up_with_access_code/presentation/bloc/bloc.dart';
@@ -30,12 +29,12 @@ List<Widget> bodyWidgets(
           if (!isEmail(value)) {
             email = "";
             state.setValidationMessage("Not a valid Email");
-            bloc.dispatch(
+            bloc.add(
               EnabledButtonEvent(email: email, code: accessCode),
             );
           } else {
             email = value;
-            bloc.dispatch(
+            bloc.add(
               EnabledButtonEvent(email: email, code: accessCode),
             );
             state.setValidationMessage('');
@@ -54,7 +53,7 @@ List<Widget> bodyWidgets(
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
           accessCode = value;
-          bloc.dispatch(
+          bloc.add(
             EnabledButtonEvent(email: email, code: accessCode),
           );
         },

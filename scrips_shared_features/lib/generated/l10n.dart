@@ -8,18 +8,24 @@ import 'intl/messages_all.dart';
 // Made by Localizely
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names, lines_longer_than_80_chars
+
 class S {
   S();
+  
+  static S current;
   
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final String name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return S();
+      S.current = S();
+      
+      return S.current;
     });
   } 
 
@@ -27,6 +33,7 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Practice Management`
   String get pm_app_name {
     return Intl.message(
       'Practice Management',
@@ -36,6 +43,7 @@ class S {
     );
   }
 
+  /// `Provider`
   String get pa_app_name {
     return Intl.message(
       'Provider',
@@ -45,6 +53,7 @@ class S {
     );
   }
 
+  /// `Check-In`
   String get uk_app_name {
     return Intl.message(
       'Check-In',
@@ -54,6 +63,7 @@ class S {
     );
   }
 
+  /// `User App`
   String get ua_app_name {
     return Intl.message(
       'User App',
@@ -63,6 +73,7 @@ class S {
     );
   }
 
+  /// `Welcome to`
   String get welcomeTo {
     return Intl.message(
       'Welcome to',
@@ -72,6 +83,7 @@ class S {
     );
   }
 
+  /// `Please, enter your login details`
   String get pleaseEnterYourLoginDetails {
     return Intl.message(
       'Please, enter your login details',
@@ -81,6 +93,7 @@ class S {
     );
   }
 
+  /// `Login`
   String get login {
     return Intl.message(
       'Login',
@@ -90,6 +103,7 @@ class S {
     );
   }
 
+  /// `Forgot Password?`
   String get forgotPassword {
     return Intl.message(
       'Forgot Password?',
@@ -99,6 +113,7 @@ class S {
     );
   }
 
+  /// `Sign Up With Access Code`
   String get signUpWithAccessCode {
     return Intl.message(
       'Sign Up With Access Code',
@@ -108,6 +123,7 @@ class S {
     );
   }
 
+  /// `Please, complete your registration for your`
   String get pleaseCompleteYourRegistrationForYour {
     return Intl.message(
       'Please, complete your registration for your',
@@ -117,6 +133,7 @@ class S {
     );
   }
 
+  /// `on Scrips.`
   String get OnScrips {
     return Intl.message(
       'on Scrips.',
@@ -126,6 +143,7 @@ class S {
     );
   }
 
+  /// `account by creating a password.`
   String get accountByCreatingAPassword {
     return Intl.message(
       'account by creating a password.',
@@ -135,6 +153,7 @@ class S {
     );
   }
 
+  /// `Complete Sign Up`
   String get completeSignUp {
     return Intl.message(
       'Complete Sign Up',
@@ -144,6 +163,7 @@ class S {
     );
   }
 
+  /// `By completing Signing Up you accept the`
   String get byCompletingSigningUpYouAcceptThe {
     return Intl.message(
       'By completing Signing Up you accept the',
@@ -153,6 +173,7 @@ class S {
     );
   }
 
+  /// `Confirm password`
   String get confirmPassword {
     return Intl.message(
       'Confirm password',
@@ -162,6 +183,7 @@ class S {
     );
   }
 
+  /// `Edit`
   String get edit {
     return Intl.message(
       'Edit',
@@ -171,6 +193,7 @@ class S {
     );
   }
 
+  /// `Refresh`
   String get refresh {
     return Intl.message(
       'Refresh',
@@ -180,6 +203,7 @@ class S {
     );
   }
 
+  /// `Press Enter to search`
   String get press_enter_to_search {
     return Intl.message(
       'Press Enter to search',
@@ -189,6 +213,7 @@ class S {
     );
   }
 
+  /// `Click Submit Key on Keyboard to search`
   String get press_submit_on_keyboard_to_search {
     return Intl.message(
       'Click Submit Key on Keyboard to search',
@@ -198,6 +223,7 @@ class S {
     );
   }
 
+  /// `No matching Organization found`
   String get no_matching_organization_found {
     return Intl.message(
       'No matching Organization found',
@@ -207,6 +233,7 @@ class S {
     );
   }
 
+  /// `No`
   String get no {
     return Intl.message(
       'No',
@@ -216,6 +243,7 @@ class S {
     );
   }
 
+  /// `Messages`
   String get messages {
     return Intl.message(
       'Messages',
@@ -225,6 +253,7 @@ class S {
     );
   }
 
+  /// `Notifications`
   String get notifications {
     return Intl.message(
       'Notifications',
@@ -234,6 +263,7 @@ class S {
     );
   }
 
+  /// `Get Help`
   String get get_help {
     return Intl.message(
       'Get Help',
@@ -243,6 +273,7 @@ class S {
     );
   }
 
+  /// `Account Settings`
   String get account_settings {
     return Intl.message(
       'Account Settings',
@@ -252,6 +283,7 @@ class S {
     );
   }
 
+  /// `We are here to help you`
   String get we_are_here_to_help_you {
     return Intl.message(
       'We are here to help you',
@@ -261,6 +293,7 @@ class S {
     );
   }
 
+  /// `Your license has expired or is not valid`
   String get your_license_has_expired_or_is_not_valid {
     return Intl.message(
       'Your license has expired or is not valid',
@@ -270,6 +303,7 @@ class S {
     );
   }
 
+  /// `Please select address`
   String get please_select_address {
     return Intl.message(
       'Please select address',
@@ -279,6 +313,7 @@ class S {
     );
   }
 
+  /// `Enter city`
   String get enter_city {
     return Intl.message(
       'Enter city',
@@ -288,6 +323,7 @@ class S {
     );
   }
 
+  /// `Please select address to update city`
   String get please_select_address_to_update_city {
     return Intl.message(
       'Please select address to update city',
@@ -297,6 +333,7 @@ class S {
     );
   }
 
+  /// `Enter country`
   String get enter_country {
     return Intl.message(
       'Enter country',
@@ -306,6 +343,7 @@ class S {
     );
   }
 
+  /// `Please select address to update country`
   String get please_select_address_to_update_country {
     return Intl.message(
       'Please select address to update country',
@@ -315,6 +353,7 @@ class S {
     );
   }
 
+  /// `Please enter valid phone number`
   String get please_enter_valid_phone_number {
     return Intl.message(
       'Please enter valid phone number',
@@ -324,6 +363,7 @@ class S {
     );
   }
 
+  /// `Please enter office phone`
   String get please_enter_office_phone {
     return Intl.message(
       'Please enter office phone',
@@ -333,6 +373,7 @@ class S {
     );
   }
 
+  /// `Please enter valid fax number`
   String get please_enter_valid_fax_number {
     return Intl.message(
       'Please enter valid fax number',
@@ -342,6 +383,7 @@ class S {
     );
   }
 
+  /// `Billing Address is different from practice address`
   String get billing_address_is_different_from_practice_address {
     return Intl.message(
       'Billing Address is different from practice address',
@@ -351,6 +393,7 @@ class S {
     );
   }
 
+  /// `Save`
   String get save {
     return Intl.message(
       'Save',
@@ -360,6 +403,7 @@ class S {
     );
   }
 
+  /// `Pending Invite`
   String get pending_invite {
     return Intl.message(
       'Pending Invite',
@@ -369,6 +413,7 @@ class S {
     );
   }
 
+  /// `Click ‘Start’ and we’ll walk you through`
   String get click_start_and_well_walk_you_through {
     return Intl.message(
       'Click ‘Start’ and we’ll walk you through',
@@ -378,6 +423,7 @@ class S {
     );
   }
 
+  /// `Start`
   String get start {
     return Intl.message(
       'Start',
@@ -387,6 +433,7 @@ class S {
     );
   }
 
+  /// `Welcome To Scrips Practice Setup`
   String get welcome_to_scrips_practice_setup {
     return Intl.message(
       'Welcome To Scrips Practice Setup',
@@ -396,6 +443,7 @@ class S {
     );
   }
 
+  /// `Your Practice Has Been Created`
   String get your_practice_has_been_created {
     return Intl.message(
       'Your Practice Has Been Created',
@@ -405,6 +453,7 @@ class S {
     );
   }
 
+  /// `You can now start filling your profile or explore the app`
   String get you_can_now_start_filling_your_profile_or_explore_the {
     return Intl.message(
       'You can now start filling your profile or explore the app',
@@ -414,6 +463,7 @@ class S {
     );
   }
 
+  /// `Fill My Profile`
   String get fill_my_profile {
     return Intl.message(
       'Fill My Profile',
@@ -423,6 +473,7 @@ class S {
     );
   }
 
+  /// `Edit Staff`
   String get edit_staff {
     return Intl.message(
       'Edit Staff',
@@ -432,6 +483,7 @@ class S {
     );
   }
 
+  /// `Add Staff`
   String get add_staff {
     return Intl.message(
       'Add Staff',
@@ -441,6 +493,7 @@ class S {
     );
   }
 
+  /// `Add staff members to your practice`
   String get add_staff_members_to_your_practice {
     return Intl.message(
       'Add staff members to your practice',
@@ -450,6 +503,7 @@ class S {
     );
   }
 
+  /// `Add other people that should have access to your practice. \nOnce you’re done we’ll invite them to fill their profile on Scrips.`
   String get add_other_people_that_should_have_access_to_your_practice {
     return Intl.message(
       'Add other people that should have access to your practice. \nOnce you’re done we’ll invite them to fill their profile on Scrips.',
@@ -459,6 +513,7 @@ class S {
     );
   }
 
+  /// `Add Another Staff Member`
   String get add_another_staff_member {
     return Intl.message(
       'Add Another Staff Member',
@@ -468,6 +523,7 @@ class S {
     );
   }
 
+  /// `You’re creating an account for a staff member`
   String get youre_creating_an_account_for_a_staff_member {
     return Intl.message(
       'You’re creating an account for a staff member',
@@ -477,6 +533,7 @@ class S {
     );
   }
 
+  /// `After clicking ‘Save’ Scrips will send an invite to this user so they can log into the \npractice and add their details`
   String get after_clicking_save_scrips_will_send_an_invite_to_this {
     return Intl.message(
       'After clicking ‘Save’ Scrips will send an invite to this user so they can log into the \npractice and add their details',
@@ -486,6 +543,7 @@ class S {
     );
   }
 
+  /// `STAFF MEMBER DETAILS`
   String get staff_member_details {
     return Intl.message(
       'STAFF MEMBER DETAILS',
@@ -495,6 +553,7 @@ class S {
     );
   }
 
+  /// `Please enter valid first name`
   String get please_enter_valid_first_name {
     return Intl.message(
       'Please enter valid first name',
@@ -504,6 +563,7 @@ class S {
     );
   }
 
+  /// `Please enter first name`
   String get please_enter_first_name {
     return Intl.message(
       'Please enter first name',
@@ -513,6 +573,7 @@ class S {
     );
   }
 
+  /// `Please enter valid last name`
   String get please_enter_valid_last_name {
     return Intl.message(
       'Please enter valid last name',
@@ -522,6 +583,7 @@ class S {
     );
   }
 
+  /// `Please enter last name`
   String get please_enter_last_name {
     return Intl.message(
       'Please enter last name',
@@ -531,6 +593,7 @@ class S {
     );
   }
 
+  /// `ROLE`
   String get role {
     return Intl.message(
       'ROLE',
@@ -540,6 +603,7 @@ class S {
     );
   }
 
+  /// `Please select role`
   String get please_select_role {
     return Intl.message(
       'Please select role',
@@ -549,6 +613,7 @@ class S {
     );
   }
 
+  /// `Select role`
   String get select_role {
     return Intl.message(
       'Select role',
@@ -558,6 +623,7 @@ class S {
     );
   }
 
+  /// `ASSIGN TO PRIMARY DOCTOR`
   String get assign_to_primary_doctor {
     return Intl.message(
       'ASSIGN TO PRIMARY DOCTOR',
@@ -567,6 +633,7 @@ class S {
     );
   }
 
+  /// `Please select primary doctor`
   String get please_select_primary_doctor {
     return Intl.message(
       'Please select primary doctor',
@@ -576,6 +643,7 @@ class S {
     );
   }
 
+  /// `Select doctor`
   String get select_doctor {
     return Intl.message(
       'Select doctor',
@@ -585,6 +653,7 @@ class S {
     );
   }
 
+  /// `Please enter a valid email id`
   String get please_enter_a_valid_email_id {
     return Intl.message(
       'Please enter a valid email id',
@@ -594,6 +663,7 @@ class S {
     );
   }
 
+  /// `Please enter email id`
   String get please_enter_email_id {
     return Intl.message(
       'Please enter email id',
@@ -603,6 +673,7 @@ class S {
     );
   }
 
+  /// `Enter email address`
   String get enter_email_address {
     return Intl.message(
       'Enter email address',
@@ -612,6 +683,7 @@ class S {
     );
   }
 
+  /// `Please enter valid mobile number`
   String get please_enter_valid_mobile_number {
     return Intl.message(
       'Please enter valid mobile number',
@@ -621,6 +693,7 @@ class S {
     );
   }
 
+  /// `Please enter mobile number`
   String get please_enter_mobile_number {
     return Intl.message(
       'Please enter mobile number',
@@ -630,6 +703,7 @@ class S {
     );
   }
 
+  /// `Enter mobile number`
   String get enter_mobile_number {
     return Intl.message(
       'Enter mobile number',
@@ -639,6 +713,7 @@ class S {
     );
   }
 
+  /// `Do you really want to archive this account?`
   String get do_you_really_want_to_archive_this_account {
     return Intl.message(
       'Do you really want to archive this account?',
@@ -648,6 +723,7 @@ class S {
     );
   }
 
+  /// `We will inform the staff member about this change. You can unarchive this account later in Account Settings.`
   String get we_will_inform_the_staff_member_about_this_change_you {
     return Intl.message(
       'We will inform the staff member about this change. You can unarchive this account later in Account Settings.',
@@ -657,6 +733,7 @@ class S {
     );
   }
 
+  /// `Archive This Account`
   String get archive_this_account {
     return Intl.message(
       'Archive This Account',
@@ -666,6 +743,7 @@ class S {
     );
   }
 
+  /// `ACC ID`
   String get acc_id {
     return Intl.message(
       'ACC ID',
@@ -675,6 +753,7 @@ class S {
     );
   }
 
+  /// `Please enter office details`
   String get please_enter_office_details {
     return Intl.message(
       'Please enter office details',
@@ -684,6 +763,7 @@ class S {
     );
   }
 
+  /// `Please, create atleast one exam room and add working hours`
   String get pleaseCreateAtleaseOneExamRoomAndAddWorkigHours {
     return Intl.message(
       'Please, create atleast one exam room and add working hours',
@@ -693,6 +773,7 @@ class S {
     );
   }
 
+  /// `Not a valid Email`
   String get not_a_valid_email {
     return Intl.message(
       'Not a valid Email',
@@ -722,7 +803,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   bool _isSupported(Locale locale) {
     if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
+      for (var supportedLocale in supportedLocales) {
         if (supportedLocale.languageCode == locale.languageCode) {
           return true;
         }

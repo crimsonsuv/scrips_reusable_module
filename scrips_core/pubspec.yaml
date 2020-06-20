@@ -18,7 +18,6 @@ dependencies:
   cupertino_icons:
   flare_splash_screen:
   dio: ^3.0.8
-  provider: ^3.2.0
   rflutter_alert:
   get_it:
   localstorage:
@@ -40,7 +39,7 @@ dependencies:
   dartz: ^0.8.6
   equatable: ^0.4.0
   flutter_tags: ^0.4.8
-  flutter_bloc:
+  flutter_bloc: ^4.0.1
 
 
 dev_dependencies:

@@ -111,8 +111,8 @@ class _GuardiansIdentityVerificationFormWidgetState
                     : null,
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.guardianIdenitification.relationId = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                 fieldBackgroundColor: textFieldBGcolor,
@@ -143,8 +143,7 @@ class _GuardiansIdentityVerificationFormWidgetState
             labelValue: "FIRST NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.guardianIdenitification.firstName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter first name",
@@ -168,8 +167,7 @@ class _GuardiansIdentityVerificationFormWidgetState
             labelValue: "MIDDLE NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.guardianIdenitification.middleName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter middle name (Optional)",
@@ -193,8 +191,7 @@ class _GuardiansIdentityVerificationFormWidgetState
             labelValue: "LAST NAME".toUpperCase(),
             onChanged: (value, FieldAndLabelState state) {
               widget.patient.guardianIdenitification.lastName = value;
-              widget.bloc
-                  .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+              widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             },
             validationMessage: "",
             placeholder: "Enter last name",
@@ -226,8 +223,8 @@ class _GuardiansIdentityVerificationFormWidgetState
                 labelValue: "DATE OF BIRTH",
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.guardianIdenitification.birthDate = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 placeholder: "Select date of birth",
@@ -265,8 +262,8 @@ class _GuardiansIdentityVerificationFormWidgetState
                 labelValue: "GENDER".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.guardianIdenitification.gender = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 axis: Axis.vertical,

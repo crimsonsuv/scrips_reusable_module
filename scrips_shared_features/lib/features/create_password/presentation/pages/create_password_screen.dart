@@ -36,7 +36,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   void initState() {
     super.initState();
-    bloc.dispatch(GetUserData(email: widget.arguments["email"]));
+    bloc.add(GetUserData(email: widget.arguments["email"]));
   }
 
   void _goNext() {

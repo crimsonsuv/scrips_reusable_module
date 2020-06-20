@@ -34,7 +34,7 @@ List<Widget> footerWidgets(
                 isEnabled ? enabledBtnBGColor : disabledBtnBGColor,
             onPressed: () {
               if (isEnabled) {
-                bloc.dispatch(CreatePassEvent(
+                bloc.add(CreatePassEvent(
                     password: password,
                     confirmPassword: confirmPassword,
                     email: arguments["email"],

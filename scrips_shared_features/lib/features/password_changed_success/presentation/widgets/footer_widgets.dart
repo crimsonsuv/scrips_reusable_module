@@ -27,7 +27,7 @@ List<Widget> footerWidgets(
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });
           } else {
-            bloc.dispatch(OAuthLoginEvent());
+            bloc.add(OAuthLoginEvent());
           }
         },
         style: semiBoldLabelTextStyle(17.0, disabledBtnTextColor),

@@ -113,7 +113,7 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                                   .removeAt(selectedIndex);
                             }
                             selectedIndex = -1;
-                            widget.bloc.dispatch(UpdateInsuranceListEvent(
+                            widget.bloc.add(UpdateInsuranceListEvent(
                                 patient: widget.patient));
                           },
                           onRemove: () {
@@ -136,7 +136,7 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                               }
                             }
                             selectedIndex = -1;
-                            widget.bloc.dispatch(UpdateInsuranceListEvent(
+                            widget.bloc.add(UpdateInsuranceListEvent(
                                 patient: widget.patient));
                           },
                           onSave: (InsuranceList data) {
@@ -150,14 +150,14 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                                         ?.length ??
                                     0) >
                                 1) {
-                              widget.bloc.dispatch(ShowErrorMessageEvent(
+                              widget.bloc.add(ShowErrorMessageEvent(
                                   message: "Health Insurance already added"));
                               return;
                             }
                             selectedIndex = -1;
                             widget.patient.healthInsuranceResponse[index] =
                                 data;
-                            widget.bloc.dispatch(UpdateInsuranceListEvent(
+                            widget.bloc.add(UpdateInsuranceListEvent(
                                 patient: widget.patient));
                           },
                           isPrimary: widget
@@ -259,7 +259,7 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                                         });
                                         isEdit = true;
                                         selectedIndex = index;
-                                        widget.bloc.dispatch(
+                                        widget.bloc.add(
                                             UpdateInsuranceListEvent(
                                                 patient: widget.patient));
                                       },
@@ -297,8 +297,8 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                         (widget?.patient?.healthInsuranceResponse?.length ??
                                 0) -
                             1;
-                    widget.bloc.dispatch(
-                        UpdateInsuranceListEvent(patient: widget.patient));
+                    widget.bloc
+                        .add(UpdateInsuranceListEvent(patient: widget.patient));
                   },
                   child: Container(
                     height: 48,

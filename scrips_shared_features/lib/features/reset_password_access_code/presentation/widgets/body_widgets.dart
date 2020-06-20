@@ -24,7 +24,7 @@ List<Widget> bodyWidgets(
         enabled: true,
         onChanged: (value, FieldAndLabelState state) {
           code = value;
-          bloc.dispatch(
+          bloc.add(
             EnabledButtonEvent(email: email, code: code),
           );
           state.setValidationMessage('');
@@ -50,7 +50,7 @@ List<Widget> bodyWidgets(
                   )
                 : GestureDetector(
                     onTap: () {
-                      bloc.dispatch(ResendCodeCallEvent(email: email));
+                      bloc.add(ResendCodeCallEvent(email: email));
                     },
                     child: Text(
                       "Resend Code",

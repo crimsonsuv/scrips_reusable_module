@@ -28,8 +28,7 @@ dependencies:
     path: ../scrips_core
   equatable: ^0.4.0
   dartz: ^0.8.6
-  provider:
-  flutter_bloc: ^0.21.0
+  flutter_bloc: ^4.0.1
   after_init: ^0.1.2
   get_it:
   json_serializable:

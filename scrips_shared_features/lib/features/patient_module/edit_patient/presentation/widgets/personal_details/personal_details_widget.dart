@@ -72,7 +72,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                 isMinor = state.isMinor;
                 widget.patient.isAdult = !isMinor;
                 widget.bloc
-                    .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+                    .add(EnablePatientSaveEvent(patient: widget.patient));
               } else if (state is SelectedPatientRecord) {
                 selectedPatientRecord = state.index;
               }
@@ -143,9 +143,8 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                                     value: pData?.isActive ?? false,
                                     onChanged: (status) {
                                       widget.patient.isActive = status;
-                                      widget.bloc.dispatch(
-                                          EnablePatientSaveEvent(
-                                              patient: widget.patient));
+                                      widget.bloc.add(EnablePatientSaveEvent(
+                                          patient: widget.patient));
                                     },
                                   );
                                 },
@@ -181,8 +180,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                         children: <Widget>[
                           InkWell(
                             onTap: () {
-                              widget.bloc
-                                  .dispatch(ChangePatientTypeEvent(true));
+                              widget.bloc.add(ChangePatientTypeEvent(true));
                             },
                             child: Container(
                               height: 48,
@@ -239,8 +237,7 @@ class _PersonalDetailsWidgetState extends State<PersonalDetailsWidget> {
                           ),
                           InkWell(
                             onTap: () {
-                              widget.bloc
-                                  .dispatch(ChangePatientTypeEvent(false));
+                              widget.bloc.add(ChangePatientTypeEvent(false));
                             },
                             child: Container(
                               height: 48,

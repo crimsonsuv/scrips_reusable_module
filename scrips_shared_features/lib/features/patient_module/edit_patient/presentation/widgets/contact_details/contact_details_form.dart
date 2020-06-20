@@ -67,8 +67,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                 labelValue: "OWNERSHIP".toUpperCase(),
                 onChanged: (value, FieldAndLabelState state) {
                   widget.patient.updatePatientContactRequest.ownership = value;
-                  widget.bloc.dispatch(
-                      EnablePatientSaveEvent(patient: widget.patient));
+                  widget.bloc
+                      .add(EnablePatientSaveEvent(patient: widget.patient));
                 },
                 validationMessage: "",
                 axis: Axis.vertical,
@@ -105,8 +105,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                       widget.patient.updatePatientContactRequest.email = value;
                       state.setValidationMessage('');
                     }
-                    widget.bloc.dispatch(
-                        EnablePatientSaveEvent(patient: widget.patient));
+                    widget.bloc
+                        .add(EnablePatientSaveEvent(patient: widget.patient));
                   },
                 ),
               ),
@@ -131,7 +131,7 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                                 .patient.updatePatientContactRequest.email)) {
                               widget.patient.updatePatientContactRequest
                                   .isPreferrable = 0;
-                              widget.bloc.dispatch(EnablePatientSaveEvent(
+                              widget.bloc.add(EnablePatientSaveEvent(
                                   patient: widget.patient));
                             }
                           },
@@ -190,8 +190,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                       }
                     }
 
-                    widget.bloc.dispatch(
-                        EnablePatientSaveEvent(patient: widget.patient));
+                    widget.bloc
+                        .add(EnablePatientSaveEvent(patient: widget.patient));
                   },
                   validationMessage: "",
                   placeholder: "e.g. +971 23 345 6789",
@@ -220,7 +220,7 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                                 .updatePatientContactRequest.primaryContact)) {
                               widget.patient.updatePatientContactRequest
                                   .isPreferrable = 1;
-                              widget.bloc.dispatch(EnablePatientSaveEvent(
+                              widget.bloc.add(EnablePatientSaveEvent(
                                   patient: widget.patient));
                             }
                           },
@@ -275,8 +275,8 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                             .secondayContact = value;
                       }
                     }
-                    widget.bloc.dispatch(
-                        EnablePatientSaveEvent(patient: widget.patient));
+                    widget.bloc
+                        .add(EnablePatientSaveEvent(patient: widget.patient));
                   },
                   validationMessage: "",
                   placeholder: "e.g. +971 23 345 6789",
@@ -305,7 +305,7 @@ class _ContactDetailsFormWidgetState extends State<ContactDetailsFormWidget> {
                                 .updatePatientContactRequest.secondayContact)) {
                               widget.patient.updatePatientContactRequest
                                   .isPreferrable = 2;
-                              widget.bloc.dispatch(EnablePatientSaveEvent(
+                              widget.bloc.add(EnablePatientSaveEvent(
                                   patient: widget.patient));
                             }
                           },

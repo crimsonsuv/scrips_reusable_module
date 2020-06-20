@@ -66,10 +66,10 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
 
   void fetchMatchingRecord({String idType, String idNumber}) {
     if (widget.patient.isAdult == true) {
-      widget.bloc.dispatch(
-          FetchMatchingRecordsEvent(idType: idType, idNumber: idNumber));
+      widget.bloc
+          .add(FetchMatchingRecordsEvent(idType: idType, idNumber: idNumber));
     } else {
-      widget.bloc.dispatch(FetchMatchingRecordsEvent(
+      widget.bloc.add(FetchMatchingRecordsEvent(
           firstName: widget.patient.firstName,
           lastName: widget.patient.lastName,
           birthDate: widget.patient.birthDate,
@@ -117,7 +117,7 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                   widget.patient.identification.idType = value;
                 }
                 widget.bloc
-                    .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+                    .add(EnablePatientSaveEvent(patient: widget.patient));
                 if (_debounce?.isActive ?? false) _debounce.cancel();
                 _debounce = Timer(const Duration(milliseconds: 500), () async {
                   fetchMatchingRecord(
@@ -157,8 +157,7 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
             } else {
               widget.patient.identification.idNumber = value;
             }
-            widget.bloc
-                .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+            widget.bloc.add(EnablePatientSaveEvent(patient: widget.patient));
             if (_debounce?.isActive ?? false) _debounce.cancel();
             _debounce = Timer(const Duration(milliseconds: 500), () async {
               fetchMatchingRecord(
@@ -208,7 +207,7 @@ class _IdentityChildWidgetState extends State<IdentityChildWidget> {
                   widget.patient.identification.idExpirationDate = value;
                 }
                 widget.bloc
-                    .dispatch(EnablePatientSaveEvent(patient: widget.patient));
+                    .add(EnablePatientSaveEvent(patient: widget.patient));
                 if (_debounce?.isActive ?? false) _debounce.cancel();
                 _debounce = Timer(const Duration(milliseconds: 500), () async {
                   fetchMatchingRecord(

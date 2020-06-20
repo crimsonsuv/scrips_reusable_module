@@ -103,7 +103,7 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                                 : null,
                             onChanged: (value, FieldAndLabelState state) {
                               widget.insuranceItem.insuranceProvider = value;
-                              widget.bloc.dispatch(EnableSaveInsuranceEvent(
+                              widget.bloc.add(EnableSaveInsuranceEvent(
                                   insurance: widget.insuranceItem));
                             },
                             padding: EdgeInsets.symmetric(
@@ -147,7 +147,7 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                                         ?.length ??
                                     0) >
                                 0) {
-                              widget.bloc.dispatch(ShowErrorMessageEvent(
+                              widget.bloc.add(ShowErrorMessageEvent(
                                   message: "Health Insurance already added"));
                               widget.insuranceItem.policyNumber = value;
                             } else {
@@ -157,7 +157,7 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                             widget.insuranceItem.policyNumber = value;
                           }
 
-                          widget.bloc.dispatch(EnableSaveInsuranceEvent(
+                          widget.bloc.add(EnableSaveInsuranceEvent(
                               insurance: widget.insuranceItem));
                         },
                         validationMessage: "",
@@ -198,7 +198,7 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                             labelValue: "ELIGIBILITY START DATE",
                             onChanged: (value, FieldAndLabelState state) {
                               widget.insuranceItem.eligiblityStartDate = value;
-                              widget.bloc.dispatch(EnableSaveInsuranceEvent(
+                              widget.bloc.add(EnableSaveInsuranceEvent(
                                   insurance: widget.insuranceItem));
                             },
                             validationMessage: "",
@@ -237,7 +237,7 @@ class _EditHealthInsuranceWidgetState extends State<EditHealthInsuranceWidget> {
                             labelValue: "EXPIRATION DATE",
                             onChanged: (value, FieldAndLabelState state) {
                               widget.insuranceItem.expirationDate = value;
-                              widget.bloc.dispatch(EnableSaveInsuranceEvent(
+                              widget.bloc.add(EnableSaveInsuranceEvent(
                                   insurance: widget.insuranceItem));
                             },
                             validationMessage: "",

@@ -20,7 +20,6 @@ import 'package:scrips_shared_features/features/patient_module/edit_patient/data
 import 'package:scrips_shared_features/features/patient_module/edit_patient/data/datamodels/patients_model.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/presentation/bloc/bloc.dart';
 import 'package:scrips_shared_features/features/patient_module/edit_patient/presentation/widgets/personal_details/child_widgets/view_patient_popup.dart';
-import 'package:scrips_shared_features/features/patient_module/patient_list/presentation/pages/patient_list_screen.dart';
 
 class PatientSelectionWidget extends StatefulWidget {
   final CreateEditPatientBloc bloc;
@@ -123,7 +122,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
         break;
     }
     setPatientsRowData(widget.patientRecords);
-    widget.bloc.dispatch(SortPatientItemsEvent(sort: currentSortType));
+    widget.bloc.add(SortPatientItemsEvent(sort: currentSortType));
   }
 
   _showPatientViewPopup(context) {
@@ -211,7 +210,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
           });
         },
         onSave: () {
-          widget.bloc.dispatch(FetchPatientEvent(pid: selectedPatientId));
+          widget.bloc.add(FetchPatientEvent(pid: selectedPatientId));
           Navigator.pop(context);
         },
         title: "View Patient");
@@ -262,7 +261,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
                           onItemClick: (index) {
                             selectedPatientId =
                                 widget.patientRecords[index].patientId;
-                            widget.bloc.dispatch(FetchSelectedPatientEvent(
+                            widget.bloc.add(FetchSelectedPatientEvent(
                                 pid: widget.patientRecords[index].patientId));
                             _showPatientViewPopup(context);
                           },
@@ -273,11 +272,9 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
                           selectedItems: [widget.selectedPatientRecord],
                           onItemSelection: (index) {
                             if (index == widget.selectedPatientRecord) {
-                              widget.bloc
-                                  .dispatch(SelectPatientRecordEvent(-1));
+                              widget.bloc.add(SelectPatientRecordEvent(-1));
                             } else {
-                              widget.bloc
-                                  .dispatch(SelectPatientRecordEvent(index));
+                              widget.bloc.add(SelectPatientRecordEvent(index));
                             }
                           },
                           onHeaderClick: (data) {
@@ -329,7 +326,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
                                 : disabledBtnBGColor,
                         style: semiBoldLabelTextStyle(15, enabledBtnTextColor),
                         onPressed: () {
-                          widget.bloc.dispatch(FetchPatientEvent(
+                          widget.bloc.add(FetchPatientEvent(
                               pid: widget
                                   .patientRecords[widget.selectedPatientRecord]
                                   .patientId));
@@ -345,7 +342,7 @@ class _PatientSelectionWidgetState extends State<PatientSelectionWidget> {
                         buttonBackgroundColor: bgColor,
                         style: semiBoldLabelTextStyle(15, enabledBtnBGColor),
                         onPressed: () {
-                          widget.bloc.dispatch(UseRecordAnywayEvent());
+                          widget.bloc.add(UseRecordAnywayEvent());
                         },
                       )
                     ],

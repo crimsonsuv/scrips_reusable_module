@@ -73,7 +73,7 @@ class _ResidentialAddressFormWidgetState
                         widget?.patient?.updatePatientContactRequest?.country =
                             "";
                       }
-                      widget.bloc.dispatch(
+                      widget.bloc.add(
                           EnablePatientSaveEvent(patient: widget?.patient));
                     },
                     validationMessage: "",

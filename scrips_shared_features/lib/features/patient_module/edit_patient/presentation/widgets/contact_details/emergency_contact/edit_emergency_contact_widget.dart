@@ -96,7 +96,7 @@ class _EditEmergencyContactWidgetState
                           : null,
                       onChanged: (value, FieldAndLabelState state) {
                         widget.emergencyContactItem.relationship = value;
-                        widget.bloc.dispatch(EnableSaveEmergencyContactEvent(
+                        widget.bloc.add(EnableSaveEmergencyContactEvent(
                             emergencyContact: widget.emergencyContactItem));
                       },
                       padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
@@ -132,7 +132,7 @@ class _EditEmergencyContactWidgetState
                         labelValue: "FIRST NAME".toUpperCase(),
                         onChanged: (value, FieldAndLabelState state) {
                           widget.emergencyContactItem.firstName = value;
-                          widget.bloc.dispatch(EnableSaveEmergencyContactEvent(
+                          widget.bloc.add(EnableSaveEmergencyContactEvent(
                               emergencyContact: widget.emergencyContactItem));
                         },
                         validationMessage: "",
@@ -160,7 +160,7 @@ class _EditEmergencyContactWidgetState
                         labelValue: "LAST NAME".toUpperCase(),
                         onChanged: (value, FieldAndLabelState state) {
                           widget.emergencyContactItem.lastName = value;
-                          widget.bloc.dispatch(EnableSaveEmergencyContactEvent(
+                          widget.bloc.add(EnableSaveEmergencyContactEvent(
                               emergencyContact: widget.emergencyContactItem));
                         },
                         validationMessage: "",
@@ -199,7 +199,7 @@ class _EditEmergencyContactWidgetState
                                     ?.length ??
                                 0) >
                             0) {
-                          widget.bloc.dispatch(ShowErrorMessageEvent(
+                          widget.bloc.add(ShowErrorMessageEvent(
                               message:
                                   "Emergency Contact Number already added"));
                           widget?.emergencyContactItem?.contactNumber = "";
@@ -210,7 +210,7 @@ class _EditEmergencyContactWidgetState
                         widget?.emergencyContactItem?.contactNumber = value;
                       }
                     }
-                    widget.bloc.dispatch(EnableSaveEmergencyContactEvent(
+                    widget.bloc.add(EnableSaveEmergencyContactEvent(
                         emergencyContact: widget.emergencyContactItem));
                   },
                   validationMessage: "",
@@ -245,10 +245,9 @@ class _EditEmergencyContactWidgetState
                             value: eData?.isProxy ?? false,
                             onChanged: (status) {
                               widget.emergencyContactItem.isProxy = status;
-                              widget.bloc.dispatch(
-                                  EnableSaveEmergencyContactEvent(
-                                      emergencyContact:
-                                          widget.emergencyContactItem));
+                              widget.bloc.add(EnableSaveEmergencyContactEvent(
+                                  emergencyContact:
+                                      widget.emergencyContactItem));
                             },
                           );
                         },

@@ -39,7 +39,7 @@ List<Widget> footerWidgets({
                 !isEnabled ? disabledBtnBGColor : normalBtnTextColor,
             onPressed: () {
               if (!isBlank(email)) {
-                bloc.dispatch(ForgotPasswordCallEvent(email: email));
+                bloc.add(ForgotPasswordCallEvent(email: email));
               }
             },
             style: semiBoldLabelTextStyle(
@@ -62,7 +62,7 @@ List<Widget> footerWidgets({
               Navigator.pushNamed(context, AppRoutePaths.Login);
             });
           } else {
-            bloc.dispatch(OAuthLoginEvent());
+            bloc.add(OAuthLoginEvent());
           }
         },
         buttonBackgroundColor: bgColor,

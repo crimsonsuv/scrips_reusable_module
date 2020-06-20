@@ -13,7 +13,7 @@ List<Widget> bodyWidgets(
         {BuildContext context,
         String password,
         String confirmPassword,
-          bool isValid,
+        bool isValid,
         CreatePasswordBloc bloc}) =>
     [
       FieldAndLabel(
@@ -28,7 +28,7 @@ List<Widget> bodyWidgets(
         isPassword: true,
         onChanged: (value, FieldAndLabelState state) {
           password = value;
-          bloc.dispatch(EnabledButtonEvent(
+          bloc.add(EnabledButtonEvent(
               password: password, confirmPassword: confirmPassword));
         },
       ),
@@ -141,12 +141,12 @@ List<Widget> bodyWidgets(
         onChanged: (value, FieldAndLabelState state) {
           if (password == value) {
             confirmPassword = value;
-            bloc.dispatch(EnabledButtonEvent(
+            bloc.add(EnabledButtonEvent(
                 password: password, confirmPassword: confirmPassword));
             state.setValidationMessage("");
           } else {
             confirmPassword = "";
-            bloc.dispatch(EnabledButtonEvent(
+            bloc.add(EnabledButtonEvent(
                 password: password, confirmPassword: confirmPassword));
             state.setValidationMessage("Password not matching");
           }

@@ -33,8 +33,7 @@ List<Widget> footerWidgets(
                 (isEnabled) ? normalBtnTextColor : disabledBtnBGColor,
             onPressed: (isEnabled)
                 ? () {
-                    bloc.dispatch(
-                        DoLoginEvent(email: email, password: password));
+                    bloc.add(DoLoginEvent(email: email, password: password));
                   }
                 : null,
             isLoading: isLoading,
