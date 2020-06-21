@@ -21,6 +21,8 @@ import 'package:scrips_core/widgets/general/stepper_widget.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/appointment_value_sets_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/hospital_list_model.dart';
 import 'package:scrips_shared_features/features/common/data/datamodels/medical_schools_model.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/data/datamodels/patients_list_model.dart';
+import 'package:scrips_shared_features/features/patient_module/patient_list/domain/usecases/fetch_patients_use_case.dart';
 
 enum FieldType {
   TextField,
@@ -87,6 +89,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
   final List<ColorCodePair> colorItems;
   final String valueSetGroup;
   final dynamic useCase;
+  final dynamic useCaseParam;
   FieldAndLabelState _myState;
   final AxisDirection direction;
 
@@ -133,6 +136,7 @@ class FieldAndLabel<ListItemType> extends StatefulWidget {
       this.maxLength = 300,
       this.valueSetGroup,
       this.useCase,
+      this.useCaseParam,
       this.direction = AxisDirection.down,
       this.wrapWithRow = true})
       : super(key: key ?? UniqueKey());
@@ -994,41 +998,86 @@ class FieldAndLabelState extends State<FieldAndLabel> {
                   onChanged: (value) {}),
               suggestionsCallback: (pattern) async {
                 if (pattern != null || pattern != "") {
-                  final result = await widget.useCase(QueryParams(
-                      query: pattern, searchFor: widget.valueSetGroup));
-                  return result.fold(
-                    (error) => [],
-                    (success) => success,
-                  );
+                  var result;
+                  if (widget.useCase is FetchPatientsUseCase &&
+                      widget.useCaseParam is FetchPatientsParams) {
+                    FetchPatientsParams params =
+                        widget.useCaseParam as FetchPatientsParams;
+                    params = FetchPatientsParams(
+                        orgId: params.orgId,
+                        isArchived: params.isArchived,
+                        practiceId: params.practiceId,
+                        pageSize: params.pageSize,
+                        pageNum: params.pageNum,
+                        status: params.status,
+                        query: pattern);
+                    result = await widget.useCase(params);
+                    return result.fold(
+                      (error) => [],
+                      (success) => success.patientData,
+                    );
+                  } else {
+                    result = await widget.useCase(QueryParams(
+                        query: pattern, searchFor: widget.valueSetGroup));
+                    return result.fold(
+                      (error) => [],
+                      (success) => success,
+                    );
+                  }
                 } else {
                   return [];
                 }
               },
               itemBuilder: (context, item) {
-                String displayText = "";
-                if (item is HospitalList) {
-                  displayText = item?.hospitalName ?? "";
-                } else if (item is MedicalSchools) {
-                  displayText = item?.medicalSchool ?? "";
-                } else if (item is AppointmentValueSets) {
-                  displayText = item?.display ?? "";
-                } else {
-                  displayText = item?.code?.displayName ?? "n/a";
-                }
-                return Listener(
-                  child: ListTile(
-                    title: Text(
-                      displayText,
-                      style: normalLabelTextStyle(15, regularTextColor),
+                if (item is PatientDatum) {
+                  return Listener(
+                    child: ListTile(
+                      leading: Container(
+                        height: 24,
+                        width: 24,
+                        decoration: BoxDecoration(
+                            color: searchBGColour,
+                            borderRadius: BorderRadius.circular(24)),
+                      ),
+                      title: Text(
+                        item.name,
+                        style: normalLabelTextStyle(15, regularTextColor),
+                      ),
+                      subtitle: Text(
+                        "${scDateFormat(item.birthDate)} • N/A • ${item.contactNumber}",
+                        style:
+                            normalLabelTextStyle(13, labelTextStyleTextColor),
+                      ),
                     ),
+                    onPointerDown: (_) =>
+                        (kIsWeb) ? onChangedInternal(item) : null,
+                  );
+                } else {
+                  String displayText = "";
+                  if (item is HospitalList) {
+                    displayText = item?.hospitalName ?? "";
+                  } else if (item is MedicalSchools) {
+                    displayText = item?.medicalSchool ?? "";
+                  } else if (item is AppointmentValueSets) {
+                    displayText = item?.display ?? "";
+                  } else {
+                    displayText = item?.code?.displayName ?? "n/a";
+                  }
+                  return Listener(
+                    child: ListTile(
+                      title: Text(
+                        displayText,
+                        style: normalLabelTextStyle(15, regularTextColor),
+                      ),
 //                    subtitle: Text(
 //                      "${prediction.terms[prediction.terms.length - 2].value}, ${prediction.terms.last.value}",
 //                      style: normalLabelTextStyle(13, labelTextStyleTextColor),
 //                    ),
-                  ),
-                  onPointerDown: (_) =>
-                      (kIsWeb) ? onChangedInternal(item) : null,
-                );
+                    ),
+                    onPointerDown: (_) =>
+                        (kIsWeb) ? onChangedInternal(item) : null,
+                  );
+                }
               },
               onSuggestionSelected: (item) {
                 onChangedInternal(item);
