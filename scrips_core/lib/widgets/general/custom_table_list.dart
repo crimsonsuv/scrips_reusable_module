@@ -42,6 +42,8 @@ class CustomTableListWidget extends StatefulWidget {
   final int totalItems;
   final TableListTitle selectedHeader;
   final List<int> selectedItems;
+  final List<String> leadingItems;
+  final String leadingHeader;
   final Function onItemSelection;
   final Function onAllSelection;
   final Function onItemClick;
@@ -59,6 +61,8 @@ class CustomTableListWidget extends StatefulWidget {
       this.onItemClick,
       this.onAllSelection,
       this.selectedHeader,
+      this.leadingItems,
+      this.leadingHeader,
       this.onHeaderClick,
       this.showPagingOptions = false,
       this.showThreeDotItemOption = false,
@@ -306,19 +310,23 @@ class _CustomTableListWidgetState extends State<CustomTableListWidget>
                     height: 40,
                     child: Row(
                       children: <Widget>[
-                        Container(
-                          height: 40,
-                          width: 43,
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                "GMT+04",
-                                style:
-                                    normalLabelTextStyle(11, regularTextColor),
+                        ((widget?.leadingItems?.length ?? 0) == 0)
+                            ? Container(
+                                width: 3,
+                              )
+                            : Container(
+                                height: 40,
+                                width: 43,
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "${widget.leadingHeader}",
+                                      style: normalLabelTextStyle(
+                                          11, regularTextColor),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
                         Space(
                           horizontal: 10,
                         ),
@@ -333,34 +341,38 @@ class _CustomTableListWidgetState extends State<CustomTableListWidget>
                     child: SingleChildScrollView(
                       child: Row(
                         children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 40,
-                                child: ListView.builder(
-                                    padding: const EdgeInsets.only(
-                                        top: 0, bottom: 0),
-                                    itemCount: widget?.rowDataList?.length ?? 0,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Container(
-                                        height: 40,
-                                        child: Row(
-                                          children: <Widget>[
-                                            Text(
-                                              "9a",
-                                              style: normalLabelTextStyle(
-                                                  13, regularTextColor),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ],
-                          ),
+                          ((widget?.leadingItems?.length ?? 0) == 0)
+                              ? Container()
+                              : Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 40,
+                                      child: ListView.builder(
+                                          padding: const EdgeInsets.only(
+                                              top: 0, bottom: 0),
+                                          itemCount:
+                                              widget?.rowDataList?.length ?? 0,
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Container(
+                                              height: 40,
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Text(
+                                                    "${widget.leadingItems[index]}",
+                                                    style: normalLabelTextStyle(
+                                                        13, regularTextColor),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                ),
                           Column(
                             children: itemsList(),
                           ),
