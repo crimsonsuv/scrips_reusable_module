@@ -62,6 +62,14 @@ String scDateFormat(value, {String format = 'MMM dd, yyyy'}) {
   }
 }
 
+String scTimeFormat(value, {String format = 'h:mma'}) {
+  if (value == null) {
+    return "";
+  } else {
+    return DateFormat(format)?.format(value);
+  }
+}
+
 File fileFromJson(String fileData) {
   return null;
 }
