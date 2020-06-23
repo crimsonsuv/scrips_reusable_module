@@ -14,6 +14,7 @@ final Color disabledBtnTextColor =
 final Color tabBgColor = Color(0xFFEFEFF0);
 final Color disabledBtnBGColor =
     Color(0xFFD1D1D1); //getColorFromHex('#D1D1D1');
+final Color blueColor = Color(0xFF007AFF);
 
 final Color gradientColor1 = Color(0xFFEEEEEE);
 final Color gradientColor2 = Color(0xFFF7F7F7);

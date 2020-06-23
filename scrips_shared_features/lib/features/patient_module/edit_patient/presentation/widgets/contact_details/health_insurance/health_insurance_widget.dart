@@ -180,68 +180,78 @@ class _HealthInsuranceWidgetState extends State<HealthInsuranceWidget> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Row(
-                                          children: <Widget>[
-                                            Text(
-                                              "${(widget.patient?.healthInsuranceResponse[index].insuranceProvider != null) ? widget?.insuranceList?.where((data) => data.id == widget.patient?.healthInsuranceResponse[index].insuranceProvider)?.toList()?.first?.insuranceProvider1 ?? "N/A" : "N/A"}",
-                                              style: boldLabelTextStyle(
-                                                  15, textInputColor),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              Text(
+                                                "${(widget.patient?.healthInsuranceResponse[index].insuranceProvider != null) ? widget?.insuranceList?.where((data) => data.id == widget.patient?.healthInsuranceResponse[index].insuranceProvider)?.toList()?.first?.insuranceProvider1 ?? "N/A" : "N/A"}",
+                                                style: boldLabelTextStyle(
+                                                    15, textInputColor),
+                                              ),
+                                              Space(
+                                                horizontal: 8,
+                                              ),
+                                              (widget
+                                                          .patient
+                                                          ?.healthInsuranceResponse[
+                                                              index]
+                                                          ?.isPrimary ??
+                                                      false)
+                                                  ? IndicatorTagWidget(
+                                                      indicatorText: "Primary",
+                                                    )
+                                                  : IndicatorTagWidget(
+                                                      indicatorText:
+                                                          "Secondary",
+                                                    )
+                                            ],
+                                          ),
+                                          Space(
+                                            vertical: 8,
+                                          ),
+                                          Row(
+                                            children: <Widget>[
+                                              Images.instance.smallHash(),
+                                              Space(
+                                                horizontal: 8,
+                                              ),
+                                              Text(
+                                                "${widget.patient?.healthInsuranceResponse[index]?.policyNumber ?? "N/A"}",
+                                                style: normalLabelTextStyle(
+                                                    15, regularTextColor),
+                                              )
+                                            ],
+                                          ),
+                                          Space(
+                                            vertical: 8,
+                                          ),
+                                          Expanded(
+                                            child: Row(
+                                              children: <Widget>[
+                                                Images.instance.appointmentIcon(
+                                                    height: 16, width: 16),
+                                                Space(
+                                                  horizontal: 8,
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    "Eligibility Start Date: ${(widget.patient?.healthInsuranceResponse[index]?.eligiblityStartDate == null) ? "N/A" : scDateFormat(widget.patient?.healthInsuranceResponse[index]?.eligiblityStartDate)} • Expiration Date: ${(widget.patient?.healthInsuranceResponse[index]?.expirationDate == null) ? "N/A" : scDateFormat(widget.patient?.healthInsuranceResponse[index]?.expirationDate)}",
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: normalLabelTextStyle(
+                                                        15, regularTextColor),
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            Space(
-                                              horizontal: 8,
-                                            ),
-                                            (widget
-                                                        .patient
-                                                        ?.healthInsuranceResponse[
-                                                            index]
-                                                        ?.isPrimary ??
-                                                    false)
-                                                ? IndicatorTagWidget(
-                                                    indicatorText: "Primary",
-                                                  )
-                                                : IndicatorTagWidget(
-                                                    indicatorText: "Secondary",
-                                                  )
-                                          ],
-                                        ),
-                                        Space(
-                                          vertical: 8,
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Images.instance.smallHash(),
-                                            Space(
-                                              horizontal: 8,
-                                            ),
-                                            Text(
-                                              "${widget.patient?.healthInsuranceResponse[index]?.policyNumber ?? "N/A"}",
-                                              style: normalLabelTextStyle(
-                                                  15, regularTextColor),
-                                            )
-                                          ],
-                                        ),
-                                        Space(
-                                          vertical: 8,
-                                        ),
-                                        Row(
-                                          children: <Widget>[
-                                            Images.instance.appointmentIcon(
-                                                height: 16, width: 16),
-                                            Space(
-                                              horizontal: 8,
-                                            ),
-                                            Text(
-                                              "Eligibility Start Date: ${(widget.patient?.healthInsuranceResponse[index]?.eligiblityStartDate == null) ? "N/A" : scDateFormat(widget.patient?.healthInsuranceResponse[index]?.eligiblityStartDate)} • Expiration Date: ${(widget.patient?.healthInsuranceResponse[index]?.expirationDate == null) ? "N/A" : scDateFormat(widget.patient?.healthInsuranceResponse[index]?.expirationDate)}",
-                                              style: normalLabelTextStyle(
-                                                  15, regularTextColor),
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                     Button(
                                       height: 32,

@@ -1031,22 +1031,42 @@ class FieldAndLabelState extends State<FieldAndLabel> {
               itemBuilder: (context, item) {
                 if (item is PatientDatum) {
                   return Listener(
-                    child: ListTile(
-                      leading: Container(
-                        height: 24,
-                        width: 24,
-                        decoration: BoxDecoration(
-                            color: searchBGColour,
-                            borderRadius: BorderRadius.circular(24)),
-                      ),
-                      title: Text(
-                        item.name,
-                        style: normalLabelTextStyle(15, regularTextColor),
-                      ),
-                      subtitle: Text(
-                        "${scDateFormat(item.birthDate)} • N/A • ${item.contactNumber}",
-                        style:
-                            normalLabelTextStyle(13, labelTextStyleTextColor),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            height: 24,
+                            width: 24,
+                            decoration: BoxDecoration(
+                                color: searchBGColour,
+                                borderRadius: BorderRadius.circular(24)),
+                            child: Images.instance.userpic(),
+                          ),
+                          Space(
+                            horizontal: 16,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                Text(
+                                  item.name,
+                                  style: normalLabelTextStyle(
+                                      15, regularTextColor),
+                                ),
+                                Text(
+                                  "${scDateFormat(item.birthDate)} • N/A • ${item?.contactNumber ?? "N/A"}",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.visible,
+                                  style: normalLabelTextStyle(
+                                      13, labelTextStyleTextColor),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     onPointerDown: (_) =>
