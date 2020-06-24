@@ -40,7 +40,7 @@ class ValueCoding {
   });
 
   factory ValueCoding.fromJson(Map<String, dynamic> json) => ValueCoding(
-        code: json["code"] == null ? null : json["code"],
+        code: json["code"] == null ? null : "${json["code"]}",
         display: json["display"] == null ? null : json["display"],
         system: json["system"] == null ? null : json["system"],
       );

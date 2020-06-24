@@ -8,6 +8,7 @@ class FormView extends StatelessWidget {
   final String header;
   final String subtitle;
   final String headerButtonText;
+  final Color headerButtonColor;
   final Widget child;
   final EdgeInsets margin;
   final bool isMandatory;
@@ -23,6 +24,7 @@ class FormView extends StatelessWidget {
     this.onHeaderButtonTap,
     @required this.child,
     this.backgroundColor = Colors.white,
+    this.headerButtonColor,
     this.isMandatory = false,
   }) : super(key: key);
   //
@@ -56,7 +58,8 @@ class FormView extends StatelessWidget {
                             onTap: onHeaderButtonTap,
                             child: Text(
                               "$headerButtonText",
-                              style: normalBoldTextStyle(13, enabledBtnBGColor),
+                              style: normalBoldTextStyle(
+                                  13, headerButtonColor ?? enabledBtnBGColor),
                             ),
                           )
                         : Container()
