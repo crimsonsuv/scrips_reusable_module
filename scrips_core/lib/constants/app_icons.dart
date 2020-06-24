@@ -36,6 +36,33 @@ class ScripsIcons {
   static int vacation = 0xe915;
   static int virtual = 0xe916;
   static int work = 0xe917;
+  static int archive = 0xe92d;
+  static int check = 0xe92e;
+  static int arrowUp = 0xe92f;
+  static int diagnosis = 0xe930;
+  static int hourglass = 0xe931;
+  static int idNumber = 0xe932;
+  static int preview = 0xe934;
+  static int sortArrow = 0xe935;
+  static int starFilled = 0xe936;
+  static int starEmpty = 0xe937;
+  static int unarchive = 0xe938;
+  static int lab = 0xe92c;
+  static int call = 0xe91e;
+  static int chat = 0xe91f;
+  static int clinical = 0xe920;
+  static int cross = 0xe921;
+  static int custom = 0xe922;
+  static int education = 0xe923;
+  static int help = 0xe924;
+  static int medication = 0xe925;
+  static int pencil = 0xe926;
+  static int procedure = 0xe927;
+  static int radiology = 0xe928;
+  static int referral = 0xe929;
+  static int search = 0xe92a;
+  static int voice = 0xe92b;
+  static int appointment = 0xe91c;
 
   Icon icon(int data, {double size, Color color}) {
     return Icon(
