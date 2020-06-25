@@ -145,13 +145,17 @@ extension StringExtension on String {
 }
 
 Failure handleFailure(DioError e) {
-  int responseCode = e.response.statusCode;
-  if (isBetween(responseCode, 400, 499)) {
-    return Failure("Request fields are missing.");
-  } else if (isBetween(responseCode, 500, 599)) {
-    return Failure(
-        "Something bad happend in Server, please contact scrips support.");
+  if (e?.response?.statusCode != null) {
+    int responseCode = e.response.statusCode;
+    if (isBetween(responseCode, 400, 499)) {
+      return Failure("Request fields are missing.");
+    } else if (isBetween(responseCode, 500, 599)) {
+      return Failure(
+          "Something bad happend in Server, please contact scrips support.");
+    } else {
+      return Failure(e?.message ?? "");
+    }
   } else {
-    return Failure(e?.message ?? "");
+    return Failure('Processing failed');
   }
 }

@@ -7,13 +7,13 @@ import 'package:scrips_core/common/data/datamodels/twilio_response_model.dart';
 import 'package:scrips_core/common/data/datamodels/valueset_data_model.dart';
 import 'package:scrips_core/common/data/datasources/common_data_source.dart';
 import 'package:scrips_core/constants/status_objects.dart';
+import 'package:scrips_shared_features/core/constants/api_constats.dart';
 
 class CommonDataSourceImpl extends CommonDataSource {
   int defaultTimeout = 10;
   static final googleAPIKey = 'AIzaSyBCrQ1GzILNdnaeDRUZbKzGc1CIICTIAXw';
   static final endpointPlaces = 'http://52.25.96.244:7008';
   static final endpointTwilio = 'https://lookups.twilio.com';
-  static final endpointMaster = 'http://75.126.168.31:7084/api/Master';
   Dio client = Dio();
 
   @override

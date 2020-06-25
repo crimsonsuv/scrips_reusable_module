@@ -17,3 +17,13 @@ const String providerServer = "http://52.25.96.244:7023";
 
 const String appointmentServer = "http://52.25.96.244:7026";
 //const String appointmentServer = "https://scripsprovidersetup.azurewebsites.net";
+
+//const String organizationServer =
+//    "https://scripsorganizationapi20191204032750.azurewebsites.net";
+const String organizationServer = "http://52.25.96.244:7014";
+
+//const String questionBankServer =
+//    "http://scripsqueestionbank.azurewebsites.net";
+const String questionBankServer = "http://52.25.96.244:7020";
+
+const endpointMaster = 'http://52.172.214.182:6004//api/Master';
