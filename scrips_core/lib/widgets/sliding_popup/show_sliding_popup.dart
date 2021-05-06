@@ -9,6 +9,7 @@ class SlidingPopup {
     String title,
     double width,
     String doneText = "Save",
+    String cancelText = "Cancel",
     Function onSave,
     Function onCancel,
   }) {
@@ -22,6 +23,7 @@ class SlidingPopup {
             child: child,
             onSave: onSave,
             doneText: doneText,
+            cancelText: cancelText,
             onCancel: onCancel,
             backgroundColor: backgroundColor,
           );

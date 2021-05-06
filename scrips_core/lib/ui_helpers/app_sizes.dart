@@ -29,3 +29,10 @@ const double defaultButtonPaddingSize = 16.0;
 const double defaultPanelPaddingSize = 8.0;
 const double defaultPanelMarginSize = 8.0;
 const double defaultPaddingBorderRadiusSize = 5.0;
+
+// avatar size
+
+const double avatarSizeSmall = 24;
+const double avatarSizeMedium = 56;
+
+const double defaultAvatarSize = avatarSizeMedium;

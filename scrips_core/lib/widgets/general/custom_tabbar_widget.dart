@@ -51,7 +51,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget>
               labelColor: blackColor,
               labelStyle: semiBoldLabelTextStyle(13, blackColor),
               unselectedLabelColor: blackColor,
-              unselectedLabelStyle: normalLabelTextStyle(13, blackColor),
+              unselectedLabelStyle: semiBoldLabelTextStyle(13, blackColor),
               isScrollable: false,
               indicatorSize: TabBarIndicatorSize.tab,
               controller: widget.controller,

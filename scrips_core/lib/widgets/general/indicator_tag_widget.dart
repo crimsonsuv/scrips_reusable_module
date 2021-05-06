@@ -5,17 +5,19 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 class IndicatorTagWidget extends StatelessWidget {
   final String indicatorText;
+  final Color color;
   //
   IndicatorTagWidget({
     Key key,
     this.indicatorText,
+    this.color,
   }) : super(key: key);
   //
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: successTabColor,
+        color: color == null ? successTabColor : color,
         borderRadius: BorderRadius.circular(2),
       ),
       height: 16,

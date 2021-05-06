@@ -3,16 +3,18 @@ import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 
 class ToastWidget extends StatelessWidget {
-  ToastWidget({Key key, @required this.message, @required this.backgroundColor, this.width = 400})
+  ToastWidget({Key key, @required this.message, @required this.backgroundColor, this.textColor ,this.width = 400})
       : super(key: key);
   final String message;
   final Color backgroundColor;
   final double width;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       type: MaterialType.transparency,
+      elevation: 2,
       child: Container(
         width: width,
         decoration: BoxDecoration(
@@ -25,7 +27,7 @@ class ToastWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 "$message",
-                style: normalLabelTextStyle(16, enabledBtnTextColor),
+                style: normalLabelTextStyle(16, textColor ?? enabledBtnTextColor),
                 textAlign: TextAlign.center,
               ),
             ),

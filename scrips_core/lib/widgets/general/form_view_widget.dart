@@ -8,6 +8,8 @@ class FormView extends StatelessWidget {
   final String header;
   final String subtitle;
   final String headerButtonText;
+  final TextStyle headerButtonStyle;
+  final TextStyle subtitleStyle;
   final Color headerButtonColor;
   final Widget child;
   final EdgeInsets margin;
@@ -18,9 +20,11 @@ class FormView extends StatelessWidget {
   FormView({
     Key key,
     this.header,
+    this.subtitleStyle,
     this.subtitle,
-    @required this.margin,
+    this.margin = const EdgeInsets.all(0),
     this.headerButtonText = "",
+    this.headerButtonStyle,
     this.onHeaderButtonTap,
     @required this.child,
     this.backgroundColor = Colors.white,
@@ -58,8 +62,10 @@ class FormView extends StatelessWidget {
                             onTap: onHeaderButtonTap,
                             child: Text(
                               "$headerButtonText",
-                              style: normalBoldTextStyle(
-                                  13, headerButtonColor ?? enabledBtnBGColor),
+                              style: (headerButtonStyle != null)
+                                  ? headerButtonStyle
+                                  : normalBoldTextStyle(13,
+                                      headerButtonColor ?? enabledBtnBGColor),
                             ),
                           )
                         : Container()
@@ -74,7 +80,7 @@ class FormView extends StatelessWidget {
                             ),
                             Text(
                               "${this.subtitle}",
-                              style: semiBoldLabelTextStyle(
+                              style: (this.subtitleStyle != null) ? subtitleStyle : semiBoldLabelTextStyle(
                                   13, labelTextStyleTextColor),
                             ),
                           ],

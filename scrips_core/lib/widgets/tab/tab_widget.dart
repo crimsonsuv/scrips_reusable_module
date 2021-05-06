@@ -9,24 +9,31 @@ class TabWidget extends StatelessWidget {
   final double width;
   final TabController tabController;
   final List<TabItem> tabs;
+  final TextStyle titleStyle;
+  final double spacing;
 
   const TabWidget(
       {Key key,
       @required this.width,
       @required this.tabController,
-      @required this.tabs})
+      @required this.tabs,
+      this.spacing = 12,
+      this.titleStyle})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 48,
-      padding: EdgeInsets.only(left: 8),
+      height: 44,
+      padding: EdgeInsets.only(left: spacing, right: 0),
       width: width,
       color: enabledBtnTextColor,
       child: TabBar(
         controller: tabController,
-        labelStyle: semiBoldLabelTextStyle(hintTextSize, enabledBtnBGColor),
+        labelPadding: EdgeInsets.symmetric(horizontal: spacing),
+        labelStyle: boldLabelTextStyle(hintTextSize, enabledBtnBGColor),
+        unselectedLabelStyle:
+            semiBoldLabelTextStyle(hintTextSize, disabledTabTextColor),
         isScrollable: true,
         unselectedLabelColor: disabledTabTextColor,
         labelColor: normalBtnTextColor,
@@ -34,7 +41,12 @@ class TabWidget extends StatelessWidget {
         tabs: tabs.map((TabItem choice) {
           return Row(
             children: <Widget>[
-              Text(choice.title),
+              Text(
+                choice.title,
+                // style: (titleStyle == null)
+                //     ? TextStyle(fontSize: 15, fontWeight: FontWeight.w500)
+                //     : titleStyle,
+              ),
               (choice?.isUnsaved ?? false)
                   ? Row(
                       children: <Widget>[

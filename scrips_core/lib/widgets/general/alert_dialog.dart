@@ -4,19 +4,22 @@ import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/widgets/general/button.dart';
 import 'package:scrips_core/widgets/general/space.dart';
 
-confirmDialog({
-  BuildContext context,
-  String title,
-  String message,
-  String yesText = "Yes",
-  String noText = "No",
-  bool isRemove = false,
-  bool hideNo = false,
-  Function onYes,
-}) async {
+confirmDialog(
+    {BuildContext context,
+    String title,
+    String message,
+    String yesText = "Yes",
+    String noText = "No",
+    bool isRemove = false,
+    bool hideNo = false,
+    bool manualPopup = false,
+    double width,
+    Function onYes,
+    Function onNo}) async {
   return showDialog(
     context: context,
-    barrierDismissible: false, // user must tap button for close dialog!
+    barrierDismissible: false,
+    barrierColor: Colors.black26, // user must tap button for close dialog!
     builder: (BuildContext context) {
       return Material(
         type: MaterialType.transparency,
@@ -25,7 +28,7 @@ confirmDialog({
               borderRadius: BorderRadius.circular(13),
               child: Container(
                 color: Colors.white,
-                width: 364,
+                width: width ?? 364,
                 child: IntrinsicHeight(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
@@ -33,63 +36,71 @@ confirmDialog({
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Text(
                             title,
                             maxLines: 2,
-                            style:
-                                boldLabelTextStyle(17, defaultFieldTextColor),
+                            style: boldLabelTextStyle(17, defaultFieldTextColor),
                             softWrap: true,
                           ),
                           Space(
                             vertical: 16,
                           ),
-                          Text(
-                            message,
-                            maxLines: 4,
-                            style: normalLabelTextStyle(15, regularTextColor),
-                            softWrap: true,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  message,
+                                  maxLines: 6,
+                                  textAlign: TextAlign.start,
+                                  overflow: TextOverflow.visible,
+                                  style: normalLabelTextStyle(15, regularTextColor),
+                                ),
+                              ),
+                            ],
                           ),
                           Space(
                             vertical: 24,
                           ),
-                          Row(
-                            children: <Widget>[
-                              (hideNo)
-                                  ? Container()
-                                  : Row(
-                                      children: <Widget>[
-                                        Button(
-                                          buttonBackgroundColor:
-                                              enabledBtnBGColor,
-                                          text: noText,
-                                          height: 32,
-                                          width: 80,
-                                          style: semiBoldLabelTextStyle(
-                                              15, enabledBtnTextColor),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        Space(
-                                          horizontal: 8,
-                                        ),
-                                      ],
-                                    ),
-                              Button(
-                                buttonBackgroundColor: bgColor,
-                                text: yesText,
-                                height: 32,
-                                width: 80,
-                                style: semiBoldLabelTextStyle(
-                                    15, isRemove ? red : enabledBtnBGColor),
-                                onPressed: () {
-                                  onYes();
-                                  Navigator.of(context).pop();
-                                },
-                              )
-                            ],
+                          Flexible(
+                            child: Row(
+                              children: <Widget>[
+                                (hideNo)
+                                    ? Container()
+                                    : Row(
+                                        children: <Widget>[
+                                          Button(
+                                            buttonBackgroundColor: enabledBtnBGColor,
+                                            text: noText,
+                                            height: 32,
+                                            style: semiBoldLabelTextStyle(15, enabledBtnTextColor),
+                                            padding: EdgeInsets.symmetric(horizontal: 16),
+                                            onPressed: () {
+                                              if (onNo != null) onNo();
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          Space(
+                                            horizontal: 8,
+                                          ),
+                                        ],
+                                      ),
+                                Button(
+                                  buttonBackgroundColor: bgColor,
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  text: yesText,
+                                  height: 32,
+                                  style: semiBoldLabelTextStyle(15, isRemove ? red : enabledBtnBGColor),
+                                  onPressed: () {
+                                    if (onYes != null) onYes();
+                                    if (!manualPopup) {
+                                      Navigator.of(context).pop();
+                                    }
+                                  },
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),

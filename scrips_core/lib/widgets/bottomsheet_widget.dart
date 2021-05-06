@@ -118,7 +118,7 @@ class _BottomSheetButtonState extends State<BottomSheetButton> {
   Widget build(BuildContext context) {
     return _show
         ? PlatformButton(
-            androidFlat: (_) => MaterialFlatButtonData(),
+            //androidFlat: (_) => MaterialFlatButtonData(),
             child: PlatformText(this.widget.label ?? 'Show Bottomsheet'),
             onPressed: () async {
               _showButton(false);

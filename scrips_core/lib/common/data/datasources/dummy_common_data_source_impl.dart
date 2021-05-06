@@ -1,3 +1,4 @@
+import 'package:scrips_core/common/data/datamodels/location_by_placeid_model.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/data/datamodels/twilio_response_model.dart';
 import 'package:scrips_core/common/data/datamodels/valueset_data_model.dart';
@@ -19,6 +20,19 @@ class DummyCommonDataSourceImpl extends CommonDataSource {
   @override
   Future<List<ValueSetData>> valueSetsData(Map<String, String> request) {
     // TODO: implement valueSetsData
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ValueSetData>> valueSetsDataSimpleKey(
+      Map<String, String> request) {
+    // TODO: implement valueSetsDataSimpleKey
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<LocationByPlaceId> fetchLocationByPlaceId({String placeId}) {
+    // TODO: implement fetchLocationByPlaceId
     throw UnimplementedError();
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:scrips_core/constants/app_assets.dart';
 import 'package:scrips_core/ui_helpers/app_colors.dart';
 import 'package:scrips_core/ui_helpers/text_styles.dart';
 import 'package:scrips_core/ui_helpers/ui_helpers.dart';
@@ -48,7 +47,7 @@ class SimpleView extends StatelessWidget {
             color: bgColor,
           ),
           padding:
-              EdgeInsets.only(left: 0.0, top: 20.0, bottom: 8.0, right: 0.0),
+              EdgeInsets.only(left: 0.0, top: 10.0, bottom: 8.0, right: 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -60,19 +59,18 @@ class SimpleView extends StatelessWidget {
                 children: [
                   showBackButton
                       ? Button(
-                    height: 40,
-                    width: 85,
-                    text: "Back",
-                    buttonBackgroundColor: bgColor,
-                    style: boldLabelTextStyle(
-                        16.0, enabledBtnBGColor),
-                    onPressed: (){
-                      Navigator.pop(context);
-                      if (this.onBack != null) {
-                        this.onBack();
-                      }
-                    },
-                  )
+                          height: 40,
+                          width: 85,
+                          text: "Back",
+                          buttonBackgroundColor: bgColor,
+                          style: boldLabelTextStyle(16.0, enabledBtnBGColor),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            if (this.onBack != null) {
+                              this.onBack();
+                            }
+                          },
+                        )
                       : Container(),
                 ],
               ),

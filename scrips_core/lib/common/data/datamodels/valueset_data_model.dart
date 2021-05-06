@@ -4,14 +4,17 @@
 
 import 'dart:convert';
 
+import 'package:scrips_core/common/data/mixin/mixin.dart';
+import 'package:scrips_shared_features/features/common/data/datamodels/code.dart';
+
 List<ValueSetData> valueSetDataFromJson(String str) => List<ValueSetData>.from(
     json.decode(str).map((x) => ValueSetData.fromJson(x)));
 
 String valueSetDataToJson(List<ValueSetData> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ValueSetData {
-  ValueCoding valueCoding;
+class ValueSetData with TitleMixin, DescriptionMixin, SearchableMixin, CodeMixin {
+  Code valueCoding;
 
   ValueSetData({
     this.valueCoding,
@@ -20,34 +23,26 @@ class ValueSetData {
   factory ValueSetData.fromJson(Map<String, dynamic> json) => ValueSetData(
         valueCoding: json["valueCoding"] == null
             ? null
-            : ValueCoding.fromJson(json["valueCoding"]),
+            : Code.fromJson(json["valueCoding"]),
       );
 
   Map<String, dynamic> toJson() => {
         "valueCoding": valueCoding == null ? null : valueCoding.toJson(),
       };
+
+  String get title => valueCoding?.display ?? "";
+  String get displayCode => valueCoding?.code ?? "";
+  String get description => valueCoding?.code ?? "";
+
+  bool containQuery(String text){
+    return (title ?? "").toLowerCase().contains(text);
+  }
+
+  @override
+  String toString() {
+    return title;
+  }
+
 }
 
-class ValueCoding {
-  String code;
-  String display;
-  String system;
 
-  ValueCoding({
-    this.code,
-    this.display,
-    this.system,
-  });
-
-  factory ValueCoding.fromJson(Map<String, dynamic> json) => ValueCoding(
-        code: json["code"] == null ? null : "${json["code"]}",
-        display: json["display"] == null ? null : json["display"],
-        system: json["system"] == null ? null : json["system"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "code": code == null ? null : code,
-        "display": display == null ? null : display,
-        "system": system == null ? null : system,
-      };
-}

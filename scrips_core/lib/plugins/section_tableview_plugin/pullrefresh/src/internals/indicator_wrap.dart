@@ -5,10 +5,12 @@
  */
 
 import 'dart:async';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter/material.dart';
-import 'default_constants.dart';
+import 'package:flutter/widgets.dart';
+
 import '../../pull_to_refresh.dart';
+import 'default_constants.dart';
 
 abstract class Wrapper extends StatefulWidget {
   final ValueNotifier<int> modeListener;

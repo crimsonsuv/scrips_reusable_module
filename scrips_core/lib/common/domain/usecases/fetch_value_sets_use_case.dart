@@ -24,5 +24,8 @@ class FetchValueSetsParams extends Equatable {
 
   FetchValueSetsParams({
     @required this.request,
-  }) : super([request]);
+  }) : super();
+
+  @override
+  List<Object> get props => [request];
 }

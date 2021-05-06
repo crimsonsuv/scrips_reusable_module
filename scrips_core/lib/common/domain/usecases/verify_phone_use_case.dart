@@ -23,5 +23,8 @@ class VerifyPhoneParams extends Equatable {
   VerifyPhoneParams({
     @required this.phone,
     @required this.country,
-  }) : super([phone, country]);
+  }) : super();
+
+  @override
+  List<Object> get props => [phone, country];
 }

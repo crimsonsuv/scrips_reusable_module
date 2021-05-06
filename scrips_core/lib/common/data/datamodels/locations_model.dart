@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:scrips_core/common/data/datamodels/location_by_placeid_model.dart';
+
 Locations locationsFromJson(String str) => Locations.fromJson(json.decode(str));
 
 String locationsToJson(Locations data) => json.encode(data.toJson());
@@ -42,17 +44,18 @@ class Prediction {
   StructuredFormatting structuredFormatting;
   List<Term> terms;
   List<String> types;
+  Location location;
 
-  Prediction({
-    this.description,
-    this.id,
-    this.matchedSubstrings,
-    this.placeId,
-    this.reference,
-    this.structuredFormatting,
-    this.terms,
-    this.types,
-  });
+  Prediction(
+      {this.description,
+      this.id,
+      this.matchedSubstrings,
+      this.placeId,
+      this.reference,
+      this.structuredFormatting,
+      this.terms,
+      this.types,
+      this.location});
 
   factory Prediction.fromJson(Map<String, dynamic> json) => Prediction(
         description: json["description"] == null ? null : json["description"],
@@ -72,6 +75,9 @@ class Prediction {
         types: json["types"] == null
             ? null
             : List<String>.from(json["types"].map((x) => x)),
+        location: json["location"] == null
+            ? null
+            : Location.fromJson(json["location"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -88,6 +94,7 @@ class Prediction {
             ? null
             : List<dynamic>.from(terms.map((x) => x.toJson())),
         "types": types == null ? null : List<dynamic>.from(types.map((x) => x)),
+        "location": location == null ? null : location.toJson(),
       };
 }
 

@@ -26,5 +26,8 @@ class FetchLocationsByQueryParams extends Equatable {
   FetchLocationsByQueryParams({
     @required this.query,
     @required this.type,
-  }) : super([query, type]);
+  }) : super();
+
+  @override
+  List<Object> get props => [query, type];
 }

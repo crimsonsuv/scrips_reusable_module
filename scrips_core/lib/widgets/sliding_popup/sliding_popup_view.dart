@@ -10,12 +10,14 @@ class SlidingPopupWidget extends StatefulWidget {
   final Function onCancel;
   final Color backgroundColor;
   final String doneText;
+  final String cancelText;
 
   SlidingPopupWidget(
       {this.title,
       this.child,
       @required this.width,
       this.doneText = "Save",
+      this.cancelText = "Cancel",
       this.onSave,
       this.onCancel,
       this.backgroundColor = Colors.white});
@@ -106,7 +108,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            GestureDetector(
+                            InkWell(
                                 onTap: () {
                                   widget.onCancel();
                                 },
@@ -118,7 +120,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),
                                       child: Text(
-                                        "Cancel",
+                                        widget.cancelText,
                                         style: semiBoldLabelTextStyle(
                                             15, enabledBtnBGColor),
                                       ),
@@ -130,7 +132,7 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
                               style:
                                   boldLabelTextStyle(17, defaultFieldTextColor),
                             ),
-                            GestureDetector(
+                            InkWell(
                                 onTap: () {
 //                                  animationController.reverse();
 //                                  opacityController.reverse();
@@ -230,3 +232,5 @@ class _SlidingPopupWidgetState extends State<SlidingPopupWidget>
 //    );
   }
 }
+
+

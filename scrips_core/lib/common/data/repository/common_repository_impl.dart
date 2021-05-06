@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:scrips_core/common/data/datamodels/country_code_model.dart';
+import 'package:scrips_core/common/data/datamodels/location_by_placeid_model.dart';
 import 'package:scrips_core/common/data/datamodels/locations_model.dart';
 import 'package:scrips_core/common/data/datamodels/twilio_response_model.dart';
 import 'package:scrips_core/common/data/datamodels/valueset_data_model.dart';
@@ -44,19 +45,25 @@ class CommonRepositoryImpl extends CommonRepository {
         var countryCodeList =
             await rootBundle.loadString(endpoint + "country_code_list.json");
         List<CountryCode> codes = countryCodeFromJson(countryCodeList);
-        String countryCode = codes
-                .where((data) => data.name == country)
-                ?.toList()
-                ?.elementAt(0)
-                ?.code ??
-            "";
-        if (countryCode == result.countryCode) {
-          return Right(result);
+        if(codes
+            .where((data) => data.name == country).length > 0){
+          String countryCode = codes
+              .where((data) => data.name == country)
+              ?.toList()
+              ?.elementAt(0)
+              ?.code ??
+              "";
+          if (countryCode == result.countryCode) {
+            return Right(result);
+          } else {
+            return Left(Failure("Number outside $country not allowed"));
+          }
         } else {
           return Left(Failure("Number outside $country not allowed"));
         }
+
       }
-    } on DioError catch (e) {
+    } on DioError catch (_) {
       return Left(Failure("Please, provide a valid number"));
     } on Failure {
       return Left(Failure("Timeout.."));
@@ -69,7 +76,34 @@ class CommonRepositoryImpl extends CommonRepository {
     try {
       final result = await commonDataSource.valueSetsData(request);
       return Right(result);
-    } on DioError catch (e) {
+    } on DioError catch (_) {
+      return (Left(Failure("Fetching Data Failed")));
+    } on Failure {
+      return Left(Failure("Request time out.."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ValueSetData>>> valueSetsDataSimpleKey(
+      Map<String, String> request) async {
+    try {
+      final result = await commonDataSource.valueSetsDataSimpleKey(request);
+      return Right(result);
+    } on DioError catch (_) {
+      return (Left(Failure("Fetching Data Failed")));
+    } on Failure {
+      return Left(Failure("Request time out.."));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LocationByPlaceId>> fetchLocationByPlaceId(
+      {String placeId}) async {
+    try {
+      final result =
+          await commonDataSource.fetchLocationByPlaceId(placeId: placeId);
+      return Right(result);
+    } on DioError catch (_) {
       return (Left(Failure("Fetching Data Failed")));
     } on Failure {
       return Left(Failure("Request time out.."));

@@ -13,7 +13,7 @@ class ScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         child: Scaffold(
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           bottomNavigationBar: bottomNavigationBar,
           body: Container(
