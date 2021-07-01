@@ -44,8 +44,6 @@ class CommonDataSourceImpl extends CommonDataSource {
     client.options.responseType = ResponseType.bytes;
     client.options.headers = {
       'Content-Type': 'application/json',
-      'Authorization':
-          'Basic QUMwMjFiNmU2YWU2ZTA4NTk2NThlMmVkY2Q4Y2MzZTBiYzo5YTY2NjAzYzAyMzZkYTFmMmZhNjQ1MjY1MmI3YzgwYg==',
     };
     var response = await client
         .get('$endpointTwilio/v1/PhoneNumbers/$phone')
