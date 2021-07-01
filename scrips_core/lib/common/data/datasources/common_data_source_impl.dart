@@ -14,7 +14,6 @@ import 'package:scrips_shared_features/di/dependency_injection.dart';
 
 class CommonDataSourceImpl extends CommonDataSource {
   int defaultTimeout = 10;
-  static final googleAPIKey = 'AIzaSyBCrQ1GzILNdnaeDRUZbKzGc1CIICTIAXw';
   static final endpointTwilio = 'https://lookups.twilio.com';
   Dio client;
 
